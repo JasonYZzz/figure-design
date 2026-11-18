@@ -12,7 +12,7 @@ import subprocess
 import sys
 import tempfile
 from zipfile import ZipFile, ZIP_DEFLATED
-from figure_common import ARTIFACTS, DIAGRAM_SKILL, ROOT, SKILL_NAME, VERSION, figure_html, read, write, fingerprint, file_hash, inside, implementation_hash, schema_check
+from figure_common import ARTIFACTS, DIAGRAM_SKILL, MIXED_ROUTES, ROOT, SKILL_NAME, VERSION, figure_html, read, write, fingerprint, file_hash, inside, implementation_hash, schema_check
 
 
 DIAGRAM_TOOLS = ('self_check.py', 'verify_geometry.py', 'export_svg.py', 'export_png.py')
@@ -241,9 +241,12 @@ def main():
     c=sub.add_parser('refs-review');c.add_argument('--catalog',default=str(ROOT/'assets/reference-library/catalog.sqlite'));c.add_argument('--images',default=str(ROOT/'assets/reference-library/images'));c.add_argument('--out',required=True);c.add_argument('--count',type=int,default=30)
     c=sub.add_parser('content-check');c.add_argument('--content',required=True);c.add_argument('--sources',nargs='+',required=True)
     c=sub.add_parser('research-brief');c.add_argument('--reference-query');c.add_argument('--catalog',default=str(ROOT/'assets/reference-library/catalog.sqlite'));c.add_argument('--content',required=True);c.add_argument('--sources',nargs='+',required=True);c.add_argument('--out',required=True)
-    c=sub.add_parser('plan');c.add_argument('--references');c.add_argument('--content',required=True);c.add_argument('--out',required=True);c.add_argument('--layout');c.add_argument('--style',default='biomedicine-academic');c.add_argument('--variant',default='balanced');c.add_argument('--route',choices=['text_structured','asset_composite','strict_scientific','image_first'])
+    c=sub.add_parser('plan');c.add_argument('--references');c.add_argument('--out',required=True);c.add_argument('--layout');c.add_argument('--style',default='biomedicine-academic');c.add_argument('--variant',default='balanced');c.add_argument('--route',choices=('text_structured', *MIXED_ROUTES))
+    inputs = c.add_mutually_exclusive_group(required=True)
+    inputs.add_argument('--source', help='Original document to hand directly to the bundled Diagram Design Skill in text mode')
+    inputs.add_argument('--content', help='FigureContent JSON for mixed planning or an existing text handoff')
     c.add_argument('--mode', choices=['text','mixed'], help='Select text-only diagrams or diagrams with approved illustrations')
-    c.add_argument('--diagram-type', choices=['architecture','roadmap'], help='Choose the text diagram layout family')
+    c.add_argument('--diagram-type', choices=['architecture','roadmap'], help='Pass the requested diagram kind to the bundled Diagram Design Skill')
     for name in ('preflight','render'):
         c=sub.add_parser(name);c.add_argument('--content',required=True);c.add_argument('--plan',required=True);c.add_argument('--sources',nargs='+',required=True);c.add_argument('--assets',nargs='*',default=[])
         c.add_argument('--out',required=name=='render',default='unused')
@@ -317,23 +320,35 @@ def main():
                 result['reference_requirements']['query']=a.reference_query
             write(a.out,result)
         elif a.command=='plan':
-            from figure_plan import MIXED_ROUTES, candidates, make_plan
-            content=read(a.content);out=Path(a.out)
+            out=Path(a.out)
             if out.exists():raise ValueError('plan output exists')
+            mode = a.mode or ('mixed' if a.route in MIXED_ROUTES else 'text')
+            if mode == 'mixed' and not a.content:
+                raise ValueError('mixed mode requires --content')
+            if a.references and not a.content:
+                raise ValueError('--references requires --content; pass user references directly to Diagram Design with --source')
+            content=read(a.content) if a.content else None
             suggestions=read(a.references) if a.references else None
             if suggestions and suggestions.get('source_content_hash')!=fingerprint(content):raise ValueError('reference suggestions bound to another content version')
-            mode = a.mode or ('mixed' if a.route in MIXED_ROUTES else 'text')
             if mode == 'text':
                 if a.layout or a.route in MIXED_ROUTES:
                     raise ValueError('text diagrams select their layout in Diagram Design')
-                schema_check('figure-content.schema.json', content)
+                if a.source:
+                    source = Path(a.source)
+                    if not source.is_file():
+                        raise ValueError(f'source document is not a file: {a.source}')
+                    document = {'source': str(source.resolve())}
+                else:
+                    schema_check('figure-content.schema.json', content)
+                    document = {'content': str(Path(a.content).resolve())}
                 result={'status':'delegated','mode':'text','engine':'diagram-design','diagram_type':a.diagram_type,
-                        'content':str(Path(a.content).resolve()),'skill':str(DIAGRAM_SKILL/'SKILL.md'),
-                        'output':str(out.resolve()),'next':'The host agent must follow Diagram Design and author the HTML, then run diagram-export.'}
+                        **document, 'skill':str(DIAGRAM_SKILL/'SKILL.md'), 'output':str(out.resolve()),
+                        'next':'Open the bundled SKILL.md now. Use Diagram Design to analyze the supplied input, select the diagram type and template, author and review the HTML, then run diagram-export.'}
                 if a.references:
                     result['references'] = str(Path(a.references).resolve())
                 write(out/'diagram-design.json',result)
             else:
+                from figure_plan import candidates, make_plan
                 route = a.route or 'asset_composite'
                 if route not in MIXED_ROUTES or a.diagram_type:
                     raise ValueError('mixed mode uses an illustrated route with its own layout')

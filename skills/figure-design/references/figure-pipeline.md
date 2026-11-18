@@ -24,4 +24,4 @@
 
 图文渲染目录包含 `figure-content.json`、`composition-plan.json`、`scene.json`、`preview.svg`、`preview.png`、`preview.html`、`quality-report.json`、`artifact-manifest.json` 与本地来源和资产快照。质量报告记录实际素材位置和主题。分享用的 `export` ZIP 携带图、结构文件、质量报告和导出状态，终稿也携带验收记录。结构文件可能包含必要的原文摘录。定量图的 `data-provenance.json` 由 `data-chart` 单独生成。
 
-纯文字的 `diagram-design.json` 是给宿主的交接文件，含图型偏好、内容路径和可选参考清单。宿主按上游 Skill 编写独立 HTML，`diagram-export` 对其校验并输出 HTML、SVG、PNG 和质量报告。详见 [纯文字工作流](standalone-workflow.md)。
+纯文字的 `diagram-design.json` 是可选交接文件，含图型偏好与原始文档路径，也兼容已有 FigureContent 路径和绑定的参考清单。宿主用随包 Diagram Design 分析输入并编写独立 HTML，`diagram-export` 调用上游校验与导出并记录质量报告。详见 [纯文字工作流](standalone-workflow.md#纯文字架构图与技术路线图)。

@@ -150,6 +150,29 @@ class StandaloneContracts(unittest.TestCase):
             diagram_export(html, self.root/'export')
         self.assertFalse((self.root/'export').exists())
 
+    def test_raw_document_delegates_to_bundled_diagram_design(self):
+        from figure_common import DIAGRAM_SKILL
+        source = self.root/'原始研究计划.md'
+        source.write_text('从原文直接选择图型。', encoding='utf-8')
+        command = [sys.executable, str(ROOT/'scripts/figure.py'), 'plan', '--source', str(source)]
+        for kind in ('architecture', 'roadmap'):
+            with self.subTest(kind=kind):
+                out = self.root/kind
+                subprocess.run(command + ['--diagram-type', kind, '--out', str(out)],
+                               check=True, capture_output=True, text=True)
+                dispatch = read(out/'diagram-design.json')
+                self.assertEqual((dispatch['status'], dispatch['mode'], dispatch['diagram_type']),
+                                 ('delegated', 'text', kind))
+                self.assertEqual(dispatch['source'], str(source.resolve()))
+                self.assertEqual(dispatch['skill'], str(DIAGRAM_SKILL/'SKILL.md'))
+                self.assertEqual({path.name for path in out.iterdir()}, {'diagram-design.json'})
+        out = self.root/'invalid'
+        run = subprocess.run(command + ['--mode', 'mixed', '--out', str(out)],
+                             capture_output=True, text=True)
+        self.assertEqual(run.returncode, 2)
+        self.assertIn('mixed mode requires --content', run.stderr)
+        self.assertFalse(out.exists())
+
     def test_route_avoids_middle_obstacle(self):
         source=[30,150,80,80];target=[390,150,80,80];obstacle=[200,100,100,200]
         points=route(source,target,[source,target,obstacle],(500,400))
@@ -344,6 +367,12 @@ class BrowserIntegration(unittest.TestCase):
             self.assertTrue((out/'preview.svg').is_file())
             self.assertTrue((out/'preview.png').is_file())
             self.assertFalse((out/'preview.pdf').exists())
+            for extension, options in (('svg', ['--system-fonts']), ('png', [])):
+                direct = self.root/f'direct.{extension}'
+                script = DIAGRAM_SKILL/'scripts'/f'export_{extension}.py'
+                subprocess.run([sys.executable, str(script), str(out/'preview.html'), str(direct), *options],
+                               check=True, capture_output=True, text=True)
+                self.assertEqual(file_hash(out/f'preview.{extension}'), file_hash(direct))
 
 
 if __name__=='__main__':unittest.main()

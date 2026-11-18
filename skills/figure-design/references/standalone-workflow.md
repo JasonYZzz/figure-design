@@ -25,7 +25,45 @@ FIGURE_PY=/实际环境目录/figure-venv/bin/python
 
 Linux 若缺 Chromium 系统库，按 Playwright 提示安装系统依赖；不要默默使用未测量字体的替代截图。首次安装需要网络下载 Python 依赖/浏览器，之后本地处理不依赖网络。项目源码、第三方复用代码、字体和说明已随包提供，无 GitHub 下载器或兄弟 Skill 运行依赖。若需要整套运行环境离线部署，应另准备匹配操作系统的依赖 wheel 和 Chromium；当前 ZIP 不声称包含 Python/浏览器。随包提供 Noto CJK 字体及原许可证；导出 SVG 内嵌字体子集。
 
-## 1. 提取与冻结内容
+## 纯文字架构图与技术路线图
+
+先打开本包的 [Diagram Design 原版 Skill](../third_party/diagram-design/skills/diagram-design/SKILL.md)，将原始文档、用户要求及参考材料直接交给宿主，由宿主执行随包工作流。CLI 需要留交接记录时可运行：
+
+```bash
+"$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" plan --source /输入/研究方案.md \
+  --mode text --diagram-type roadmap --out /工作目录/roadmap-handoff
+```
+
+架构图用 `--diagram-type architecture`。省略该参数时由 Diagram Design 按来源选择。打开交接文件 `diagram-design.json` 中的 `skill` 和 `source`。已有 FigureContent 可继续用 `--content <JSON>`，并可携带与其绑定的 `--references` 清单。两种交接均返回 `delegated`，由宿主执行以下同一流程。
+
+### 从原文到图面
+
+1. **确定读图任务。** 根据用途和读者，写出主图需要回答的核心问题。按用户给出的插入宽度设计，缺省时用随包 Diagram Design 对应用途的尺寸预设。用户参考图提供阅读方向、层级和布局线索，研究内容以原文为依据。
+2. **核对节点与关系。** 在工作笔记中为关键节点记录名称、职责或产出和来源。为每条关键边记录起点、终点、方向、关系类型、交接物或触发条件，以及来源。定位用页码、章节或原文行号。保留影响理解的单位、否定、对照和计划／假说／观测／已验证状态。若核心关系因缺失或冲突而无法确定，先向用户确认该处并继续处理可确定部分。原文明确提出的待验证关系按假说表达。无法判断是否存在的关系留在审阅记录。
+3. **按关系选图型。** 若行为或状态决定图的含义，先按随包规则选语义模式，再读所选图型的参考。用下表决定优先保留哪些原文信息。
+
+   | 图的用途 | 主图解释的问题 | 有原文依据时补充 |
+   | --- | --- | --- |
+   | 架构图 | 组件及其协作 | 职责、边界、接口、传递对象、依赖或反馈 |
+   | 技术路线图 | 推进路径、各步交付与验证 | 阶段产出、真实依赖、并行评测、分支条件、对照或判据 |
+   | 机理示意图 | 对象间的作用及其成立条件 | 作用方向、区室或尺度、替代解释、证据状态 |
+
+4. **按使用尺寸排版。** 核心节点优先写短标题和一到两条有辨识度的信息。把交接物放在关键箭头或邻近节点，把触发条件放在对应分支。章节或年度顺序只有在原文明确表示执行关系时才画成流程。按上游图型的复杂度和字号规范排版。空间不足时先调整分组、方向或画幅，再考虑局部展开或总览加细节。只交一张图时，详细参数和次要说明可记入审阅记录，影响理解的条件保留在图内。
+5. **用随包模板编写 HTML。** 按 Diagram Design 的图型、主题和模板规则绘制内联 SVG，使用可编辑文字、形状和连线。需要出现在三种格式中的标题、注释和图例写在内联 SVG 内。
+
+### 导出与审阅
+
+导出时运行：
+
+```bash
+"$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" diagram-export --input /工作目录/diagram.html --out /工作目录/deliver-text
+```
+
+命令调用同一随包 Skill 的 `self_check.py --offline`、`verify_geometry.py`、`export_svg.py --system-fonts` 和 `export_png.py`，交付 HTML、SVG、PNG 与质量报告。打开实际 HTML 和 PNG，按 [纯文字审阅](acceptance.md#纯文字审阅) 核对并记录结果。语义错误回到原文和节点关系，版面问题回到 Diagram Design 构图。编辑时修改原 HTML，再导出到新目录。
+
+## 图文混合
+
+### 1. 提取与冻结内容
 
 ```bash
 "$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" ingest --input /输入/研究方案.docx --out /工作目录/sources
@@ -45,26 +83,7 @@ Linux 若缺 Chromium 系统库，按 Playwright 提示安装系统依赖；不�
 
 检查会重新提取原件、核对文本/hash/跨度/引用。它不能判断摘要科学含义是否准确，Codex 仍需逐条审阅原文。
 
-## 2. 科研设计简报、参考图与构图
-
-纯文字由宿主 Agent 执行 [Diagram Design 原版 Skill](../third_party/diagram-design/skills/diagram-design/SKILL.md)。使用 CLI 时可通过以下命令获得交接文件。省略 `--diagram-type` 时，Agent 根据来源和参考图选择图型。
-
-```bash
-"$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" plan --content /工作目录/content.json \
-  --mode text --diagram-type architecture --out /工作目录/architecture-plans
-"$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" plan --content /工作目录/content.json \
-  --mode text --diagram-type roadmap --out /工作目录/roadmap-plans
-```
-
-打开 `diagram-design.json` 的 `skill` 路径并执行原版指引。使用用户参考图或通过 `--references` 交接的参考清单决定分组、方向、层次和密度，参照 [主题设计](visual-style.md) 定义本次颜色，按上游模板编写独立 HTML。把样式和图形嵌入 HTML，便于离线打开。技术路线图可按来源选阶段流程、时间线或泳道。导出时执行：
-
-```bash
-"$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" diagram-export --input /工作目录/diagram.html --out /工作目录/deliver-text
-```
-
-命令运行上游 `self_check.py --offline`、`verify_geometry.py`、`export_svg.py --system-fonts` 和 `export_png.py`，交付 HTML、SVG、PNG 与质量报告。导出工具截取内联 SVG，需出现在三种格式中的标题、注释和图例要写在 SVG 内。质量报告记录实际检查状态，Agent 打开 PNG 并核对来源、参考结构和阅读顺序后补充审阅记录。1.5.0 的纯文字计划需从来源或旧 HTML 内容重新编写 Diagram Design HTML。
-
-### 图文混合
+### 2. 科研设计简报、参考图与构图
 
 先读 [scientific-design.md](scientific-design.md)，将来源绑定内容整理为设计工作表：
 
@@ -87,7 +106,7 @@ Codex 根据实际来源填写中心问题、面板职责、主证据与验证�
 
 选一个候选另存为 `plan.json`。按参考图编排画面，在 `theme` 写入本次图文配色及依据，再绑定素材。新图文计划写入 `mode: mixed`。高级选项 `--route strict_scientific` 和 `--route image_first` 仍要求绑定获准资产。
 
-## 3. 本地示意、资产绑定与可选生图
+### 3. 本地示意、资产绑定与可选生图
 
 先寻找合适的获准原图，或按简报绘制无字的本地 SVG。比如用并排的采样装置和读数界面说明测量过程，正式条件和连接线仍由 FigureContent 控制。可以用 `make demo` 查看从本地原创 SVG 到两种成图的完整例子。
 
@@ -107,7 +126,7 @@ metadata 必需：`id`, `scientific_type`, `style_family_id`, `rights: authorize
 
 费用未知保持 unknown。请求账本记录操作状态，费用以上游工具为准。缺少生图能力时优先复用获准资产或绘制本地示意。用户未指定模式且素材不足时，可用纯文字交付结构草稿并注明待补画面。
 
-## 4. 图文路线、渲染与检查
+### 4. 图文路线、渲染与检查
 
 - asset_composite：图文混合默认路线，至少绑定一份获准资产，使用原生 SVG 文字和连接。
 - strict_scientific：同一原生准确性链，保留明确关系。定量图可先 `data-chart --input <真实CSV> --x <列名> --y <列名> --title <标题> --kind line|bar --out <目录>`，数值完整记录于 provenance；审查坐标单位后注册图形资产。
@@ -132,7 +151,7 @@ Codex 打开 PNG 审查构图、阅读顺序、语义连接和图文遮挡，按
 
 当前边界：复杂数学 TeX、自环、复杂矢量导入、不支持字形或无法无交叉排线会报错，需重构图/使用经核验的数学资产。不要把 unsupported/unknown 判为通过。数据图暂支持数值 x/y 的 line/bar，不模拟显微/Western blot/实验数值。
 
-## 5. 图文修改、验收与导出
+### 5. 图文修改、验收与导出
 
 ```bash
 "$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" patch-label --render /工作目录/render-v1 --expected-render-hash 实际HASH --label 实际LABEL_ID --text '获准的新文字' --reason '用户修订说明' --out /工作目录/render-v2

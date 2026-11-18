@@ -10,20 +10,23 @@ PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。仓库保�
 
 ## 文档如何变成路线图
 
+**纯文字架构图与技术路线图**由宿主把原文直接交给随包 Diagram Design，按原版指引完成内容分析、图型选择、主题与 HTML。可用 `plan --source <原文> --mode text` 记录交接。项目的 `diagram-export` 只调用随包的检查与导出工具，记录 HTML、SVG、PNG 的 hash。
+
+**图文混合**由本项目执行以下流程：
+
 | 阶段 | Codex 的判断 | Python 的输入和输出 |
 | --- | --- | --- |
 | 1. 固定来源 | 选取相关段落，检查扫描件的转录 | `ingest` 将文档提取为带原文件 SHA256 的来源快照 |
 | 2. 整理科研内容 | 提炼任务、正式标签、条件、对照和有依据的关系，区分研究计划与结果 | `content-check` 重读原件并核对 FigureContent 的原文跨度、引用和状态契约 |
 | 3. 设计图文 | 写出主视觉解释的问题，确定各面板的证据分工，打开可用参考图核对可迁移布局 | `research-brief` 提供设计工作表；`refs-search --brief` 返回与当前内容绑定的候选 |
-| 4. 编排构图 | 设计区域位置和阅读顺序，图文模式制作或选择获准素材 | `plan --mode text\|mixed` 持久化选择并编排区域；`asset-register` 固定素材及来源元数据 |
+| 4. 编排构图 | 设计区域位置和阅读顺序，制作或选择获准素材 | `plan --mode mixed` 持久化选择并编排区域；`asset-register` 固定素材及来源元数据 |
 | 5. 编译与渲染 | 按实际预览调整空间、文字层级和图文关系 | `preflight` 做实际字体测量、关系走线和资产检查；`render` 输出 Scene、SVG、PNG、HTML 和报告 |
 | 6. 审查和导出 | 核对科学语义、图像内容和可读性，收集实际验收 | `qa` 核对渲染包 hash；`export` 打包待审图，终稿需绑定 render hash 的人审记录 |
 
 ### 模式与输出
 
-- **纯文字**由 Agent 按原版 Diagram Design 指引编写 HTML，图型和构图按参考与来源选定。`diagram-export` 编排上游检查和转换，并记录报告。
 - **图文混合**默认使用 `asset_composite`，预检要求计划至少绑定一份审核通过的资产。Agent 根据内容和参考图选择语义色，报告记录实际主题和素材位置。
-- **三种格式**从同一 SVG 生成。HTML 内嵌字体和插图，Chromium 对网页中的实际文字执行检查并生成 PNG。模板内容参与实现 hash，导出的 HTML 参与产物 hash。
+- **图文模式的三种格式**从同一 SVG 生成。HTML 内嵌字体和插图，Chromium 对网页中的实际文字执行检查并生成 PNG。模板内容参与实现 hash，导出的 HTML 参与产物 hash。
 
 完整命令和兼容路线见 [工作流程](../skills/figure-design/references/standalone-workflow.md)。
 
@@ -38,7 +41,7 @@ PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。仓库保�
 | `scripts/vendor/ppt_master_svg_resources.py` | 本地嵌入 SVG/CSS/图像资源完整性校验 |
 | `figure_catalog.py` | 参考库身份索引、检索调度、均衡抽样和审阅记录 |
 | `figure_knowledge.py` / `figure_retrieval.py` | 逐图分析、原子知识代、中文结构检索与任务反馈 |
-| `figure_plan.py` | 模式与图类型、可执行几何母版、样式和内容绑定 |
+| `figure_plan.py` | 图文混合的可执行几何母版、样式和内容绑定 |
 | `figure_render.py` / `figure_geometry.py` | 实际字体测量、Scene、原生文字、连接线、SVG/PNG/HTML |
 | `third_party/diagram-design/` | 原版纯文字制图、几何验证与导出 |
 | `figure_assets.py` / `figure_data.py` | 许可元数据、素材与请求状态、真实数值图表 |

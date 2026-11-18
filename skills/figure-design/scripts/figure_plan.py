@@ -2,9 +2,7 @@
 from __future__ import annotations
 import math
 import yaml
-from figure_common import ROOT, fingerprint, schema_check
-
-MIXED_ROUTES = ('asset_composite', 'image_first', 'strict_scientific')
+from figure_common import MIXED_ROUTES, ROOT, fingerprint, schema_check
 
 
 def registry():

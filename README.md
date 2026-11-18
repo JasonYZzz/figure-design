@@ -18,20 +18,18 @@ make package
 
 | 模式 | 用途 | CLI 规划参数 |
 | --- | --- | --- |
-| 纯文字 | 由随包的原版 Diagram Design Skill 编写架构图或技术路线图 | `--mode text` 返回交接入口，可选 `--diagram-type architecture` 或 `roadmap` |
+| 纯文字 | 随包的原版 Diagram Design 直接分析文档并绘制架构图或技术路线图 | `plan --source <原文> --mode text` 可记录交接，图型可选 `architecture` 或 `roadmap` |
 | 图文混合 | 用原创 SVG 示意或获准插图解释研究对象、方法与验证场景 | `--mode mixed` |
 
-Skill 与 CLI 默认采用纯文字。用户可说「带插图」或指定 `mode=mixed` 来选择图文。两种模式都先按参考图确定结构，再由 Agent 根据内容设计配色，并交付 `preview.svg`、`preview.png`、`preview.html` 和 `quality-report.json`。详见 [主题设计](skills/figure-design/references/visual-style.md)。
+Skill 与 CLI 默认采用纯文字。用户可说「带插图」或指定 `mode=mixed` 来选择图文。两种模式均交付 `preview.svg`、`preview.png`、`preview.html` 和 `quality-report.json`。
 
 跨项目使用可从 ZIP 安装。安装路径、环境配置和逐条 CLI 命令见 [独立安装与端到端流程](skills/figure-design/references/standalone-workflow.md)。
 
 ## 从文档到成图
 
-1. **提取与溯源**。读取 DOCX、可提取文字的 PDF、TXT 或 Markdown。Codex 依据原文建立 FigureContent，保留关键条件、对照、单位、研究状态和有证据的关系。扫描件需要先转录。
-2. **设计与参考**。写出主视觉解释的问题，为各面板分配科研职责。检索书面结构和可用原图，选择构图方向。参考图提供布局线索。
-3. **构图与素材**。纯文字交给原版 Diagram Design 撰写 HTML。图文模式编排区域和语义色，并绑定至少一份原创示意或获准素材。
-4. **预检与渲染**。纯文字运行 Diagram Design 自检、走线检查及 SVG、PNG 导出。图文模式用 Chromium 测量字形，校验素材和对比度，生成图和结构文件。
-5. **审查与交付**。打开 PNG 核对科研语义、视觉层级和图文关系。默认输出待审图。有绑定到本次渲染的人审记录后，可以导出终稿。
+- **纯文字**。宿主直接打开 [随包 Diagram Design](skills/figure-design/third_party/diagram-design/skills/diagram-design/SKILL.md)，从原文分析关系、选择图型和主题，使用上游模板编写 HTML。项目的 `diagram-export` 调用上游检查与导出。
+- **图文混合**。使用 FigureContent 绑定原文，借助科研简报和参考图构图，绑定获准插图后用本项目的 `preflight`、`render` 和 `qa` 生成与校验图文产物。
+- **审查与交付**。打开实际 PNG 按原文核对语义、视觉层级和条件，默认交付待审图。
 
 计划、渲染和离线资源的关系见 [架构与流程](docs/ARCHITECTURE.md)。
 
