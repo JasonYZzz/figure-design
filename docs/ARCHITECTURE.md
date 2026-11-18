@@ -2,9 +2,9 @@
 
 ## 本地独立实现
 
-项目标识、Skill 目录、`SKILL.md` 的 name、调用名和 ZIP 顶层目录统一为 `scientific-figure-designer`。`skills/scientific-figure-designer/` 是唯一源码，`.agents/skills/scientific-figure-designer` 是 Codex 发现入口。ZIP 直接收录 Skill 文件。项目布局参考 [Agent Skills 规范](https://agentskills.io/specification) 和 [Codex Skill 发现方式](https://learn.chatgpt.com/docs/build-skills)。
+项目标识、Skill 目录、`SKILL.md` 的 name、调用名和 ZIP 顶层目录统一为 `figure-design`。`skills/figure-design/` 是唯一源码。安装包直接收录 Skill 文件，由宿主从用户技能目录载入。布局参考 [Diagram Design](https://github.com/cathrynlavery/diagram-design) 和 [Agent Skills 规范](https://agentskills.io/specification)。
 
-PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。仓库保存 Diagram Design 的完整快照，安装包随附原版 Skill 的完整目录与上游许可证。来源与提交见 [本地复用记录](../skills/scientific-figure-designer/third_party/README.md)。
+PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。仓库保存 Diagram Design 的完整快照，安装包随附原版 Skill 的完整目录与上游许可证。来源与提交见 [本地复用记录](../skills/figure-design/third_party/README.md)。
 
 仓库根目录的 `skills/` 放可安装源码，`scripts/`、Makefile 和 CI 放开发工具，`docs/` 放当前说明与历史记录。`build/`、`dist/` 和 `outputs/` 是本地目录。
 
@@ -25,7 +25,7 @@ PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。仓库保�
 - **图文混合**默认使用 `asset_composite`，预检要求计划至少绑定一份审核通过的资产。Agent 根据内容和参考图选择语义色，报告记录实际主题和素材位置。
 - **三种格式**从同一 SVG 生成。HTML 内嵌字体和插图，Chromium 对网页中的实际文字执行检查并生成 PNG。模板内容参与实现 hash，导出的 HTML 参与产物 hash。
 
-完整命令和兼容路线见 [工作流程](../skills/scientific-figure-designer/references/standalone-workflow.md)。
+完整命令和兼容路线见 [工作流程](../skills/figure-design/references/standalone-workflow.md)。
 
 ## 运行模块
 
@@ -44,7 +44,7 @@ PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。仓库保�
 | `figure_assets.py` / `figure_data.py` | 许可元数据、素材与请求状态、真实数值图表 |
 | `install.py` | 校验包内 hash 后安装，不覆盖旧版本 |
 
-以上模块均在 [Skill scripts](../skills/scientific-figure-designer/scripts/) 中。所有资源以 `figure_common.ROOT`（解析后的 Skill 路径）为基准，不查找项目外的开发源码。
+以上模块均在 [Skill scripts](../skills/figure-design/scripts/) 中。所有资源以 `figure_common.ROOT`（解析后的 Skill 路径）为基准，不查找项目外的开发源码。
 
 ## 参考库与打包
 
@@ -60,7 +60,7 @@ assets/reference-library/
 └── images/           原图唯一存放位置；Git 忽略
 ```
 
-`refs-search` 使用中文词法、别名、结构与显式数量约束检索；旧库无知识代时兼容原关键词匹配。详见 [知识工作流](../skills/scientific-figure-designer/references/reference-knowledge.md)。结果中的 `path` 是库内相对路径，`image_path` 是运行时解析的绝对路径，`image_status` 标明 hash 校验情况。轻量安装没有图片时明确返回 missing；可以用 `--images` 指向同一批原图。
+`refs-search` 使用中文词法、别名、结构与显式数量约束检索；旧库无知识代时兼容原关键词匹配。详见 [知识工作流](../skills/figure-design/references/reference-knowledge.md)。结果中的 `path` 是库内相对路径，`image_path` 是运行时解析的绝对路径，`image_status` 标明 hash 校验情况。轻量安装没有图片时明确返回 missing；可以用 `--images` 指向同一批原图。
 
 `pack` 以允许的目录集合选择 Skill 文件，但始终排除本地 `images/`。只有显式提供 `--references` 时才盘点图片、与目录索引比对并加入 ZIP，目标路径仍是 `assets/reference-library/images/`。仅携带当前知识代，排除裁片、缩略图、嵌图审阅页和任务反馈。不重复复制、不嵌入开发机路径，不把 build/docs/.venv 混入 Skill 包。
 

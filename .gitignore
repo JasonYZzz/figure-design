@@ -35,9 +35,9 @@ Thumbs.db
 
 # User-supplied reference pixels: unknown redistribution rights.
 # The portable catalog and library metadata remain versioned.
-/skills/scientific-figure-designer/assets/reference-library/images/
-/skills/scientific-figure-designer/assets/reference-library/thumbnails/
-/skills/scientific-figure-designer/assets/reference-library/crops/
-/skills/scientific-figure-designer/assets/reference-library/review/
-/skills/scientific-figure-designer/assets/reference-library/private/
-/skills/scientific-figure-designer/assets/reference-library/feedback/
+/skills/*/assets/reference-library/images/
+/skills/*/assets/reference-library/thumbnails/
+/skills/*/assets/reference-library/crops/
+/skills/*/assets/reference-library/review/
+/skills/*/assets/reference-library/private/
+/skills/*/assets/reference-library/feedback/

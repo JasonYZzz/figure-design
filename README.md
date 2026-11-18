@@ -1,28 +1,29 @@
-# Scientific Figure Designer
+# Figure Design
 
-`scientific-figure-designer` 是一个将论文、开题报告、基金申请和研究方案转成科研技术路线图、研究框架或机制示意图的 Agent Skill。Codex 提炼科研内容并审阅图面，Python 本地工具校验来源、排版并导出可编辑 SVG、PNG、可离线打开的 HTML 和质量报告。
+`figure-design` 是一个将论文、开题报告、基金申请和研究方案转成科研技术路线图、研究框架或机制示意图的 Agent Skill。Codex 提炼科研内容并审阅图面，Python 本地工具校验来源、排版并导出可编辑 SVG、PNG、可离线打开的 HTML 和质量报告。
 
 ## 快速开始
 
-从项目根目录打开 Codex。首次使用时，运行以下命令准备 Python 环境和 Chromium。
+在项目根目录运行以下命令准备 Python 环境、检查 Chromium 并构建安装包。
 
 ```bash
 make setup
 make doctor
+make package
 ```
 
-附上文档即可给出简单指令：
+解压安装包，用包内安装器安装到用户技能目录。重新打开会话并附上文档后，就可调用 Skill。需要随包参考原图时使用 `make package-private`。详见 [安装说明](skills/figure-design/references/standalone-workflow.md#安装)。
 
-> 使用 $scientific-figure-designer，根据这份研究方案生成纯文字技术路线图，使用 mode=text，交付 SVG、PNG、HTML 和质量报告。
+> 使用 $figure-design，根据这份研究方案生成纯文字技术路线图，使用 mode=text，交付 SVG、PNG、HTML 和质量报告。
 
 | 模式 | 用途 | CLI 规划参数 |
 | --- | --- | --- |
 | 纯文字 | 由随包的原版 Diagram Design Skill 编写架构图或技术路线图 | `--mode text` 返回交接入口，可选 `--diagram-type architecture` 或 `roadmap` |
 | 图文混合 | 用原创 SVG 示意或获准插图解释研究对象、方法与验证场景 | `--mode mixed` |
 
-Skill 与 CLI 默认采用纯文字。用户可说「带插图」或指定 `mode=mixed` 来选择图文。两种模式都先按参考图确定结构，再由 Agent 根据内容设计配色，并交付 `preview.svg`、`preview.png`、`preview.html` 和 `quality-report.json`。详见 [主题设计](skills/scientific-figure-designer/references/visual-style.md)。
+Skill 与 CLI 默认采用纯文字。用户可说「带插图」或指定 `mode=mixed` 来选择图文。两种模式都先按参考图确定结构，再由 Agent 根据内容设计配色，并交付 `preview.svg`、`preview.png`、`preview.html` 和 `quality-report.json`。详见 [主题设计](skills/figure-design/references/visual-style.md)。
 
-跨项目使用可从 ZIP 安装。安装路径、环境配置和逐条 CLI 命令见 [独立安装与端到端流程](skills/scientific-figure-designer/references/standalone-workflow.md)。
+跨项目使用可从 ZIP 安装。安装路径、环境配置和逐条 CLI 命令见 [独立安装与端到端流程](skills/figure-design/references/standalone-workflow.md)。
 
 ## 从文档到成图
 
@@ -37,8 +38,8 @@ Skill 与 CLI 默认采用纯文字。用户可说「带插图」或指定 `mode
 ## 项目结构
 
 ```text
-scientific-figure-designer/
-├── skills/scientific-figure-designer/   可独立安装的唯一 Skill 源码
+figure-design/
+├── skills/figure-design/   可独立安装的唯一 Skill 源码
 │   ├── SKILL.md                         触发条件和执行规则
 │   ├── agents/                          Codex 显示元数据
 │   ├── scripts/                         CLI、安装器、演示和基准
@@ -47,14 +48,13 @@ scientific-figure-designer/
 │   ├── schemas/                         内容、构图和 Scene 数据契约
 │   ├── tests/                           可随包验证的测试和夹具
 │   └── third_party/                     复用代码及其许可
-├── .agents/skills/                      指向唯一源码的 Codex 发现入口
 ├── docs/                                架构、研发状态和历史记录
 ├── scripts/                             仓库维护检查
 ├── .github/workflows/                   CI
 └── Makefile                             安装、测试、演示和打包
 ```
 
-仓库名、Skill 名、调用名和安装包内目录名统一使用 `scientific-figure-designer`。构建、发行包和用户生成结果分别放在本地 `build/`、`dist/` 和 `outputs/`。
+仓库名、Skill 名、调用名和安装包内目录名统一使用 `figure-design`。构建、发行包和用户生成结果分别放在本地 `build/`、`dist/` 和 `outputs/`。
 
 ## 演示与开发
 
@@ -69,4 +69,4 @@ make package-private                 # 本机私用 ZIP，另附全部 161 张�
 
 重复运行用新的 `OUT` 或 `DIST`。仓库与轻量 ZIP 提供参考索引和知识库，可通过 `--images` 绑定本地图库。项目代码采用 [MIT 许可证](LICENSE)。随包字体、第三方代码和本地参考原图的许可分别见 [第三方资源与许可](THIRD_PARTY_NOTICES.md)。
 
-[贡献与维护](CONTRIBUTING.md) · [开发状态](docs/DEVELOPMENT_PLAN.md) · [参考库维护](skills/scientific-figure-designer/references/reference-knowledge.md) · [1.6.0 变更](docs/releases/1.6.0.md)
+[贡献与维护](CONTRIBUTING.md) · [开发状态](docs/DEVELOPMENT_PLAN.md) · [参考库维护](skills/figure-design/references/reference-knowledge.md) · [1.7.0 变更](docs/releases/1.7.0.md)

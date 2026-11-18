@@ -6,11 +6,12 @@ import json
 from pathlib import Path
 import shutil
 import tempfile
+from figure_common import SKILL_NAME
 
 
 def install(source, destination):
     source=Path(source).resolve();destination=Path(destination).expanduser().resolve()
-    target=destination/'scientific-figure-designer'
+    target=destination/SKILL_NAME
     if target.exists():raise ValueError('target exists; compare or back up the old version before installing')
     manifest=json.loads((source/'package-manifest.json').read_text(encoding='utf-8'))
     expected=set(manifest['files'])|{'package-manifest.json'}

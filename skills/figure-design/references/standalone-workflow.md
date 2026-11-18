@@ -2,20 +2,20 @@
 
 ## 安装
 
-在源码项目中，直接从项目根打开 Codex，系统通过 `.agents/skills/scientific-figure-designer` 发现源码。用 `make setup && make doctor` 准备工具。跨项目使用时，解压发行 ZIP 后用 Python（3.10+，验证版本为 3.12）安装到用户级目录：
+源码位于 `skills/figure-design/`。在仓库根目录运行 `make setup`、`make doctor`、`make package`。解压发行 ZIP 后，用 Python（3.10+，验证版本为 3.12）安装到用户级目录：
 
 ```bash
-python3 /实际解压路径/scientific-figure-designer/scripts/install.py --to ~/.agents/skills
+python3 /实际解压路径/figure-design/scripts/install.py --to ~/.agents/skills
 ```
 
-安装器验证包内全部 hash，并在目标已有同名 Skill 时停止。也可以安装到另一个项目的 `.agents/skills`。升级前，将旧副本移到发现目录之外保存，再安装新版本。项目内也可能同时发现用户级副本，出现同名入口时用 `doctor` 核对所选 Skill 的版本。完整私用包包含当前 161 张本地参考图，原图许可待核实。
+安装器验证包内全部 hash，并在目标已有同名 Skill 时停止。旧名 `scientific-figure-designer` 的用户级安装可单独备份。使用新名称时，安装 `figure-design` 后在会话中调用它，并用 `doctor` 核对名称和版本。完整私用包包含当前 161 张本地参考图，原图许可待核实。
 
-DSH 可读取项目级 `.agents/skills/`，解包后的 Skill 目录可通过相同安装器放入其中。打开对应项目后用 `/scientific-figure-designer`，并在会话中要求使用 `doctor` 核对实际载入的 Skill 版本和 Python 路径。
+Codex 使用 `$figure-design`，DSH 使用 `/figure-design`。需要项目级部署时，也可把独立安装包安装到目标项目的 `.agents/skills/`。
 
 为工具建立隔离环境，路径由当前机器选择（下方变量中的路径必须换成实际值）：
 
 ```bash
-FIGURE_SKILL=/实际安装路径/scientific-figure-designer
+FIGURE_SKILL=/实际安装路径/figure-design
 python3 -m venv /实际环境目录/figure-venv
 FIGURE_PY=/实际环境目录/figure-venv/bin/python
 "$FIGURE_PY" -m pip install -r "$FIGURE_SKILL/requirements.txt"
@@ -153,7 +153,7 @@ Codex 打开 PNG 审查构图、阅读顺序、语义连接和图文遮挡，按
 FIGURE_RENDER_TESTS=1 python -m unittest discover -s tests -v
 python scripts/benchmark.py --out /独立工作目录/benchmark
 python scripts/demo.py --out /独立工作目录/illustrated-demo
-python scripts/figure.py pack --out /独立发布目录/scientific-figure-designer.zip --references /用户授权的本地参考图目录
+python scripts/figure.py pack --out /独立发布目录/figure-design.zip --references /用户授权的本地参考图目录
 ```
 
 两种包都提供 Diagram Design 模板、规则、示例和当前科研参考索引。需要包内原图时用 `make package-private` 或显式传 `pack --references <Skill目录>/assets/reference-library/images`。打包前核对每张图的路径及 SHA-256，解包后的原图保持同一目录结构。轻量包可用 `--images` 绑定本地图库。benchmark 的 12+4 个案例均为合成校验，demo 使用原创几何图标。依赖通过 `requirements.txt` 安装。

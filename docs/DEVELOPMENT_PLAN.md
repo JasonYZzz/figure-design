@@ -1,6 +1,6 @@
 # 开发计划与当前状态
 
-当前版本 **1.6.0**，项目和独立 Agent Skill 统一使用 `scientific-figure-designer`。唯一源码目录是 `skills/scientific-figure-designer/`，`.agents/skills/` 提供发现入口。
+当前版本 **1.7.0**，项目和独立 Agent Skill 统一使用 `figure-design`。唯一源码目录是 `skills/figure-design/`。用户通过独立安装包部署 Skill。
 
 ## 已交付
 
@@ -23,6 +23,7 @@ v20/v24 用于内容绑定和构图回归；自动候选仍需容量调整。30 
 - [逐项研发任务、实现证据与限制](development/BACKLOG.csv)：保留原验收条目，不将待人审任务标为完成。Evidence 中的 scripts/assets/schemas 路径以 Skill 目录为根。
 - [1.5.0 HTML 导出与模式选择](releases/1.5.0.md)
 - [1.6.0 文字构图与安装包优化](releases/1.6.0.md)
+- [1.7.0 命名与目录迁移](releases/1.7.0.md)
 - [1.3.0 参考知识实施记录](releases/1.3.0.md)
 - [1.2.0 本地整合记录](releases/1.2.0.md)
 - [1.1.0 功能交付与验收](releases/1.1.0.md)

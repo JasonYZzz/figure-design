@@ -1,11 +1,11 @@
 ---
-name: scientific-figure-designer
+name: figure-design
 description: 根据论文、开题报告、基金申请或研究方案生成可编辑的架构图、科研技术路线图、研究框架和机制示意图。支持纯文字与图文混合模式，导出 SVG、PNG、离线 HTML 和质量报告。也用于参考图改版和已有科研图的文字修订。
 ---
 
-# Scientific Figure Designer
+# Figure Design
 
-版本 `1.6.0`。宿主 Agent（例如 Codex 或 DSH）负责理解文档、构思画面和审阅成图。随包 Python 工具负责来源校验、参考检索、文字与连接线排版及渲染。
+版本 `1.7.0`。宿主 Agent（例如 Codex 或 DSH）负责理解文档、构思画面和审阅成图。随包 Python 工具负责来源校验、参考检索、文字与连接线排版及渲染。
 
 ## 开始工作
 

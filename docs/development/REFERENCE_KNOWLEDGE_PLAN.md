@@ -1,6 +1,6 @@
 # 科研参考图库知识导航与检索优化实施计划
 
-本计划面向 Scientific Figure Designer 1.2.0 的本地参考图库。目标是逐张理解 161 张参考图，把可迁移的构图知识沉淀为可追溯、可检索、可用于实际排版的知识库。建议按“单图分析—跨图归纳—任务检索—构图验证—反馈更新”实施，继续使用现有 Python CLI、SQLite、内容来源绑定和质量检查链。
+本计划面向 Figure Design 1.2.0 的本地参考图库。目标是逐张理解 161 张参考图，把可迁移的构图知识沉淀为可追溯、可检索、可用于实际排版的知识库。建议按“单图分析—跨图归纳—任务检索—构图验证—反馈更新”实施，继续使用现有 Python CLI、SQLite、内容来源绑定和质量检查链。
 
 本轮完成实现审查、全库元数据及图片完整性核查、查询诊断，并结合前两次制图中已查看的参考图制定方案。全量原图逐张精读属于后续实施阶段。本文中的时间和验收阈值是规划值。
 
@@ -19,7 +19,7 @@
 | 构图 | 纵向阶段类 52、矩阵类 25、中心主体类 25、分支汇合类 22、多泳道类 20，其他 17 | 粗标签存在集中分布，不能直接作精细分类真值 |
 | 许可 | 161 条 unknown | 参考用途与素材复用权限须分别记录 |
 
-现有 `search()` 按空格分词，在四类标签及 observations 拼接文本中累计子串命中，人工审核记录加 0.25 分，同分按 hash ID 排序。没有中文查询归一化、分面过滤、拓扑匹配和同类结果去重。[实现](../../skills/scientific-figure-designer/scripts/figure_catalog.py#L46)
+现有 `search()` 按空格分词，在四类标签及 observations 拼接文本中累计子串命中，人工审核记录加 0.25 分，同分按 hash ID 排序。没有中文查询归一化、分面过滤、拓扑匹配和同类结果去重。[实现](../../skills/figure-design/scripts/figure_catalog.py#L46)
 
 按该匹配逻辑对只读索引进行查询诊断，得到以下结果。这组结果证明查询覆盖问题，尚不能作为有金标的精确率测量。
 
@@ -34,10 +34,10 @@
 
 还有四处需要联动处理。
 
-- `library.json` 明确记录已有分析来自 11 张缩略图联系表，且 `annual-stage-timeline` 同时表示一般纵向阶段。年份时间轴与纵向流程必须拆分。文件名或旧标签只能作为线索。[图库说明](../../skills/scientific-figure-designer/assets/reference-library/library.json)
-- 分类提示词要求区域、阅读顺序、置信度，但当前 schema 没有相应字段，`annotate()` 只接收旧字段。规范、保存和检索之间存在缺口。[提示词](../../skills/scientific-figure-designer/references/prompts/reference-classifier.md)、[数据契约](../../skills/scientific-figure-designer/schemas/reference-record.schema.json)
-- `refs-review` 仅按宽高比抽样。人工审核需要覆盖不同领域、结构、密度、图文比例以及低置信度样本。[抽样实现](../../skills/scientific-figure-designer/scripts/figure_catalog.py#L96)
-- `plan` 当前根据关系类型和出度选母版，参考资料由 Codex 手动解释。检索知识需要进入研究简报和区域设计，才能改善成图。[候选构图](../../skills/scientific-figure-designer/scripts/figure_plan.py#L132)
+- `library.json` 明确记录已有分析来自 11 张缩略图联系表，且 `annual-stage-timeline` 同时表示一般纵向阶段。年份时间轴与纵向流程必须拆分。文件名或旧标签只能作为线索。[图库说明](../../skills/figure-design/assets/reference-library/library.json)
+- 分类提示词要求区域、阅读顺序、置信度，但当前 schema 没有相应字段，`annotate()` 只接收旧字段。规范、保存和检索之间存在缺口。[提示词](../../skills/figure-design/references/prompts/reference-classifier.md)、[数据契约](../../skills/figure-design/schemas/reference-record.schema.json)
+- `refs-review` 仅按宽高比抽样。人工审核需要覆盖不同领域、结构、密度、图文比例以及低置信度样本。[抽样实现](../../skills/figure-design/scripts/figure_catalog.py#L96)
+- `plan` 当前根据关系类型和出度选母版，参考资料由 Codex 手动解释。检索知识需要进入研究简报和区域设计，才能改善成图。[候选构图](../../skills/figure-design/scripts/figure_plan.py#L132)
 
 ## 借鉴 LLM Wiki 的方式
 

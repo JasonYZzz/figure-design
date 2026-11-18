@@ -2,7 +2,7 @@
 
 ## 修改范围
 
-项目和 Skill 名均为 `scientific-figure-designer`。唯一源码在 `skills/scientific-figure-designer/`。`.agents/skills/scientific-figure-designer` 是相对符号链接。Skill 内资源一律相对自身目录解析。
+项目和 Skill 名均为 `figure-design`。唯一源码在 `skills/figure-design/`。Skill 内资源相对自身目录解析，宿主从用户技能目录载入已安装版本。
 
 运行代码放 Skill 的 `scripts/`，调用规则放 `SKILL.md`，详细流程放 `references/`，结构契约放 `schemas/`。根目录 `scripts/` 只处理仓库维护。测试和 fixtures 随 Skill 发布，验证独立安装行为。
 

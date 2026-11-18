@@ -219,11 +219,11 @@ class StandaloneContracts(unittest.TestCase):
                 self.assertFalse(any('/images/' in n or '/human-review/' in n or '/thumbnails/' in n for n in z.namelist()))
                 self.assertTrue(any(n.endswith('/diagram-design/SKILL.md') for n in z.namelist()))
                 self.assertFalse(any(n.endswith('/docs/maintainer.md') for n in z.namelist()))
-                self.assertFalse(json.loads(z.read('scientific-figure-designer/package-manifest.json'))['reference_images_included'])
+                self.assertFalse(json.loads(z.read('figure-design/package-manifest.json'))['reference_images_included'])
             with ZipFile(self.root/'private.zip') as z:
                 self.assertEqual(sum('/images/' in n for n in z.namelist()),1)
                 z.extractall(self.root/'unpacked')
-            target=install(self.root/'unpacked/scientific-figure-designer',self.root/'installed')
+            target=install(self.root/'unpacked/figure-design',self.root/'installed')
             self.assertEqual(file_hash(target/'assets/reference-library/images/ref.png'),file_hash(images/'ref.png'))
             Image.new('RGB',(20,20),'black').save(images/'ref.png')
             with self.assertRaisesRegex(ValueError,'match the bundled catalog'):pack(self.root/'mismatch.zip',images)
@@ -319,7 +319,7 @@ class BrowserIntegration(unittest.TestCase):
             report=render_job(c,p,s,self.root/route,[manifest])
             self.assertFalse(report['errors']);self.assertEqual(report['format'],'hybrid_svg')
             self.assertEqual(report['composition'], {'route': route, 'mode': 'mixed',
-                'html_template': 'scientific-figure-designer',
+                'html_template': 'figure-design',
                 'asset_placements': [{'region_id': p['regions'][1]['id'], 'asset_id': 'module1'}]})
             self.assertIn('href="data:image/png;base64,', (self.root/route/'preview.html').read_text())
             if route=='image_first':self.assertIn('native_image_text_and_arrows_review',report['pending'])

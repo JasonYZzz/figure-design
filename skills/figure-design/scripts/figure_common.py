@@ -8,7 +8,8 @@ from pathlib import Path
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = '1.6.0'
+SKILL_NAME = 'figure-design'
+VERSION = '1.7.0'
 DIAGRAM_SKILL = ROOT / 'third_party/diagram-design/skills/diagram-design'
 ARTIFACTS = ('preview.svg', 'preview.png', 'preview.html', 'figure-content.json',
              'composition-plan.json', 'scene.json', 'quality-report.json')

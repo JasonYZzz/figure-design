@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check canonical skill discovery, portable resource paths and active document links."""
+"""Check skill naming, portable resource paths and active document links."""
 from pathlib import Path
 import json
 import re
@@ -8,15 +8,12 @@ import sys
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / 'skills/scientific-figure-designer'
+SKILL = ROOT / 'skills/figure-design'
 
 
 def check():
     errors = []
     upstream = SKILL/'third_party/diagram-design'
-    discovery = ROOT / '.agents/skills/scientific-figure-designer'
-    if not discovery.is_symlink() or discovery.resolve() != SKILL:
-        errors.append('Codex discovery must link to the canonical skills/ directory')
     frontmatter = yaml.safe_load((SKILL/'SKILL.md').read_text(encoding='utf-8').split('---', 2)[1])
     if frontmatter.get('name') != SKILL.name:
         errors.append('SKILL.md name must match its directory')
@@ -24,7 +21,7 @@ def check():
         errors.append('bundled skill license must match the repository license')
     documents = [ROOT/'README.md', ROOT/'CONTRIBUTING.md', ROOT/'THIRD_PARTY_NOTICES.md',
                  *(p for p in SKILL.rglob('*.md') if not p.is_relative_to(upstream)),
-                 ROOT/'docs/ARCHITECTURE.md', ROOT/'docs/DEVELOPMENT_PLAN.md', ROOT/'docs/releases/1.6.0.md']
+                 ROOT/'docs/ARCHITECTURE.md', ROOT/'docs/DEVELOPMENT_PLAN.md', ROOT/'docs/releases/1.7.0.md']
     for path in documents:
         for target in re.findall(r'\]\(([^)]+)\)', path.read_text(encoding='utf-8')):
             if re.match(r'\w+://', target) or target.startswith('#'):
@@ -38,7 +35,9 @@ def check():
     if len(rows) != json.loads((library/'library.json').read_text())['count']:
         errors.append('reference catalog count differs from library metadata')
     sys.path.insert(0, str(SKILL/'scripts'))
-    from figure_common import file_hash, inside
+    from figure_common import SKILL_NAME, file_hash, inside
+    if SKILL_NAME != SKILL.name:
+        errors.append('package name must match the skill directory')
     third_party = json.loads((SKILL/'third_party/sources.json').read_text())
     for relative, digest in third_party['vendored_files'].items():
         if file_hash(inside(SKILL, relative)) != digest:

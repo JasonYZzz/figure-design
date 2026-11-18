@@ -109,7 +109,7 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
         raise ValueError('image_first uses one reviewed base image')
     if plan['route']=='image_first' and sum(len(r.get('asset_ids',[])) for r in regions.values())!=1:
         raise ValueError('place the image-first base image exactly once')
-    composition = {'route': route_name, 'mode': 'mixed', 'html_template': 'scientific-figure-designer',
+    composition = {'route': route_name, 'mode': 'mixed', 'html_template': 'figure-design',
                    'asset_placements': [
         {'region_id': rid, 'asset_id': aid} for rid, region in regions.items()
         for aid in region.get('asset_ids', [])

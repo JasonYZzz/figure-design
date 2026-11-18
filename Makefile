@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 PYTHON ?= $(if $(wildcard .venv/bin/python),.venv/bin/python,python3)
-SKILL := skills/scientific-figure-designer
+SKILL := skills/figure-design
 VERSION := $(shell $(PYTHON) -c "import sys; sys.path.insert(0, '$(SKILL)/scripts'); from figure_common import VERSION; print(VERSION)")
 DIST ?= dist
 OUT ?= build/runs
@@ -24,6 +24,6 @@ benchmark:
 demo:
 	$(PYTHON) $(SKILL)/scripts/demo.py --out $(OUT)/demo
 package:
-	$(PYTHON) $(SKILL)/scripts/figure.py pack --out $(DIST)/scientific-figure-designer-$(VERSION).zip
+	$(PYTHON) $(SKILL)/scripts/figure.py pack --out $(DIST)/$(notdir $(SKILL))-$(VERSION).zip
 package-private:
-	$(PYTHON) $(SKILL)/scripts/figure.py pack --out $(DIST)/scientific-figure-designer-$(VERSION)-private.zip --references $(SKILL)/assets/reference-library/images
+	$(PYTHON) $(SKILL)/scripts/figure.py pack --out $(DIST)/$(notdir $(SKILL))-$(VERSION)-private.zip --references $(SKILL)/assets/reference-library/images

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Standalone Scientific Figure Designer CLI. Semantic tasks run in Codex."""
+"""Standalone Figure Design CLI. Semantic tasks run in Codex."""
 from __future__ import annotations
 import argparse
 import copy
@@ -12,7 +12,7 @@ import subprocess
 import sys
 import tempfile
 from zipfile import ZipFile, ZIP_DEFLATED
-from figure_common import ARTIFACTS, DIAGRAM_SKILL, ROOT, VERSION, figure_html, read, write, fingerprint, file_hash, inside, implementation_hash, schema_check
+from figure_common import ARTIFACTS, DIAGRAM_SKILL, ROOT, SKILL_NAME, VERSION, figure_html, read, write, fingerprint, file_hash, inside, implementation_hash, schema_check
 
 
 DIAGRAM_TOOLS = ('self_check.py', 'verify_geometry.py', 'export_svg.py', 'export_png.py')
@@ -160,9 +160,9 @@ def pack(out, references=None):
             manifest['files'][relative]=row['sha256']
     out.parent.mkdir(parents=True,exist_ok=True)
     with ZipFile(out,'x',ZIP_DEFLATED) as z:
-        for p in files:z.write(p,'scientific-figure-designer/'+p.relative_to(ROOT).as_posix())
-        for p,relative in images:z.write(p,'scientific-figure-designer/'+relative)
-        z.writestr('scientific-figure-designer/package-manifest.json',json.dumps(manifest,ensure_ascii=False,indent=2))
+        for p in files:z.write(p,SKILL_NAME+'/'+p.relative_to(ROOT).as_posix())
+        for p,relative in images:z.write(p,SKILL_NAME+'/'+relative)
+        z.writestr(SKILL_NAME+'/package-manifest.json',json.dumps(manifest,ensure_ascii=False,indent=2))
     return {'package':str(out),'sha256':file_hash(out),'files':len(manifest['files']),'version':VERSION}
 
 
@@ -209,12 +209,12 @@ def diagram_export(source, out):
 def doctor():
     import importlib.util
     missing=[name for name in ('playwright','fontTools','pypdf','PIL','yaml','jsonschema') if importlib.util.find_spec(name) is None]
-    if missing:return {'version':VERSION,'ready':False,'missing_modules':missing,'action':'python -m pip install -r '+str(ROOT/'requirements.txt')}
+    if missing:return {'name':SKILL_NAME,'version':VERSION,'ready':False,'missing_modules':missing,'action':'python -m pip install -r '+str(ROOT/'requirements.txt')}
     from figure_render import FONT
     from playwright.sync_api import sync_playwright
     diagram_missing = [name for name in ('SKILL.md', *(f'scripts/{tool}' for tool in DIAGRAM_TOOLS))
                        if not (DIAGRAM_SKILL/name).is_file()]
-    result={'version':VERSION,'python':sys.version.split()[0],'font':FONT.is_file(),'catalog':(ROOT/'assets/reference-library/catalog.sqlite').is_file(),
+    result={'name':SKILL_NAME,'version':VERSION,'python':sys.version.split()[0],'font':FONT.is_file(),'catalog':(ROOT/'assets/reference-library/catalog.sqlite').is_file(),
             'reference_images':(ROOT/'assets/reference-library/images').is_dir(),
             'diagram_design_skill':not diagram_missing,'diagram_design_missing':diagram_missing,
             'codex_semantic_tools':'host_provided','image_generation':'host_capability_required; no API key required by this CLI'}
