@@ -2,12 +2,11 @@
 
 ## Route preference
 
-Select `plan --mode text` for a Diagram Design HTML architecture diagram or research roadmap with native SVG labels and connectors. Select `plan --mode mixed` to require approved illustrations in the rendered figure. Both modes deliver SVG, PNG, standalone HTML and the quality report.
+For `text`, the agent follows the bundled Diagram Design Skill and hands its HTML to `diagram-export` for upstream checks and exports. The routes below apply to `plan --mode mixed`. Both modes deliver SVG, PNG, standalone HTML and the quality report.
 
-1. `text_structured`: high-density text or exact workflow; controlled composition grammar, native typography.
-2. `asset_composite`: main illustrated scientific roadmap route; native text + arrows + approved pictograms/AI assets.
-3. `image_first`: low-density concept picture or user-selected aesthetic exploration. If generated figure contains text/critical lines that are unverified, it is a draft. Post hoc layer separation/OCR are optional experimental workflows, not guaranteed production.
-4. `strict_scientific`: dense math, high-risk causal structure, exact quantitative data; plot directly from values or verified assets. No generated data marks.
+1. `asset_composite`: main illustrated scientific roadmap route; native text + arrows + approved pictograms/AI assets.
+2. `image_first`: low-density concept picture or user-selected aesthetic exploration. If generated figure contains text/critical lines that are unverified, it is a draft. Post hoc layer separation/OCR are optional experimental workflows, not guaranteed production.
+3. `strict_scientific`: dense math, high-risk causal structure or exact quantitative data combined with approved assets.
 
 ## Composition ownership
 
@@ -25,7 +24,7 @@ Render exact Unicode strings from approved Label IDs. Preserve units, minus symb
 
 ## Repair protocol
 
-Classify failure by source: content, composition, text, connector, asset, provider, visual. Patch specific scene IDs; recalc dependency graph. Bounded retries (default at most 2 for paid image generation, 1 local layout reflow per candidate) and diagnose instead of looping. If a direct image's text cannot be separated without harm, discard as final and use asset-composite/text-structured fallback with the already-approved content.
+Classify failure by source: content, composition, text, connector, asset, provider, visual. Patch specific scene IDs; recalc dependency graph. Bounded retries (default at most 2 for paid image generation, 1 local layout reflow per candidate) and diagnose instead of looping. If a direct image's text cannot be separated without harm, use asset composite with the approved content. Use Diagram Design when the user chooses a text-only draft.
 
 ## Latency tracking
 

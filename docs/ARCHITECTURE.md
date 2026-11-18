@@ -4,7 +4,7 @@
 
 项目标识、Skill 目录、`SKILL.md` 的 name、调用名和 ZIP 顶层目录统一为 `scientific-figure-designer`。`skills/scientific-figure-designer/` 是唯一源码，`.agents/skills/scientific-figure-designer` 是 Codex 发现入口。ZIP 直接收录 Skill 文件。项目布局参考 [Agent Skills 规范](https://agentskills.io/specification) 和 [Codex Skill 发现方式](https://learn.chatgpt.com/docs/build-skills)。
 
-PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。纯文字模式使用随包的 Diagram Design HTML 模板、架构与流程布局规则。Diagram Design 的完整受版本控制快照包含在 Skill 内，两种模式均从当前包读取运行资源。具体来源、提交和许可见 [本地复用记录](../skills/scientific-figure-designer/third_party/README.md)。
+PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。仓库保存 Diagram Design 的完整快照，安装包随附原版 Skill 的完整目录与上游许可证。来源与提交见 [本地复用记录](../skills/scientific-figure-designer/third_party/README.md)。
 
 仓库根目录的 `skills/` 放可安装源码，`scripts/`、Makefile 和 CI 放开发工具，`docs/` 放当前说明与历史记录。`build/`、`dist/` 和 `outputs/` 是本地目录。
 
@@ -21,8 +21,8 @@ PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。纯文字�
 
 ### 模式与输出
 
-- **纯文字**使用 Diagram Design 的 HTML 版式。架构图按组件和关系选择分组构图，技术路线图按步骤与分支选择阶段构图。Scientific Figure Designer 编译科研标签、节点和关系，沿用原文字形与证据绑定检查。
-- **图文混合**默认使用 `asset_composite`，预检要求计划至少绑定一份审核通过的资产。报告记录图文素材及其所在区域。
+- **纯文字**由 Agent 按原版 Diagram Design 指引编写 HTML，图型和构图按参考与来源选定。`diagram-export` 编排上游检查和转换，并记录报告。
+- **图文混合**默认使用 `asset_composite`，预检要求计划至少绑定一份审核通过的资产。Agent 根据内容和参考图选择语义色，报告记录实际主题和素材位置。
 - **三种格式**从同一 SVG 生成。HTML 内嵌字体和插图，Chromium 对网页中的实际文字执行检查并生成 PNG。模板内容参与实现 hash，导出的 HTML 参与产物 hash。
 
 完整命令和兼容路线见 [工作流程](../skills/scientific-figure-designer/references/standalone-workflow.md)。
@@ -40,7 +40,7 @@ PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。纯文字�
 | `figure_knowledge.py` / `figure_retrieval.py` | 逐图分析、原子知识代、中文结构检索与任务反馈 |
 | `figure_plan.py` | 模式与图类型、可执行几何母版、样式和内容绑定 |
 | `figure_render.py` / `figure_geometry.py` | 实际字体测量、Scene、原生文字、连接线、SVG/PNG/HTML |
-| `figure_common.py` / `third_party/diagram-design/` | 生成独立 HTML、复用纯文字页面模板，记录上游快照 |
+| `third_party/diagram-design/` | 原版纯文字制图、几何验证与导出 |
 | `figure_assets.py` / `figure_data.py` | 许可元数据、素材与请求状态、真实数值图表 |
 | `install.py` | 校验包内 hash 后安装，不覆盖旧版本 |
 

@@ -4,12 +4,30 @@ import math
 import yaml
 from figure_common import ROOT, fingerprint, schema_check
 
-MODE_ROUTES = {'text': ('text_structured', 'strict_scientific'),
-               'mixed': ('asset_composite', 'image_first', 'strict_scientific')}
+MIXED_ROUTES = ('asset_composite', 'image_first', 'strict_scientific')
 
 
 def registry():
     return yaml.safe_load((ROOT / 'assets' / 'layout-registry.yaml').read_text(encoding='utf-8'))
+
+
+def figure_theme(plan):
+    preset = registry()['styles'].get(plan['style_id'])
+    if preset is None:
+        raise ValueError('unknown style')
+    theme = plan.get('theme') or preset
+
+    def luminance(rgb):
+        channels = [int(rgb[i:i+2], 16)/255 for i in (1, 3, 5)]
+        linear = [v/12.92 if v <= .04045 else ((v+.055)/1.055)**2.4 for v in channels]
+        return sum(value*weight for value, weight in zip(linear, (.2126, .7152, .0722)))
+
+    for text in ('ink', 'muted', 'accent'):
+        for background in ('paper', 'surface'):
+            low, high = sorted((luminance(theme[text]), luminance(theme[background])))
+            if (high+.05)/(low+.05) < 4.5:
+                raise ValueError(f'theme_contrast: {text} against {background} must reach 4.5:1')
+    return theme
 
 
 def positions(family, n, variant='balanced'):
@@ -73,13 +91,10 @@ def positions(family, n, variant='balanced'):
     raise ValueError('unknown layout family')
 
 
-def text_diagram_type(content):
-    types = {relation['type'] for relation in content['relations']}
-    return 'roadmap' if types and types <= {'sequence', 'depends_on'} else 'architecture'
-
-
-def make_plan(content, primary, style, variant='balanced', route='text_structured', *, mode=None, diagram_type=None):
+def make_plan(content, primary, style, variant='balanced', route='asset_composite'):
     schema_check('figure-content.schema.json', content)
+    if route not in MIXED_ROUTES:
+        raise ValueError('use Diagram Design for text diagrams')
     config = registry()
     layout = config['layouts'].get(primary)
     if not layout:
@@ -130,30 +145,20 @@ def make_plan(content, primary, style, variant='balanced', route='text_structure
             raise ValueError('conditional relation needs an explicit condition LabelInstance owned by that relation')
     if caption:
         regions.append(region('caption', 'caption', [.05, .905, .90, .055], caption))
-    plan = {'schema_version': '1.0', 'figure_id': content['figure_id'], 'route': route,
+    plan = {'schema_version': '1.0', 'figure_id': content['figure_id'], 'route': route, 'mode': 'mixed',
             'canvas': canvas, 'grammar': {'primary': primary, 'modifiers': [layout['modifier']], 'asset_treatments': []},
             'regions': regions, 'edges': edges, 'style_id': style, 'status': 'draft'}
-    if mode is not None:
-        plan['mode'] = mode
-    if diagram_type is not None:
-        plan['diagram_type'] = diagram_type
     schema_check('composition-plan.schema.json', plan)
     return plan
 
 
-def candidates(content, style='biomedicine-academic', references=None, *, variant='balanced', route='text_structured',
-               mode=None, diagram_type=None):
+def candidates(content, style='biomedicine-academic', references=None, *, variant='balanced', route='asset_composite'):
     rels = content['relations']
     types = {r['type'] for r in rels}
     degree = {}
     for r in rels:
         degree[r['from_id']] = degree.get(r['from_id'], 0) + 1
-    if diagram_type == 'architecture':
-        choices = ['top-overview-multi-lane', 'comparative-panels']
-    elif diagram_type == 'roadmap':
-        choices = ['fork-merge-validation', 'annual-stage-timeline'] if any(v > 1 for v in degree.values()) else [
-            'annual-stage-timeline', 'top-overview-multi-lane']
-    elif types & {'activates', 'inhibits', 'feedback'}:
+    if types & {'activates', 'inhibits', 'feedback'}:
         choices = ['center-hero-side-support', 'macro-micro-mechanism']
     elif any(v > 1 for v in degree.values()):
         choices = ['fork-merge-validation', 'top-overview-multi-lane']
@@ -169,14 +174,12 @@ def candidates(content, style='biomedicine-academic', references=None, *, varian
             if row.get('image_status')=='modified':continue
             layout=row.get('analysis',{}).get('facets',{}).get('layout')
             if layout in registry()['layouts'] and layout not in suggestions:suggestions.append(layout)
-        if diagram_type is None:
-            choices=list(dict.fromkeys(suggestions[:2]+choices))
+        choices=list(dict.fromkeys(suggestions[:2]+choices))
     result = []
     for primary in choices:
         if len(result)==2:break
         try:
-            plan = make_plan(content, primary, style, variant=variant, route=route,
-                             mode=mode, diagram_type=diagram_type)
+            plan = make_plan(content, primary, style, variant=variant, route=route)
             result.append({'plan': plan, 'content_hash': fingerprint(content),
                            'reason': 'topology-based initial candidate; Codex must inspect references and refine', 'status': 'capacity_check_pending',
                            'reference_evidence': [{'id':r['id'],'sha256':r['sha256'],'analysis_hash':r.get('analysis_hash'),

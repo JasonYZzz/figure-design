@@ -52,6 +52,12 @@
     "third_party/diagram-design/THIRD_PARTY_LICENSES.md": "ad931154e2f91bf545fc9c442666a2159aa56c0af3cca0b7246e02c6efeab6ba",
     "third_party/diagram-design/skills/diagram-design/assets/template.html": "f6978a9d50dd286f32ab149bcf505261b9fc331df7320071f87509a285dee7f4",
     "third_party/diagram-design/skills/diagram-design/references/type-architecture.md": "28260c9c0a72fe17ddf6eed7b1fff01c04f58f62bbb7147c45372574c9e38eea",
-    "third_party/diagram-design/skills/diagram-design/references/type-flowchart.md": "c2af5e2b849255ae4859125db7b101b74bfb9b201204725c1e83fac51a98ebab"
+    "third_party/diagram-design/skills/diagram-design/references/type-flowchart.md": "c2af5e2b849255ae4859125db7b101b74bfb9b201204725c1e83fac51a98ebab",
+    "third_party/diagram-design/skills/diagram-design/assets/example-architecture.html": "a9e8b59854d31e70288abba522509494f82a319bc684c3694e08e67dfc990bc5",
+    "third_party/diagram-design/skills/diagram-design/assets/example-flowchart.html": "f9c92596d77b010417b78f710ae96cf161395831ad8e51153caa41fa4a31446c",
+    "third_party/diagram-design/skills/diagram-design/references/primitives-core.md": "601305baed49217870dda15a0ebc879a6a560608cb63fe2108aaebee1abefbc9",
+    "third_party/diagram-design/skills/diagram-design/references/style-guide.md": "320881ec802004384c09ce4f4f087b9242d926b08071d6b908160e14c707d155",
+    "third_party/diagram-design/skills/diagram-design/references/output-spec.md": "12dc0eed3514e387328651652604ef4fba1a76bce1823a79f4da2993336d1e69",
+    "third_party/diagram-design/skills/diagram-design/references/layout-budget.md": "12043c659df9ce146f8ecc45e247ddc14b04f1c5724cc4cb6286b60cc1e758f2"
   }
 }

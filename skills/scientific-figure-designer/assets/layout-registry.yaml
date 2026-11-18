@@ -14,7 +14,7 @@ layouts:
   experimental-apparatus: {family: apparatus, modifier: frame_breakout}
   minimal-text-graphical-abstract: {family: abstract, modifier: organic_cutout}
 styles:
-  biomedicine-academic: {ink: '#203b42', accent: '#287d85', pale: '#eef7f4', secondary: '#b4d8ce'}
-  cs-academic: {ink: '#26374d', accent: '#3765a0', pale: '#f0f4fa', secondary: '#b9cce6'}
-  materials-academic: {ink: '#423c36', accent: '#a36938', pale: '#faf4e9', secondary: '#dfc39e'}
-  earth-social-academic: {ink: '#2b4036', accent: '#517a59', pale: '#f1f6ed', secondary: '#bad0ad'}
+  biomedicine-academic: {paper: '#faf9fc', surface: '#ffffff', ink: '#25233a', muted: '#56516b', accent: '#514487', border: '#c3bdd6'}
+  cs-academic: {paper: '#f8fafc', surface: '#ffffff', ink: '#1c2b40', muted: '#4d5d73', accent: '#274d80', border: '#b7c5d8'}
+  materials-academic: {paper: '#faf8f5', surface: '#ffffff', ink: '#332a24', muted: '#675449', accent: '#8a442b', border: '#d4c2b7'}
+  earth-social-academic: {paper: '#faf9f6', surface: '#ffffff', ink: '#2e2b27', muted: '#5d5751', accent: '#76475c', border: '#d0c3c6'}

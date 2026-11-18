@@ -24,7 +24,7 @@ def check():
         errors.append('bundled skill license must match the repository license')
     documents = [ROOT/'README.md', ROOT/'CONTRIBUTING.md', ROOT/'THIRD_PARTY_NOTICES.md',
                  *(p for p in SKILL.rglob('*.md') if not p.is_relative_to(upstream)),
-                 ROOT/'docs/ARCHITECTURE.md', ROOT/'docs/DEVELOPMENT_PLAN.md', ROOT/'docs/releases/1.5.0.md']
+                 ROOT/'docs/ARCHITECTURE.md', ROOT/'docs/DEVELOPMENT_PLAN.md', ROOT/'docs/releases/1.6.0.md']
     for path in documents:
         for target in re.findall(r'\]\(([^)]+)\)', path.read_text(encoding='utf-8')):
             if re.match(r'\w+://', target) or target.startswith('#'):

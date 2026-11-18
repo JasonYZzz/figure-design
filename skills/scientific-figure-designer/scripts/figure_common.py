@@ -5,44 +5,26 @@ from html import escape
 import json
 import os
 from pathlib import Path
-import re
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = '1.5.0'
-DIAGRAM_DESIGN = ROOT / 'third_party/diagram-design'
-DIAGRAM_TEMPLATE = DIAGRAM_DESIGN / 'skills/diagram-design/assets/template.html'
-DIAGRAM_LICENSE = DIAGRAM_DESIGN / 'LICENSE'
+VERSION = '1.6.0'
+DIAGRAM_SKILL = ROOT / 'third_party/diagram-design/skills/diagram-design'
 ARTIFACTS = ('preview.svg', 'preview.png', 'preview.html', 'figure-content.json',
              'composition-plan.json', 'scene.json', 'quality-report.json')
 
 
 def implementation_hash():
     return fingerprint({p.relative_to(ROOT).as_posix(): file_hash(p)
-        for p in sorted([*(ROOT/'scripts').rglob('*.py'), ROOT/'assets/layout-registry.yaml',
-                         DIAGRAM_TEMPLATE, DIAGRAM_LICENSE])})
+        for p in sorted([*(ROOT/'scripts').rglob('*.py'), ROOT/'assets/layout-registry.yaml'])})
 
 
-def figure_html(svg, title, diagram_type=None):
+def figure_html(svg, title):
     title = escape(title)
     base = '<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-    if diagram_type is None:
-        return (f'<!DOCTYPE html><html lang="zh-CN"><head>{base}<title>{title}</title>'
-                '<style>body{margin:0}svg{display:block;max-width:100%;height:auto}</style></head>'
-                f'<body>{svg}</body></html>')
-
-    # Keep the upstream responsive frame and use the scientific SVG title and embedded font.
-    template = DIAGRAM_TEMPLATE.read_text(encoding='utf-8')
-    template = re.sub(r'^  <link[^\n]+\n', '', template, flags=re.MULTILINE)
-    template = re.sub(r'^    (?:<p class="eyebrow">.*</p>|<h1>.*</h1>)\n', '', template, flags=re.MULTILINE)
-    template = template.replace('<html lang="en">', '<html lang="zh-CN">')
-    frame_style = 'body{padding:0}.frame{max-width:none}svg{min-width:0;height:auto}'
-    template = template.replace('</head>', f'<style>{frame_style}</style></head>', 1)
-    template = template.replace('<title>Diagram</title>', f'<title>{title}</title>', 1)
-    template = template.replace('<div class="diagram-container">', f'<div class="diagram-container" data-diagram-type="{diagram_type}">', 1)
-    license_notice = DIAGRAM_LICENSE.read_text(encoding='utf-8')
-    template = template.replace('<!DOCTYPE html>', f'<!DOCTYPE html>\n<!-- Diagram Design template\n{license_notice}-->')
-    return re.sub(r'<svg\b.*?</svg>', lambda _: svg, template, count=1, flags=re.DOTALL)
+    return (f'<!DOCTYPE html><html lang="zh-CN"><head>{base}<title>{title}</title>'
+            '<style>body{margin:0}svg{display:block;max-width:100%;height:auto}</style></head>'
+            f'<body>{svg}</body></html>')
 
 
 def read(path):

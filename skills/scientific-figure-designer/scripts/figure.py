@@ -6,11 +6,16 @@ import copy
 import json
 import os
 from pathlib import Path
+import runpy
 import shutil
+import subprocess
 import sys
 import tempfile
 from zipfile import ZipFile, ZIP_DEFLATED
-from figure_common import ARTIFACTS, DIAGRAM_TEMPLATE, ROOT, VERSION, figure_html, read, write, fingerprint, file_hash, inside, implementation_hash
+from figure_common import ARTIFACTS, DIAGRAM_SKILL, ROOT, VERSION, figure_html, read, write, fingerprint, file_hash, inside, implementation_hash, schema_check
+
+
+DIAGRAM_TOOLS = ('self_check.py', 'verify_geometry.py', 'export_svg.py', 'export_png.py')
 
 
 def verify_bundle(folder):
@@ -123,7 +128,11 @@ def pack(out, references=None):
         if lint(library,library/'catalog.sqlite')['status']!='ok':
             raise ValueError('reference knowledge or original images are invalid')
     allowed={'scripts','references','schemas','assets','tests','agents','third_party'}
+    diagram_design = ROOT/'third_party/diagram-design'
+    diagram_skill = diagram_design/'skills/diagram-design'
     files=[p for p in ROOT.rglob('*') if p.is_file() and '__pycache__' not in p.parts and p.name!='.DS_Store'
+           and (not p.is_relative_to(diagram_design) or p.is_relative_to(diagram_skill)
+                or p in (diagram_design/'LICENSE', diagram_design/'THIRD_PARTY_LICENSES.md'))
            and not any(p.relative_to(ROOT).is_relative_to('assets/reference-library/'+d) for d in ('images','thumbnails','crops','review','private','feedback'))
            and not (p.is_relative_to(library) and p.relative_to(library).parts[0] not in {'catalog.sqlite','library.json','taxonomy.yaml','patterns.json','analyses','analysis-events','knowledge'})
            and not (p.is_relative_to(library) and p.suffix.lower()=='.html' and p!=knowledge/'generations'/str(active)/'index.html')
@@ -157,21 +166,64 @@ def pack(out, references=None):
     return {'package':str(out),'sha256':file_hash(out),'files':len(manifest['files']),'version':VERSION}
 
 
+def diagram_export(source, out):
+    source, out = Path(source).resolve(), Path(out)
+    if out.exists():
+        raise ValueError('export path already exists')
+    out.parent.mkdir(parents=True, exist_ok=True)
+    scripts = DIAGRAM_SKILL/'scripts'
+    with tempfile.TemporaryDirectory(prefix=out.name+'-working-', dir=out.parent) as temporary:
+        stage = Path(temporary)/'export'
+        stage.mkdir()
+        html = stage/'preview.html'
+        shutil.copyfile(source, html)
+        checker = runpy.run_path(str(scripts/'self_check.py'))
+        errors = checker['verify'](html, offline=True)
+        if errors:
+            raise ValueError('Diagram Design self_check.py: ' + '\n'.join(errors))
+        for tag, _, value in checker['parsed_document'](html.read_text(encoding='utf-8')).references:
+            value = value.strip()
+            if value and not value.lower().startswith(('#', 'data:image/')):
+                raise ValueError(f'Diagram Design HTML must be self-contained; inline the resource referenced by <{tag}>.')
+        commands = {
+            'verify_geometry.py': (html,),
+            'export_svg.py': (html, stage/'preview.svg', '--system-fonts'),
+            'export_png.py': (html, stage/'preview.png'),
+        }
+        for name, args in commands.items():
+            run = subprocess.run([sys.executable, str(scripts/name), *map(str, args)],
+                                 capture_output=True, text=True)
+            if run.returncode:
+                raise ValueError(f'Diagram Design {name}: {(run.stdout+run.stderr).strip()}')
+        report = {'mode':'text','renderer':'diagram-design','status':'review_required',
+                  'hard_gates':dict.fromkeys(DIAGRAM_TOOLS, True),
+                  'files':{p.name:file_hash(p) for p in stage.iterdir()},
+                  'pending':['source_fidelity_review','visual_review','user_acceptance']}
+        write(stage/'quality-report.json', report)
+        if out.exists():
+            raise ValueError('output appeared during export')
+        stage.rename(out)
+    return report
+
+
 def doctor():
     import importlib.util
     missing=[name for name in ('playwright','fontTools','pypdf','PIL','yaml','jsonschema') if importlib.util.find_spec(name) is None]
     if missing:return {'version':VERSION,'ready':False,'missing_modules':missing,'action':'python -m pip install -r '+str(ROOT/'requirements.txt')}
     from figure_render import FONT
     from playwright.sync_api import sync_playwright
+    diagram_missing = [name for name in ('SKILL.md', *(f'scripts/{tool}' for tool in DIAGRAM_TOOLS))
+                       if not (DIAGRAM_SKILL/name).is_file()]
     result={'version':VERSION,'python':sys.version.split()[0],'font':FONT.is_file(),'catalog':(ROOT/'assets/reference-library/catalog.sqlite').is_file(),
-            'reference_images':(ROOT/'assets/reference-library/images').is_dir(),'diagram_design_template':DIAGRAM_TEMPLATE.is_file(),
+            'reference_images':(ROOT/'assets/reference-library/images').is_dir(),
+            'diagram_design_skill':not diagram_missing,'diagram_design_missing':diagram_missing,
             'codex_semantic_tools':'host_provided','image_generation':'host_capability_required; no API key required by this CLI'}
     try:
         with sync_playwright() as p:
             browser=p.chromium.launch();result['chromium']=browser.version;browser.close()
     except Exception as exc:
         result['chromium']=False;result['action']='python -m playwright install chromium';result['error']=str(exc).splitlines()[0]
-    result['ready']=bool(result['font'] and result['chromium'] and result['diagram_design_template'])
+    result['ready']=bool(result['font'] and result['chromium'] and result['diagram_design_skill'])
     return result
 
 
@@ -196,12 +248,14 @@ def main():
         c=sub.add_parser(name);c.add_argument('--content',required=True);c.add_argument('--plan',required=True);c.add_argument('--sources',nargs='+',required=True);c.add_argument('--assets',nargs='*',default=[])
         c.add_argument('--out',required=name=='render',default='unused')
     c=sub.add_parser('qa');c.add_argument('--render',required=True)
+    c=sub.add_parser('diagram-export',help='Validate and export an HTML diagram authored with the bundled Diagram Design Skill')
+    c.add_argument('--input',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('patch-label');c.add_argument('--render',required=True);c.add_argument('--expected-render-hash',required=True);c.add_argument('--label',required=True);c.add_argument('--text',required=True);c.add_argument('--reason',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('export');c.add_argument('--render',required=True);c.add_argument('--out',required=True);c.add_argument('--review');c.add_argument('--final',action='store_true')
     c=sub.add_parser('asset-register');c.add_argument('--input',required=True);c.add_argument('--metadata',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('asset-sheet');c.add_argument('--input',required=True);c.add_argument('--boxes',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('asset-search');c.add_argument('--library',required=True);c.add_argument('--type',required=True);c.add_argument('--style')
-    c=sub.add_parser('data-chart');c.add_argument('--input',required=True);c.add_argument('--out',required=True);c.add_argument('--x',required=True);c.add_argument('--y',required=True);c.add_argument('--title',required=True);c.add_argument('--kind',choices=['line','bar'],default='line')
+    c=sub.add_parser('data-chart');c.add_argument('--input',required=True);c.add_argument('--out',required=True);c.add_argument('--x',required=True);c.add_argument('--y',required=True);c.add_argument('--title',required=True);c.add_argument('--kind',choices=['line','bar'],default='line');c.add_argument('--plan',help='Reuse the mixed figure plan theme')
     c=sub.add_parser('image-request');c.add_argument('--content',required=True);c.add_argument('--entity',required=True);c.add_argument('--prompt',required=True);c.add_argument('--out',required=True);c.add_argument('--operation-id',required=True);c.add_argument('--budget',required=True,type=float)
     c=sub.add_parser('image-status');c.add_argument('--operation',required=True);c.add_argument('--status',required=True,choices=['submitted','succeeded','unknown','failed','cancelled']);c.add_argument('--provider');c.add_argument('--receipt');c.add_argument('--image')
     c=sub.add_parser('pack');c.add_argument('--out',required=True);c.add_argument('--references')
@@ -263,29 +317,37 @@ def main():
                 result['reference_requirements']['query']=a.reference_query
             write(a.out,result)
         elif a.command=='plan':
-            from figure_plan import MODE_ROUTES, candidates, make_plan, text_diagram_type
+            from figure_plan import MIXED_ROUTES, candidates, make_plan
             content=read(a.content);out=Path(a.out)
             if out.exists():raise ValueError('plan output exists')
             suggestions=read(a.references) if a.references else None
             if suggestions and suggestions.get('source_content_hash')!=fingerprint(content):raise ValueError('reference suggestions bound to another content version')
-            mode = a.mode or ('text' if a.diagram_type else None)
-            route = a.route or MODE_ROUTES[mode or 'text'][0]
-            if mode and route not in MODE_ROUTES[mode]:
-                raise ValueError(f'route {route} is incompatible with mode {mode}')
-            if a.diagram_type and mode != 'text':
-                raise ValueError('--diagram-type requires text mode')
-            diagram_type = (a.diagram_type or text_diagram_type(content)) if mode == 'text' else None
-            options = {'variant': a.variant, 'route': route, 'mode': mode, 'diagram_type': diagram_type}
-            plans=[{'plan':make_plan(content,a.layout,a.style,**options),'content_hash':fingerprint(content)}] if a.layout else candidates(content,a.style,suggestions,**options)
-            out.mkdir(parents=True)
-            for i,item in enumerate(plans):write(out/f'candidate-{i+1}.json',item['plan'])
-            write(out/'selection.json',plans);result={'candidates':len(plans),'out':str(out),'route':route,
-                'mode': mode or ('mixed' if route in ('asset_composite','image_first') else 'text'), 'diagram_type':diagram_type,
-                'next':'Refine candidate layouts and bind route-required assets before preflight.'}
+            mode = a.mode or ('mixed' if a.route in MIXED_ROUTES else 'text')
+            if mode == 'text':
+                if a.layout or a.route in MIXED_ROUTES:
+                    raise ValueError('text diagrams select their layout in Diagram Design')
+                schema_check('figure-content.schema.json', content)
+                result={'status':'delegated','mode':'text','engine':'diagram-design','diagram_type':a.diagram_type,
+                        'content':str(Path(a.content).resolve()),'skill':str(DIAGRAM_SKILL/'SKILL.md'),
+                        'output':str(out.resolve()),'next':'The host agent must follow Diagram Design and author the HTML, then run diagram-export.'}
+                if a.references:
+                    result['references'] = str(Path(a.references).resolve())
+                write(out/'diagram-design.json',result)
+            else:
+                route = a.route or 'asset_composite'
+                if route not in MIXED_ROUTES or a.diagram_type:
+                    raise ValueError('mixed mode uses an illustrated route with its own layout')
+                options = {'variant': a.variant, 'route': route}
+                plans=[{'plan':make_plan(content,a.layout,a.style,**options),'content_hash':fingerprint(content)}] if a.layout else candidates(content,a.style,suggestions,**options)
+                out.mkdir(parents=True)
+                for i,item in enumerate(plans):write(out/f'candidate-{i+1}.json',item['plan'])
+                write(out/'selection.json',plans);result={'candidates':len(plans),'out':str(out),'route':route,
+                    'mode':'mixed','next':'Choose a layout, write its theme roles and bind approved illustrations before preflight.'}
         elif a.command in ('preflight','render'):
             from figure_render import render
             result=render(read(a.content),read(a.plan),a.sources,a.out,a.assets,True) if a.command=='preflight' else render_job(read(a.content),read(a.plan),a.sources,a.out,a.assets)
         elif a.command=='qa':result=verify_bundle(a.render)
+        elif a.command=='diagram-export':result=diagram_export(a.input,a.out)
         elif a.command=='patch-label':
             folder=Path(a.render);report=verify_bundle(folder)
             if report['render_hash']!=a.expected_render_hash:raise ValueError('stale render hash; reload the current version')
@@ -310,7 +372,7 @@ def main():
                 if item['scientific_type']==a.type and (not a.style or item['style_family_id']==a.style) and item['rights']=='authorized_reuse' and item['approval']=='production_approved':result.append({'manifest':str(path),**item})
         elif a.command=='data-chart':
             from figure_data import chart
-            result=chart(a.input,a.out,a.x,a.y,a.title,a.kind)
+            result=chart(a.input,a.out,a.x,a.y,a.title,a.kind,plan=read(a.plan) if a.plan else None)
         elif a.command=='image-request':
             from figure_assets import request
             result=request(read(a.content),a.entity,a.prompt,a.out,a.operation_id,a.budget)

@@ -10,7 +10,7 @@ Copyright (c) 2025-2026 Hugo He。适用 [MIT License](ppt-master/LICENSE)。用
 
 ## Diagram Design
 
-`diagram-design/` 是用户本地仓库提交 `f6db0decea96de66b901331a0f79a8d4b147ebae` 的完整受版本控制快照，共 763 个文件。保留 [MIT License](diagram-design/LICENSE) 及[第三方许可](diagram-design/THIRD_PARTY_LICENSES.md)。Skill 在纯文字模式读取 [HTML 模板](diagram-design/skills/diagram-design/assets/template.html)和[架构](diagram-design/skills/diagram-design/references/type-architecture.md)、[流程图](diagram-design/skills/diagram-design/references/type-flowchart.md)规则。渲染时移除模板的远程字体引用，内嵌科研 SVG 与字体子集。项目快照随安装包复制，运行入口为 Scientific Figure Designer。
+仓库中的 `diagram-design/` 是用户本地仓库提交 `f6db0decea96de66b901331a0f79a8d4b147ebae` 的完整快照。安装包包含完整、未经改写的 [Diagram Design Skill](diagram-design/skills/diagram-design/SKILL.md)，以及 [MIT License](diagram-design/LICENSE) 和 [第三方许可](diagram-design/THIRD_PARTY_LICENSES.md)。纯文字由宿主执行该 Skill，`diagram-export` 调用上游自检、几何验证及导出脚本。`sources.json` 记录上游提交和关键文件哈希。
 
 ## nature 系列
 

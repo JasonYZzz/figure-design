@@ -11,7 +11,7 @@ from playwright.sync_api import sync_playwright
 from figure_common import ROOT, VERSION, figure_html, fingerprint, file_hash, write, schema_check, implementation_hash
 from figure_sources import evidence
 from figure_assets import resolve
-from figure_plan import MODE_ROUTES, registry, text_diagram_type
+from figure_plan import MIXED_ROUTES, figure_theme
 from figure_geometry import route, intersects
 
 FONT = ROOT / 'assets/fonts/NotoSansCJKsc-Regular.otf'
@@ -69,7 +69,7 @@ WRAP = r'''items => {
  const ctx = document.createElement('canvas').getContext('2d');
  const segmenter = new Intl.Segmenter('zh', {granularity:'grapheme'});
  return items.map(item => {
-  ctx.font = `${item.size}px FigureFont`;
+  ctx.font = `${item.weight} ${item.size}px FigureFont`;
   let lines = [], line = '';
   const graphemes = new Map(Array.from(segmenter.segment(item.text), g=>[g.index,g.segment]));
   const tokens=[];
@@ -95,20 +95,13 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
         raise ValueError('\n'.join(source_qa['errors']))
     instances, relations, regions = bindings(content, plan)
     used_assets = {aid for r in regions.values() for aid in r.get('asset_ids', [])}
-    explicit_mode = plan.get('mode')
     route_name = plan['route']
-    mode = explicit_mode or ('mixed' if used_assets or route_name in ('asset_composite', 'image_first') else 'text')
-    if explicit_mode and route_name not in MODE_ROUTES[mode]:
-        raise ValueError(f'route {route_name} is incompatible with mode {mode}')
-    if mode == 'text' and (used_assets or (explicit_mode and asset_manifests)):
-        raise ValueError('text mode does not accept illustration assets')
-    if mode == 'mixed' and 'diagram_type' in plan:
-        raise ValueError('diagram_type requires text mode')
-    diagram_type = (plan.get('diagram_type') or text_diagram_type(content)) if mode == 'text' else None
+    if plan.get('mode') == 'text' or route_name not in MIXED_ROUTES:
+        raise ValueError('text diagrams use the bundled Diagram Design SKILL.md; run plan --mode text')
     assets = resolve(asset_manifests, content)
     if used_assets - assets.keys():
         raise ValueError('unresolved assets: ' + ', '.join(sorted(used_assets - assets.keys())))
-    if (route_name == 'asset_composite' or explicit_mode == 'mixed') and route_name != 'image_first' and not used_assets:
+    if route_name != 'image_first' and not used_assets:
         raise ValueError('mixed mode requires at least one approved asset bound to a region')
     if plan['route'] == 'image_first' and not used_assets:
         raise ValueError('image_first requires an actual approved base image; submit an image request first')
@@ -116,13 +109,11 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
         raise ValueError('image_first uses one reviewed base image')
     if plan['route']=='image_first' and sum(len(r.get('asset_ids',[])) for r in regions.values())!=1:
         raise ValueError('place the image-first base image exactly once')
-    composition = {'route': route_name, 'mode': mode, 'html_template': 'diagram-design' if diagram_type else 'scientific-figure-designer',
+    composition = {'route': route_name, 'mode': 'mixed', 'html_template': 'scientific-figure-designer',
                    'asset_placements': [
         {'region_id': rid, 'asset_id': aid} for rid, region in regions.items()
         for aid in region.get('asset_ids', [])
     ]}
-    if diagram_type:
-        composition['diagram_type'] = diagram_type
     labels = {l['id']: l['text'] for l in content['labels']}
     state = STATES[content['study_status']]
     relation_types = sorted({r['type'] for r in relations.values()})
@@ -131,9 +122,7 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
     if any(token in used_text for token in ('\\frac', '\\begin', '\\sqrt', '$$')):
         raise ValueError('unsupported_math: provide a verified rendered math asset or approved Unicode runs')
     encoded_font = font_data(used_text)
-    style = registry()['styles'].get(plan['style_id'])
-    if not style:
-        raise ValueError('unknown style')
+    style = figure_theme(plan)
     width, height = plan['canvas']['width'], plan['canvas']['height']
     bounds = {rid: [r['bounds'][0]*width,r['bounds'][1]*height,r['bounds'][2]*width,r['bounds'][3]*height] for rid,r in regions.items()}
     for a, ra in bounds.items():
@@ -141,6 +130,7 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
             if a < b and intersects(ra, rb):
                 raise ValueError(f'overlapping regions: {a}, {b}')
     objects, specs = [], []
+    heading_roles = {'title', 'section', 'task'}
     for rid, region in regions.items():
         x,y,w,h = bounds[rid]
         pad = region['text_safe']['padding_px']
@@ -160,7 +150,8 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
         for iid in region['label_instance_ids']:
             size = 42 if region['role'] == 'title' else max(24, region['text_safe']['min_font_px'])
             specs.append({'id': iid, 'region': rid, 'text': labels[instances[iid]['label_id']],
-                          'size': size, 'width': w-2*pad, 'start_y': cursor, 'pad': pad})
+                          'size': size, 'width': w-2*pad, 'start_y': cursor, 'pad': pad,
+                          'weight': 600 if instances[iid]['role'] in heading_roles else 400})
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
         try:
@@ -224,31 +215,28 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
                                        'style':style,'code':code_hash,'chromium':browser.version})
             if preflight:
                 return {'status':'pass','render_hash':render_hash,'labels':len(shaped),'relations':len(plan['edges']),
-                        'composition':composition}
+                        'composition':composition,'theme':style}
             out = Path(out)
             if out.exists() and any(out.iterdir()):
                 raise ValueError('render output must be empty; use a new version directory')
             out.mkdir(parents=True,exist_ok=True)
             svg = ET.Element('svg',{'xmlns':'http://www.w3.org/2000/svg','width':str(width),'height':str(height),
                                      'viewBox':f'0 0 {width} {height}','data-render-hash':render_hash,'data-status':'review_required',
-                                     'data-mode':mode,'role':'img','aria-labelledby':'figure-title'})
-            if diagram_type:
-                svg.set('data-diagram-type', diagram_type)
+                                     'data-mode':'mixed','role':'img','aria-labelledby':'figure-title'})
             ET.SubElement(svg,'title',{'id':'figure-title'}).text = content['purpose']
             ET.SubElement(svg,'style').text = font_css + 'text{font-family:FigureFont;white-space:pre}'
             defs=ET.SubElement(svg,'defs')
             for key,d in [('arrow','M0 0 L10 5 L0 10 Z'),('open','M0 0 L10 5 L0 10'),('bar','M9 0 L9 10')]:
                 marker=ET.SubElement(defs,'marker',{'id':key,'viewBox':'0 0 12 12','refX':'10','refY':'5','markerWidth':'7','markerHeight':'7','orient':'auto'})
                 ET.SubElement(marker,'path',{'d':d,'stroke':style['accent'],'fill':style['accent'] if key=='arrow' else 'none','stroke-width':'1.5'})
-            paper = '#f5f5f5' if diagram_type else '#ffffff'
+            paper = style['paper']
             ET.SubElement(svg,'rect',{'width':'100%','height':'100%','fill':paper})
             for rid,region in regions.items():
                 x,y,w,h=bounds[rid]
                 if region['role'] not in ('title','caption') and plan['route']!='image_first':
-                    focal = region['role'] == 'hero'
-                    ET.SubElement(svg,'rect',{'x':str(x),'y':str(y),'width':str(w),'height':str(h),'rx':'6','fill':style['pale'],
-                                              'stroke':style['accent'] if diagram_type and focal else style['secondary'],'stroke-width':'1.5'})
-                    if not diagram_type:
+                    ET.SubElement(svg,'rect',{'x':str(x),'y':str(y),'width':str(w),'height':str(h),'rx':'6','fill':style['surface'],
+                                              'stroke':style['border'],'stroke-width':'1.5'})
+                    if region['role'] == 'hero':
                         ET.SubElement(svg,'rect',{'x':str(x),'y':str(y),'width':'5','height':str(h),'fill':style['accent']})
             for obj in sorted(objects,key=lambda x:x['z_index']):
                 if obj['type']=='image':
@@ -268,9 +256,12 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
                 else:
                     x,y,w,h=obj['bounds']
                     if plan['route']=='image_first':
-                        ET.SubElement(svg,'rect',{'x':str(x-6),'y':str(y-4),'width':str(w+12),'height':str(h+8),'fill':'white','fill-opacity':'.94'})
+                        ET.SubElement(svg,'rect',{'x':str(x-6),'y':str(y-4),'width':str(w+12),'height':str(h+8),'fill':style['surface']})
+                    role = instances[obj['label_instance_id']]['role']
+                    heading = role in heading_roles
                     element=ET.SubElement(svg,'text',{'id':obj['id'],'data-label-instance-id':obj['label_instance_id'],
-                        'x':str(x),'y':str(y+obj['font_size']),'font-size':str(obj['font_size']),'fill':style['ink'],
+                        'x':str(x),'y':str(y+obj['font_size']),'font-size':str(obj['font_size']),
+                        'font-weight':'600' if heading else '400','fill':style['ink'] if heading else style['muted'],
                         '{http://www.w3.org/XML/1998/namespace}space':'preserve'})
                     for idx,line in enumerate(obj['lines']):
                         ET.SubElement(element,'tspan',{'x':str(x),'y':str(y+obj['font_size']+idx*obj['line_height'])}).text=line
@@ -281,7 +272,7 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
             resource_error=svg_image_payload_error(xml.encode('utf-8'))
             if resource_error:raise ValueError('SVG resource closure: '+resource_error)
             (out/'preview.svg').write_text(xml,encoding='utf-8')
-            document = figure_html(xml, content['purpose'], diagram_type)
+            document = figure_html(xml, content['purpose'])
             (out/'preview.html').write_text(document,encoding='utf-8')
             page.set_content(document)
             page.evaluate('document.fonts.ready')
@@ -302,13 +293,14 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
             page.screenshot(path=str(out/'preview.png'),full_page=True)
             report={'schema_version':'1.1','status':'blocked' if errors else 'review_required','render_hash':render_hash,
                     'hard_gates':{'evidence_binding':True,'label_instances':len(actual),'exact_text':not any('manifest' in e for e in errors),
-                                  'glyphs':True,'actual_text_fit':not errors,'asset_rights_metadata':True,'relation_bindings':True},
+                                  'glyphs':True,'actual_text_fit':not errors,'asset_rights_metadata':True,'relation_bindings':True,
+                                  'theme_contrast':True},
                     'errors':errors,'pending':['scientific_semantic_review','visual_review','user_acceptance']+(['asset_pixels_and_native_text_review'] if used_assets else [])+
                         (['native_image_text_and_arrows_review'] if plan['route']=='image_first' else []),
                     'label_manifest':actual,'relation_label_manifest':semantic_actual,'source_review':source_qa,'format':'hybrid_svg' if used_assets else 'vector_svg',
                     'metrics':{'render_wall_ms':round((time.perf_counter()-start)*1000,2),'paid_calls':0,'cache_hit':False,'scope':'local_render_only','upstream_model_cost':'unknown'},
                     'renderer':{'version':VERSION,'chromium':browser.version,'font_sha256':file_hash(FONT),'implementation_hash':code_hash},
-                    'asset_hashes':{aid:assets[aid]['file_sha256'] for aid in used_assets},'composition':composition}
+                    'asset_hashes':{aid:assets[aid]['file_sha256'] for aid in used_assets},'composition':composition,'theme':style}
             report['checks_scope']='Native LabelInstance text and deterministic connectors; embedded asset text/data are subject to explicit asset review.'
             write(out/'figure-content.json',content);write(out/'composition-plan.json',plan);write(out/'scene.json',scene);write(out/'quality-report.json',report)
             write(out/'artifact-manifest.json',{'render_hash':render_hash,'files':{p.name:file_hash(p) for p in out.iterdir() if p.is_file()}})

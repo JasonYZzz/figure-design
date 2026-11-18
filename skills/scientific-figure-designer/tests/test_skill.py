@@ -6,13 +6,12 @@ import tempfile
 import unittest
 import sys
 import subprocess
-from xml.etree import ElementTree as ET
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 from validate_contract import validate
 from inventory_refs import inventory
-from render_preview import svg_content
+from figure_render import bindings
 
 class FigureSkillSmoke(unittest.TestCase):
     def setUp(self):
@@ -32,15 +31,6 @@ class FigureSkillSmoke(unittest.TestCase):
     def test_duplicate_plan_relation_blocks(self):
         bad=copy.deepcopy(self.plan); bad['edges'].append(copy.deepcopy(bad['edges'][0]))
         self.assertTrue(validate(self.ps,bad))
-    def test_exact_strings_in_svg(self):
-        svg=svg_content(self.content,self.plan)
-        root=ET.fromstring(svg)
-        labels={e.attrib['id']:e.text for e in root.iter() if e.tag.endswith('text')}
-        approved={x['id']:x['text'] for x in self.content['labels']}
-        self.assertEqual(labels,{'label-'+x['id']:approved[x['label_id']] for x in self.content['label_instances']})
-        self.assertIn('relation-REL1',svg)
-    def test_svg_is_stable(self):
-        self.assertEqual(svg_content(self.content,self.plan),svg_content(self.content,self.plan))
     def test_inventory_dupes_and_rights(self):
         from PIL import Image
         with tempfile.TemporaryDirectory() as d:
@@ -54,7 +44,7 @@ class FigureSkillSmoke(unittest.TestCase):
             self.assertTrue(all(r['license_state']=='unknown' for r in rows))
 
     def test_required_instances_and_critical_edges_block(self):
-        for change in ('missing_label','duplicate_label','unknown_label','missing_edge','wrong_owner','unapproved'):
+        for change in ('missing_label','duplicate_label','unknown_label','missing_edge','wrong_owner'):
             with self.subTest(change=change):
                 content,plan=copy.deepcopy(self.content),copy.deepcopy(self.plan)
                 if change=='missing_label':plan['regions'][0]['label_instance_ids']=[]
@@ -62,28 +52,9 @@ class FigureSkillSmoke(unittest.TestCase):
                 if change=='unknown_label':plan['regions'][0]['label_instance_ids']=['MISSING']
                 if change=='missing_edge':plan['edges']=[]
                 if change=='wrong_owner':plan['edges'][0]['source_region_id']='R_HERO'
-                if change=='unapproved':content['labels'][0]['approved']=False
-                with self.assertRaises(ValueError):svg_content(content,plan)
+                with self.assertRaises(ValueError):bindings(content,plan)
 
-    def test_repeat_text_and_xml_escaping_preserve_instances(self):
-        self.content['labels'][2]['text']='α < β & "中文" 10 μm；拟验证'
-        self.content['labels'][3]['text']=self.content['labels'][2]['text']
-        root=ET.fromstring(svg_content(self.content,self.plan))
-        labels=[e for e in root.iter() if e.tag.endswith('text')]
-        matching=[e for e in labels if e.text==self.content['labels'][2]['text']]
-        self.assertEqual({e.attrib['id'] for e in matching},{'label-LI_TASK1','label-LI_TASK2'})
-        self.assertEqual(len(labels),len(self.content['label_instances']))
 
-    def test_unsupported_scientific_rendering_blocks(self):
-        for change in ('relation','condition','line','asset','route'):
-            with self.subTest(change=change):
-                content,plan=copy.deepcopy(self.content),copy.deepcopy(self.plan)
-                if change=='relation':content['relations'][0]['type']='inhibits'
-                if change=='condition':content['relations'][0]['condition_label_id']='L_HERO'
-                if change=='line':plan['edges'][0]['line_style']='tbar'
-                if change=='asset':plan['regions'][1]['asset_ids']=['UNREVIEWED']
-                if change=='route':plan['route']='asset_composite'
-                with self.assertRaises(ValueError):svg_content(content,plan)
 
     def test_ambiguous_owner_blocks(self):
         self.content['entities'][0]['id']='TASK1'
@@ -92,9 +63,6 @@ class FigureSkillSmoke(unittest.TestCase):
     def test_external_schema_reference_rejected(self):
         self.assertTrue(validate({'$ref':'https://example.invalid/no-network'},{}))
 
-    def test_vertical_overflow_blocks(self):
-        self.plan['regions'][2]['bounds'][3]=0.01
-        with self.assertRaisesRegex(ValueError,'overflow'):svg_content(self.content,self.plan)
 
     def test_inventory_nested_exif_corrupt_and_readonly(self):
         from PIL import Image
@@ -138,12 +106,4 @@ class FigureSkillSmoke(unittest.TestCase):
             self.assertEqual(json.loads(out.with_suffix('.errors.json').read_text()),[])
             self.assertEqual(original.read_bytes(),before)
 
-    def test_preview_cli_does_not_overwrite_inputs(self):
-        with tempfile.TemporaryDirectory() as d:
-            content=Path(d)/'content.json';content.write_text(json.dumps(self.content))
-            before=content.read_bytes()
-            result=subprocess.run([sys.executable,str(ROOT/'scripts/render_preview.py'),
-                '--content',str(content),'--plan',str(ROOT/'tests/fixtures/composition_plan.json'),
-                '--out',str(content)],capture_output=True,text=True)
-            self.assertEqual(result.returncode,2);self.assertEqual(content.read_bytes(),before)
 if __name__=='__main__':unittest.main()

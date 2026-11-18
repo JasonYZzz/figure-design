@@ -10,6 +10,8 @@ python3 /实际解压路径/scientific-figure-designer/scripts/install.py --to ~
 
 安装器验证包内全部 hash，并在目标已有同名 Skill 时停止。也可以安装到另一个项目的 `.agents/skills`。升级前，将旧副本移到发现目录之外保存，再安装新版本。项目内也可能同时发现用户级副本，出现同名入口时用 `doctor` 核对所选 Skill 的版本。完整私用包包含当前 161 张本地参考图，原图许可待核实。
 
+DSH 可读取项目级 `.agents/skills/`，解包后的 Skill 目录可通过相同安装器放入其中。打开对应项目后用 `/scientific-figure-designer`，并在会话中要求使用 `doctor` 核对实际载入的 Skill 版本和 Python 路径。
+
 为工具建立隔离环境，路径由当前机器选择（下方变量中的路径必须换成实际值）：
 
 ```bash
@@ -45,7 +47,7 @@ Linux 若缺 Chromium 系统库，按 Playwright 提示安装系统依赖；不�
 
 ## 2. 科研设计简报、参考图与构图
 
-纯文字用以下命令选择架构图或技术路线图。省略 `--diagram-type` 时，以步骤/依赖为主的图选 `roadmap`，其余选 `architecture`。
+纯文字由宿主 Agent 执行 [Diagram Design 原版 Skill](../third_party/diagram-design/skills/diagram-design/SKILL.md)。使用 CLI 时可通过以下命令获得交接文件。省略 `--diagram-type` 时，Agent 根据来源和参考图选择图型。
 
 ```bash
 "$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" plan --content /工作目录/content.json \
@@ -54,7 +56,13 @@ Linux 若缺 Chromium 系统库，按 Playwright 提示安装系统依赖；不�
   --mode text --diagram-type roadmap --out /工作目录/roadmap-plans
 ```
 
-布局可按来源调整各区域和连线端点。随包的 Diagram Design 提供[架构图规则](../third_party/diagram-design/skills/diagram-design/references/type-architecture.md)、[流程图规则](../third_party/diagram-design/skills/diagram-design/references/type-flowchart.md)和 HTML 模板。纯文字可跳过以下图文简报与第 3 节，直接到第 4 节。
+打开 `diagram-design.json` 的 `skill` 路径并执行原版指引。使用用户参考图或通过 `--references` 交接的参考清单决定分组、方向、层次和密度，参照 [主题设计](visual-style.md) 定义本次颜色，按上游模板编写独立 HTML。把样式和图形嵌入 HTML，便于离线打开。技术路线图可按来源选阶段流程、时间线或泳道。导出时执行：
+
+```bash
+"$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" diagram-export --input /工作目录/diagram.html --out /工作目录/deliver-text
+```
+
+命令运行上游 `self_check.py --offline`、`verify_geometry.py`、`export_svg.py --system-fonts` 和 `export_png.py`，交付 HTML、SVG、PNG 与质量报告。导出工具截取内联 SVG，需出现在三种格式中的标题、注释和图例要写在 SVG 内。质量报告记录实际检查状态，Agent 打开 PNG 并核对来源、参考结构和阅读顺序后补充审阅记录。1.5.0 的纯文字计划需从来源或旧 HTML 内容重新编写 Diagram Design HTML。
 
 ### 图文混合
 
@@ -77,7 +85,7 @@ Codex 根据实际来源填写中心问题、面板职责、主证据与验证�
 
 显式布局：`plan --layout center-hero-side-support --style biomedicine-academic --variant wide ...`。布局见 `assets/layout-registry.yaml`，12 个可执行入口、4 套样式；可选择 balanced/wide/portrait/landscape 及对应 mirrored 共 8 种画幅/方向变体。镜像仅改变区域位置，关系方向仍由事实 ID 决定。构图修饰词是设计词表，不是所有装饰均会自动实现。
 
-选一个候选另存为 `plan.json`，按科研阅读顺序调整区域和画幅。图文模式为关键画面留出空间。计划保存用户指定的模式与图类型，预检、渲染和改字都读取该计划。原有只传 `--route` 的 CLI 脚本仍可运行。两项参数都省略时，CLI 使用 `text_structured`。Skill 在用户未选模式时会显式传 `--mode mixed`。
+选一个候选另存为 `plan.json`。按参考图编排画面，在 `theme` 写入本次图文配色及依据，再绑定素材。新图文计划写入 `mode: mixed`。高级选项 `--route strict_scientific` 和 `--route image_first` 仍要求绑定获准资产。
 
 ## 3. 本地示意、资产绑定与可选生图
 
@@ -99,9 +107,8 @@ metadata 必需：`id`, `scientific_type`, `style_family_id`, `rights: authorize
 
 费用未知保持 unknown。请求账本记录操作状态，费用以上游工具为准。缺少生图能力时优先复用获准资产或绘制本地示意。用户未指定模式且素材不足时，可用纯文字交付结构草稿并注明待补画面。
 
-## 4. 四种路线、渲染与检查
+## 4. 图文路线、渲染与检查
 
-- text_structured：纯文字默认路线，使用原生 SVG 标签和关系。
 - asset_composite：图文混合默认路线，至少绑定一份获准资产，使用原生 SVG 文字和连接。
 - strict_scientific：同一原生准确性链，保留明确关系。定量图可先 `data-chart --input <真实CSV> --x <列名> --y <列名> --title <标题> --kind line|bar --out <目录>`，数值完整记录于 provenance；审查坐标单位后注册图形资产。
 - image_first：需要一张真实底图，程序叠加受控标签/连接。底图可能含文字或科研箭头，必须额外复核，不能自动认定为终稿。
@@ -117,9 +124,7 @@ cd /工作目录
 "$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" qa --render /工作目录/render-v1
 ```
 
-纯文字的预检和渲染命令都省略 `--assets`，并使用纯文字计划。图文混合至少绑定一份获准资产。用户选择高级 `--route` 时，`strict_scientific` 兼容两种模式，`image_first` 用于图文模式。
-
-预检执行实际字体、字形、布局、资产与关系走线检查。失败时优先增加局部空间或重组布局。预检和质量报告都返回 `composition.mode`、`composition.route`、`composition.html_template` 和 `composition.asset_placements`。纯文字额外记录 `composition.diagram_type`。
+图文混合至少绑定一份获准资产。预检执行实际字体、字形、布局、资产、主题对比度与关系走线检查。失败时优先增加局部空间或重组布局。预检和质量报告包含模式、路线、实际素材及其位置和实际主题。
 
 渲染生成 `preview.svg`、`preview.png`、`preview.html`、内容、计划、Scene、质量报告、文件 hash 清单、本地来源与素材快照。网页内嵌同一 SVG、字体子集与已批准的插图，可单独离线打开。渲染目录不可覆盖，相同输入可缓存复用。写入使用临时目录再整体重命名。失败保留 failure.json，修正后用原目标路径重跑。进程被强制杀死留下 `.lock` 时先确认任务已退出，再移走该任务的锁。
 
@@ -127,7 +132,7 @@ Codex 打开 PNG 审查构图、阅读顺序、语义连接和图文遮挡，按
 
 当前边界：复杂数学 TeX、自环、复杂矢量导入、不支持字形或无法无交叉排线会报错，需重构图/使用经核验的数学资产。不要把 unsupported/unknown 判为通过。数据图暂支持数值 x/y 的 line/bar，不模拟显微/Western blot/实验数值。
 
-## 5. 修改、验收与导出
+## 5. 图文修改、验收与导出
 
 ```bash
 "$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" patch-label --render /工作目录/render-v1 --expected-render-hash 实际HASH --label 实际LABEL_ID --text '获准的新文字' --reason '用户修订说明' --out /工作目录/render-v2
@@ -151,4 +156,4 @@ python scripts/demo.py --out /独立工作目录/illustrated-demo
 python scripts/figure.py pack --out /独立发布目录/scientific-figure-designer.zip --references /用户授权的本地参考图目录
 ```
 
-不指定 references 始终打轻量包，即使本地有原图也不自动收录。完整包需显式指定 `--references <Skill目录>/assets/reference-library/images`；打包前核对每个相对路径和 hash 与索引一致，包内保持相同目录。轻量包使用原图时通过 refs-search/refs-review 的 `--images` 绑定本地图库。benchmark 的 12+4 个案例都是虚构软件测试，不是专家盲评；demo 以相同内容和原创几何图标生成中心/泳道两张图。包内 `requirements.lock` 记录本次实测环境，运行依赖入口保持 `requirements.txt`。
+两种包都提供 Diagram Design 模板、规则、示例和当前科研参考索引。需要包内原图时用 `make package-private` 或显式传 `pack --references <Skill目录>/assets/reference-library/images`。打包前核对每张图的路径及 SHA-256，解包后的原图保持同一目录结构。轻量包可用 `--images` 绑定本地图库。benchmark 的 12+4 个案例均为合成校验，demo 使用原创几何图标。依赖通过 `requirements.txt` 安装。

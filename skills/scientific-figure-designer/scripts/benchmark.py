@@ -7,6 +7,7 @@ import sys
 import time
 from figure_common import ROOT,write
 from figure_plan import make_plan,registry
+from figure_assets import register
 from figure import render_job
 sys.path.insert(0,str(ROOT/'tests'))
 from cases import make_case
@@ -27,10 +28,17 @@ def run(out):
         if i==15:
             c['relations'][0]['to_id']='T3';c['relations'][1]['from_id']='T1';c['relations'][1]['to_id']='T2'
         p=make_plan(c,name,list(registry()['styles'])[i%4])
+        asset = directory/'fixture.svg'
+        asset.write_text('<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="30" fill="#31598f"/></svg>')
+        register(asset, {'id':'fixture','scientific_type':'module','style_family_id':p['style_id'],
+                         'rights':'authorized_reuse','approval':'production_approved','origin':'synthetic benchmark',
+                         'source_content_ids':['T1'],'reviewer':'software fixture','review_note':'synthetic','contains_evidence':False},
+                 directory/'assets')
+        p['regions'][1]['asset_ids']=['fixture']
         write(directory/'input-content.json',c);write(directory/'input-plan.json',p)
         begin=time.perf_counter()
         try:
-            qa=render_job(c,p,s,directory/'render')
+            qa=render_job(c,p,s,directory/'render',[directory/'assets/fixture/asset.json'])
             record={'case':i+1,'group':'development' if i<12 else 'holdout','layout':name,
                     'hard_pass':not qa['errors'],'errors':qa['errors'],'render_hash':qa['render_hash'],
                     'status':qa['status'],'wall_ms':round((time.perf_counter()-begin)*1000,2),'labels':len(qa['label_manifest'])}

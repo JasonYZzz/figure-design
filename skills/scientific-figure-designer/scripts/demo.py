@@ -38,11 +38,11 @@ def run(out):
              'tasks':tasks,'relations':[{'id':f'R{i+1}','from_id':f'T{i+1}','to_id':f'T{i+2}','type':'sequence','evidence_state':'planned','source_ids':[tasks[i]['source_ids'][0],tasks[i+1]['source_ids'][0]],'critical':True} for i in range(4)],'labels':labels,'label_instances':instances}
     write(out/'figure-content.json',content)
     icons=[
-        '<ellipse cx="180" cy="130" rx="125" ry="55" fill="#e1f2ef"/><path d="M180 35 C180 35 120 105 120 139 A60 60 0 0 0 240 139 C240 105 180 35 180 35Z" fill="#6bb7b5"/><circle cx="190" cy="145" r="27" fill="#f5fbfa"/>',
-        '<rect x="93" y="45" width="174" height="145" rx="18" fill="#e1f2ef" stroke="#287d85" stroke-width="4"/><rect x="116" y="67" width="128" height="63" rx="5" fill="white"/><path d="M180 130 V167 M151 167 H209" stroke="#287d85" stroke-width="5"/><circle cx="180" cy="160" r="7" fill="#287d85"/>',
-        '<rect x="85" y="45" width="140" height="140" rx="10" fill="#e1f2ef"/><path d="M105 78 H190 M105 108 H175 M105 138 H155" stroke="#287d85" stroke-width="6"/><circle cx="215" cy="135" r="40" fill="white" stroke="#287d85" stroke-width="7"/><path d="M245 165 L277 197" stroke="#287d85" stroke-width="12"/>',
-        '<path d="M180 35 L290 95 L180 155 L70 95Z" fill="#6bb7b5"/><path d="M70 130 L180 190 L290 130" fill="none" stroke="#287d85" stroke-width="12"/><path d="M70 160 L180 220 L290 160" fill="none" stroke="#b4d8ce" stroke-width="12"/>',
-        '<rect x="100" y="35" width="160" height="180" rx="12" fill="#e1f2ef" stroke="#287d85" stroke-width="4"/><path d="M128 95 L147 114 L188 73 M128 160 L147 179 L188 138" fill="none" stroke="#287d85" stroke-width="9"/><path d="M205 98 H235 M205 162 H235" stroke="#6bb7b5" stroke-width="5"/>']
+        '<ellipse cx="180" cy="130" rx="125" ry="55" fill="#e9edf8"/><path d="M180 35 C180 35 120 105 120 139 A60 60 0 0 0 240 139 C240 105 180 35 180 35Z" fill="#8198c7"/><circle cx="190" cy="145" r="27" fill="#f8f9fc"/>',
+        '<rect x="93" y="45" width="174" height="145" rx="18" fill="#e9edf8" stroke="#31598f" stroke-width="4"/><rect x="116" y="67" width="128" height="63" rx="5" fill="white"/><path d="M180 130 V167 M151 167 H209" stroke="#31598f" stroke-width="5"/><circle cx="180" cy="160" r="7" fill="#31598f"/>',
+        '<rect x="85" y="45" width="140" height="140" rx="10" fill="#e9edf8"/><path d="M105 78 H190 M105 108 H175 M105 138 H155" stroke="#31598f" stroke-width="6"/><circle cx="215" cy="135" r="40" fill="white" stroke="#31598f" stroke-width="7"/><path d="M245 165 L277 197" stroke="#31598f" stroke-width="12"/>',
+        '<path d="M180 35 L290 95 L180 155 L70 95Z" fill="#8198c7"/><path d="M70 130 L180 190 L290 130" fill="none" stroke="#31598f" stroke-width="12"/><path d="M70 160 L180 220 L290 160" fill="none" stroke="#bdcbe4" stroke-width="12"/>',
+        '<rect x="100" y="35" width="160" height="180" rx="12" fill="#e9edf8" stroke="#31598f" stroke-width="4"/><path d="M128 95 L147 114 L188 73 M128 160 L147 179 L188 138" fill="none" stroke="#31598f" stroke-width="9"/><path d="M205 98 H235 M205 162 H235" stroke="#8198c7" stroke-width="5"/>']
     manifests=[]
     for i,drawing in enumerate(icons):
         path=out/f'icon-{i+1}.svg';path.write_text('<svg xmlns="http://www.w3.org/2000/svg" width="360" height="250" viewBox="0 0 360 250">'+drawing+'</svg>',encoding='utf-8')
@@ -52,6 +52,9 @@ def run(out):
         manifests.append(out/'assets'/f'demo-icon-{i+1}'/'asset.json')
     for primary in ['center-hero-side-support','top-overview-multi-lane']:
         plan=make_plan(content,primary,'biomedicine-academic',route='asset_composite')
+        plan['theme']={'paper':'#f8f8fc','surface':'#ffffff','ink':'#1c2941','muted':'#485774',
+                       'accent':'#31598f','border':'#bcc9dc',
+                       'rationale':'冷蓝呼应测量与数据记录，浅灰白衬底突出装置与验证信息。'}
         owner_regions=[r for r in plan['regions'] if r['role']!='title']
         if primary=='center-hero-side-support':
             coordinates=[[.35,.22,.30,.65],[.04,.22,.26,.31],[.70,.22,.26,.31],[.04,.58,.26,.31],[.70,.58,.26,.31]]

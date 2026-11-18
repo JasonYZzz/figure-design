@@ -16,9 +16,8 @@ jobs:
       - run: make test PYTHON=python
       - run: make benchmark PYTHON=python OUT=/tmp/figure-validation
       - run: make package PYTHON=python
-      - name: Validate and render bundled fixtures
+      - name: Validate bundled contracts
         working-directory: skills/scientific-figure-designer
         run: |
           python scripts/validate_contract.py --schema schemas/figure-content.schema.json --input tests/fixtures/figure_content.json
           python scripts/validate_contract.py --schema schemas/composition-plan.schema.json --input tests/fixtures/composition_plan.json
-          python scripts/render_preview.py --content tests/fixtures/figure_content.json --plan tests/fixtures/composition_plan.json --out /tmp/scientific-figure-preview.svg

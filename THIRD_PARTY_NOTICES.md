@@ -6,4 +6,4 @@
 - **本项目代码**采用 [MIT 许可证](LICENSE)。上游代码和其他资源分别保留其来源与许可证。
 
 - **PPT Master 本地复用**：SVG 资源闭包检查代码以 MIT 许可纳入 Skill，保留版权与 [许可证](skills/scientific-figure-designer/third_party/ppt-master/LICENSE)。复用范围和 nature 方法分析见 [本地说明](skills/scientific-figure-designer/third_party/README.md)。
-- **Diagram Design**：完整项目快照随 Skill 提供，保留上游 [MIT 许可证](skills/scientific-figure-designer/third_party/diagram-design/LICENSE)与[第三方资源许可](skills/scientific-figure-designer/third_party/diagram-design/THIRD_PARTY_LICENSES.md)。纯文字模式复用其本地 HTML 模板与架构、流程图规则。
+- **Diagram Design**：仓库保留完整快照。安装包附带原版 Skill 的模板、规则、示例和工具，以及上游 [MIT 许可证](skills/scientific-figure-designer/third_party/diagram-design/LICENSE)和[第三方资源许可](skills/scientific-figure-designer/third_party/diagram-design/THIRD_PARTY_LICENSES.md)。

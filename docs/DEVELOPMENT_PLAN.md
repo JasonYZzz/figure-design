@@ -1,6 +1,6 @@
 # 开发计划与当前状态
 
-当前版本 **1.5.0**，项目和独立 Codex Skill 统一使用 `scientific-figure-designer`。唯一源码目录是 `skills/scientific-figure-designer/`，`.agents/skills/` 提供发现入口。
+当前版本 **1.6.0**，项目和独立 Agent Skill 统一使用 `scientific-figure-designer`。唯一源码目录是 `skills/scientific-figure-designer/`，`.agents/skills/` 提供发现入口。
 
 ## 已交付
 
@@ -11,6 +11,7 @@
 - 161 张原图独立分析、9 类任务导航、中文结构检索、brief/plan 衔接、可恢复知识构建及检索评测工具。
 - 文档路线图默认先设计图文分工；自动候选保留 route 和 variant，预检和质量报告列出素材绑定。
 - `text` 和 `mixed` 两种模式统一交付 SVG、PNG、离线 HTML 和质量报告。纯文字复用随包 Diagram Design 的架构与路线图能力。
+- 纯文字交给原版 Diagram Design，图文使用可校验的语义配色。轻量包收录完整上游 Skill，私用包额外收录 161 张原图。
 
 ## 验收边界
 
@@ -21,6 +22,7 @@ v20/v24 用于内容绑定和构图回归；自动候选仍需容量调整。30 
 - [当前架构与目录规则](ARCHITECTURE.md)
 - [逐项研发任务、实现证据与限制](development/BACKLOG.csv)：保留原验收条目，不将待人审任务标为完成。Evidence 中的 scripts/assets/schemas 路径以 Skill 目录为根。
 - [1.5.0 HTML 导出与模式选择](releases/1.5.0.md)
+- [1.6.0 文字构图与安装包优化](releases/1.6.0.md)
 - [1.3.0 参考知识实施记录](releases/1.3.0.md)
 - [1.2.0 本地整合记录](releases/1.2.0.md)
 - [1.1.0 功能交付与验收](releases/1.1.0.md)

@@ -109,28 +109,46 @@ class StandaloneContracts(unittest.TestCase):
         self.assertNotEqual(pair[0]['plan']['regions'],pair[1]['plan']['regions'])
 
     def test_cli_plan_modes_and_diagram_types(self):
+        from figure_common import DIAGRAM_SKILL
         content_path = self.root/'content.json'
         write(content_path, self.content)
+        references_path = self.root/'references.json'
+        write(references_path, {'source_content_hash':fingerprint(self.content),'candidates':[]})
         command = [sys.executable, str(ROOT/'scripts/figure.py'), 'plan', '--content', str(content_path)]
-        for name, args, route, diagram_type, layout in (
-            ('roadmap', ['--mode', 'text'], 'text_structured', 'roadmap', 'annual-stage-timeline'),
-            ('architecture', ['--mode', 'text', '--diagram-type', 'architecture'], 'text_structured',
-             'architecture', 'top-overview-multi-lane'),
-            ('mixed', ['--mode', 'mixed', '--layout', 'center-hero-side-support'], 'asset_composite',
-             None, 'center-hero-side-support'),
-        ):
+        for name, args in (('default', []), ('architecture', ['--mode','text','--diagram-type','architecture'])):
             out = self.root/name
-            run = subprocess.run(command + args + ['--out', str(out)], capture_output=True, text=True)
+            run = subprocess.run(command + args + ['--references',str(references_path),'--out',str(out)],
+                                 capture_output=True, text=True)
             self.assertEqual(run.returncode, 0, run.stderr)
-            plan = read(out/'candidate-1.json')
-            self.assertEqual(plan['mode'], 'mixed' if name == 'mixed' else 'text')
-            self.assertEqual((plan['route'], plan.get('diagram_type'), plan['grammar']['primary']),
-                             (route, diagram_type, layout))
+            dispatch = read(out/'diagram-design.json')
+            self.assertEqual(dispatch['status'], 'delegated')
+            self.assertEqual(dispatch['skill'], str(DIAGRAM_SKILL/'SKILL.md'))
+            self.assertEqual(dispatch['references'], str(references_path.resolve()))
+            self.assertEqual(dispatch['diagram_type'], 'architecture' if name=='architecture' else None)
+            self.assertFalse(list(out.glob('candidate-*.json')))
+        out = self.root/'mixed'
+        run = subprocess.run(command + ['--mode','mixed','--out',str(out)], capture_output=True, text=True)
+        self.assertEqual(run.returncode, 0, run.stderr)
+        plan = read(out/'candidate-1.json')
+        self.assertEqual((plan['mode'],plan['route']), ('mixed','asset_composite'))
         out = self.root/'bad'
-        run = subprocess.run(command + ['--mode', 'text', '--route', 'asset_composite', '--out', str(out)],
+        run = subprocess.run(command + ['--mode','text','--route','asset_composite','--out',str(out)],
                              capture_output=True, text=True)
         self.assertEqual(run.returncode, 2)
         self.assertFalse(out.exists())
+
+    def test_diagram_export_rejects_relative_stylesheet(self):
+        import re
+        from figure import diagram_export
+        from figure_common import DIAGRAM_SKILL
+        html = self.root/'diagram.html'
+        official = (DIAGRAM_SKILL/'assets/example-architecture.html').read_text()
+        html.write_text(re.sub(r'<link[^>]+fonts\.googleapis\.com[^>]*>',
+                               '<link rel="stylesheet" href="theme.css">', official))
+        (self.root/'theme.css').write_text('body { background: #eee }')
+        with self.assertRaisesRegex(ValueError, 'self-contained'):
+            diagram_export(html, self.root/'export')
+        self.assertFalse((self.root/'export').exists())
 
     def test_route_avoids_middle_obstacle(self):
         source=[30,150,80,80];target=[390,150,80,80];obstacle=[200,100,100,200]
@@ -159,8 +177,10 @@ class StandaloneContracts(unittest.TestCase):
 
     def test_data_chart_preserves_values(self):
         path=self.root/'data.csv';path.write_text('time,value\n1,-2\n2,4\n3,3\n')
-        result=chart(path,self.root/'chart','time','value','Synthetic values','bar')
+        plan=make_plan(self.content,'top-overview-multi-lane','materials-academic')
+        result=chart(path,self.root/'chart','time','value','Synthetic values','bar',plan=plan)
         self.assertEqual(result['points'],[(1.,-2.),(2.,4.),(3.,3.)])
+        self.assertIn('fill="#8a442b"',(self.root/'chart/chart.svg').read_text())
         path.write_text('time,value\n1,NaN\n2,3\n')
         with self.assertRaises(ValueError):chart(path,self.root/'bad','time','value','bad')
 
@@ -185,11 +205,20 @@ class StandaloneContracts(unittest.TestCase):
         index(images,library/'catalog.sqlite')
         (library/'human-review').mkdir();(library/'human-review/review.html').write_text('private pixels')
         (library/'thumbnails').mkdir();(library/'thumbnails/preview.png').write_bytes(b'private pixels')
+        vendor=skill/'third_party/diagram-design'
+        runtime=vendor/'skills/diagram-design'
+        runtime.mkdir(parents=True)
+        (runtime/'SKILL.md').write_text('upstream skill')
+        (vendor/'LICENSE').write_text('upstream license')
+        (vendor/'docs').mkdir()
+        (vendor/'docs/maintainer.md').write_text('upstream dev-only docs')
         with patch('figure.ROOT',skill):
             pack(self.root/'light.zip')
             pack(self.root/'private.zip',images)
             with ZipFile(self.root/'light.zip') as z:
                 self.assertFalse(any('/images/' in n or '/human-review/' in n or '/thumbnails/' in n for n in z.namelist()))
+                self.assertTrue(any(n.endswith('/diagram-design/SKILL.md') for n in z.namelist()))
+                self.assertFalse(any(n.endswith('/docs/maintainer.md') for n in z.namelist()))
                 self.assertFalse(json.loads(z.read('scientific-figure-designer/package-manifest.json'))['reference_images_included'])
             with ZipFile(self.root/'private.zip') as z:
                 self.assertEqual(sum('/images/' in n for n in z.namelist()),1)
@@ -206,33 +235,44 @@ class BrowserIntegration(unittest.TestCase):
     def setUp(self):self.temp=tempfile.TemporaryDirectory();self.root=Path(self.temp.name)
     def tearDown(self):self.temp.cleanup()
 
+    def illustrate(self, plan):
+        from PIL import Image
+        asset = self.root/'figure.png'
+        Image.new('RGB', (40,40), (12,48,92)).save(asset)
+        register(asset, {'id':'fixture','scientific_type':'module','style_family_id':plan['style_id'],
+                         'rights':'authorized_reuse','approval':'production_approved','origin':'synthetic fixture',
+                         'source_content_ids':['T1'],'reviewer':'software fixture','review_note':'synthetic','contains_evidence':False},
+                 self.root/'library')
+        plan['regions'][1]['asset_ids']=['fixture']
+        return [self.root/'library/fixture/asset.json']
+
     def test_render_exact_unicode_cache_patch_and_export(self):
         from figure import render_job,verify_bundle,export
         c,s=make_case(self.root/'case',number=1)
-        p=make_plan(c,'top-overview-multi-lane','biomedicine-academic',mode='text',diagram_type='architecture')
+        p=make_plan(c,'top-overview-multi-lane','biomedicine-academic')
+        manifests=self.illustrate(p)
         out=self.root/'render'
-        report=render_job(c,p,s,out);self.assertFalse(report['errors'])
-        self.assertEqual(report['composition'], {'route': 'text_structured', 'mode': 'text',
-            'diagram_type': 'architecture', 'html_template': 'diagram-design', 'asset_placements': []})
+        report=render_job(c,p,s,out,manifests);self.assertFalse(report['errors'])
+        self.assertEqual(report['composition']['mode'], 'mixed')
+        self.assertEqual(report['theme']['accent'], '#514487')
         scene=read(out/'scene.json')
         measured=next(o for o in scene['objects'] if o.get('label_instance_id')=='I2')
         self.assertTrue(any('10 μmol/L' in line for line in measured['lines']))
         html = (out/'preview.html').read_text()
-        self.assertIn('class="diagram-container" data-diagram-type="architecture"', html)
         self.assertIn((out/'preview.svg').read_text(), html)
-        self.assertNotIn('<image', html)
+        self.assertIn('href="data:image/png;base64,', html)
         self.assertNotIn('fonts.googleapis.com', html)
         self.assertFalse((out/'preview.pdf').exists())
         self.assertEqual(len(report['label_manifest']),len(c['label_instances']))
         self.assertEqual({r['id']:r['text'] for r in report['relation_label_manifest']},{r['id']:'步骤' for r in c['relations']})
-        self.assertTrue(render_job(c,p,s,out)['metrics']['cache_hit'])
+        self.assertTrue(render_job(c,p,s,out,manifests)['metrics']['cache_hit'])
         with self.assertRaises(ValueError):export(out,self.root/'final.zip',final=True)
         exported=export(out,self.root/'draft.zip');self.assertEqual(exported['status'],'review_required')
         with ZipFile(self.root/'draft.zip') as z:
             self.assertEqual(z.read('preview.html').decode(), html)
             self.assertNotIn('preview.pdf', z.namelist())
         patched=copy.deepcopy(c);patched['labels'][1]['text']='拟调整研究条件';patched['labels'][1]['kind']='approved_summary'
-        second=render_job(patched,p,s,self.root/'patch');self.assertEqual(second['metrics']['paid_calls'],0)
+        second=render_job(patched,p,s,self.root/'patch',manifests);self.assertEqual(second['metrics']['paid_calls'],0)
         self.assertNotEqual(second['render_hash'],report['render_hash'])
         (out/'preview.html').write_text('tampered')
         with self.assertRaises(ValueError):verify_bundle(out)
@@ -240,12 +280,27 @@ class BrowserIntegration(unittest.TestCase):
     def test_capacity_missing_glyph_and_wrong_edge_block(self):
         from figure_render import render
         c,s=make_case(self.root/'case');p=make_plan(c,'top-overview-multi-lane','cs-academic')
+        manifests=self.illustrate(p)
         bad=copy.deepcopy(c);bad['labels'][1]['text']='长标签'*150;bad['labels'][1]['kind']='approved_summary'
-        with self.assertRaisesRegex(ValueError,'text_capacity'):render(bad,p,s,self.root/'none',preflight=True)
+        with self.assertRaisesRegex(ValueError,'text_capacity'):render(bad,p,s,self.root/'none',manifests,preflight=True)
         bad['labels'][1]['text']='\U0001f984'
-        with self.assertRaisesRegex(ValueError,'glyph'):render(bad,p,s,self.root/'none',preflight=True)
+        with self.assertRaisesRegex(ValueError,'glyph'):render(bad,p,s,self.root/'none',manifests,preflight=True)
         p['edges'][0]['source_region_id']='owner-3'
-        with self.assertRaisesRegex(ValueError,'owner'):render(c,p,s,self.root/'none',preflight=True)
+        with self.assertRaisesRegex(ValueError,'owner'):render(c,p,s,self.root/'none',manifests,preflight=True)
+
+    def test_agent_theme_renders_and_rejects_low_contrast(self):
+        from figure_render import render
+        c,s=make_case(self.root/'case')
+        p=make_plan(c,'top-overview-multi-lane','cs-academic')
+        manifests=self.illustrate(p)
+        p['theme']={'paper':'#faf8f5','surface':'#ffffff','ink':'#332a24','muted':'#675449',
+                    'accent':'#8a442b','border':'#d4c2b7','rationale':'warm experimental material reference'}
+        report=render(c,p,s,self.root/'themed',manifests)
+        self.assertEqual(report['theme'],p['theme'])
+        self.assertIn('fill="#faf8f5"',(self.root/'themed/preview.svg').read_text())
+        p['theme']['muted']='#eeeeee'
+        with self.assertRaisesRegex(ValueError,'theme_contrast'):
+            render(c,p,s,None,manifests,preflight=True)
 
     def test_asset_and_image_first_routes(self):
         from PIL import Image
@@ -256,8 +311,7 @@ class BrowserIntegration(unittest.TestCase):
         register(im,{'id':'module1','scientific_type':'module','style_family_id':'biomedicine-academic','rights':'authorized_reuse','approval':'production_approved','origin':'synthetic test shape','source_content_ids':['T1'],'reviewer':'software test fixture','review_note':'not a human acceptance record','contains_evidence':False},self.root/'library')
         manifest=self.root/'library/module1/asset.json'
         for route in ['asset_composite','image_first','strict_scientific']:
-            p=make_plan(c,'center-hero-side-support','biomedicine-academic',route=route,
-                        mode='mixed' if route == 'asset_composite' else None)
+            p=make_plan(c,'center-hero-side-support','biomedicine-academic',route=route)
             if route == 'asset_composite':
                 with self.assertRaisesRegex(ValueError, 'requires at least one approved asset'):
                     render(c, p, s, None, preflight=True)
@@ -269,13 +323,27 @@ class BrowserIntegration(unittest.TestCase):
                 'asset_placements': [{'region_id': p['regions'][1]['id'], 'asset_id': 'module1'}]})
             self.assertIn('href="data:image/png;base64,', (self.root/route/'preview.html').read_text())
             if route=='image_first':self.assertIn('native_image_text_and_arrows_review',report['pending'])
-        p=make_plan(c,'annual-stage-timeline','biomedicine-academic',mode='text',diagram_type='roadmap')
-        report=render_job(c,p,s,self.root/'roadmap')
-        self.assertFalse(report['errors'])
-        self.assertEqual(report['composition']['diagram_type'], 'roadmap')
-        p['regions'][1]['asset_ids']=['module1']
-        with self.assertRaisesRegex(ValueError, 'text mode does not accept'):
+        p['route']='text_structured'
+        p['mode']='text'
+        with self.assertRaisesRegex(ValueError, 'bundled Diagram Design'):
             render(c,p,s,None,[manifest],preflight=True)
+
+    def test_diagram_design_checks_and_exports_its_examples(self):
+        import re
+        from figure import diagram_export
+        from figure_common import DIAGRAM_SKILL
+        for kind in ('architecture','flowchart'):
+            source = (DIAGRAM_SKILL/'assets'/f'example-{kind}.html').read_text()
+            offline = re.sub(r'^\s*<link[^>]+fonts\.googleapis\.com[^>]*>\n?', '', source, flags=re.M)
+            input_path = self.root/f'{kind}.html'
+            input_path.write_text(offline)
+            out = self.root/kind
+            report = diagram_export(input_path, out)
+            self.assertEqual(report['renderer'], 'diagram-design')
+            self.assertEqual((out/'preview.html').read_text(), offline)
+            self.assertTrue((out/'preview.svg').is_file())
+            self.assertTrue((out/'preview.png').is_file())
+            self.assertFalse((out/'preview.pdf').exists())
 
 
 if __name__=='__main__':unittest.main()

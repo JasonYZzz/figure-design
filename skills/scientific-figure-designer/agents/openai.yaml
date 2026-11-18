@@ -1,4 +1,4 @@
 interface:
   display_name: "Scientific Figure Designer"
   short_description: "从科研文档提取证据、绘制对象和方法示意，生成可编辑科研路线图"
-  default_prompt: "使用 $scientific-figure-designer 根据这份文档以 mode=mixed 生成带插图的科研技术路线图，保留关键实验条件和研究状态，交付 SVG、PNG、HTML 与质量报告。"
+  default_prompt: "使用 $scientific-figure-designer 根据这份文档生成纯文字技术路线图，保留关键条件和研究状态，交付 SVG、PNG、HTML 与质量报告。"
