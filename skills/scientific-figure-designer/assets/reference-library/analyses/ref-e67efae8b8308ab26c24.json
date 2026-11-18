@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-e67efae8b8308ab26c24",
+  "image_sha256": "e67efae8b8308ab26c24fe39706a8182d1d4837ac4d28f53c42e9279b59c1349",
+  "title": "土壤修复九阶段长期监测回路",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "earth",
+    "layout": "annual-stage-timeline",
+    "topology": [
+      "sequence",
+      "feedback",
+      "comparison"
+    ],
+    "media": "illustrated",
+    "density": "high",
+    "temporal_axis": "explicit",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.16,
+        0.5,
+        0.8,
+        0.34
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "九个编号阶段，室内三对照与田间四对照，监测0至3月到1至3年反馈配方",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "多阶段图中独立标出对照与长期反馈",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "阶段数多，需保留字号而非整体缩小"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "九个编号阶段，室内三对照与田间四对照，监测0至3月到1至3年反馈配方",
+  "variant_group": null,
+  "spatial": {
+    "columns": null,
+    "stages": null,
+    "direction": "top_to_bottom",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+  "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "unknown",
+    "method": "individual_original_image_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "reference-visual-v2",
+    "observed_on": "2026-11-17"
+  },
+  "relations": []
+}

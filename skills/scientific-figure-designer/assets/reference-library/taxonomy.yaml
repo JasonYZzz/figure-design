@@ -1,0 +1,172 @@
+version: '2.0'
+facets:
+  domain:
+    biomedicine:
+    - 生物医药
+    - 生物医学
+    - 医学
+    - 细胞
+    - biomedical
+    - biology
+    earth:
+    - 地学
+    - 地理
+    - 环境
+    - 遥感
+    - 生态
+    social:
+    - 社科
+    - 社会科学
+    - 政策
+    - 教育
+    - 调查
+    cs-ai:
+    - 计算机
+    - 人工智能
+    - 算法
+    - AI
+    - system
+    materials:
+    - 材料
+    - 纳米
+    - 催化
+    general:
+    - 通用
+    - 空白
+    - 模板
+    unknown: []
+  layout:
+    annual-stage-timeline:
+    - 纵向阶段
+    top-overview-multi-lane:
+    - 多列泳道
+    center-hero-side-support:
+    - 中心两侧
+    comparative-panels:
+    - 双面板
+    matrix-plus-flow:
+    - 矩阵
+    fork-merge-validation:
+    - 分支汇合
+    macro-micro-mechanism:
+    - 跨尺度
+    hub-spoke:
+    - 中心辐射
+    network-overlay:
+    - 关系网络
+    unknown: []
+  topology:
+    sequence:
+    - 串行
+    - 顺序
+    - 递进
+    - 步骤
+    - 流程
+    - workflow
+    parallel:
+    - 并行
+    - 并列
+    - 支线
+    branch:
+    - 分支
+    - 分流
+    merge:
+    - 汇合
+    - 汇聚
+    - 融合
+    feedback:
+    - 反馈
+    - 回路
+    - 闭环
+    - feedback
+    comparison:
+    - 比较
+    - 对照
+    - 分组
+    association:
+    - 关联
+    - 联系
+    - 互作
+    unknown: []
+  media:
+    illustrated:
+    - 图文
+    - 图文混合
+    - 插图
+    - 图标
+    - 配图
+    - illustrated
+    text:
+    - 文字
+    - 纯文字
+    - 文本
+    unknown: []
+  density:
+    low:
+    - 低密度
+    - 少文字
+    - 低文字密度
+    medium:
+    - 中密度
+    high:
+    - 高密度
+    - 长中文
+    - 文字密集
+    unknown: []
+  temporal_axis:
+    explicit:
+    - 年度
+    - 四年
+    - 时间轴
+    - 进度
+    - 时间安排
+    stages:
+    - 阶段
+    - 里程碑
+    unknown: []
+  purpose:
+    roadmap:
+    - 路线图
+    - 技术路线
+    mechanism:
+    - 机制
+    - 通路
+    framework:
+    - 框架
+    - 概念
+    experiment:
+    - 实验设计
+    - 实验方案
+    comparison:
+    - 比较设计
+    unknown: []
+definitions:
+  temporal_axis.explicit: 图内可见明确持续时间或时间刻度；不保证年度。
+  temporal_axis.stages: 阶段编号/里程碑，不等于日期。
+  density: 以当前原图呈现的定性视觉判断；不是OCR测量。
+  illustrated: 具有研究对象、操作、装置插图；几何框和概念圆不计。
+aliases:
+  RNA:
+  - RNA
+  - rna
+  - 测序
+  - sequencing
+  verification:
+  - 验证
+  - 检验
+  - verification
+  - validation
+  clinical:
+  - 临床
+  - clinical
+  animal:
+  - 动物
+  - 小鼠
+  - 大鼠
+  - animal
+  cell:
+  - 细胞
+  - cell
+  model:
+  - 模型
+  - model

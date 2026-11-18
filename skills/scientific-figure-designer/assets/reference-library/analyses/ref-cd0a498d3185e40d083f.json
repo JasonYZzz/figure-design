@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-cd0a498d3185e40d083f",
+  "image_sha256": "cd0a498d3185e40d083fc44fab29fbc64e75acf86d71156af2dd457611f2a321",
+  "title": "细胞个体临床三证据层",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "biomedicine",
+    "layout": "annual-stage-timeline",
+    "topology": [
+      "sequence",
+      "parallel",
+      "merge"
+    ],
+    "media": "illustrated",
+    "density": "high",
+    "temporal_axis": "stages",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.16,
+        0.14,
+        0.79,
+        0.2
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "顶部细胞五方法列，中部动物双验证，底部回顾病例与采样汇合统计",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "按研究尺度分层并用对象图标提示层级",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "占位基因和年份未知，不可补填"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "顶部细胞五方法列，中部动物双验证，底部回顾病例与采样汇合统计",
+  "variant_group": null,
+  "spatial": {
+    "columns": 5,
+    "stages": null,
+    "direction": "top_to_bottom",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+  "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "unknown",
+    "method": "individual_original_image_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "reference-visual-v2",
+    "observed_on": "2026-11-17"
+  },
+  "relations": []
+}

@@ -1,0 +1,94 @@
+{
+  "at": "2026-11-17T06:59:17.707154+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-f7b759b474373dea34a2",
+    "image_sha256": "f7b759b474373dea34a293d9c9b4f7a6e80f82a530520127912864c49df91e8c",
+    "title": "外泌体四研究内容方法方案矩阵",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "top-overview-multi-lane",
+      "topology": [
+        "sequence",
+        "branch",
+        "merge"
+      ],
+      "media": "text",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.12,
+          0.4,
+          0.81,
+          0.5
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "上部筛选主链配侧向实验，下面四列分别内容、方法、方案，底部统计汇合",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "四任务逐列对齐方法与执行方案",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "宽文本块高度不一，应按真实中文测量"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "上部筛选主链配侧向实验，下面四列分别内容、方法、方案，底部统计汇合",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "left_to_right"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

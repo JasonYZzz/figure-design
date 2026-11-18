@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ScientificAssetRecord v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "scientific_type",
+    "style_family_id",
+    "asset_path",
+    "file_sha256",
+    "rights",
+    "approval"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scientific_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "style_family_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "asset_path": {
+      "type": "string",
+      "minLength": 1
+    },
+    "file_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "rights": {
+      "enum": [
+        "unknown",
+        "internal_reference",
+        "style_only",
+        "authorized_reuse",
+        "restricted"
+      ]
+    },
+    "approval": {
+      "enum": [
+        "candidate",
+        "scientific_reviewed",
+        "production_approved",
+        "blocked"
+      ]
+    },
+    "origin_reference_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "pixel_integrity_notes": {
+      "type": "string"
+    },
+    "source_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "allowed_domains": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "visual_features": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "origin": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_content_ids": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewer": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_note": {
+      "type": "string",
+      "minLength": 1
+    },
+    "contains_evidence": {
+      "type": "boolean"
+    },
+    "mime": {
+      "enum": [
+        "image/svg+xml",
+        "image/png",
+        "image/jpeg",
+        "image/webp"
+      ]
+    }
+  }
+}

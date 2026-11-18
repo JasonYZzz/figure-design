@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-ebc184b0ebca06781400",
+  "image_sha256": "ebc184b0ebca0678140012fdf8cc2af894601547849c7f0f4c133870b6a6ac5a",
+  "title": "类器官建模四阶段与底部比较",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "biomedicine",
+    "layout": "top-overview-multi-lane",
+    "topology": [
+      "sequence",
+      "comparison"
+    ],
+    "media": "illustrated",
+    "density": "medium",
+    "temporal_axis": "stages",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.02,
+        0.67,
+        0.96,
+        0.3
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "顶部四个图文步骤，末端折向底部与传统模型比较",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "四阶段主链加宽幅验证或比较区",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "优劣符号属于原图叙事，不能迁移为研究结论"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "顶部四个图文步骤，末端折向底部与传统模型比较",
+  "variant_group": null,
+  "spatial": {
+    "columns": null,
+    "stages": null,
+    "direction": "left_to_right",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+  "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "unknown",
+    "method": "individual_original_image_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "reference-visual-v2",
+    "observed_on": "2026-11-17"
+  },
+  "relations": []
+}

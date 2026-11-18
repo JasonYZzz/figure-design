@@ -1,0 +1,94 @@
+{
+  "at": "2026-11-17T07:05:06.325345+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "b96261e0814de05fd1a3a95d5d68feb5250aa3209bdbe54506aa4c386d40b4cc",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-9bdb8ce37945e2139c08",
+    "image_sha256": "9bdb8ce37945e2139c0831433c78a2090df96923243bff7dbb078c65955ce059",
+    "title": "测序仪器与分析流程图谱",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "top-overview-multi-lane",
+      "topology": [
+        "sequence"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.01,
+          0.01,
+          0.97,
+          0.97
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "窄列分别展示提取、建库、质控、测序及功能分析器具",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "按方法模块建立插图词汇导航",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "部分测序模块重复，阅读路径需另行明确"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "窄列分别展示提取、建库、质控、测序及功能分析器具",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "left_to_right",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

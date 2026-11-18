@@ -1,0 +1,57 @@
+{
+  "local_sources_only": true,
+  "runtime_upstream_access": false,
+  "records": [
+    {
+      "project": "diagram-design",
+      "source_commit": "f6db0decea96de66b901331a0f79a8d4b147ebae",
+      "source_relative_path": ".",
+      "tracked_file_count": 763,
+      "reuse": "full_tracked_snapshot_MIT"
+    },
+    {
+      "project": "ppt-master",
+      "source_relative_path": "skills/ppt-master/scripts/resource_paths.py",
+      "sha256": "c8ee17e1a83e946201e5c2944c3b4ef30b05eddebc4b62995fe7a9b722ccda3e",
+      "reuse": "selected_functions_copied_MIT"
+    },
+    {
+      "project": "ppt-master",
+      "source_relative_path": "skills/ppt-master/references/shared-standards-core.md",
+      "sha256": "658bf3ede7e0d16ed28fa6722f3ba451ae6a83325e04f5c4fea4f72915f40770",
+      "reuse": "design_review_only"
+    },
+    {
+      "project": "nature-figure",
+      "source_relative_path": "references/figure-contract.md",
+      "sha256": "db08b51fb080c5fe37f61140a1b7fd31247f90810f3a80cdcf58429a699879df",
+      "reuse": "ideas_reviewed_original_local_implementation"
+    },
+    {
+      "project": "nature-figure",
+      "source_relative_path": "references/multipanel-evidence-architecture.md",
+      "sha256": "79ca617cc05088d6fcfb065140d0ee036eb849738bb79306964eb9aa3a4ed274",
+      "reuse": "ideas_reviewed_original_local_implementation"
+    },
+    {
+      "project": "nature-proposal-writer",
+      "source_relative_path": "templates/02_evidence_table.md",
+      "sha256": "7a94d7c5d9c993240f96d314b33b745f70e6d2e992ee11371a5f7b9cd6fa4217",
+      "reuse": "ideas_reviewed_original_local_implementation"
+    },
+    {
+      "project": "nature-proposal-writer",
+      "source_relative_path": "templates/03_argument_map.md",
+      "sha256": "45d8705a58eb3c9cdb797481c9833f3bca3397039979fce185ac517d82f46496",
+      "reuse": "ideas_reviewed_original_local_implementation"
+    }
+  ],
+  "vendored_files": {
+    "scripts/vendor/ppt_master_svg_resources.py": "80d074a877b3ffdeb4c55b70b6c3fdfe7551253c52425f36665f0ebba73f1b9d",
+    "third_party/diagram-design/LICENSE": "bb7e12e91fecef43024111123ff784cec6c485585561d8b552557c0173b3ed29",
+    "third_party/diagram-design/THIRD_PARTY_LICENSES.md": "ad931154e2f91bf545fc9c442666a2159aa56c0af3cca0b7246e02c6efeab6ba",
+    "third_party/diagram-design/skills/diagram-design/assets/template.html": "f6978a9d50dd286f32ab149bcf505261b9fc331df7320071f87509a285dee7f4",
+    "third_party/diagram-design/skills/diagram-design/references/type-architecture.md": "28260c9c0a72fe17ddf6eed7b1fff01c04f58f62bbb7147c45372574c9e38eea",
+    "third_party/diagram-design/skills/diagram-design/references/type-flowchart.md": "c2af5e2b849255ae4859125db7b101b74bfb9b201204725c1e83fac51a98ebab"
+  }
+}

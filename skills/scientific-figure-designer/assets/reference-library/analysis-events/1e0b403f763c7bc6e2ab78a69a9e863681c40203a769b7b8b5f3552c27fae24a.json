@@ -1,0 +1,96 @@
+{
+  "at": "2026-11-17T07:05:06.291165+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "f28d6aa8c03636613cf3cb5058619baeaac383ca78382ad2c011779a76992df1",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-418e78e4234db25d6b19",
+    "image_sha256": "418e78e4234db25d6b1990f5e296d3b10138c04efb7cfe3f9ecbbface7911a12",
+    "title": "采集清洗错误重试流程",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "cs-ai",
+      "layout": "annual-stage-timeline",
+      "topology": [
+        "sequence",
+        "branch",
+        "feedback"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.21,
+          0.29,
+          0.77,
+          0.38
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "五阶段纵向，中间状态码菱形分403、429等路径回到请求，底部五步清洗",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "异常分支保留在阶段内，正常链向下",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "小字号参数只能局部放大核验"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "五阶段纵向，中间状态码菱形分403、429等路径回到请求，底部五步清洗",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "top_to_bottom",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-f03d218c47e82ced7c19",
+  "image_sha256": "f03d218c47e82ced7c19d1b593ecc7106ff4897bba92b9a9b0ba8c5a603d8e95",
+  "title": "动物药物评价五阶段",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "biomedicine",
+    "layout": "top-overview-multi-lane",
+    "topology": [
+      "sequence",
+      "parallel"
+    ],
+    "media": "illustrated",
+    "density": "high",
+    "temporal_axis": "stages",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.02,
+        0.14,
+        0.96,
+        0.73
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "五列从饲养到多指标验证，中央粗箭头串联，每列上下分项",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "阶段标题与插图方法子项一一对应",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "右列病理图和条带来源未知，不能复用像素"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "五列从饲养到多指标验证，中央粗箭头串联，每列上下分项",
+  "variant_group": null,
+  "spatial": {
+    "columns": 5,
+    "stages": null,
+    "direction": "left_to_right",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+  "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "unknown",
+    "method": "individual_original_image_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "reference-visual-v2",
+    "observed_on": "2026-11-17"
+  },
+  "relations": []
+}

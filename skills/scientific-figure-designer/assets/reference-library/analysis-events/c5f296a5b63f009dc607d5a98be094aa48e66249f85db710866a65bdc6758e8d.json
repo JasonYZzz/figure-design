@@ -1,0 +1,94 @@
+{
+  "at": "2026-11-17T06:59:17.729001+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-9601a767558718a2dd5b",
+    "image_sha256": "9601a767558718a2dd5baf79ab12e10c1368c5b9623f5eefa60fe9df6092232b",
+    "title": "碳市场经济能源环境循环模型",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "social",
+      "layout": "annual-stage-timeline",
+      "topology": [
+        "sequence",
+        "feedback",
+        "branch"
+      ],
+      "media": "text",
+      "density": "medium",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.07,
+          0.39,
+          0.84,
+          0.31
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "背景层后中央碳市场到经济产出与能源消耗回路，下层模型参数检验情景三支",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "系统机制占主区，验证情景独立下层",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "反馈模型是原文假设，不能套作因果事实"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "背景层后中央碳市场到经济产出与能源消耗回路，下层模型参数检验情景三支",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "top_to_bottom"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

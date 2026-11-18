@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-9401f30da1cf9359f009",
+  "image_sha256": "9401f30da1cf9359f009a65cb58119f4a3333e7aefc296e7ce97a22ea4e088c4",
+  "title": "骨修复三组对照四阶段",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "biomedicine",
+    "layout": "top-overview-multi-lane",
+    "topology": [
+      "sequence",
+      "parallel",
+      "comparison"
+    ],
+    "media": "illustrated",
+    "density": "high",
+    "temporal_axis": "stages",
+    "purpose": "experiment"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.01,
+        0.13,
+        0.46,
+        0.76
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "左侧A支架B细胞C因子三组，主体制备体外动物组织四阶段",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "对照组颜色贯穿处理与读出",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "包含示例统计柱图，不能据图设定疗效"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "左侧A支架B细胞C因子三组，主体制备体外动物组织四阶段",
+  "variant_group": null,
+  "spatial": {
+    "columns": 4,
+    "stages": null,
+    "direction": "left_to_right",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+  "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "unknown",
+    "method": "individual_original_image_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "reference-visual-v2",
+    "observed_on": "2026-11-17"
+  },
+  "relations": []
+}

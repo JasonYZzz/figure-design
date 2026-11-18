@@ -1,0 +1,102 @@
+{
+  "at": "2026-11-17T07:05:06.299157+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "445691e42f0e0b881710eb7b094f2ca99ef58f2ccb40228bd3379d33f8e2289a",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-e66c31be92e3e15e953f",
+    "image_sha256": "e66c31be92e3e15e953f2c8996895d9666669d2708aaa12ebc3a0b1deb882fc5",
+    "title": "临床五指标细胞动物机制模板",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "fork-merge-validation",
+      "topology": [
+        "sequence",
+        "branch",
+        "merge"
+      ],
+      "media": "illustrated",
+      "density": "medium",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.05,
+          0.43,
+          0.89,
+          0.43
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "临床五指标汇合关系后分细胞三方法三指标与动物双模型四检测",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "简化版临床发现到机制验证双支",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "大部分占位文本，底部结论须改为研究问题"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "临床五指标汇合关系后分细胞三方法三指标与动物双模型四检测",
+    "variant_group": "variant-74",
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": [
+      {
+        "reference_id": "ref-750b6dfda2bcf91056b4",
+        "type": "variant_of",
+        "reason": "逐图观察到相同主分区和主要分支；标签细节或配色不同。"
+      }
+    ]
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-8e18f38fa9ba9ba355aa",
+  "image_sha256": "8e18f38fa9ba9ba355aa9c5ae4d2b90dcea43be6ed14d06550404d775c2b7349",
+  "title": "绿色金融宏微观实证双向框架",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "social",
+    "layout": "annual-stage-timeline",
+    "topology": [
+      "sequence",
+      "feedback",
+      "parallel"
+    ],
+    "media": "text",
+    "density": "high",
+    "temporal_axis": "stages",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.09,
+        0.37,
+        0.8,
+        0.37
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "选题机制实证建议四层，实证层宏观区域和微观企业左右双栏有反馈箭头",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "多尺度证据并列且显式互相影响",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "非常细字，需要按版面拆分"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "选题机制实证建议四层，实证层宏观区域和微观企业左右双栏有反馈箭头",
+  "variant_group": null,
+  "spatial": {
+    "columns": null,
+    "stages": null,
+    "direction": "top_to_bottom",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+  "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "unknown",
+    "method": "individual_original_image_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "reference-visual-v2",
+    "observed_on": "2026-11-17"
+  },
+  "relations": []
+}

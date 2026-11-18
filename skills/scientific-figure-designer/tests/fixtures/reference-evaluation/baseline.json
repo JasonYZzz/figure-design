@@ -1,0 +1,5476 @@
+[
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "109adaaea49cd698",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 650,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-001260900ca6e1e1628a",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-139.png",
+    "paths": [
+      "ref-139.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "001260900ca6e1e1628a485b71976ff35e353af1885359060c231711257862d1",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "f0d4ccf0ccb0b2b0",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1300,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-0038a3270b1e75e4442d",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-055.png",
+    "paths": [
+      "ref-055.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "0038a3270b1e75e4442d03ab76a7a78ffc0d7a541a063ee60f40b21702304f3f",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "da5a6464544666b9",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 850,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-00bf87bc2f5724194367",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-154.png",
+    "paths": [
+      "ref-154.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "00bf87bc2f5724194367359d34b2a326274e9f1cbc187d45da306cbf040044bd",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "30787870e8ea7030",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1350,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-01ff8ea380855faa3994",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-091.png",
+    "paths": [
+      "ref-091.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "01ff8ea380855faa3994f628a93869856fa98ef27766a727a0a82bb24892bcd6",
+    "text_density": "unknown",
+    "width": 955
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "a48cc713b27349b2",
+    "domain_tags": [
+      "earth"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 560,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-037be32a51b1543e2f99",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-058.png",
+    "paths": [
+      "ref-058.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "037be32a51b1543e2f99e463f832d3feca3b7e10eb57552d7d653e9c786a7f5a",
+    "text_density": "unknown",
+    "width": 760
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "34b0ba98b8309898",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 800,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-082d2a421770306dbc0c",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-158.png",
+    "paths": [
+      "ref-158.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "082d2a421770306dbc0c38df9f21c16ad8b9e349dcccfc0dcc6495df836806de",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "30f0f0e0e0d4f0f0",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1300,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-0831b9450c887beb05b0",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-045.png",
+    "paths": [
+      "ref-045.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "0831b9450c887beb05b0b37aa2dc3065f828e1009799e289a77e975f41ccc7b6",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "hub-spoke"
+    ],
+    "dhash64": "e8b0f0d4f050f0aa",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "research_framework"
+    ],
+    "height": 850,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-0b727c29b1529cfe7803",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中心对象和围绕中心排列的多个区域或环状连接。"
+    ],
+    "origin": null,
+    "path": "ref-097.png",
+    "paths": [
+      "ref-097.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "0b727c29b1529cfe7803f9192d22b857014085441b773f3e321a4625b103aafc",
+    "text_density": "unknown",
+    "width": 780
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "f0c4f06088a8a060",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-0bab63b67be95f8b598f",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-138.png",
+    "paths": [
+      "ref-138.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "0bab63b67be95f8b598f4d1f941f75da989a8c6cff5e7c0e0e40381a994bbe6c",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "e8aab296b2cab2d0",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1150,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-0bee91d7c15168a92433",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-104.png",
+    "paths": [
+      "ref-104.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "0bee91d7c15168a9243308cd0ba2113a2f595d605b28380d500bbb0cf2050175",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "d848484c50646c31",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1300,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-0d6a50bb7ee36f46bda9",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-046.png",
+    "paths": [
+      "ref-046.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "0d6a50bb7ee36f46bda98591c1172eb73fe2ecb81b7d656a2e214ab55446ab7b",
+    "text_density": "unknown",
+    "width": 899
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "90a3a9a9b9b39352",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-0d9ab2a07387089551cc",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-114.png",
+    "paths": [
+      "ref-114.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "0d9ab2a07387089551cc8ebfaa661350b0ca8398081700402cae287480fb2133",
+    "text_density": "unknown",
+    "width": 1200
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "a2b6b6929293b692",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 660,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-0da3ec1fd043eaab0fa0",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-066.png",
+    "paths": [
+      "ref-066.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "0da3ec1fd043eaab0fa0d44e67c1196e643fdcd78d2bb63980e39a2f6d381edb",
+    "text_density": "unknown",
+    "width": 490
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "f4f0d4d4d4d4cc96",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 850,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-14003332083abcf5e61c",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-095.png",
+    "paths": [
+      "ref-095.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "14003332083abcf5e61c008e80e3475d1d5dd2e8e42ef52ea635c4c1001d1980",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "92983c5657161632",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 360,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-1493d691905733d4b7af",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-029.png",
+    "paths": [
+      "ref-029.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "1493d691905733d4b7af7938583ce511670f9213962ae6f36770483cdce6226b",
+    "text_density": "unknown",
+    "width": 640
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "f4968ec8f0aa94aa",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-19d86c26bdb6f7500fe4",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-011.png",
+    "paths": [
+      "ref-011.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "19d86c26bdb6f7500fe4d134a34030909ad25ed9589366d5e545eafb870abcbe",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "b4b4352534a0a69a",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-1a7d6690315075a28814",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-080.png",
+    "paths": [
+      "ref-080.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "1a7d6690315075a28814f2e89b1948a1ee73ae4fc4583be3cc7b5a6433801943",
+    "text_density": "unknown",
+    "width": 1400
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "90b2b2b2b2b2b2b2",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-1be45751a086f14d8e36",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-110.png",
+    "paths": [
+      "ref-110.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "1be45751a086f14d8e3686e12bf1f94de7912f194c45e7be1bccb76861e908af",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "d8d7d7d336b65755",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 460,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-1c55be2833f9a1f1a3c4",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-023.png",
+    "paths": [
+      "ref-023.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "1c55be2833f9a1f1a3c499f5b162b423169f44141dd8a6f3d2e6fc7f72aa66b7",
+    "text_density": "unknown",
+    "width": 685
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "90a0b272c8a2e020",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-21bef4ed0dea612ed1fb",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-036.png",
+    "paths": [
+      "ref-036.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "21bef4ed0dea612ed1fbec0de7d19b8f869b85cc42bcdec185a9919a3647ec19",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "a6aea8d2d2d2b292",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 490,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-26532a9370becf719e47",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-129.png",
+    "paths": [
+      "ref-129.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "26532a9370becf719e47c6fc40589ac00a95bc154c48830729e62804eea1c64e",
+    "text_density": "unknown",
+    "width": 660
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "55e6b633f4b52a2a",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 460,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-2736d15eb30b595d91a1",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-014.png",
+    "paths": [
+      "ref-014.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "2736d15eb30b595d91a1fe3af5e1ce78f532484b2ab52db6a6ec5c8c05a8bfe2",
+    "text_density": "unknown",
+    "width": 620
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "d455545555554cc6",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1340,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-274f162915ec14639332",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-127.png",
+    "paths": [
+      "ref-127.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "274f162915ec146393324ab7db1dc5109fc6b86401514a3e91685ed1d90d40cb",
+    "text_density": "unknown",
+    "width": 1999
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "comparative-panels"
+    ],
+    "dhash64": "cecc8ccc8e8acccc",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 500,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-2bf4fd52911294d85071",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见并列的两个主要面板，支持对照式阅读。"
+    ],
+    "origin": null,
+    "path": "ref-119.png",
+    "paths": [
+      "ref-119.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "2bf4fd52911294d8507111e4ee66ff3e62d128e12fc5414b4414ea2994ab2fc6",
+    "text_density": "unknown",
+    "width": 660
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "comparative-panels"
+    ],
+    "dhash64": "d2d0cccccccccccc",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-2e06787a9f0b78e74548",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见并列的两个主要面板，支持对照式阅读。"
+    ],
+    "origin": null,
+    "path": "ref-137.png",
+    "paths": [
+      "ref-137.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "2e06787a9f0b78e74548c32b8cb9a6e5ac90b4b70fe57c812ee22d75cab216a3",
+    "text_density": "unknown",
+    "width": 650
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "bab8b89a99b8a4a4",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1600,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-2ee53743371f5afc4f76",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-052.png",
+    "paths": [
+      "ref-052.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "2ee53743371f5afc4f76ec25e01f87433ea9db03af160cdab1c61206b97191e2",
+    "text_density": "unknown",
+    "width": 719
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "b296b2b2b2b2b2b0",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1200,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-307a0b9d3cc56edb6003",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-032.png",
+    "paths": [
+      "ref-032.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "307a0b9d3cc56edb600344fb1d0d47f3413674f7c99cce6a9277112677d8f997",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "d0d4d4d0d0f0d470",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-311f5c6d2d000556bded",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-035.png",
+    "paths": [
+      "ref-035.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "311f5c6d2d000556bded2c167a986d1548f0631272dc27c7705fb30334776e40",
+    "text_density": "unknown",
+    "width": 600
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "b2b2f0b2b2b2b2e8",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1333,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-326e19e94ab3710f202a",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-086.png",
+    "paths": [
+      "ref-086.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "326e19e94ab3710f202a64e91a852ebdb4591e6d56cc7292abcf0c34cf5f9426",
+    "text_density": "unknown",
+    "width": 955
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "2e929ab28adad894",
+    "domain_tags": [
+      "earth"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1150,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-3368a75b55e613440774",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-088.png",
+    "paths": [
+      "ref-088.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "3368a75b55e613440774cd534ac4df9c84f830e9919ea26d31f9e07bfba9d4e2",
+    "text_density": "unknown",
+    "width": 900
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "comparative-panels"
+    ],
+    "dhash64": "dca8a2faececca13",
+    "domain_tags": [
+      "earth"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 777,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-33bf629304368df1e5bf",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见并列的两个主要面板，支持对照式阅读。"
+    ],
+    "origin": null,
+    "path": "ref-084.png",
+    "paths": [
+      "ref-084.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "33bf629304368df1e5bfa7f40ceada68f86e03358fa51d9cdd884b944707c019",
+    "text_density": "unknown",
+    "width": 900
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "3712348893b494b4",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 840,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-3577426dfc26eef846db",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-022.png",
+    "paths": [
+      "ref-022.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "3577426dfc26eef846dba20fcf019b9820b8ef9cb4d741cfc2c5a98753f6a808",
+    "text_density": "unknown",
+    "width": 1500
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "98afbab127b493b2",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-35949153857e07c2e89d",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-135.png",
+    "paths": [
+      "ref-135.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "35949153857e07c2e89d9e90e17b83daba2191fcdb156381033ed5470b52a93c",
+    "text_density": "unknown",
+    "width": 1100
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "38307afa34646360",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 855,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-3741bde094449472865a",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-100.png",
+    "paths": [
+      "ref-100.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "3741bde094449472865afe7a37921be028bcfac0aee1fefd065f4db19fb3331c",
+    "text_density": "unknown",
+    "width": 600
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "64d9d062f8663434",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 700,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-3a61d041527d750e78bf",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-092.png",
+    "paths": [
+      "ref-092.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "3a61d041527d750e78bf327da4ba833d83e463b4067bd394b1ff4357f821fc17",
+    "text_density": "unknown",
+    "width": 850
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "f052545450747818",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1099,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-3cad07a8fff47639def3",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-134.png",
+    "paths": [
+      "ref-134.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "3cad07a8fff47639def34b123dccab865be9bd8c4aa049f8c05b9498ac20a16f",
+    "text_density": "unknown",
+    "width": 900
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "40d4a4e030343020",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-3de32b64b207ae3b7244",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-039.png",
+    "paths": [
+      "ref-039.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "3de32b64b207ae3b7244dd2b3b931351a71d52edd96a6fcd28624817ed330a73",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "hub-spoke"
+    ],
+    "dhash64": "b292b2cce8b2b2b2",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "research_framework"
+    ],
+    "height": 550,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-3fb21ae8c03226e7db31",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中心对象和围绕中心排列的多个区域或环状连接。"
+    ],
+    "origin": null,
+    "path": "ref-107.png",
+    "paths": [
+      "ref-107.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "3fb21ae8c03226e7db3184a8899cfe335aeaf9ee3502b2bc40f9b12a1272f313",
+    "text_density": "unknown",
+    "width": 440
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "6830f130f0f07428",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 920,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-408698d08d8ce2043908",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-099.png",
+    "paths": [
+      "ref-099.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "408698d08d8ce20439082901492716581275eb168f1b3b9c9118f0e7f0e4a1f0",
+    "text_density": "unknown",
+    "width": 755
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "b0b4f0f0c8e23620",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-416dac5e6709bd81c77c",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-048.png",
+    "paths": [
+      "ref-048.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "416dac5e6709bd81c77cebd6ef7302d3d396e753e55af737c8449cb18f0b3d3c",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "48facc75b1e8d248",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 750,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-418e78e4234db25d6b19",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-064.png",
+    "paths": [
+      "ref-064.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "418e78e4234db25d6b1990f5e296d3b10138c04efb7cfe3f9ecbbface7911a12",
+    "text_density": "unknown",
+    "width": 430
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "c496326ad5d4d4f0",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 999,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-4494e86b6d94bb061a36",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-016.png",
+    "paths": [
+      "ref-016.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "4494e86b6d94bb061a362e7d1d98d43f8f30f33886dfd4f65f407e7523a1be06",
+    "text_density": "unknown",
+    "width": 719
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "ca2a7454d4585746",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1821,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-44b17da521c17ccd83f5",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-061.png",
+    "paths": [
+      "ref-061.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "44b17da521c17ccd83f50191ec8b3014b020f98b97d897045dc8937f370c81d0",
+    "text_density": "unknown",
+    "width": 1383
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "e8f0b271d49692ee",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1821,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-46797140d951f1c1c894",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-059.png",
+    "paths": [
+      "ref-059.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "46797140d951f1c1c894a6c5ab500065bc1afe1de79890a866a83f6bcafa5818",
+    "text_density": "unknown",
+    "width": 1383
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "30c4de9ab6ded092",
+    "domain_tags": [
+      "earth"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 666,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-4743dcba3cdb10ac9043",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-090.png",
+    "paths": [
+      "ref-090.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "4743dcba3cdb10ac9043ee5159a51bc87f41460445a58c392ff494d599c5c818",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "98969696d1d29696",
+    "domain_tags": [
+      "earth"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 660,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-489382e6c7672f13f320",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-026.png",
+    "paths": [
+      "ref-026.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "489382e6c7672f13f320de9ede6d81ee0c69c1f85894abf7f667dd4d599de219",
+    "text_density": "unknown",
+    "width": 440
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "b6b635e59696964e",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1120,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-4a6fc386e668b235b8a6",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-013.png",
+    "paths": [
+      "ref-013.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "4a6fc386e668b235b8a6671a11d7c38d6a6c1ad536cee5c995e097e91ac00f4a",
+    "text_density": "unknown",
+    "width": 1500
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "e252d063d3e86ae0",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 955,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-4bf4d526eb77b639fd46",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-098.png",
+    "paths": [
+      "ref-098.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "4bf4d526eb77b639fd464187549f3a6568f692bdc5b07c734c95420745d14bbd",
+    "text_density": "unknown",
+    "width": 820
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "96b29696b2f0ccb0",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "research_framework"
+    ],
+    "height": 530,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-4c0d08e5160898317283",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-109.png",
+    "paths": [
+      "ref-109.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "4c0d08e51608983172830f05bc01b06b15f0298ef9f41e73ce127b1e474bc4a4",
+    "text_density": "unknown",
+    "width": 435
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "b25a5a5a5a5aaaaa",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 520,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-4cf730e1899690071677",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-108.png",
+    "paths": [
+      "ref-108.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "4cf730e18996900716771df98a865bb74c0ec41f0e9769e19ee1e5228e7a8aa7",
+    "text_density": "unknown",
+    "width": 435
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "a0d052c0a4f0caac",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 850,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-4d0c09d7a8ddbb441fb1",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-140.png",
+    "paths": [
+      "ref-140.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "4d0c09d7a8ddbb441fb1e76e388112e700c215a8f305c70a33e017e205665b8d",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "3070703160202064",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1400,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-4dfbce47ba997741b98b",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-041.png",
+    "paths": [
+      "ref-041.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "4dfbce47ba997741b98b07afc80a51d43d6107fa10cc1e849c7d48b7d343d079",
+    "text_density": "unknown",
+    "width": 1000
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "b2f27262b2e2f0b2",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-4e31570d8933f44a247b",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-105.png",
+    "paths": [
+      "ref-105.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "4e31570d8933f44a247be3828bec0a05674125db478b6f6e341db7bcf68e094e",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "d8ca6adab3dac0c8",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 380,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-52d73dd5ecc5c5504821",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-017.png",
+    "paths": [
+      "ref-017.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "52d73dd5ecc5c550482144677e66f35a5ec5f1da55763f60fffd34e2595a96ec",
+    "text_density": "unknown",
+    "width": 680
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "d090d45450d27438",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1099,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-543166f6469a91a2e89e",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-075.png",
+    "paths": [
+      "ref-075.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "543166f6469a91a2e89eacaa23b27cdf0ef158b6e1d07b3257c788910048cf5b",
+    "text_density": "unknown",
+    "width": 899
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "30f0b29696cef030",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 950,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-5627ac1795ebf2f02ca4",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-148.png",
+    "paths": [
+      "ref-148.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "5627ac1795ebf2f02ca48c2aad278793a9f3c035ca6d3db6f82240370f4302f8",
+    "text_density": "unknown",
+    "width": 999
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "e4e6d696b6b6b696",
+    "domain_tags": [
+      "earth"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 440,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-5732c29a52f7ea4b2dce",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-007.png",
+    "paths": [
+      "ref-007.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "5732c29a52f7ea4b2dce26064f6e26332a098bc2be15f60f09dfe6b239b830da",
+    "text_density": "unknown",
+    "width": 660
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "comparative-panels"
+    ],
+    "dhash64": "9a9a8a9a8a9a9858",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1100,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-57c07d43c08ba9a2cf08",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见并列的两个主要面板，支持对照式阅读。"
+    ],
+    "origin": null,
+    "path": "ref-146.png",
+    "paths": [
+      "ref-146.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "57c07d43c08ba9a2cf0886f7a57af20b9596f793bdb0b7bc1479a34f0b8d50b1",
+    "text_density": "unknown",
+    "width": 1200
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "b0f2f0f0f0b4b0e8",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1400,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-57c4ad3fcf236d1e2ac4",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-040.png",
+    "paths": [
+      "ref-040.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "57c4ad3fcf236d1e2ac4b9f5fb4ec8827e3b905b99687a9b7c6e5e60d32a2fda",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "b4b696b694f06070",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-59fd9780109071cc28ad",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-147.png",
+    "paths": [
+      "ref-147.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "59fd9780109071cc28ad42c5e0ba7ffc6e9a46c5c750011b28d0843d90639b83",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "b2aae0b255f0f068",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-639c94613c9bb7259307",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-056.png",
+    "paths": [
+      "ref-056.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "639c94613c9bb7259307799149a8181c591e637496b5d91edc61ab1adce34763",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "d6b4ba2f8fcedcdc",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 725,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-6426d3a6d56b481d44ef",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-067.png",
+    "paths": [
+      "ref-067.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "6426d3a6d56b481d44ef64b895cd39243ca3675507d728c344e1f8fb9af9d83f",
+    "text_density": "unknown",
+    "width": 1300
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "78d8d8d8d8d87800",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1100,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-646b9e218029b85b3c00",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-043.png",
+    "paths": [
+      "ref-043.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "646b9e218029b85b3c00acdd363621002af4bcd5355a0507fa436a00e879b489",
+    "text_density": "unknown",
+    "width": 899
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "abea6b6baaa9a8aa",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 538,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-65cd7935f82feebc22fa",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-132.png",
+    "paths": [
+      "ref-132.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "65cd7935f82feebc22faffc255e75fb34edfbc4f7601131f714542ab792ebe85",
+    "text_density": "unknown",
+    "width": 1000
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "aaaaa8ace4e4a486",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-65ed4f6ebf7794def910",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-053.png",
+    "paths": [
+      "ref-053.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "65ed4f6ebf7794def91027ff4dc5d977385645e7c74942ea35e2107fce69015c",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "8a8acc5cdccea2c2",
+    "domain_tags": [
+      "materials"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 360,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-666191098336ba3a0e62",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-124.png",
+    "paths": [
+      "ref-124.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "666191098336ba3a0e62a9ed022a288b8877e1cecbb3c2cfdea59db6714eb1ae",
+    "text_density": "unknown",
+    "width": 640
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "c8d8d1d094a8aa5a",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-66af4b09ea3d601a6251",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-152.png",
+    "paths": [
+      "ref-152.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "66af4b09ea3d601a62517c4e104249e49e9550c5dbf58b7320ba295ebdcb54be",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "b2b2b2b2b2eab2b0",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-6988dec4f5ea4b7e8cb1",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-044.png",
+    "paths": [
+      "ref-044.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "6988dec4f5ea4b7e8cb1e525f9e5e6281af4b527618f09d6bae0f64a71726516",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "c496969696d49494",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 547,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-6bf2b6a431c778b1b32d",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-065.png",
+    "paths": [
+      "ref-065.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "6bf2b6a431c778b1b32db175e0c4b2d945a915f5b23afa284c37c0602d3b0314",
+    "text_density": "unknown",
+    "width": 440
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "d04dcccfb3bd2c42",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1800,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-6c348553a48c4a2bf949",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-122.png",
+    "paths": [
+      "ref-122.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "6c348553a48c4a2bf949a6435f1ee39176bb3d3e047c83b2f478c6e17643acb2",
+    "text_density": "unknown",
+    "width": 1599
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "d4d8da8c8ec69692",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 650,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-6c966627b9ec1c6eb449",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-063.png",
+    "paths": [
+      "ref-063.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "6c966627b9ec1c6eb449c4e5673f51a759da5ec661bddcf96daaef6f853358a3",
+    "text_density": "unknown",
+    "width": 480
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "e4b0a9edad98c818",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 800,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-712a7fd043147fd4a193",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-047.png",
+    "paths": [
+      "ref-047.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "712a7fd043147fd4a193ec633ae751ec6069e1ac7f0291f2ceffc277823db153",
+    "text_density": "unknown",
+    "width": 900
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "60a4e4f4e464e4a0",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1100,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-712d89185a712da226a3",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-051.png",
+    "paths": [
+      "ref-051.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "712d89185a712da226a317b5f567842c5f6e954adc5dbe18ab8fa5af1a33a8df",
+    "text_density": "unknown",
+    "width": 830
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "e869717169b2b28e",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 595,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-744e9040afbddeda4e23",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-062.png",
+    "paths": [
+      "ref-062.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "744e9040afbddeda4e23244d3defb6095b5b3ec731b202d2d9da477ea14f831b",
+    "text_density": "unknown",
+    "width": 465
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "31d2d0ccc494e8f8",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1300,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-750b6dfda2bcf91056b4",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-074.png",
+    "paths": [
+      "ref-074.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "750b6dfda2bcf91056b4f0eea96ad1477b07f9226d4564efdc8f4bfe3c40ac4f",
+    "text_density": "unknown",
+    "width": 1000
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "f0e8cce892969694",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 950,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-75d045425c3fe6749dd4",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-103.png",
+    "paths": [
+      "ref-103.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "75d045425c3fe6749dd42aa4f58cfdefab1351f1fb3212fc031692e72daf234c",
+    "text_density": "unknown",
+    "width": 799
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "98d4f29298ba9834",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 560,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-774c5da034105355feb4",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-136.png",
+    "paths": [
+      "ref-136.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "774c5da034105355feb4ffc44f0b140120be2bb95729622ad604e9d61c000954",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "72082a6c528a0868",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1100,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-791400475d8187e708ac",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-101.png",
+    "paths": [
+      "ref-101.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "791400475d8187e708acb3221127e9dc0e71d720fc9bae787cce21eee382d820",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "6f968d6dee96177f",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 560,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-7927914f6ee843501922",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-130.png",
+    "paths": [
+      "ref-130.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "7927914f6ee843501922f14dc833e8bc438b741b486590c8f765fe3581932376",
+    "text_density": "unknown",
+    "width": 760
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "70a8b1e8f071f0b0",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1300,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-7dca82cca9ebfe8a10ce",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-042.png",
+    "paths": [
+      "ref-042.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "7dca82cca9ebfe8a10cee6db21e9309aefea9ad28f9a2fa387139bd6a43bb7a4",
+    "text_density": "unknown",
+    "width": 780
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "ba9268aaa8aae6e6",
+    "domain_tags": [
+      "earth"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-7f8e59d807246cd60af0",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-089.png",
+    "paths": [
+      "ref-089.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "7f8e59d807246cd60af04fe2ec5a4175a8c992a5c939ed7ca6bc2e3673226141",
+    "text_density": "unknown",
+    "width": 700
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "647d396474317961",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1025,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-81eec5c81bfef6d248c2",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-005.png",
+    "paths": [
+      "ref-005.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "81eec5c81bfef6d248c2a2a66b2ddce960e94cb5282bb9b61dccb159b6b6cc56",
+    "text_density": "unknown",
+    "width": 630
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "comparative-panels"
+    ],
+    "dhash64": "8c8e8e486ad2d0c8",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-81f4a6963e3f7a4a7f9c",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见并列的两个主要面板，支持对照式阅读。"
+    ],
+    "origin": null,
+    "path": "ref-079.png",
+    "paths": [
+      "ref-079.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "81f4a6963e3f7a4a7f9cf1c50cb709b4a79e23fb9ab3be33a7589869e2a40773",
+    "text_density": "unknown",
+    "width": 1100
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "30f0d8d8c8c8e830",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 750,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-83bf0f3c4915a7916893",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-149.png",
+    "paths": [
+      "ref-149.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "83bf0f3c4915a79168933de1507ee332ff54f363672ce31758d382484cf04bd8",
+    "text_density": "unknown",
+    "width": 750
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "b0d0f0d4cc323230",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-84c8a0bb76b7cc2fd84c",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-102.png",
+    "paths": [
+      "ref-102.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "84c8a0bb76b7cc2fd84ca21f9b37719337a44a724deefe21c5afad4ac772f197",
+    "text_density": "unknown",
+    "width": 700
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "eada496a6aabe7fa",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1100,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-855c230535de05cc4b9a",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-133.png",
+    "paths": [
+      "ref-133.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "855c230535de05cc4b9a2076b1bd74343eb3d87786cf3b239fde62739dd59cbc",
+    "text_density": "unknown",
+    "width": 899
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "b93833321e32721a",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 800,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-8685db8b0261a75535fa",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-094.png",
+    "paths": [
+      "ref-094.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "8685db8b0261a75535fa7495d2fa2945b2fcceaafb874017c9b7b91234fa342b",
+    "text_density": "unknown",
+    "width": 700
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "ec32c8ba954b2ccc",
+    "domain_tags": [
+      "materials"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1999,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-88071a4988fef87258c2",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-069.png",
+    "paths": [
+      "ref-069.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "88071a4988fef87258c20ef7672bd44e8d18b329d1c273eb44511a456b3e3c84",
+    "text_density": "unknown",
+    "width": 1500
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "362abaaaaad6e0aa",
+    "domain_tags": [
+      "materials"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 729,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-8cb694f860b7b739bf98",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-121.png",
+    "paths": [
+      "ref-121.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "8cb694f860b7b739bf983443a94e6b2914fe6c83bf00bf6df6546810f4644f9c",
+    "text_density": "unknown",
+    "width": 540
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "680a2a2a2aaa53b0",
+    "domain_tags": [
+      "earth"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 560,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-8d625eab1152d6918b9b",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-118.png",
+    "paths": [
+      "ref-118.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "8d625eab1152d6918b9b6fbae1d02ba71cd190bda1891fd9ef21f08cc9156b0e",
+    "text_density": "unknown",
+    "width": 750
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "e1e4b4ccecec70d4",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1350,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-8e18f38fa9ba9ba355aa",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-111.png",
+    "paths": [
+      "ref-111.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "8e18f38fa9ba9ba355aa9c5ae4d2b90dcea43be6ed14d06550404d775c2b7349",
+    "text_density": "unknown",
+    "width": 1100
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "comparative-panels"
+    ],
+    "dhash64": "cccc9ae8e87c6ce4",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 800,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-8fa27ebe5ffc25f28097",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见并列的两个主要面板，支持对照式阅读。"
+    ],
+    "origin": null,
+    "path": "ref-157.png",
+    "paths": [
+      "ref-157.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "8fa27ebe5ffc25f280972392e6cc067a83a4b6b27d17203ddbd32ab53c79bc16",
+    "text_density": "unknown",
+    "width": 900
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "a2aaeae2aceaa2b2",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-921e0ffd0e04254986bf",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-096.png",
+    "paths": [
+      "ref-096.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "921e0ffd0e04254986bf3677eca2764915789d1020afe558a7c52cacafaea1bc",
+    "text_density": "unknown",
+    "width": 750
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "f0b2a6e8b6b2b2d4",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1999,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-935b52b0af0fb0575804",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-115.png",
+    "paths": [
+      "ref-115.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "935b52b0af0fb0575804a8043fa0c31bd2555a0de2f84b4269ec3dcd268c10aa",
+    "text_density": "unknown",
+    "width": 1335
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "ccda93b4bbbccda7",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 590,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-9401f30da1cf9359f009",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-068.png",
+    "paths": [
+      "ref-068.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "9401f30da1cf9359f009a65cb58119f4a3333e7aefc296e7ce97a22ea4e088c4",
+    "text_density": "unknown",
+    "width": 885
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "ceccc88c8caa8ccc",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 790,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-954d411042d7ca041267",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-024.png",
+    "paths": [
+      "ref-024.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "954d411042d7ca04126717490babd6673a465996d222719fe4c4a6b88e2bb298",
+    "text_density": "unknown",
+    "width": 440
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "d4f0f4944948e0b9",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1500,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-9601a767558718a2dd5b",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-112.png",
+    "paths": [
+      "ref-112.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "9601a767558718a2dd5baf79ab12e10c1368c5b9623f5eefa60fe9df6092232b",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "68c8d89696969898",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-98a62a1529cdf270fd40",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-150.png",
+    "paths": [
+      "ref-150.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "98a62a1529cdf270fd40cdff0c413572c4bef2fe0804a7d3b45291c45e740a95",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "macro-micro-mechanism"
+    ],
+    "dhash64": "969acc8e48ccacde",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 620,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-9bbb0e5f330af29449cf",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见从整体对象到局部细节的放大/多尺度示意。"
+    ],
+    "origin": null,
+    "path": "ref-019.png",
+    "paths": [
+      "ref-019.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "9bbb0e5f330af29449cf38c1758168ded1b343a11e15d4f7231a844aaee8fc3f",
+    "text_density": "unknown",
+    "width": 460
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "acccd8db238cd8a7",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 460,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-9bdb8ce37945e2139c08",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-009.png",
+    "paths": [
+      "ref-009.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "9bdb8ce37945e2139c0831433c78a2090df96923243bff7dbb078c65955ce059",
+    "text_density": "unknown",
+    "width": 620
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "aaab2b6a28d98faf",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 420,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-9be696a5c982f0f84f50",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-125.png",
+    "paths": [
+      "ref-125.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "9be696a5c982f0f84f506bc846dfd35eca4c667cb5dca444e7ae9f6f441bc872",
+    "text_density": "unknown",
+    "width": 560
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "b8a668ba7a68e464",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1200,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-9dd5a5f3519bfd8de6af",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-087.png",
+    "paths": [
+      "ref-087.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "9dd5a5f3519bfd8de6af749eb25f1fff91f35178462721ec10c07f03313a8c06",
+    "text_density": "unknown",
+    "width": 1000
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "68b6b4ccaa92b6b2",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 660,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-9e02ccc28872545ab63e",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-028.png",
+    "paths": [
+      "ref-028.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "9e02ccc28872545ab63ebda79213d6d384b3c74f27eba938716c1a6674de34c2",
+    "text_density": "unknown",
+    "width": 660
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "d2d8d8c8d8c8c810",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 700,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-9ee89f0af16f4167f2bb",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-113.png",
+    "paths": [
+      "ref-113.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "9ee89f0af16f4167f2bb19c7490053ba42177f00e3ce335e38d9338c38c3aa17",
+    "text_density": "unknown",
+    "width": 900
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "b69a9bba8ab6c8ca",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 480,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-9f5380a99acaf7d68ba5",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-003.png",
+    "paths": [
+      "ref-003.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "9f5380a99acaf7d68ba598ce21af1157eea35236ccdaf8a3498472cc03fc8192",
+    "text_density": "unknown",
+    "width": 640
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "7070dc94d898d4d6",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 700,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-9ff80b7b633792a107f7",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-151.png",
+    "paths": [
+      "ref-151.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "9ff80b7b633792a107f763571b952c44412a18c8766d708f332d5ce41d8cf472",
+    "text_density": "unknown",
+    "width": 1000
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "b0d0d29c9496ded6",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 780,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-a031e3eba9abb6b0b118",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-153.png",
+    "paths": [
+      "ref-153.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "a031e3eba9abb6b0b118d374e11b928e43195a1567ad94ce94e5463528687ae9",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "d02a2233332232e2",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 2000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-a238d5699feb39947cfd",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-008.png",
+    "paths": [
+      "ref-008.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "a238d5699feb39947cfd0d7c8462ce27ad1662e8e45ce28dbf3e5618bee209e4",
+    "text_density": "unknown",
+    "width": 1330
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "30f0aca48cc42030",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-a36a36b49107e89530be",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-049.png",
+    "paths": [
+      "ref-049.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "a36a36b49107e89530be32f9ed51312b939fe35bd071d8fd197817f8072bd3c9",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "61e0a6b0948cb196",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1100,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-a76a64d8f13fbcfdad31",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-073.png",
+    "paths": [
+      "ref-073.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "a76a64d8f13fbcfdad314b6a824773e4cc3e0a701809aefdc767be9134d01e09",
+    "text_density": "unknown",
+    "width": 900
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "8cbc9adadc9e9ade",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 576,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-a80914cb69bf1d9fdf54",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-141.png",
+    "paths": [
+      "ref-141.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "a80914cb69bf1d9fdf546326e45b9fb5b68b89d17f83a92bf2e3ac5e3ecc4206",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "1978743128567035",
+    "domain_tags": [
+      "earth"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 629,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-a9e35118312b32dc1132",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-027.png",
+    "paths": [
+      "ref-027.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "a9e35118312b32dc113228ccff0ae98bac3ffe09f9866024000609828263dfa5",
+    "text_density": "unknown",
+    "width": 629
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "f4d4d4b42c606a6a",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-abdf7a9a9b41e29f7f17",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-159.png",
+    "paths": [
+      "ref-159.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "abdf7a9a9b41e29f7f17ff2a30c524e7af2a78ccb672f4a42b39b1cbb6fa0fa6",
+    "text_density": "unknown",
+    "width": 900
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "network-overlay"
+    ],
+    "dhash64": "90a6a6bea6a68cc4",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 460,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-aec73a7c7f3e17c87282",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见多个对象之间的网络连接与局部放大面板。"
+    ],
+    "origin": null,
+    "path": "ref-012.png",
+    "paths": [
+      "ref-012.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "aec73a7c7f3e17c87282041c883928b0f30cb236e2df5b45d55332fd9b41558a",
+    "text_density": "unknown",
+    "width": 630
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "15ababa9aaab9696",
+    "domain_tags": [
+      "earth"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 440,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-af00ec331478ce39d409",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-025.png",
+    "paths": [
+      "ref-025.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "af00ec331478ce39d409b2da637e8c4dec006b8fe7e1e763d5727df748149a09",
+    "text_density": "unknown",
+    "width": 660
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "30d4f0d4d4f0d430",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1200,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-b18600b61aed48b793ff",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-050.png",
+    "paths": [
+      "ref-050.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "b18600b61aed48b793ff452e6dd99520ac35fed319527f1cd6607eb4fd1de307",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "6a2a3a3a3a3a3a32",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-b220c8189a53d0d2c25d",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-072.png",
+    "paths": [
+      "ref-072.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "b220c8189a53d0d2c25d5f1d7361eb84e1db2fc04af0967b4fd5fbc035d79993",
+    "text_density": "unknown",
+    "width": 888
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "602ac2a6268192d2",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1999,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-b7460402c53c4bf65024",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-004.png",
+    "paths": [
+      "ref-004.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "b7460402c53c4bf650242fa75575cdd4b1aeda7c209007fe25d97be5a3bb4674",
+    "text_density": "unknown",
+    "width": 1125
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "hub-spoke"
+    ],
+    "dhash64": "f071943571f0b2f0",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 560,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-b8aba31e80d19fd80dd7",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中心对象和围绕中心排列的多个区域或环状连接。"
+    ],
+    "origin": null,
+    "path": "ref-002.png",
+    "paths": [
+      "ref-002.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "b8aba31e80d19fd80dd7ab8ef1092377172dd45866804129f3a7a0a0eb9e5719",
+    "text_density": "unknown",
+    "width": 440
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "cce2f2e96cf06438",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1120,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-bb0704b58cc7e0349110",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-143.png",
+    "paths": [
+      "ref-143.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "bb0704b58cc7e0349110c1b6287c8b3556739f81c91936a3c8e14e5fea974eae",
+    "text_density": "unknown",
+    "width": 750
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "6cb0a8b8ecb0b084",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1200,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-bbfb7f936d2eaef950dc",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-071.png",
+    "paths": [
+      "ref-071.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "bbfb7f936d2eaef950dc646de16fe2823cd93493ee867569bb7000819e6aa107",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "345454c7377585d5",
+    "domain_tags": [
+      "earth"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 460,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-bd48da80e231b7ede87c",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-117.png",
+    "paths": [
+      "ref-117.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "bd48da80e231b7ede87c86692fa48fa5a41e6bd9c83a9955a6bae36c03baa0c4",
+    "text_density": "unknown",
+    "width": 680
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "hub-spoke"
+    ],
+    "dhash64": "e032b27132f0b233",
+    "domain_tags": [
+      "cs-ai"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 635,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-bde545f7dbef3105f7eb",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中心对象和围绕中心排列的多个区域或环状连接。"
+    ],
+    "origin": null,
+    "path": "ref-060.png",
+    "paths": [
+      "ref-060.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "bde545f7dbef3105f7eb2833c86931770a778ff7b37733d4c5242d6b28c4e3e6",
+    "text_density": "unknown",
+    "width": 550
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "a1a5d2dac2c4a124",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-be6ebeb8fa8907c99637",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-006.png",
+    "paths": [
+      "ref-006.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "be6ebeb8fa8907c99637d1f7dead3ce517b2ea48fb60dfaeb9c143385429f841",
+    "text_density": "unknown",
+    "width": 650
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "comparative-panels"
+    ],
+    "dhash64": "f0ccd4d4d4d46860",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1100,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-c027d8083b83a82f111b",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见并列的两个主要面板，支持对照式阅读。"
+    ],
+    "origin": null,
+    "path": "ref-142.png",
+    "paths": [
+      "ref-142.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "c027d8083b83a82f111bc2536fefca96e43ea8a33e278eec8effd36b733a0d50",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "b2f0e0aaaaa2b2b2",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1250,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-c33acf0e3cc3dfc528ea",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-085.png",
+    "paths": [
+      "ref-085.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "c33acf0e3cc3dfc528ea3a02a10c7d35b1f51216e67d7c9c698d8a28f405c677",
+    "text_density": "unknown",
+    "width": 1000
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "b2d66afa545a5832",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1400,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-c44e4b9f0f4c8dc6e09b",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-077.png",
+    "paths": [
+      "ref-077.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "c44e4b9f0f4c8dc6e09b53534d558f70bc808fcb8a7e0c578805ac1bf4c912b4",
+    "text_density": "unknown",
+    "width": 1000
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "59130d6c4f132d44",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 360,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-c46ef2068bc023c5629c",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-126.png",
+    "paths": [
+      "ref-126.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "c46ef2068bc023c5629c21ca2eab7f0b973a8267f443047fe9c6ab270e72e008",
+    "text_density": "unknown",
+    "width": 645
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "b43228b86cd03660",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1300,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-11；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-c7838b9d2b9c4b80d5e8",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-161.png",
+    "paths": [
+      "ref-161.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "c7838b9d2b9c4b80d5e8b9fc0e9c0f0d6865a26de5d29b7fc4be4c9957ce1530",
+    "text_density": "unknown",
+    "width": 1050
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "9a6aaaae8a8ba2a2",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 480,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-c7b09fc22b7a8e462584",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-131.png",
+    "paths": [
+      "ref-131.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "c7b09fc22b7a8e46258498f896f08adaf70a00139f2ac234d39a26c3757de3a9",
+    "text_density": "unknown",
+    "width": 660
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "ea2ada7a7a8a22ea",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 600,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-ca2d6770ca088fc58b31",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-030.png",
+    "paths": [
+      "ref-030.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "ca2d6770ca088fc58b31b63316713ce4fb6829a8a134f7338599a1c0592f5d7f",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "833139f430f4b9b9",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 933,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-07；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-cb9ccfa51b516cea8cdc",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-106.png",
+    "paths": [
+      "ref-106.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "cb9ccfa51b516cea8cdc3ab7bd2d0e4b710a64098cefe8a36f90979b5734c56c",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "e4e0f2f0ec6ce470",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1250,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-cd0a498d3185e40d083f",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-081.png",
+    "paths": [
+      "ref-081.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "cd0a498d3185e40d083fc44fab29fbc64e75acf86d71156af2dd457611f2a321",
+    "text_density": "unknown",
+    "width": 1000
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "c898c8b88cb8c898",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-cfac67303e32884a983b",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-083.png",
+    "paths": [
+      "ref-083.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "cfac67303e32884a983b256948baf57344a5560e6f1fd4db880ee318204572d4",
+    "text_density": "unknown",
+    "width": 1300
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "96b0f292f06890d0",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1100,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-cffd75e133f2fc486434",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-038.png",
+    "paths": [
+      "ref-038.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "cffd75e133f2fc486434b32cf1329f092abfb941712cc5827645d27156699578",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "b232b3d676b6a2b3",
+    "domain_tags": [
+      "materials"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 360,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-d970897268f968d55fb8",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-015.png",
+    "paths": [
+      "ref-015.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "d970897268f968d55fb8776b21cd524cafabb221467394de501229fb646ab63b",
+    "text_density": "unknown",
+    "width": 660
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "98c45454554dbc8a",
+    "domain_tags": [
+      "social"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 360,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-da870aab3893c01ca931",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-123.png",
+    "paths": [
+      "ref-123.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "da870aab3893c01ca931f6ebd1724fc8e7f7a4d4c7614f304189cfcd06f8eaab",
+    "text_density": "unknown",
+    "width": 640
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "comparative-panels"
+    ],
+    "dhash64": "7a4a7a78b85aeae9",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 460,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-de2d104c22bcbc539199",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见并列的两个主要面板，支持对照式阅读。"
+    ],
+    "origin": null,
+    "path": "ref-001.png",
+    "paths": [
+      "ref-001.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "de2d104c22bcbc539199dd6a12ca37fcd74bdbdbe2a4e8bcdfb75533488f5ed8",
+    "text_density": "unknown",
+    "width": 660
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "9292929292929292",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1300,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-de3cdd4cf3d1e2398d4c",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-034.png",
+    "paths": [
+      "ref-034.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "de3cdd4cf3d1e2398d4cd8fff8c0dd0b3fc5dcde4a4cc095aec809f1c3ec659d",
+    "text_density": "unknown",
+    "width": 500
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "33d7525a40d45852",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1200,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-df04fe7f23d7016fcf86",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-160.png",
+    "paths": [
+      "ref-160.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "df04fe7f23d7016fcf868e2c3613d21cc0d24b9b90d5c3770d8bb1bddb3154cd",
+    "text_density": "unknown",
+    "width": 900
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "483ab68b201a2a16",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 700,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-e004c16ea6df7c60e28f",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-021.png",
+    "paths": [
+      "ref-021.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "e004c16ea6df7c60e28f6966b2c75ad7c73d583e4acd7274290f49672190970b",
+    "text_density": "unknown",
+    "width": 530
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "comparative-panels"
+    ],
+    "dhash64": "8aaaac8cc4ccdac6",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-e03899acfcdb627bc511",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见并列的两个主要面板，支持对照式阅读。"
+    ],
+    "origin": null,
+    "path": "ref-128.png",
+    "paths": [
+      "ref-128.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "e03899acfcdb627bc511e95d56a4ab14a8ed7ea9178e65ce39b5e2380426fd53",
+    "text_density": "unknown",
+    "width": 1500
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "hub-spoke"
+    ],
+    "dhash64": "aadcbaaa2aa8c8c8",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-09；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-e2131583d432067cecfb",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中心对象和围绕中心排列的多个区域或环状连接。"
+    ],
+    "origin": null,
+    "path": "ref-144.png",
+    "paths": [
+      "ref-144.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "e2131583d432067cecfb26a5d1eed3919fc79b0ebb50e8963350b5750d83a7d9",
+    "text_density": "unknown",
+    "width": 900
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "center-hero-side-support"
+    ],
+    "dhash64": "f0d88aaaaaaaeae8",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1100,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-e3fb0a7d42b8a487eea7",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见中央主体与两侧支持区域，区域大小或权重不同。"
+    ],
+    "origin": null,
+    "path": "ref-033.png",
+    "paths": [
+      "ref-033.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "e3fb0a7d42b8a487eea7d7067a86242ca85074a7c89c812336b8f18317960b3f",
+    "text_density": "unknown",
+    "width": 899
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "9a9aa89ab88d4cca",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 760,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-e644546216e0182cf644",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-120.png",
+    "paths": [
+      "ref-120.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "e644546216e0182cf64429875b92d2adb895403d66ef055ec73bffc6f91f6d14",
+    "text_density": "unknown",
+    "width": 740
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "30f0f0f0c48cccd4",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-e66c31be92e3e15e953f",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-155.png",
+    "paths": [
+      "ref-155.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "e66c31be92e3e15e953f2c8996895d9666669d2708aaa12ebc3a0b1deb882fc5",
+    "text_density": "unknown",
+    "width": 720
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "c44d7228896c5242",
+    "domain_tags": [
+      "materials"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1999,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-e67efae8b8308ab26c24",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-070.png",
+    "paths": [
+      "ref-070.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "e67efae8b8308ab26c24fe39706a8182d1d4837ac4d28f53c42e9279b59c1349",
+    "text_density": "unknown",
+    "width": 1339
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "aaaa9992d1929adb",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 520,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-08；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-e6b5491df75e20fe2ae0",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-116.png",
+    "paths": [
+      "ref-116.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "e6b5491df75e20fe2ae05e4a67da9726e6b774476a95c9514cf35df9feb9032f",
+    "text_density": "unknown",
+    "width": 760
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "24682b94d496b7b7",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1130,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-e7e12cacfba182de2490",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-057.png",
+    "paths": [
+      "ref-057.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "e7e12cacfba182de24905853d33c07ccd79610229a4cab92a9444a9b2ae1c4d6",
+    "text_density": "unknown",
+    "width": 1500
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "ca8ae068cc88ceae",
+    "domain_tags": [
+      "earth"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1400,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-e8d901ee760777825861",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-082.png",
+    "paths": [
+      "ref-082.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "e8d901ee76077782586131f1e22e1c0eb38c6552b978ebdddd9bcd13e00241a7",
+    "text_density": "unknown",
+    "width": 1100
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "b0b830aad4d4d0a6",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1100,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-06；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-e930e95243b4030d1815",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-093.png",
+    "paths": [
+      "ref-093.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "e930e95243b4030d1815a4d9c53292c10d2371f52ac34e248a9c3c9423fc545f",
+    "text_density": "unknown",
+    "width": 1000
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "d4a8abe92af0a6ab",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 370,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-01；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-ebc184b0ebca06781400",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-010.png",
+    "paths": [
+      "ref-010.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "ebc184b0ebca0678140012fdf8cc2af894601547849c7f0f4c133870b6a6ac5a",
+    "text_density": "unknown",
+    "width": 660
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "a4a5adaca44aaa98",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-ef8bf952026a6c4e84e4",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-156.png",
+    "paths": [
+      "ref-156.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "ef8bf952026a6c4e84e422a9817d394bf78d35eae330893007cfea4a2519e639",
+    "text_density": "unknown",
+    "width": 1100
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "top-overview-multi-lane"
+    ],
+    "dhash64": "99d296a3e34d4dc8",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 840,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-f03d218c47e82ced7c19",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见横向并列的内容列，列内有分步骤对象或图文。"
+    ],
+    "origin": null,
+    "path": "ref-020.png",
+    "paths": [
+      "ref-020.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "f03d218c47e82ced7c19d1b593ecc7106ff4897bba92b9a9b0ba8c5a603d8e95",
+    "text_density": "unknown",
+    "width": 1500
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "c4ce8e969692d3cc",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 660,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-f4360c0af149bca0cd48",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-018.png",
+    "paths": [
+      "ref-018.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "f4360c0af149bca0cd4883ed08022bf6dc8a7a56994cd1d65e340c7c2fb45986",
+    "text_density": "unknown",
+    "width": 440
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "matrix-plus-flow"
+    ],
+    "dhash64": "baaeb8b2aeb892b6",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 850,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-f5b1d19d043e54a883b3",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见二维分区与跨区连接，多个内容面板按行列组织。"
+    ],
+    "origin": null,
+    "path": "ref-078.png",
+    "paths": [
+      "ref-078.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "f5b1d19d043e54a883b3c9161d71a95b35718ec188f6e97fc8872cbcbe71d98b",
+    "text_density": "unknown",
+    "width": 1200
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "709292ea88e8e2f0",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1050,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-05；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-f7b759b474373dea34a2",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-076.png",
+    "paths": [
+      "ref-076.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "f7b759b474373dea34a293d9c9b4f7a6e80f82a530520127912864c49df91e8c",
+    "text_density": "unknown",
+    "width": 800
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "fork-merge-validation"
+    ],
+    "dhash64": "36b6b2b2f2ced0c0",
+    "domain_tags": [
+      "biomedicine"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1000,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-10；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-fd4163ba114d6e9867ad",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见一对多分支或多对一汇合，以及组内子节点。"
+    ],
+    "origin": null,
+    "path": "ref-145.png",
+    "paths": [
+      "ref-145.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "fd4163ba114d6e9867adf05ce5189b0975b1be9c19b2f7ca4bffd62a392e88cb",
+    "text_density": "unknown",
+    "width": 900
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "comparative-panels"
+    ],
+    "dhash64": "66a6a6e2a6e2a266",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 900,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-04；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-ff8a0090f9893e3cce7f",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见并列的两个主要面板，支持对照式阅读。"
+    ],
+    "origin": null,
+    "path": "ref-054.png",
+    "paths": [
+      "ref-054.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "ff8a0090f9893e3cce7fd9bfac2462f9bf872ff5cf2f04be191dc940be522eaf",
+    "text_density": "unknown",
+    "width": 1100
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "9094703032b060c0",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1300,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-03；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-ffe5050df3d5102fff8b",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-037.png",
+    "paths": [
+      "ref-037.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "ffe5050df3d5102fff8bf4deaeebf30fe7c254dec32913d27cffbdb38217364d",
+    "text_density": "unknown",
+    "width": 900
+  },
+  {
+    "asset_tags": [],
+    "composition_tags": [
+      "annual-stage-timeline"
+    ],
+    "dhash64": "b0c8a0d0cc303068",
+    "domain_tags": [
+      "general"
+    ],
+    "exact_duplicate_of": null,
+    "figure_type_tags": [
+      "technical_route"
+    ],
+    "height": 1200,
+    "hypotheses": [
+      "构图家族与领域是 Codex 根据缩略图提出的候选；需查看原图确认，未进行逐字 OCR。",
+      "审阅批次 batch-02；阶段式候选不表示原图包含年份。"
+    ],
+    "id": "ref-fffc791e6a63c6db0784",
+    "license_state": "unknown",
+    "notes": "",
+    "observations": [
+      "可见纵向分层区域和逐层连接，部分区域内有并行子框。"
+    ],
+    "origin": null,
+    "path": "ref-031.png",
+    "paths": [
+      "ref-031.png"
+    ],
+    "review_status": "auto_proposed",
+    "sha256": "fffc791e6a63c6db07849da72338d5ff31e891e253b7a58f7d85c541fac90501",
+    "text_density": "unknown",
+    "width": 750
+  }
+]

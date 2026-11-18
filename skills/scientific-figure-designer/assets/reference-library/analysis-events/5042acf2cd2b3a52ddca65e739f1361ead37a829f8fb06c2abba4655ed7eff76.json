@@ -1,0 +1,95 @@
+{
+  "at": "2026-11-17T06:59:17.731679+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-8d625eab1152d6918b9b",
+    "image_sha256": "8d625eab1152d6918b9b6fbae1d02ba71cd190bda1891fd9ef21f08cc9156b0e",
+    "title": "流域水风险四阶段情景闭环",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "earth",
+      "layout": "top-overview-multi-lane",
+      "topology": [
+        "sequence",
+        "parallel",
+        "feedback",
+        "comparison"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.01,
+          0.69,
+          0.97,
+          0.27
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "四列调查评价规划模拟，底部自然人为对比和五种治理情景汇入综合评估反馈",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "主阶段与情景对照横带结合",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "方案优选图标不代表已经取得最佳结果"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "四列调查评价规划模拟，底部自然人为对比和五种治理情景汇入综合评估反馈",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "left_to_right"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

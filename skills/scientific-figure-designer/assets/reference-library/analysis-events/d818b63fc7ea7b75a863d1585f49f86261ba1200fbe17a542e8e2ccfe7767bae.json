@@ -1,0 +1,94 @@
+{
+  "at": "2026-11-17T06:59:17.722431+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-3741bde094449472865a",
+    "image_sha256": "3741bde094449472865afe7a37921be028bcfac0aee1fefd065f4db19fb3331c",
+    "title": "氢化酶改组筛选与结构分析",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "annual-stage-timeline",
+      "topology": [
+        "sequence",
+        "branch",
+        "merge"
+      ],
+      "media": "text",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.23,
+          0.2,
+          0.66,
+          0.28
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "横虚线五阶段，三基因组合各分两片段长度，右侧长线接结构建模",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "组合实验分支与阶段分隔结合",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "右侧长线是跨阶段输入，不能误识别为反馈"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "横虚线五阶段，三基因组合各分两片段长度，右侧长线接结构建模",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "top_to_bottom"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

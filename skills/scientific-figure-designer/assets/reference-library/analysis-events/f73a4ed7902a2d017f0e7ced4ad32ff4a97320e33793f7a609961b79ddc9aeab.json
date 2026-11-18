@@ -1,0 +1,95 @@
+{
+  "at": "2026-11-17T07:05:06.301175+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "3611b3caa7833c358bee7e6543e6d59a318c3b1b7c6714cd9ad8663a0e26fe63",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-2e06787a9f0b78e74548",
+    "image_sha256": "2e06787a9f0b78e74548c32b8cb9a6e5ac90b4b70fe57c812ee22d75cab216a3",
+    "title": "脊髓损伤临床入口体内外双列",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "comparative-panels",
+      "topology": [
+        "sequence",
+        "parallel"
+      ],
+      "media": "illustrated",
+      "density": "medium",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.04,
+          0.22,
+          0.91,
+          0.72
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "顶部血样检测横链，下分体外细胞七方法和体内大鼠五方法，各接指标",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "两类实验用等宽列保持方法清单可读",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "清单内方法无箭头，不应强制串行"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "顶部血样检测横链，下分体外细胞七方法和体内大鼠五方法，各接指标",
+    "variant_group": null,
+    "spatial": {
+      "columns": 2,
+      "stages": null,
+      "direction": "unknown",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

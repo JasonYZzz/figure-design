@@ -1,0 +1,380 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "reference_id",
+    "image_sha256",
+    "title",
+    "review_status",
+    "facets",
+    "regions",
+    "observations",
+    "transfer",
+    "limitations",
+    "reading_order",
+    "reading_summary",
+    "variant_group",
+    "spatial",
+    "visual_encoding",
+    "uncertainty",
+    "provenance",
+    "relations"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "2.0"
+    },
+    "reference_id": {
+      "type": "string",
+      "pattern": "^ref-[0-9a-f]{20}$"
+    },
+    "image_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_status": {
+      "enum": [
+        "auto_proposed",
+        "human_approved"
+      ]
+    },
+    "facets": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain",
+        "layout",
+        "topology",
+        "media",
+        "density",
+        "temporal_axis",
+        "purpose"
+      ],
+      "properties": {
+        "domain": {
+          "enum": [
+            "biomedicine",
+            "earth",
+            "social",
+            "cs-ai",
+            "materials",
+            "general",
+            "unknown"
+          ]
+        },
+        "layout": {
+          "enum": [
+            "annual-stage-timeline",
+            "top-overview-multi-lane",
+            "center-hero-side-support",
+            "comparative-panels",
+            "matrix-plus-flow",
+            "fork-merge-validation",
+            "macro-micro-mechanism",
+            "hub-spoke",
+            "network-overlay",
+            "unknown"
+          ]
+        },
+        "topology": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "sequence",
+              "parallel",
+              "branch",
+              "merge",
+              "feedback",
+              "comparison",
+              "association",
+              "unknown"
+            ]
+          }
+        },
+        "media": {
+          "enum": [
+            "illustrated",
+            "text",
+            "unknown"
+          ]
+        },
+        "density": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "unknown"
+          ]
+        },
+        "temporal_axis": {
+          "enum": [
+            "explicit",
+            "stages",
+            "unknown"
+          ]
+        },
+        "purpose": {
+          "enum": [
+            "roadmap",
+            "mechanism",
+            "framework",
+            "experiment",
+            "comparison",
+            "unknown"
+          ]
+        }
+      }
+    },
+    "regions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "parent_id",
+          "bounds",
+          "role"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9-]+$"
+          },
+          "parent_id": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "bounds": {
+            "type": "array",
+            "minItems": 4,
+            "maxItems": 4,
+            "items": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1
+            }
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "observations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "text",
+          "region_ids"
+        ],
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "region_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        }
+      }
+    },
+    "transfer": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "text",
+          "region_ids"
+        ],
+        "properties": {
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "region_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "minItems": 1
+          }
+        }
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "reading_order": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "reading_summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "variant_group": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "spatial": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "columns",
+        "stages",
+        "direction",
+        "task_lanes",
+        "duration_years"
+      ],
+      "properties": {
+        "columns": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "stages": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "direction": {
+          "enum": [
+            "left_to_right",
+            "top_to_bottom",
+            "serpentine",
+            "radial",
+            "mixed",
+            "unknown"
+          ]
+        },
+        "task_lanes": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        },
+        "duration_years": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 1
+        }
+      }
+    },
+    "visual_encoding": {
+      "type": "string",
+      "minLength": 1
+    },
+    "uncertainty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reviewer",
+        "model",
+        "method",
+        "taxonomy_version",
+        "prompt_version",
+        "observed_on"
+      ],
+      "properties": {
+        "reviewer": {
+          "type": "string",
+          "minLength": 1
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "taxonomy_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "prompt_version": {
+          "type": "string",
+          "minLength": 1
+        },
+        "observed_on": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "relations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reference_id",
+          "type",
+          "reason"
+        ],
+        "properties": {
+          "reference_id": {
+            "type": "string",
+            "pattern": "^ref-[0-9a-f]{20}$"
+          },
+          "type": {
+            "enum": [
+              "variant_of",
+              "illustrates",
+              "contrasts_with"
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "at": "2026-11-17T06:59:17.725459+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-cb9ccfa51b516cea8cdc",
+    "image_sha256": "cb9ccfa51b516cea8cdc3ab7bd2d0e4b710a64098cefe8a36f90979b5734c56c",
+    "title": "双核心任务各三支的粉色模板",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "general",
+      "layout": "annual-stage-timeline",
+      "topology": [
+        "parallel",
+        "branch",
+        "sequence"
+      ],
+      "media": "text",
+      "density": "medium",
+      "temporal_axis": "stages",
+      "purpose": "framework"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.16,
+          0.38,
+          0.72,
+          0.42
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "四个虚线阶段，核心研究两组各含三条三节点横向链，两侧阶段目的",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "六条短路径分组呈现与左右阶段对照",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "占位框不能说明任务实际依赖"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "四个虚线阶段，核心研究两组各含三条三节点横向链，两侧阶段目的",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "top_to_bottom"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

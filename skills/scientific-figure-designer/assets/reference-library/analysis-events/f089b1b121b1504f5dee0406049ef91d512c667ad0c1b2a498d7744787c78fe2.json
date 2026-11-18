@@ -1,0 +1,95 @@
+{
+  "at": "2026-11-17T07:05:06.319287+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "8e51fe0eb8fc41741db748b5f11c2bf5e32d80f4ca0f8965f91437986712cc87",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-037be32a51b1543e2f99",
+    "image_sha256": "037be32a51b1543e2f99e463f832d3feca3b7e10eb57552d7d653e9c786a7f5a",
+    "title": "森林遥感反演与地面验证",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "earth",
+      "layout": "center-hero-side-support",
+      "topology": [
+        "sequence",
+        "merge"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.0,
+          0.75,
+          0.99,
+          0.24
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "左上多卫星观测，右侧校正和模型，中心森林圈，底部实地采样验证",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "研究对象主视觉连接遥感方法与实测验证",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "步骤2重复出现，需要重排读序"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "左上多卫星观测，右侧校正和模型，中心森林圈，底部实地采样验证",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

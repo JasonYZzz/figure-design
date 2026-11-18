@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-3a61d041527d750e78bf",
+  "image_sha256": "3a61d041527d750e78bf327da4ba833d83e463b4067bd394b1ff4357f821fc17",
+  "title": "细胞载体与大鼠模型双路验证",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "biomedicine",
+    "layout": "fork-merge-validation",
+    "topology": [
+      "sequence",
+      "merge",
+      "parallel"
+    ],
+    "media": "text",
+    "density": "medium",
+    "temporal_axis": "stages",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.24,
+        0.41,
+        0.64,
+        0.55
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "载体和细胞汇合转染，左细胞右大鼠共享干预后汇入分子与功能检测",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "体内外模型共享条件横向对齐",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "共用干预连线需明确每个对象适用性"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "载体和细胞汇合转染，左细胞右大鼠共享干预后汇入分子与功能检测",
+  "variant_group": null,
+  "spatial": {
+    "columns": null,
+    "stages": null,
+    "direction": "unknown",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+  "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "unknown",
+    "method": "individual_original_image_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "reference-visual-v2",
+    "observed_on": "2026-11-17"
+  },
+  "relations": []
+}

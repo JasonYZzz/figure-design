@@ -1,0 +1,6 @@
+jsonschema>=4.22,<5
+Pillow>=10,<13
+PyYAML>=6,<7
+playwright==1.65.2
+fonttools==4.68.0
+pypdf==6.21.4

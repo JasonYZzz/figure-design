@@ -1,0 +1,93 @@
+{
+  "at": "2026-11-17T06:59:17.700013+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-44b17da521c17ccd83f5",
+    "image_sha256": "44b17da521c17ccd83f50191ec8b3014b020f98b97d897045dc8937f370c81d0",
+    "title": "云存储到问答系统四层",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "cs-ai",
+      "layout": "annual-stage-timeline",
+      "topology": [
+        "sequence",
+        "parallel"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.17,
+          0.1,
+          0.81,
+          0.21
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "左侧四色阶段立方体，右侧服务器插图、存储恢复双栏、问答及成果四层",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "系统架构阶段配不同粒度的内部图解",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "图内百分比是示例陈述，不能迁移效果"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "左侧四色阶段立方体，右侧服务器插图、存储恢复双栏、问答及成果四层",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "top_to_bottom"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

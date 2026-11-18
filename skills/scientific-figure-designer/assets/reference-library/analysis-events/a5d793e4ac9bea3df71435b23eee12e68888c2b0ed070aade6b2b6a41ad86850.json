@@ -1,0 +1,93 @@
+{
+  "at": "2026-11-17T06:59:17.736492+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-274f162915ec14639332",
+    "image_sha256": "274f162915ec146393324ab7db1dc5109fc6b86401514a3e91685ed1d90d40cb",
+    "title": "脑类器官五阶段与应用底栏",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "top-overview-multi-lane",
+      "topology": [
+        "sequence",
+        "branch"
+      ],
+      "media": "illustrated",
+      "density": "medium",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.38,
+          0.15,
+          0.21,
+          0.65
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "五个蓝标题列从重编程到轨迹验证，中间3D培养列展示三类器官，底部应用挑战",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "清晰列标题和较大对象图适合图文科研总览",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "轨迹散点示意不能作为分析结果"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "五个蓝标题列从重编程到轨迹验证，中间3D培养列展示三类器官，底部应用挑战",
+    "variant_group": null,
+    "spatial": {
+      "columns": 5,
+      "stages": null,
+      "direction": "left_to_right"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "at": "2026-11-17T06:59:17.758817+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-a031e3eba9abb6b0b118",
+    "image_sha256": "a031e3eba9abb6b0b118d374e11b928e43195a1567ad94ce94e5463528687ae9",
+    "title": "数字孪生物理交互虚拟三层",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "cs-ai",
+      "layout": "annual-stage-timeline",
+      "topology": [
+        "association",
+        "parallel"
+      ],
+      "media": "illustrated",
+      "density": "medium",
+      "temporal_axis": "unknown",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.02,
+          0.42,
+          0.95,
+          0.52
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "上层资源与对象，中层通信数据控制，下层坐标点云存储与处理，层间双箭头",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "系统架构按层组织并显示双向映射",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "双向通信不是实验反馈循环"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "上层资源与对象，中层通信数据控制，下层坐标点云存储与处理，层间双箭头",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "top_to_bottom"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

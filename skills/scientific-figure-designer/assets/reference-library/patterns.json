@@ -1,0 +1,215 @@
+[
+  {
+    "id": "illustrated-stages",
+    "title": "图文步骤一一对应",
+    "task": "图文混合实验路线怎么排",
+    "query": "图文混合实验路线怎么排",
+    "claim": "阶段标题、研究对象插图与短方法标签在同列对应。",
+    "when": "四至六个主要阶段；列内步骤较短。",
+    "limits": "列数增加会挤压中文；不能复制示意数据。",
+    "kind": "cross_image",
+    "sources": [
+      {
+        "reference_id": "ref-f03d218c47e82ced7c19",
+        "region_id": "focus",
+        "reason": "阶段标题与插图方法子项一一对应"
+      },
+      {
+        "reference_id": "ref-1493d691905733d4b7af",
+        "region_id": "focus",
+        "reason": "短步骤标签配对象图，细节用局部插框"
+      },
+      {
+        "reference_id": "ref-666191098336ba3a0e62",
+        "region_id": "focus",
+        "reason": "每列对象插图配短方法标签"
+      },
+      {
+        "reference_id": "ref-274f162915ec14639332",
+        "region_id": "focus",
+        "reason": "清晰列标题和较大对象图适合图文科研总览"
+      }
+    ]
+  },
+  {
+    "id": "parallel-validation",
+    "title": "主任务与独立验证分区",
+    "task": "三条研究任务加底部验证",
+    "query": "三条研究任务加底部验证",
+    "claim": "把主体任务区和验证区分开，使用来源支持的箭头关联。",
+    "when": "主任务与后续验证证据角色不同。",
+    "limits": "是否有条件取决于文档，不能由底部位置推断。",
+    "kind": "cross_image",
+    "sources": [
+      {
+        "reference_id": "ref-1a7d6690315075a28814",
+        "region_id": "focus",
+        "reason": "主体三任务与独立体内验证带分区"
+      },
+      {
+        "reference_id": "ref-e644546216e0182cf644",
+        "region_id": "focus",
+        "reason": "中心细胞机制与上下证据来源呼应"
+      }
+    ]
+  },
+  {
+    "id": "conditional-loop",
+    "title": "主链与失败返回",
+    "task": "如何画条件判断和反馈",
+    "query": "如何画条件判断和反馈",
+    "claim": "可辨条件节点配标明失败出口的外侧返回线。",
+    "when": "真实存在失败重做或条件跳转。",
+    "limits": "未标条件的菱形不算证据；回路与双向关联不同。",
+    "kind": "cross_image",
+    "sources": [
+      {
+        "reference_id": "ref-3de32b64b207ae3b7244",
+        "region_id": "focus",
+        "reason": "用菱形和否标注表达条件失败重做"
+      },
+      {
+        "reference_id": "ref-418e78e4234db25d6b19",
+        "region_id": "focus",
+        "reason": "异常分支保留在阶段内，正常链向下"
+      }
+    ]
+  },
+  {
+    "id": "evidence-scales",
+    "title": "多尺度证据分层",
+    "task": "临床动物细胞如何对齐",
+    "query": "临床动物细胞如何对齐",
+    "claim": "按细胞、动物、临床证据层分别组织方法，层内并行。",
+    "when": "具有多个独立证据尺度。",
+    "limits": "尺度顺序由研究设计决定；布局不证明因果。",
+    "kind": "cross_image",
+    "sources": [
+      {
+        "reference_id": "ref-cd0a498d3185e40d083f",
+        "region_id": "focus",
+        "reason": "按研究尺度分层并用对象图标提示层级"
+      },
+      {
+        "reference_id": "ref-bb0704b58cc7e0349110",
+        "region_id": "focus",
+        "reason": "实验尺度分层和同层并行设计"
+      },
+      {
+        "reference_id": "ref-fd4163ba114d6e9867ad",
+        "region_id": "focus",
+        "reason": "大体外模块与简短体内临床分配不同高度"
+      }
+    ]
+  },
+  {
+    "id": "methods-alignment",
+    "title": "内容与方法侧栏",
+    "task": "研究目标内容方法对应",
+    "query": "研究目标内容方法对应",
+    "claim": "在主体研究内容两侧对齐阶段和方法，长方法清单留宽区。",
+    "when": "多阶段社科或设计研究。",
+    "limits": "侧栏跨度必须与真实阶段匹配。",
+    "kind": "cross_image",
+    "sources": [
+      {
+        "reference_id": "ref-cffd75e133f2fc486434",
+        "region_id": "focus",
+        "reason": "三列对照说明研究内容与方法对应"
+      },
+      {
+        "reference_id": "ref-c33acf0e3cc3dfc528ea",
+        "region_id": "focus",
+        "reason": "方法侧栏与层内关系图结合"
+      },
+      {
+        "reference_id": "ref-9ee89f0af16f4167f2bb",
+        "region_id": "focus",
+        "reason": "方法与数据来源按任务行逐项对齐"
+      }
+    ]
+  },
+  {
+    "id": "explicit-time",
+    "title": "阶段与时间轴分开",
+    "task": "四年研究进度安排",
+    "query": "四年研究进度安排",
+    "claim": "研究内容上方组织，明确年度安排另设底栏。",
+    "when": "文档提供年度或月份计划。",
+    "limits": "仅一张四年示例；不从阶段编号推断年份。",
+    "kind": "single_example",
+    "sources": [
+      {
+        "reference_id": "ref-a238d5699feb39947cfd",
+        "region_id": "focus",
+        "reason": "研究内容与年度进度分区呈现"
+      }
+    ]
+  },
+  {
+    "id": "comparison-panels",
+    "title": "对照对象同位排列",
+    "task": "多组对照和跨物种验证",
+    "query": "多组对照和跨物种验证",
+    "claim": "对照组在相邻面板保持对象、方法及读出位置对应。",
+    "when": "比较研究且比较维度相同。",
+    "limits": "共享颜色不等于样本匹配；缺失指标须明示。",
+    "kind": "cross_image",
+    "sources": [
+      {
+        "reference_id": "ref-9401f30da1cf9359f009",
+        "region_id": "focus",
+        "reason": "对照组颜色贯穿处理与读出"
+      },
+      {
+        "reference_id": "ref-e03899acfcdb627bc511",
+        "region_id": "focus",
+        "reason": "发现对照、跨物种验证和干预分面板"
+      }
+    ]
+  },
+  {
+    "id": "serpentine",
+    "title": "编号折返长流程",
+    "task": "长实验链怎样紧凑排版",
+    "query": "长实验链怎样紧凑排版",
+    "claim": "折返链保留明确编号与行末连接，避免普通逐行误读。",
+    "when": "横幅内需要多于四个步骤。",
+    "limits": "方法并列不能强行串为依赖链。",
+    "kind": "cross_image",
+    "sources": [
+      {
+        "reference_id": "ref-954d411042d7ca041267",
+        "region_id": "focus",
+        "reason": "软硬件开发链用一致卡片和对象图"
+      },
+      {
+        "reference_id": "ref-65cd7935f82feebc22fa",
+        "region_id": "focus",
+        "reason": "长方法链用编号保证折返读序"
+      }
+    ]
+  },
+  {
+    "id": "center-network",
+    "title": "中心对象与支撑网络",
+    "task": "中心机制两侧方法",
+    "query": "中心机制两侧方法",
+    "claim": "中心机制或对象突出，两侧容纳数据及方法支持。",
+    "when": "具有明确核心研究对象。",
+    "limits": "外围圆环不必代表反馈；每条科学边单独来源。",
+    "kind": "cross_image",
+    "sources": [
+      {
+        "reference_id": "ref-037be32a51b1543e2f99",
+        "region_id": "focus",
+        "reason": "研究对象主视觉连接遥感方法与实测验证"
+      },
+      {
+        "reference_id": "ref-935b52b0af0fb0575804",
+        "region_id": "focus",
+        "reason": "宏观合作框架结合下方可执行研究任务"
+      }
+    ]
+  }
+]

@@ -1,0 +1,15 @@
+{
+  "schema_version":"1.0","figure_id":"DEMO-001","route":"text_structured",
+  "canvas":{"width":1600,"height":1200},
+  "grammar":{"primary":"top-overview-multi-lane","modifiers":["varied_band_rhythm"],"asset_treatments":[]},
+  "style_id":"biomedicine-academic",
+  "regions":[
+    {"id":"R_TITLE","role":"title","bounds":[0.06,0.02,0.88,0.09],"label_instance_ids":["LI_TITLE"],"visual_priority":10,"text_safe":{"min_font_px":24,"max_lines":2,"padding_px":12}},
+    {"id":"R_HERO","role":"hero","bounds":[0.06,0.14,0.88,0.13],"label_instance_ids":["LI_HERO"],"visual_priority":9,"text_safe":{"min_font_px":20,"max_lines":2,"padding_px":16}},
+    {"id":"R_T1","role":"research_task","bounds":[0.06,0.32,0.88,0.17],"label_instance_ids":["LI_TASK1"],"visual_priority":7,"text_safe":{"min_font_px":18,"max_lines":3,"padding_px":16}},
+    {"id":"R_T2","role":"research_task","bounds":[0.06,0.55,0.88,0.17],"label_instance_ids":["LI_TASK2"],"visual_priority":7,"text_safe":{"min_font_px":18,"max_lines":3,"padding_px":16}},
+    {"id":"R_OUT","role":"outcome","bounds":[0.06,0.78,0.88,0.16],"label_instance_ids":["LI_OUT"],"visual_priority":8,"text_safe":{"min_font_px":18,"max_lines":3,"padding_px":16}}
+  ],
+  "edges":[{"relation_id":"REL1","source_region_id":"R_T1","target_region_id":"R_T2","line_style":"solid"}],
+  "status":"draft"
+}

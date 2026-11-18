@@ -1,0 +1,34 @@
+version: '1.0'
+# Seed grammar: catalogued techniques are references, not a forced final layout.
+primary:
+  - top-overview-multi-lane
+  - center-hero-side-support
+  - annual-stage-timeline
+  - macro-micro-mechanism
+  - fork-merge-validation
+  - matrix-plus-flow
+  - funnel-evidence
+  - hub-spoke
+  - network-overlay
+  - comparative-panels
+  - experimental-apparatus
+  - minimal-text-graphical-abstract
+modifiers:
+  - zoom_callout
+  - organic_cutout
+  - frame_breakout
+  - directional_scrim
+  - asymmetric_weighting
+  - nonrectangular_region
+  - registered_layer
+  - varied_band_rhythm
+asset_treatments:
+  - approved_transparent_illustration
+  - registered_crop
+  - approved_icon_sheet
+  - layered_object_inset
+prohibitions:
+  - invent_scientific_results
+  - invent_critical_arrows
+  - embed_authoritative_text_in_image
+  - reuse_unlicensed_source_pixels

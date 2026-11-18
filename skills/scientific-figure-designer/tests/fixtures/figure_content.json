@@ -1,0 +1,24 @@
+{
+  "schema_version":"1.0","figure_id":"DEMO-001","purpose":"展示结构化科研图生成流程，不代表真实实验结论","domain":"generic-research","study_status":"planned",
+  "sources":[{"id":"SRC1","document_sha256":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","locator":"user_approved_demo","excerpt":"科研技术路线图（示例）：研究对象与条件、研究任务一、研究任务二、研究结果核验。仅作演示，不代表真实实验结果。","verification":"approved_user_brief"}],
+  "entities":[{"id":"ENT1","name":"研究对象与条件","kind":"research_input","source_ids":["SRC1"]}],
+  "tasks":[
+    {"id":"TASK1","title_label_id":"L_TASK1","status":"planned","source_ids":["SRC1"],"entity_ids":["ENT1"]},
+    {"id":"TASK2","title_label_id":"L_TASK2","status":"planned","source_ids":["SRC1"],"entity_ids":["ENT1"]}
+  ],
+  "relations":[{"id":"REL1","from_id":"TASK1","to_id":"TASK2","type":"sequence","evidence_state":"planned","source_ids":["SRC1"],"critical":true}],
+  "labels":[
+    {"id":"L_TITLE","text":"科研技术路线图（示例）","kind":"editorial","approved":true,"source_ids":["SRC1"]},
+    {"id":"L_HERO","text":"研究对象与条件","kind":"verbatim","approved":true,"source_ids":["SRC1"]},
+    {"id":"L_TASK1","text":"研究任务一（拟开展）","kind":"approved_summary","approved":true,"source_ids":["SRC1"]},
+    {"id":"L_TASK2","text":"研究任务二（拟开展）","kind":"approved_summary","approved":true,"source_ids":["SRC1"]},
+    {"id":"L_OUT","text":"研究结果核验（尚无实验结果）","kind":"approved_summary","approved":true,"source_ids":["SRC1"]}
+  ],
+  "label_instances":[
+    {"id":"LI_TITLE","label_id":"L_TITLE","owner_id":"DEMO-001","role":"title","required":true},
+    {"id":"LI_HERO","label_id":"L_HERO","owner_id":"ENT1","role":"section","required":true},
+    {"id":"LI_TASK1","label_id":"L_TASK1","owner_id":"TASK1","role":"task","required":true},
+    {"id":"LI_TASK2","label_id":"L_TASK2","owner_id":"TASK2","role":"task","required":true},
+    {"id":"LI_OUT","label_id":"L_OUT","owner_id":"DEMO-001","role":"caption","required":true}
+  ]
+}

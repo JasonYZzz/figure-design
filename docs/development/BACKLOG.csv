@@ -1,0 +1,54 @@
+﻿Phase,TaskId,Priority,Task,Components,Dependencies,EstimatedPersonDays,Acceptance,Status_1_1,Evidence_1_1,Limit_1_1
+P0,P0-01,P0,检查真实项目结构及 AGENTS 规则,repo audit,,1,给出带文件行号的能力清单,verified,docs/archive/p0/current-system-audit.md,无旧 TS/DSH 工程
+P0,P0-02,P0,导入 Skill 并保持目录完整,skill dir,P0-01,0.5,Codex /skills 或 $ 调用可发现,verified,SKILL.md; agents/openai.yaml,当前项目发现；外部安装器验证
+P0,P0-03,P0,运行契约和脚本离线测试,tests,P0-02,0.5,所有离线测试通过且有日志,verified,tests/; docs/archive/validation-1.1/clean-tests.log,30 项通过
+P0,P0-04,P0,现有混合成图质量/耗时基线,benchmark,P0-01,1,保存真实图、模型日志、运行总时长,not_applicable,docs/archive/p0/current-system-audit.md,旧混合系统不存在；新性能见 benchmark
+P0,P0-05,P0,旧 Plan/CLI/DSH 兼容性冻结,regression,P0-01,1,旧任务可以读取及导出,not_applicable,tests/test_skill.py,旧 TS/DSH 不存在；保留原包 17 回归
+P1,P1-01,P0,实际参考图目录只读 inventory,inventory_refs,P0-02,1,清单真实数量和坏图/重复报告,verified,scripts/inventory_refs.py,161 原图无改动
+P1,P1-02,P0,参考图数据表与许可状态协议,reference schema,P1-01,1,未知版权不被放行,verified,scripts/figure_catalog.py; schemas/reference-record.schema.json,全部原图许可 unknown
+P1,P1-03,P1,元数据分类词表与候选 OCR/VLM 接口,classifier,P1-02,1.5,严格 Schema JSON 且保留不确定性,codex_workflow,scripts/figure_catalog.py; assets/reference-library/catalog.sqlite,旧标签保留；1.3 新增 161 原图独立分析；不声称完整 OCR
+P1,P1-04,P0,30 个分层人工金标与审核记录,review UI,P1-03,2,人工与模型候选独立且可追溯,external_review_pending,build/runs/gold-review/review.html,30 图审校工作流具备；人审金标 0
+P1,P1-05,P1,索引 SQLite/JSONL 与多维过滤,catalog,P1-04,1,按领域/拓扑/密度返回审过记录,verified,scripts/figure_catalog.py,1.3 中文结构检索/硬分面/数量约束；人审语义准确率待测
+P1,P1-06,P1,处理注入式文字/损坏图/重复文件,test,P1-03,1,无命令执行、无误授权,verified,tests/test_skill.py; tests/test_standalone.py,输入作为数据；损坏/重复/未知权限测试
+P2,P2-01,P0,组合式语法词表 + 兼容条件,grammar yaml,P1-04,1,涵盖 12 主原型且冲突可阻断,implemented_with_limits,assets/layout-registry.yaml; scripts/figure_plan.py,12 入口；部分共享几何；修饰词并非全部自动特效
+P2,P2-02,P0,图2中心主线母版及可变区域,layout master,P2-01,1.5,主视觉可变、文字槽可靠,verified,scripts/demo.py; scripts/figure_plan.py,中心可变区域；专业视觉需实际素材和设计
+P2,P2-03,P0,图3多泳道母版及可变区域,layout master,P2-01,1.5,3/4 泳道 + 多尺度图插,verified,scripts/demo.py; scripts/figure_plan.py,总览加泳道；人工设计科学插图
+P2,P2-04,P1,图1年度阶段高级布局变体,layout master,P2-01,1.5,有多种节奏非全卡片,implemented_with_limits,scripts/figure_plan.py,画幅/方向/坐标可变；自动母版仍偏区域框架
+P2,P2-05,P1,领域样式与版式分离,style registry,P2-01,1,同布局换域不改关系,verified,assets/layout-registry.yaml,4 样式与几何分离
+P2,P2-06,P1,自动检查母版 Slot 几何与关系端口,layout QA,P2-02;P2-03,1.5,text slots/anchors 不越界,verified,scripts/figure_render.py; scripts/figure_geometry.py,容量/边界/避障失败会阻断
+P3,P3-01,P0,FigureContent TS 类型与 Ajv,figure-content,P0-01,1.5,严格类型及 schema 验证,replaced_for_standalone,schemas/figure-content.schema.json; scripts/validate_contract.py,用 Python/jsonschema；TS 文件保留作原设计参考
+P3,P3-02,P0,SourceRef 强绑定/研究状态审核,scientific validator,P3-01,2,无来源因果与否定丢失被阻断,codex_workflow,scripts/figure_sources.py; SKILL.md,精确原文绑定自动；语义因果/否定由 Codex 与人工审阅
+P3,P3-03,P0,LabelInstance / Relation 引用完整性,contract validator,P3-01,1.5,重复术语多实例不丢,verified,scripts/validate_contract.py; scripts/figure_render.py,实例/任务/条件/关系完整性
+P3,P3-04,P0,CompositionPlan 输出及 Top2 计划,planner,P2-01;P3-01,2.5,同事实不同设计，无造事实,codex_workflow,scripts/figure_plan.py,两个规则初始候选加 Codex 设计；非独立 LLM 服务
+P3,P3-05,P0,真实目标字体字符宽度/断行/容量,text fit,P2-06,2,正确字符文本区域不溢出,verified,scripts/figure_render.py,真实 Chromium/Noto 字体；不支持字形报错
+P3,P3-06,P1,输出结构差异、文本容量与修订原因,plan report,P3-04;P3-05,1,候选可比较与审计,codex_workflow,references/standalone-workflow.md; scripts/figure.py,plan JSON 与 preflight；设计差异解释由 Codex 输出
+P3,P3-07,P1,研究状态及有冲突内容负例测试,tests,P3-02,1,planned/validated 不混淆,verified,tests/test_standalone.py,计划/验证混淆负例
+P4,P4-01,P0,FigureScene 稳定 ID/zIndex/来源绑定,scene,P3-04,2,节点可 patch、schema 可核验,verified,schemas/figure-scene-v1.1.schema.json,稳定实例/连接 ID 和层序
+P4,P4-02,P0,真实 SVG 文字组与字符保真,svg text,P4-01;P3-05,2,UTF-8/希腊符号准确,verified,scripts/figure_render.py,SVG 原生文字与实际字符清单
+P4,P4-03,P0,科研关系箭头/端点路由,connector engine,P4-01;P3-03,2,关键边正确并可追踪,verified,scripts/figure_geometry.py; scripts/figure_render.py,10 类关系语义标签；自环不支持且报错
+P4,P4-04,P0,Text-Structured 高质量构图,renderer route1,P4-02;P2-02,2,有真实层级非纯卡片,implemented_with_limits,scripts/figure_render.py,结构渲染可用；高质量视觉由 Codex 设计且待专家评价
+P4,P4-05,P1,Strict-Scientific 路由与数据保护,renderer route4,P4-03,2,不生成定量数据/结果,verified,scripts/figure_data.py,真实 CSV line/bar；不生成实验数值
+P4,P4-06,P0,Chromium 最终预览与几何 QA,render QA,P4-04,2,字体/越界/碰撞可审,verified,tests/test_standalone.py,Chromium PNG/PDF 和几何报告
+P4,P4-07,P1,文字 Patch 不动图像/研究事实,scene patch,P4-01,1.5,无额外生图调用,verified,scripts/figure.py patch-label,素材 hash 不变；生图调用 0；验收失效
+P5,P5-01,P0,ApprovedAssets 检索与权限门禁,asset catalog,P1-05,1.5,source licence blocked properly,verified,scripts/figure_assets.py,明确许可/审批/对象绑定；不验证声明人的身份
+P5,P5-02,P1,科研资产离线提取候选与审核,segmentation,P5-01,2,候选与生产素材明确分开,codex_workflow,scripts/figure_assets.py asset-sheet,显式矩形裁片；复杂分割由可用工具与人工完成
+P5,P5-03,P1,AI Asset Adapter 与图像请求账本,image provider,P5-01,2,付费闸门/unknown/idempotency,external_validation_pending,scripts/figure_assets.py; references/standalone-workflow.md,账本/锁/unknown 已测；原生 Codex 生图调用未实测
+P5,P5-04,P1,Sheet 图标切分与透明边缘校验,sheet slicing,P5-03,2,颜色残边检测/原始保留,implemented_with_limits,scripts/figure_assets.py asset-sheet,边缘透明统计；不能自动判断所有颜色污染
+P5,P5-05,P0,Asset-Composite 合成与 zIndex,renderer route2,P4-04;P5-01,2.5,图文不遮挡、风格统一,verified,scripts/figure_render.py; scripts/demo.py,获准资产嵌入；像素内容需人工审查
+P5,P5-06,P0,图2/图3视觉对比与修复,visual benchmark,P5-05,2,真实产物和盲评报告,external_review_pending,build/runs/release-validation/demo/,同内容两图已生成与观察；专家盲评未做
+P5,P5-07,P1,图像缓存、模型版本/资产 hash,asset cache,P5-03,1,重复不再生成,verified,scripts/figure_assets.py; scripts/figure.py,文件 hash 和请求身份；供应商费用未知
+P6,P6-01,P1,低文字 Image-First 试验 Route3,image-first,P3-03,2,无法确认文字只能草稿,verified,tests/test_standalone.py,真实底图叠字；一直待额外审核
+P6,P6-02,P1,可选图片原生图层/OCR 注册,optional layering,P6-01,2,不得认定所有图像可完整分层,optional_host_capability,references/reconstruction.md,无通用自动图层/OCR 重建器；调用宿主能力后核对
+P6,P6-03,P0,科研文本关系几何权限多维 QA,quality,P5-05,2,硬错误不能通过美学打分,verified,scripts/figure_sources.py; scripts/figure_render.py,机器硬错误阻断；语义与资产像素不伪称自动核验
+P6,P6-04,P1,局部 patch + bounded retry,repair,P6-03,1.5,不重复生图，有限次修复,codex_workflow,scripts/figure.py patch-label; references/standalone-workflow.md,受 hash 约束改字；设计回流有界且不自动重试付费
+P6,P6-05,P1,注入安全与图片许可负例集,security,P6-03,1,无非法调用与素材漏审,verified,tests/test_standalone.py,SVG 外部引用/脚本拒绝；未知许可阻断
+P7,P7-01,P0,CLI feature flag + 版本兼容,cli,P6-03,1.5,旧任务不受影响,replaced_for_standalone,scripts/figure.py; tests/test_skill.py,独立 CLI；保留原包工具；无旧宿主 feature flag
+P7,P7-02,P1,DSH 共享核心 + 归属/授权,dsh,P7-01,2,与 CLI 行为一致,out_of_scope,references/integration.md,按用户要求无 DSH 依赖；可选宿主接入未开发
+P7,P7-03,P0,任务 hash、恢复、unknown 状态,job lifecycle,P7-01,2,重复请求不重复收费,verified,scripts/figure.py; scripts/figure_assets.py,缓存/原子写/失败保留/unknown；非供应商计费承诺
+P7,P7-04,P0,12+4 heldout 对照 Benchmark,benchmark,P7-01,2,保留失败分母与真实成本,verified,scripts/benchmark.py; build/runs/release-validation/benchmark/benchmark.json,12+4 合成案例；非真实学科盲测；外部成本 unknown
+P7,P7-05,P0,视觉评审与字符/关系阻断标准,quality gate,P7-04,1.5,全部通过才允许生产标识,external_review_pending,references/acceptance.md; scripts/figure.py export,机器阻断和实际人审声明入口；专家盲评未做
+P7,P7-06,P0,灰度回滚与历史任务可读,release,P7-05,1,异常可以仅切新任务回退,replaced_for_standalone,scripts/install.py; docs/archive/validation-1.1/clean-install.json,安装不覆盖；输出版本保留；无线上服务灰度
+K2,K2-01,P0,161 原图逐图区域分析,analyses; schema,P1-01,0,原图 hash 绑定且观察与推断分离,verified,assets/reference-library/analyses; docs/releases/1.3.0.md,全部 auto_proposed；区域近似
+K2,K2-02,P0,知识代与任务导航,figure_knowledge,K2-01,0,可重建/失效检查/失败不切换,verified,tests/test_knowledge.py,整代缓存；不做逐页增量
+K2,K2-03,P0,中文结构检索与构图衔接,figure_retrieval; figure_plan,K2-02,0,解释/数量过滤/内容 hash 不变,verified,tests/test_knowledge.py; benchmark_references.py,覆盖率不是准确率；候选仍需设计
+K2,K2-04,P1,30 图结构与60查询人工评测,review; judgments,K2-03,0,实际人审与模型输出分离,external_review_pending,build/reference-knowledge-v2/human-review; build/reference-knowledge-v2/evaluation-final,无独立人工金标及视觉盲评

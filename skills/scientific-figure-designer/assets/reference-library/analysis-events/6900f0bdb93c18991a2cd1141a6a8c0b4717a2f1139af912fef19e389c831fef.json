@@ -1,0 +1,96 @@
+{
+  "at": "2026-11-17T07:05:06.330409+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "378b4f9c35eaaaa37daa057d14fc294fcb99322f8a50455a1781d172892045c8",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-01ff8ea380855faa3994",
+    "image_sha256": "01ff8ea380855faa3994f628a93869856fa98ef27766a727a0a82bb24892bcd6",
+    "title": "沟谷特征建模侧标四阶段",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "earth",
+      "layout": "annual-stage-timeline",
+      "topology": [
+        "sequence",
+        "association",
+        "branch"
+      ],
+      "media": "text",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.2,
+          0.55,
+          0.72,
+          0.17
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "左侧准备建模实验总结分段，中间粗箭头主链，下部结构与时空特征双栏",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "侧边阶段标尺对齐不等高主体模块",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "侧标为研究阶段，不是年度时间轴"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "左侧准备建模实验总结分段，中间粗箭头主链，下部结构与时空特征双栏",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "top_to_bottom",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

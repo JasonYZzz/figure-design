@@ -1,0 +1,20 @@
+version: '1.1'
+# Geometry is implemented by figure_plan.positions; these are executable dispatch entries.
+layouts:
+  top-overview-multi-lane: {family: lanes, modifier: varied_band_rhythm}
+  center-hero-side-support: {family: center, modifier: asymmetric_weighting}
+  annual-stage-timeline: {family: stages, modifier: varied_band_rhythm}
+  macro-micro-mechanism: {family: scales, modifier: zoom_callout}
+  fork-merge-validation: {family: fork, modifier: directional_scrim}
+  matrix-plus-flow: {family: matrix, modifier: registered_layer}
+  funnel-evidence: {family: funnel, modifier: nonrectangular_region}
+  hub-spoke: {family: radial, modifier: asymmetric_weighting}
+  network-overlay: {family: center, modifier: registered_layer}
+  comparative-panels: {family: matrix, modifier: varied_band_rhythm}
+  experimental-apparatus: {family: apparatus, modifier: frame_breakout}
+  minimal-text-graphical-abstract: {family: abstract, modifier: organic_cutout}
+styles:
+  biomedicine-academic: {ink: '#203b42', accent: '#287d85', pale: '#eef7f4', secondary: '#b4d8ce'}
+  cs-academic: {ink: '#26374d', accent: '#3765a0', pale: '#f0f4fa', secondary: '#b9cce6'}
+  materials-academic: {ink: '#423c36', accent: '#a36938', pale: '#faf4e9', secondary: '#dfc39e'}
+  earth-social-academic: {ink: '#2b4036', accent: '#517a59', pale: '#f1f6ed', secondary: '#bad0ad'}

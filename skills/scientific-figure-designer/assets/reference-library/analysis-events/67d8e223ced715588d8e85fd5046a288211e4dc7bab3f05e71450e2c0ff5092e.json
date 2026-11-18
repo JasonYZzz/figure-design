@@ -1,0 +1,93 @@
+{
+  "at": "2026-11-17T06:59:17.729342+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-9ee89f0af16f4167f2bb",
+    "image_sha256": "9ee89f0af16f4167f2bb19c7490053ba42177f00e3ce335e38d9338c38c3aa17",
+    "title": "跨境电商人才培养五列研究",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "social",
+      "layout": "matrix-plus-flow",
+      "topology": [
+        "sequence",
+        "parallel"
+      ],
+      "media": "text",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.24,
+          0.15,
+          0.7,
+          0.76
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "阶段问题内容工作方法五列，黄色数据小卡支持调查访谈实验对应行",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "方法与数据来源按任务行逐项对齐",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "列多时研究工作长列表易挤压字号"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "阶段问题内容工作方法五列，黄色数据小卡支持调查访谈实验对应行",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

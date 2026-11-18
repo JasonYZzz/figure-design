@@ -1,0 +1,93 @@
+{
+  "at": "2026-11-17T06:59:17.684925+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-a9e35118312b32dc1132",
+    "image_sha256": "a9e35118312b32dc113228ccff0ae98bac3ffe09f9866024000609828263dfa5",
+    "title": "DEM多尺度纹理特征",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "earth",
+      "layout": "annual-stage-timeline",
+      "topology": [
+        "sequence",
+        "parallel"
+      ],
+      "media": "text",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.2,
+          0.18,
+          0.73,
+          0.64
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "侧边四阶段轴，主区预处理四项、滤波两项、分量三项并列",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "不同阶段容纳不同数量并行方法",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "竖向箭头只表达阶段推进"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "侧边四阶段轴，主区预处理四项、滤波两项、分量三项并列",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "top_to_bottom"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

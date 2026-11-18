@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "title":"FigureScene v1","type":"object","additionalProperties":false,
+  "required":["schema_version","figure_id","canvas","objects","source_content_hash","plan_hash","render_status"],
+  "properties":{
+    "schema_version":{"const":"1.0"},"figure_id":{"type":"string"},"canvas":{"type":"object","additionalProperties":false,"required":["width","height"],"properties":{"width":{"type":"integer","minimum":1},"height":{"type":"integer","minimum":1}}},
+    "objects":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["id","type","bounds","z_index","source_ids"],"properties":{
+      "id":{"type":"string"},"type":{"enum":["shape","text","image","connector","group"]},
+      "bounds":{"type":"array","minItems":4,"maxItems":4,"items":{"type":"number"}},
+      "z_index":{"type":"integer"},"source_ids":{"type":"array","items":{"type":"string"}},
+      "asset_id":{"type":"string"},"label_instance_id":{"type":"string"},"relation_id":{"type":"string"}
+    }}},"source_content_hash":{"type":"string"},"plan_hash":{"type":"string"},"render_status":{"enum":["draft","review_required","qa_reviewed"]}
+  }
+}

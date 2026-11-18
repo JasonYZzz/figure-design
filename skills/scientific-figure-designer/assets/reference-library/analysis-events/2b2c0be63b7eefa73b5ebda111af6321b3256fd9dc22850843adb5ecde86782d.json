@@ -1,0 +1,95 @@
+{
+  "at": "2026-11-17T07:05:06.291860+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "ac770943e3170db624e9c7d31fab3e3332568215976fbec9991f38bf3203f361",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-489382e6c7672f13f320",
+    "image_sha256": "489382e6c7672f13f320de9ede6d81ee0c69c1f85894abf7f667dd4d599de219",
+    "title": "滑坡评估数据模型输出三泳道",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "earth",
+      "layout": "top-overview-multi-lane",
+      "topology": [
+        "sequence",
+        "merge"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.04,
+          0.13,
+          0.92,
+          0.84
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "左列多源地学图层汇合，中列随机森林，右列地图及评价读出",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "输入、模型、产出按三列组织",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "示例精度表与ROC不提供当前效果证据"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "左列多源地学图层汇合，中列随机森林，右列地图及评价读出",
+    "variant_group": null,
+    "spatial": {
+      "columns": 3,
+      "stages": null,
+      "direction": "left_to_right",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

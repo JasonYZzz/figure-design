@@ -1,0 +1,94 @@
+{
+  "at": "2026-11-17T06:59:17.721704+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-4bf4d526eb77b639fd46",
+    "image_sha256": "4bf4d526eb77b639fd464187549f3a6568f692bdc5b07c734c95420745d14bbd",
+    "title": "耕地系统理论实证与数据侧栏",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "earth",
+      "layout": "center-hero-side-support",
+      "topology": [
+        "sequence",
+        "branch",
+        "association"
+      ],
+      "media": "text",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.11,
+          0.39,
+          0.87,
+          0.27
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "四层背景理论思路实证，右侧贯通数据方法，思路内三个空菱形",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "数据库与分析模型作为持续支撑侧栏",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "空菱形未标条件，不按判断节点解释"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "四层背景理论思路实证，右侧贯通数据方法，思路内三个空菱形",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

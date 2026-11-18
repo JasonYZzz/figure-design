@@ -1,0 +1,95 @@
+{
+  "at": "2026-11-17T07:05:06.302612+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "74ab403ff8a396d9b399eee4699dcdc3e0d6b43f1b10bea0b0d0dc3e3b810129",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-0da3ec1fd043eaab0fa0",
+    "image_sha256": "0da3ec1fd043eaab0fa0d44e67c1196e643fdcd78d2bb63980e39a2f6d381edb",
+    "title": "工业视觉部署与里程碑",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "cs-ai",
+      "layout": "matrix-plus-flow",
+      "topology": [
+        "sequence",
+        "feedback"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.03,
+          0.65,
+          0.94,
+          0.31
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "硬件算法产线卡片折返，下行精度迭代和扩展，底部五个Milestone",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "开发链与里程碑独立对照",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "里程碑没有日期，不标明确年度轴"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "硬件算法产线卡片折返，下行精度迭代和扩展，底部五个Milestone",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "serpentine",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

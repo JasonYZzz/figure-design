@@ -1,0 +1,94 @@
+{
+  "at": "2026-11-17T06:59:17.736766+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-e03899acfcdb627bc511",
+    "image_sha256": "e03899acfcdb627bc511e95d56a4ab14a8ed7ea9178e65ce39b5e2380426fd53",
+    "title": "脑转移血管靶点发现验证概念实验",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "comparative-panels",
+      "topology": [
+        "comparison",
+        "merge",
+        "sequence"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.04,
+          0.03,
+          0.92,
+          0.55
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "A比较病变与正常血管，B比较人鼠，C下部靶点与概念验证",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "发现对照、跨物种验证和干预分面板",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "图内效果箭头属于原研究，未经验证不可移用"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "A比较病变与正常血管，B比较人鼠，C下部靶点与概念验证",
+    "variant_group": null,
+    "spatial": {
+      "columns": 4,
+      "stages": null,
+      "direction": "unknown"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

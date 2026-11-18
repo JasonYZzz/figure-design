@@ -1,0 +1,94 @@
+{
+  "at": "2026-11-17T07:05:06.289457+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "9db6dbb001d72a53f95e5fb55ff2bd47b96149f4ac56dab7d81f31676a290a4e",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-f4360c0af149bca0cd48",
+    "image_sha256": "f4360c0af149bca0cd4883ed08022bf6dc8a7a56994cd1d65e340c7c2fb45986",
+    "title": "光遗传操作与行为记录",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "annual-stage-timeline",
+      "topology": [
+        "sequence"
+      ],
+      "media": "illustrated",
+      "density": "medium",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.02,
+          0.1,
+          0.96,
+          0.87
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "脑区筛选、载体和注射、成像行为三行折返图文序列",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "用实验对象插图配短标签组织长链",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "步骤编号重复，绘制时须重新核对顺序"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "脑区筛选、载体和注射、成像行为三行折返图文序列",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "serpentine",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

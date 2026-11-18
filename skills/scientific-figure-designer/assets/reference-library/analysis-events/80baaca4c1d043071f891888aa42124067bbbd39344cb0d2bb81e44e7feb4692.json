@@ -1,0 +1,96 @@
+{
+  "at": "2026-11-17T07:05:06.337323+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "de339fda3c4163459ccb975964710cefc961ddc138d06b6ff88f12c770c93575",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-0bab63b67be95f8b598f",
+    "image_sha256": "0bab63b67be95f8b598f4d1f941f75da989a8c6cff5e7c0e0e40381a994bbe6c",
+    "title": "肾衰大鼠六处理组与六周采样",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "fork-merge-validation",
+      "topology": [
+        "comparison",
+        "branch",
+        "merge"
+      ],
+      "media": "text",
+      "density": "medium",
+      "temporal_axis": "explicit",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.1,
+          0.14,
+          0.75,
+          0.34
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "六个竖排组汇入六周实验周期，后分组织血液尿液采样检测并汇合分析",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "分组、时间采样和读出三级组织",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "时间点和剂量须来自新方案"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "六个竖排组汇入六周实验周期，后分组织血液尿液采样检测并汇合分析",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

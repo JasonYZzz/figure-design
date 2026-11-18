@@ -1,0 +1,94 @@
+{
+  "at": "2026-11-17T06:59:17.685979+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-ca2d6770ca088fc58b31",
+    "image_sha256": "ca2d6770ca088fc58b31b63316713ce4fb6829a8a134f7338599a1c0592f5d7f",
+    "title": "空白分支汇合模板",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "general",
+      "layout": "fork-merge-validation",
+      "topology": [
+        "branch",
+        "merge",
+        "sequence"
+      ],
+      "media": "text",
+      "density": "low",
+      "temporal_axis": "unknown",
+      "purpose": "framework"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.2,
+          0.27,
+          0.76,
+          0.47
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "左侧通高入口，中部两输入汇合后分三路，右侧各自列表",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "适合输入汇合再分任务的框架",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "空白框无领域语义，不能推断时间和实验意义"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "左侧通高入口，中部两输入汇合后分三路，右侧各自列表",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

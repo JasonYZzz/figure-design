@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-8685db8b0261a75535fa",
+  "image_sha256": "8685db8b0261a75535fa7495d2fa2945b2fcceaafb874017c9b7b91234fa342b",
+  "title": "低碳绩效框架与方法侧栏",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "social",
+    "layout": "annual-stage-timeline",
+    "topology": [
+      "sequence",
+      "branch"
+    ],
+    "media": "text",
+    "density": "medium",
+    "temporal_axis": "stages",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.18,
+        0.29,
+        0.73,
+        0.33
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "三层虚线区，第二层战略到评价框架及四维度，左侧三种研究方法",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "方法侧注与评价维度分支结合",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "框架维度只属于原案例，需独立选定"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "三层虚线区，第二层战略到评价框架及四维度，左侧三种研究方法",
+  "variant_group": null,
+  "spatial": {
+    "columns": null,
+    "stages": null,
+    "direction": "top_to_bottom",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+  "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "unknown",
+    "method": "individual_original_image_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "reference-visual-v2",
+    "observed_on": "2026-11-17"
+  },
+  "relations": []
+}

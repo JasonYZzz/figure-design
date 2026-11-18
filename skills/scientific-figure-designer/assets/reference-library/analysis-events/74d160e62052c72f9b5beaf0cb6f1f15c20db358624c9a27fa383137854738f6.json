@@ -1,0 +1,96 @@
+{
+  "at": "2026-11-17T07:05:06.296727+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "b2318f7635ae623c840b76296c9c976cf9650ba80055f5453dbe86b9d3f595a2",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-8fa27ebe5ffc25f28097",
+    "image_sha256": "8fa27ebe5ffc25f280972392e6cc067a83a4b6b27d17203ddbd32ab53c79bc16",
+    "title": "冷冻细胞温度梯度与体内外功能",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "matrix-plus-flow",
+      "topology": [
+        "sequence",
+        "comparison",
+        "branch"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.04,
+          0.1,
+          0.46,
+          0.34
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "左上七种降温速度到复温和诱导，右上冷冻新鲜对照，下部动物及2D3D功能分流",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "参数梯度筛选与多尺度功能评估分区",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "细字非常小，详细方法适合补充图"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "左上七种降温速度到复温和诱导，右上冷冻新鲜对照，下部动物及2D3D功能分流",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

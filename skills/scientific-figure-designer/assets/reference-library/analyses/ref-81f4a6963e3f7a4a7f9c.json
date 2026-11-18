@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-81f4a6963e3f7a4a7f9c",
+  "image_sha256": "81f4a6963e3f7a4a7f9cf1c50cb709b4a79e23fb9ab3be33a7589869e2a40773",
+  "title": "生活圈与城市韧性概念整合",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "social",
+    "layout": "center-hero-side-support",
+    "topology": [
+      "merge",
+      "association"
+    ],
+    "media": "text",
+    "density": "medium",
+    "temporal_axis": "unknown",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.31,
+        0.49,
+        0.36,
+        0.34
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "上方生活圈和韧性双概念，中间三圆重叠，下方结论接收两侧路径",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "两个理论来源汇入重叠维度再导出应用",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "维恩图只示概念交集，没有定量面积意义"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "上方生活圈和韧性双概念，中间三圆重叠，下方结论接收两侧路径",
+  "variant_group": null,
+  "spatial": {
+    "columns": null,
+    "stages": null,
+    "direction": "unknown",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+  "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "unknown",
+    "method": "individual_original_image_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "reference-visual-v2",
+    "observed_on": "2026-11-17"
+  },
+  "relations": []
+}

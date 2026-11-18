@@ -1,0 +1,93 @@
+{
+  "at": "2026-11-17T06:59:17.676408+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-b8aba31e80d19fd80dd7",
+    "image_sha256": "b8aba31e80d19fd80dd7ab8ef1092377172dd45866804129f3a7a0a0eb9e5719",
+    "title": "AlphaFold环形技术生态",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "cs-ai",
+      "layout": "hub-spoke",
+      "topology": [
+        "feedback",
+        "association"
+      ],
+      "media": "text",
+      "density": "high",
+      "temporal_axis": "unknown",
+      "purpose": "framework"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.17,
+          0.06,
+          0.67,
+          0.53
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "中央适用场景被环形节点围绕，两侧配纵向要点，底部锥形展望",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "中心主题加循环迭代和外围条件",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "小圆文字过密，环线方向需逐条复核"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "中央适用场景被环形节点围绕，两侧配纵向要点，底部锥形展望",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "radial"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

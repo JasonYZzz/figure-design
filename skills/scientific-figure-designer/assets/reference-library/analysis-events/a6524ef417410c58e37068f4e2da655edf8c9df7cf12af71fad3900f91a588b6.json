@@ -1,0 +1,99 @@
+{
+  "at": "2026-11-17T06:59:17.739621+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-35949153857e07c2e89d",
+    "image_sha256": "35949153857e07c2e89d9e90e17b83daba2191fcdb156381033ed5470b52a93c",
+    "title": "脊柱三层现象原理验证配色变体",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "comparative-panels",
+      "topology": [
+        "sequence",
+        "comparison"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.02,
+          0.4,
+          0.89,
+          0.27
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "左样本中央机理右层次三行，新增黄色编号与较深分组色块",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "同一三层研究设计可比较配色变体",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "与既有三层脊柱图同构，不重复计独立证据"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "左样本中央机理右层次三行，新增黄色编号与较深分组色块",
+    "variant_group": "variant-78",
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": [
+      {
+        "reference_id": "ref-f5b1d19d043e54a883b3",
+        "type": "variant_of",
+        "reason": "逐图观察到相同主分区和主要分支；标签细节或配色不同。"
+      }
+    ]
+  }
+}

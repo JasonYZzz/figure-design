@@ -1,0 +1,12 @@
+{
+  "version": "2.0",
+  "count": 161,
+  "status": "auto_proposed",
+  "human_gold_count": 0,
+  "images": "assets/reference-library/images/ in private full package, or user-supplied directory",
+  "method": "Individual visual inspection of all 161 originals; independent observations and approximate region evidence; model proposals, no complete OCR or human gold.",
+  "rights": "unknown; reference pixels are never production assets",
+  "observations": "Legacy catalog labels retained for compatibility. Current analyses distinguish explicit time from stages; unknown measurements remain unknown.",
+  "analysis_count": 161,
+  "analysis_schema": "2.0"
+}

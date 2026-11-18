@@ -1,0 +1,95 @@
+{
+  "at": "2026-11-17T07:05:06.317405+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "973e9079ec7dc85a6d2c7d244096a18a4c1e745a13728c47061eecfa871c7e61",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-af00ec331478ce39d409",
+    "image_sha256": "af00ec331478ce39d409b2da637e8c4dec006b8fe7e1e763d5727df748149a09",
+    "title": "水体微塑料监测与治理反馈",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "earth",
+      "layout": "matrix-plus-flow",
+      "topology": [
+        "sequence",
+        "feedback"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.02,
+          0.18,
+          0.96,
+          0.8
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "四行任务节点含方法小图标，外侧青色回路连接长期监测反馈",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "长任务链分行并外置反馈",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "节点编号与箭头须独立核对"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "四行任务节点含方法小图标，外侧青色回路连接长期监测反馈",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

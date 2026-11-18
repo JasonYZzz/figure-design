@@ -1,0 +1,24 @@
+name: Scientific Figure Designer CI
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r skills/scientific-figure-designer/requirements.txt
+      - run: python -m playwright install --with-deps chromium
+      - run: make check PYTHON=python
+      - run: make test PYTHON=python
+      - run: make benchmark PYTHON=python OUT=/tmp/figure-validation
+      - run: make package PYTHON=python
+      - name: Validate and render bundled fixtures
+        working-directory: skills/scientific-figure-designer
+        run: |
+          python scripts/validate_contract.py --schema schemas/figure-content.schema.json --input tests/fixtures/figure_content.json
+          python scripts/validate_contract.py --schema schemas/composition-plan.schema.json --input tests/fixtures/composition_plan.json
+          python scripts/render_preview.py --content tests/fixtures/figure_content.json --plan tests/fixtures/composition_plan.json --out /tmp/scientific-figure-preview.svg

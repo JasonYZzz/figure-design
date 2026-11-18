@@ -1,0 +1,96 @@
+{
+  "at": "2026-11-17T07:05:06.294854+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "f5f2818e17939f6de60ac6fb826057c51d38526f12176c2cf488609f53b3953b",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-e8d901ee760777825861",
+    "image_sha256": "e8d901ee76077782586131f1e22e1c0eb38c6552b978ebdddd9bcd13e00241a7",
+    "title": "碳排放碳汇双路与生态安全流程",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "earth",
+      "layout": "comparative-panels",
+      "topology": [
+        "parallel",
+        "merge",
+        "sequence"
+      ],
+      "media": "text",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.03,
+          0.02,
+          0.95,
+          0.47
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "上半粉蓝两路计算汇合平衡分析，下半供需与稀缺到安全格局四步",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "并列计算模块汇入综合评价",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "下半与上半连接不明确，公式需独立核验"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "上半粉蓝两路计算汇合平衡分析，下半供需与稀缺到安全格局四步",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

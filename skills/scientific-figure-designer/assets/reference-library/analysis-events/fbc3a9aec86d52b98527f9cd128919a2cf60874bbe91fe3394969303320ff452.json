@@ -1,0 +1,100 @@
+{
+  "at": "2026-11-17T06:59:17.747273+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-001260900ca6e1e1628a",
+    "image_sha256": "001260900ca6e1e1628a485b71976ff35e353af1885359060c231711257862d1",
+    "title": "脑缺血动物细胞联合四功能链",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "fork-merge-validation",
+      "topology": [
+        "parallel",
+        "branch",
+        "merge"
+      ],
+      "media": "text",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.05,
+          0.38,
+          0.92,
+          0.5
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "动物脑功能支线与共培养主线，下面四蓝色功能节点再分子功能分支",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "体内外输入共享下游功能检测矩阵",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "底部括号和箭头交叠，需明确对象映射"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "动物脑功能支线与共培养主线，下面四蓝色功能节点再分子功能分支",
+    "variant_group": "variant-139",
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": [
+      {
+        "reference_id": "ref-4d0c09d7a8ddbb441fb1",
+        "type": "variant_of",
+        "reason": "逐图观察到相同主分区和主要分支；标签细节或配色不同。"
+      }
+    ]
+  }
+}

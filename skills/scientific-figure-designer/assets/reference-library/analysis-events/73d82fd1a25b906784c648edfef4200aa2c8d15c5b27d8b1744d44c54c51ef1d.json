@@ -1,0 +1,94 @@
+{
+  "at": "2026-11-17T07:05:06.315719+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "b02eba5918309bb8e4ac31c4a4ee1161c72b324ed3e16c31cdf31bccd8ed5107",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-666191098336ba3a0e62",
+    "image_sha256": "666191098336ba3a0e62a9ed022a288b8877e1cecbb3c2cfdea59db6714eb1ae",
+    "title": "纳米材料制备表征六列",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "materials",
+      "layout": "top-overview-multi-lane",
+      "topology": [
+        "sequence"
+      ],
+      "media": "illustrated",
+      "density": "medium",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.02,
+          0.21,
+          0.95,
+          0.76
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "六色竖列从前驱体、反应、形貌、显微谱学、表面功能到测试器件",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "每列对象插图配短方法标签",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "同一器具重复出现，需按真实操作去重"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "六色竖列从前驱体、反应、形貌、显微谱学、表面功能到测试器件",
+    "variant_group": null,
+    "spatial": {
+      "columns": 6,
+      "stages": null,
+      "direction": "left_to_right",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

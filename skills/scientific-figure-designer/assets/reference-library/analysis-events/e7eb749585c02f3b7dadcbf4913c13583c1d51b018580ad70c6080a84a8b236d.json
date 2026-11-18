@@ -1,0 +1,96 @@
+{
+  "at": "2026-11-17T07:05:06.322378+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "e4a81700bab717e5c7e0c2510ff35083320660321b1e9412bad2e8e0632d26e1",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-e644546216e0182cf644",
+    "image_sha256": "e644546216e0182cf64429875b92d2adb895403d66ef055ec73bffc6f91f6d14",
+    "title": "儿童肠炎队列机制体内验证三层",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "macro-micro-mechanism",
+      "topology": [
+        "sequence",
+        "association",
+        "parallel"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.17,
+          0.28,
+          0.8,
+          0.42
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "上层临床单细胞GWAS，中层肠上皮与免疫代谢机制，下层小鼠和儿童验证",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "中心细胞机制与上下证据来源呼应",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "九名儿童及药物效果不可迁移"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "上层临床单细胞GWAS，中层肠上皮与免疫代谢机制，下层小鼠和儿童验证",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"urn:scientific-figure:composition-plan:1",
+  "title":"CompositionPlan v1",
+  "type":"object", "additionalProperties":false,
+  "required":["schema_version","figure_id","route","canvas","grammar","regions","edges","style_id","status"],
+  "properties":{
+    "schema_version":{"const":"1.0"},"figure_id":{"type":"string","minLength":1},
+    "route":{"enum":["text_structured","asset_composite","image_first","strict_scientific"]},
+    "mode":{"enum":["text","mixed"]},
+    "diagram_type":{"enum":["architecture","roadmap"]},
+    "canvas":{"type":"object","required":["width","height"],"additionalProperties":false,"properties":{"width":{"type":"integer","minimum":400,"maximum":10000},"height":{"type":"integer","minimum":400,"maximum":10000}}},
+    "grammar":{"type":"object","additionalProperties":false,"required":["primary","modifiers","asset_treatments"],"properties":{
+      "primary":{"type":"string","minLength":1},"modifiers":{"type":"array","uniqueItems":true,"items":{"type":"string"}},"asset_treatments":{"type":"array","uniqueItems":true,"items":{"type":"string"}}
+    }},
+    "style_id":{"type":"string","minLength":1},
+    "regions":{"type":"array","minItems":1,"items":{"type":"object","additionalProperties":false,"required":["id","role","bounds","label_instance_ids","visual_priority","text_safe"],"properties":{
+      "id":{"type":"string","minLength":1},"role":{"enum":["title","hero","research_task","methods","validation","timeline","outcome","caption","support"]},
+      "bounds":{"type":"array","minItems":4,"maxItems":4,"items":{"type":"number","minimum":0,"maximum":1}},
+      "label_instance_ids":{"type":"array","uniqueItems":true,"items":{"type":"string"}},
+      "asset_ids":{"type":"array","uniqueItems":true,"items":{"type":"string"}},
+      "visual_priority":{"type":"integer","minimum":1,"maximum":10},
+      "text_safe":{"type":"object","additionalProperties":false,"required":["min_font_px","max_lines","padding_px"],"properties":{
+        "min_font_px":{"type":"number","minimum":5},"max_lines":{"type":"integer","minimum":1},"padding_px":{"type":"number","minimum":0}
+      }}
+    }}},
+    "edges":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["relation_id","source_region_id","target_region_id","line_style"],"properties":{
+      "relation_id":{"type":"string"},"source_region_id":{"type":"string"},"target_region_id":{"type":"string"},"line_style":{"enum":["solid","dashed","dotted","tbar"]}
+    }}},
+    "status":{"enum":["draft","validated","rejected","review_required"]}
+  }
+}

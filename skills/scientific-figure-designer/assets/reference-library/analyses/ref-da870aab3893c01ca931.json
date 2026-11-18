@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-da870aab3893c01ca931",
+  "image_sha256": "da870aab3893c01ca931f6ebd1724fc8e7f7a4d4c7614f304189cfcd06f8eaab",
+  "title": "公共卫生语料与传播效果路线",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "social",
+    "layout": "top-overview-multi-lane",
+    "topology": [
+      "sequence",
+      "merge"
+    ],
+    "media": "illustrated",
+    "density": "medium",
+    "temporal_axis": "stages",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.03,
+        0.22,
+        0.95,
+        0.7
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "采集、框架分析、危机编码、受众评估、策略五模块，下侧结构方程汇合",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "文本方法图标与建模支路结合",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "下方SEM示例小字不适合直接复用"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "采集、框架分析、危机编码、受众评估、策略五模块，下侧结构方程汇合",
+  "variant_group": null,
+  "spatial": {
+    "columns": null,
+    "stages": null,
+    "direction": "left_to_right",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+  "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "unknown",
+    "method": "individual_original_image_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "reference-visual-v2",
+    "observed_on": "2026-11-17"
+  },
+  "relations": []
+}

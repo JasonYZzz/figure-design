@@ -1,0 +1,94 @@
+{
+  "at": "2026-11-17T06:59:17.717758+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-3368a75b55e613440774",
+    "image_sha256": "3368a75b55e613440774cd534ac4df9c84f830e9919ea26d31f9e07bfba9d4e2",
+    "title": "农业多源输入与三类足迹",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "earth",
+      "layout": "matrix-plus-flow",
+      "topology": [
+        "sequence",
+        "merge",
+        "parallel"
+      ],
+      "media": "text",
+      "density": "medium",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.04,
+          0.45,
+          0.9,
+          0.43
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "顶部五类数据，主体经济水能碳三色区域，右列椭圆产出，底部综合目标",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "计算过程与输出指标分列对应",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "模型符号和箭头不应替代变量定义"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "顶部五类数据，主体经济水能碳三色区域，右列椭圆产出，底部综合目标",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "unknown"
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

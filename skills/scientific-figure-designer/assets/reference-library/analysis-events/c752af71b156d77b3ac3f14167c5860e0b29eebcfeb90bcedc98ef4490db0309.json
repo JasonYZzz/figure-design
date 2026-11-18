@@ -1,0 +1,95 @@
+{
+  "at": "2026-11-17T07:05:06.336211+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": "2fa7e70b58dbcdc076d6cff35eb5088678e0f61ba0587444511a8e386b0cc9bb",
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-3fb21ae8c03226e7db31",
+    "image_sha256": "3fb21ae8c03226e7db3184a8899cfe335aeaf9ee3502b2bc40f9b12a1272f313",
+    "title": "磁热材料多尺度圆环概念",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "materials",
+      "layout": "hub-spoke",
+      "topology": [
+        "association",
+        "feedback"
+      ],
+      "media": "text",
+      "density": "high",
+      "temporal_axis": "unknown",
+      "purpose": "framework"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.07,
+          0.13,
+          0.88,
+          0.56
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "中心融合创新被四段环包围，外圈驱动预测调控等六节点，底部平台",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "核心概念、挑战与支撑平台分层",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "术语和环箭头含义不完全明确"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "中心融合创新被四段环包围，外圈驱动预测调控等六节点，底部平台",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "radial",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+    "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "unknown",
+      "method": "individual_original_image_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "reference-visual-v2",
+      "observed_on": "2026-11-17"
+    },
+    "relations": []
+  }
+}

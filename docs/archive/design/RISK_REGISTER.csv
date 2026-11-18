@@ -1,0 +1,15 @@
+﻿Id,Risk,Severity,Mitigation,EvidenceRequired
+R01,161 图不存在或不完整,P0,盘点阻断，报告实际文件数,原图清单与每张 sha
+R02,参照图片的像素素材无授权,P0,"rights=unknown, 只做抽象结构分析",获准使用的许可证明
+R03,参考图内容被模型当成新研究事实,P0,Reference != source evidence 强隔离,无来源关键主张拒绝
+R04,Planner 退化为卡片模板,P0,P/M/A 组合规则与相同内容双布局盲评,专家质量改善
+R05,文字正确但字形 tofu / 断行溢出,P0,真实浏览器测字与终图 QA,全部正式标签可读
+R06,关键箭头端点不对,P0,仅从 Relation ID 绘制与审核,无已知关键边错误
+R07,生成式科学插画暗示假结果,P0,scientific validation + no invented data,不出现伪造证据
+R08,图标 Sheet 切分产生背景残影,P1,alpha/mask 边缘质检,资产审批状态正确
+R09,图像风格不统一,P1,style_family_id + 统一视觉 QA,风格盲评不降级
+R10,模型异常长尾/重复调用成本,P0,"operationId,预算占位,恢复而不是重发",回执核算
+R11,修改新代码破坏旧 v4,P0,feature flag，回归和旧版本 schema,历史任务可读可导出
+R12,VLM/OCR 自动结果被当成审核真值,P0,候选状态与人工审核区分,自动结果不得标人工通过
+R13,文档含提示注入或不安全外链,P0,来源隔离、标签转义、资源路径隔离,安全负例通过
+R14,专业科研内容缺乏来源/状态混乱,P0,证据核验、planned/observed 分离,关键错误阻断

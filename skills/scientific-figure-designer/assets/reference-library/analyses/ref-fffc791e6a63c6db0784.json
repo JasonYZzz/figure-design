@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-fffc791e6a63c6db0784",
+  "image_sha256": "fffc791e6a63c6db07849da72338d5ff31e891e253b7a58f7d85c541fac90501",
+  "title": "六阶段问题分析与方法侧标",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "general",
+    "layout": "annual-stage-timeline",
+    "topology": [
+      "sequence",
+      "branch"
+    ],
+    "media": "text",
+    "density": "medium",
+    "temporal_axis": "stages",
+    "purpose": "framework"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.18,
+        0.5,
+        0.66,
+        0.15
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "左侧六阶段轴，右侧虚线容器内分支，绿色强调文献及案例方法",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "阶段内部研究内容和方法分色",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "末两阶段顺序仅为原图模板"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "左侧六阶段轴，右侧虚线容器内分支，绿色强调文献及案例方法",
+  "variant_group": null,
+  "spatial": {
+    "columns": null,
+    "stages": null,
+    "direction": "top_to_bottom",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "unknown — 未逐项测量颜色、字体及连线样式",
+  "uncertainty": "模型独立原图观察；局部坐标为近似定位；未完成OCR、精确文字占比或逐条连线核验。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "unknown",
+    "method": "individual_original_image_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "reference-visual-v2",
+    "observed_on": "2026-11-17"
+  },
+  "relations": []
+}
