@@ -11,7 +11,7 @@
   "keywords": ["deepseek-harness", "dsh-plugin", "scientific-figures", "diagrams"],
   "engines": {
     "node": "^22.19.0 || >=24.0.0",
-    "dsh": "^0.2.1-rc.3 || ^0.2.2-rc.3"
+    "dsh": "^0.2.1-rc.3"
   },
   "exports": {
     ".": "./index.js",

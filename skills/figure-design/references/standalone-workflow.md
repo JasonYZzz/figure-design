@@ -2,17 +2,17 @@
 
 ## 安装
 
-源码位于 `skills/figure-design/`。在仓库根目录运行 `make setup`、`make doctor`、`make package`。解压发行 ZIP 后，用 Python（3.10+，验证版本为 3.12）安装到用户级目录：
+源码位于 `skills/figure-design/`。在仓库根目录运行 `make setup`、`make doctor`、`make package`。解压发行 ZIP 后，用 Python（3.11+，验证版本为 3.12）安装到用户级目录：
 
 ```bash
 python3 /实际解压路径/figure-design/scripts/install.py --to ~/.agents/skills
 ```
 
-安装器验证包内全部 hash，并在目标已有同名 Skill 时停止。旧名 `scientific-figure-designer` 的用户级安装可单独备份。使用新名称时，安装 `figure-design` 后在会话中调用它，并用 `doctor` 核对名称和版本。私用包包含当前 111 张本地参考图，原图许可待核实。
+安装器验证包内全部 hash，并在目标已有同名 Skill 时停止。更新时先把现有 Skill 目录移到技能搜索目录之外备份，再使用同一个安装器。重新打开会话后调用 `figure-design`，并用 `doctor` 核对名称和版本。私用包包含当前 111 张本地参考图，原图许可待核实。
 
 Codex 使用 `$figure-design`，DSH 使用 `/figure-design`。需要项目级部署时，也可把独立安装包安装到目标项目的 `.agents/skills/`。
 
-通过 `.tgz` 安装 DSH 插件时使用 `/dsh-figure-design`。以会话提供的资源目录作为 `FIGURE_SKILL`，接着配置下方的 Python 环境。
+通过 `.tgz` 安装 DSH 插件时使用 `/dsh-figure-design`。CLI 的 `web` Profile 使用 npm 安装的 DSH 命令。桌面端的 `desktop` Profile 由桌面应用管理，先正常退出应用，再用其自带 CLI 安装并重新打开应用。版本条件见 [插件安装说明](https://github.com/JasonYZzz/figure-design/tree/main/plugins/dsh-figure-design#dsh-版本与运行环境)。以会话提供的资源目录作为 `FIGURE_SKILL`，接着配置下方的 Python 环境。
 
 为工具建立隔离环境，路径由当前机器选择（下方变量中的路径必须换成实际值）：
 

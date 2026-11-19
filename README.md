@@ -27,15 +27,7 @@ Skill 与 CLI 默认采用纯文字。用户可说「带插图」或指定 `mode
 
 ## DeepSeek Harness 插件
 
-在仓库根目录执行 `make setup` 和 `make package-dsh`，生成 `dist/dsh-figure-design-1.11.0.tgz`，再安装到实际使用的 DSH CLI Profile。
-
-```bash
-export FIGURE_PY="$PWD/.venv/bin/python"
-dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.11.0.tgz"
-dsh web
-```
-
-在对话中使用 `/dsh-figure-design`。兼容版本、预构建包安装与依赖配置见 [DSH 插件说明](plugins/dsh-figure-design/README.md)。
+在仓库根目录执行 `make setup` 和 `make package-dsh`，生成 `dist/dsh-figure-design-1.11.0.tgz`。安装后在 DSH 对话中使用 `/dsh-figure-design`。CLI 和桌面端各有安装入口，版本条件、安装命令和同版本更新方式见 [DSH 插件说明](plugins/dsh-figure-design/README.md)。
 
 ## 从文档到成图
 
