@@ -120,11 +120,11 @@ def pack(out, references=None):
     out=Path(out)
     if out.exists():raise ValueError('package already exists; choose a new version/path')
     if out.resolve().is_relative_to(ROOT):raise ValueError('package output must be outside the skill')
-    knowledge=ROOT/'assets/reference-library/knowledge'
-    active=read(knowledge/'current.json')['generation'] if (knowledge/'current.json').exists() else None
+    from figure_knowledge import WIKI_DIR, lint
     library=ROOT/'assets/reference-library'
-    if active:
-        from figure_knowledge import lint
+    wiki=library/WIKI_DIR
+    active=read(wiki/'current.json')['generation'] if (wiki/'current.json').exists() else None
+    if active or (library/'knowledge/current.json').is_file():
         if lint(library,library/'catalog.sqlite')['status']!='ok':
             raise ValueError('reference knowledge or original images are invalid')
     allowed={'scripts','references','schemas','assets','tests','agents','third_party'}
@@ -134,10 +134,10 @@ def pack(out, references=None):
            and (not p.is_relative_to(diagram_design) or p.is_relative_to(diagram_skill)
                 or p in (diagram_design/'LICENSE', diagram_design/'THIRD_PARTY_LICENSES.md'))
            and not any(p.relative_to(ROOT).is_relative_to('assets/reference-library/'+d) for d in ('images','thumbnails','crops','review','private','feedback'))
-           and not (p.is_relative_to(library) and p.relative_to(library).parts[0] not in {'catalog.sqlite','library.json','taxonomy.yaml','patterns.json','analyses','analysis-events','knowledge'})
-           and not (p.is_relative_to(library) and p.suffix.lower()=='.html' and p!=knowledge/'generations'/str(active)/'index.html')
+           and not (p.is_relative_to(library) and p.relative_to(library).parts[0] not in {'catalog.sqlite','library.json','taxonomy.yaml','patterns.json','analyses','analysis-events',WIKI_DIR})
+           and not (p.is_relative_to(library) and p.suffix.lower()=='.html' and p not in {wiki/'index.html',wiki/'generations'/str(active)/'index.html'})
            and not any(part.startswith('.working-') for part in p.parts)
-           and not (p.is_relative_to(knowledge/'generations') and active and p.relative_to(knowledge/'generations').parts[0]!=active)
+           and not (p.is_relative_to(wiki/'generations') and p.relative_to(wiki/'generations').parts[0]!=active)
            and not (p.suffix.lower() in ('.png','.jpg','.jpeg','.webp','.svg','.pdf') and p.relative_to(ROOT).is_relative_to('assets/reference-library'))
            and (p.relative_to(ROOT).parts[0] in allowed
                 or p.relative_to(ROOT).as_posix() in ('SKILL.md','LICENSE','requirements.txt','requirements.lock','README.md'))]
@@ -241,7 +241,7 @@ def main():
     c=sub.add_parser('refs-review');c.add_argument('--catalog',default=str(ROOT/'assets/reference-library/catalog.sqlite'));c.add_argument('--images',default=str(ROOT/'assets/reference-library/images'));c.add_argument('--out',required=True);c.add_argument('--count',type=int,default=30)
     c=sub.add_parser('content-check');c.add_argument('--content',required=True);c.add_argument('--sources',nargs='+',required=True)
     c=sub.add_parser('research-brief');c.add_argument('--reference-query');c.add_argument('--catalog',default=str(ROOT/'assets/reference-library/catalog.sqlite'));c.add_argument('--content',required=True);c.add_argument('--sources',nargs='+',required=True);c.add_argument('--out',required=True)
-    c=sub.add_parser('plan');c.add_argument('--references');c.add_argument('--out',required=True);c.add_argument('--layout');c.add_argument('--style',default='biomedicine-academic');c.add_argument('--variant',default='balanced');c.add_argument('--route',choices=('text_structured', *MIXED_ROUTES))
+    c=sub.add_parser('plan');c.add_argument('--references');c.add_argument('--brief');c.add_argument('--out',required=True);c.add_argument('--layout');c.add_argument('--style',default='biomedicine-academic');c.add_argument('--variant',default='balanced');c.add_argument('--route',choices=('text_structured', *MIXED_ROUTES))
     inputs = c.add_mutually_exclusive_group(required=True)
     inputs.add_argument('--source', help='Original document to hand directly to the bundled Diagram Design Skill in text mode')
     inputs.add_argument('--content', help='FigureContent JSON for mixed planning or an existing text handoff')
@@ -327,6 +327,8 @@ def main():
                 raise ValueError('mixed mode requires --content')
             if a.references and not a.content:
                 raise ValueError('--references requires --content; pass user references directly to Diagram Design with --source')
+            if a.brief and (mode != 'mixed' or not a.references):
+                raise ValueError('--brief requires mixed mode and --references')
             content=read(a.content) if a.content else None
             suggestions=read(a.references) if a.references else None
             if suggestions and suggestions.get('source_content_hash')!=fingerprint(content):raise ValueError('reference suggestions bound to another content version')
@@ -348,12 +350,14 @@ def main():
                     result['references'] = str(Path(a.references).resolve())
                 write(out/'diagram-design.json',result)
             else:
-                from figure_plan import candidates, make_plan
+                from figure_plan import candidates, make_plan, reference_choices
                 route = a.route or 'asset_composite'
                 if route not in MIXED_ROUTES or a.diagram_type:
                     raise ValueError('mixed mode uses an illustrated route with its own layout')
                 options = {'variant': a.variant, 'route': route}
-                plans=[{'plan':make_plan(content,a.layout,a.style,**options),'content_hash':fingerprint(content)}] if a.layout else candidates(content,a.style,suggestions,**options)
+                reviewed = reference_choices(content,suggestions,read(a.brief)) if a.brief else {}
+                plans=[{'plan':make_plan(content,a.layout,a.style,**options),'content_hash':fingerprint(content),
+                        'reference_review':reviewed}] if a.layout else candidates(content,a.style,suggestions,reviewed=reviewed,**options)
                 out.mkdir(parents=True)
                 for i,item in enumerate(plans):write(out/f'candidate-{i+1}.json',item['plan'])
                 write(out/'selection.json',plans);result={'candidates':len(plans),'out':str(out),'route':route,

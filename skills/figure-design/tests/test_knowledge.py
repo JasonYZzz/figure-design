@@ -11,7 +11,7 @@ from zipfile import ZipFile
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scripts'))
 from figure_common import read,write,fingerprint,file_hash
-from figure_knowledge import LIBRARY,build,current,lint,records,validate_analysis,taxonomy,ingest_analyses
+from figure_knowledge import LIBRARY,WIKI_DIR,build,current,lint,records,validate_analysis,taxonomy,ingest_analyses
 from figure_catalog import search,index
 from figure_retrieval import tokens,resolve_images,save_feedback
 
@@ -24,15 +24,16 @@ class KnowledgeContracts(unittest.TestCase):
             shutil.copyfile(LIBRARY/name,self.lib/name)
         shutil.copytree(LIBRARY/'analyses',self.lib/'analyses')
         self.catalog=self.lib/'catalog.sqlite'
+        self.active_count=read(LIBRARY/'library.json')['count']
         self.result=build(self.lib,self.catalog)
     def tearDown(self):self.temp.cleanup()
 
     def test_chinese_constraints_and_enumeration(self):
         self.assertIn('并行',tokens('三条并行任务汇合'))
-        self.assertEqual(len(search(self.catalog,limit=10000)),161)
+        self.assertEqual(len(search(self.catalog,limit=10000)),self.active_count)
         rows=search(self.catalog,'生物医药图文混合路线',require={'domain':'biomedicine','media':'illustrated'})
         self.assertTrue(rows)
-        self.assertTrue(all(r['selection_score']>=0 for r in search(self.catalog,'并行',limit=161)))
+        self.assertTrue(all(r['selection_score']>=0 for r in search(self.catalog,'并行',limit=self.active_count)))
         self.assertTrue(all(r['analysis']['facets']['media']=='illustrated' for r in rows))
         self.assertEqual(search(self.catalog,'四年技术路线图',require={'duration_years':'4'})[0]['path'],'ref-008.png')
         self.assertEqual(search(self.catalog,'卡通企鹅火星餐厅'),[])
@@ -47,14 +48,29 @@ class KnowledgeContracts(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'modified'):search(self.catalog,'图文')
 
     def test_build_failure_keeps_previous_generation_and_recovers(self):
-        previous=read(self.lib/'knowledge/current.json')
+        wiki=self.lib/WIKI_DIR
+        previous=read(wiki/'current.json')
         p=next((self.lib/'analyses').glob('*.json'));a=read(p);a['title']+='新版';write(p,a)
         with patch('figure_knowledge._text',side_effect=OSError('disk full')):
             with self.assertRaises(OSError):build(self.lib,self.catalog)
-        self.assertEqual(read(self.lib/'knowledge/current.json'),previous)
-        self.assertFalse(list((self.lib/'knowledge/generations').glob('.working-*')))
+        self.assertEqual(read(wiki/'current.json'),previous)
+        self.assertFalse(list((wiki/'generations').glob('.working-*')))
         new=build(self.lib,self.catalog);self.assertEqual(build(self.lib,self.catalog)['generation'],new['generation'])
-        self.assertEqual(lint(self.lib,self.catalog)['images']['missing'],161)
+        self.assertEqual(lint(self.lib,self.catalog)['images']['missing'],self.active_count)
+
+    def test_wiki_entry_and_local_source_links(self):
+        wiki=self.lib/WIKI_DIR
+        self.assertEqual(Path(self.result['index']),(wiki/'index.html').resolve())
+        generation=current(self.lib,self.catalog,verify=True)
+        self.assertIn(f'generations/{generation.name}/index.html',(wiki/'index.html').read_text())
+        row=search(self.catalog,'四年技术路线图',require={'duration_years':'4'})[0]
+        card=Path(row['knowledge_page'])
+        self.assertEqual(card.parent.parent,generation.resolve())
+        self.assertIn('href="../../../../images/ref-008.png"',card.read_text())
+        (wiki/'index.html').write_text('stale')
+        with self.assertRaisesRegex(ValueError,'wiki entry is stale'):lint(self.lib,self.catalog)
+        build(self.lib,self.catalog)
+        self.assertEqual(lint(self.lib,self.catalog)['status'],'ok')
 
     def test_schema_sources_and_human_protection(self):
         rows=records(self.catalog);a=read(next((self.lib/'analyses').glob('*.json')));r=rows[a['reference_id']]
@@ -92,12 +108,20 @@ class KnowledgeContracts(unittest.TestCase):
     def test_suggestions_do_not_change_science(self):
         from cases import make_case
         from figure_retrieval import suggest
-        from figure_plan import candidates
+        from figure_plan import candidates,reference_choices
         c,s=make_case(self.root/'case');original=copy.deepcopy(c)
         suggestions=suggest(self.catalog,c,'图文混合生物医药')
         plans=candidates(c,references=suggestions)
         self.assertLessEqual(len(plans),2);self.assertEqual(c,original)
-        self.assertTrue(plans[0]['reference_evidence'])
+        self.assertTrue(all(not p['reference_review'] for p in plans))
+        ref=suggestions['candidates'][0]
+        choice={'id':ref['id'],'region_id':'focus','basis':'knowledge','use':'Separate the shared validation panel'}
+        brief={'source_content_hash':fingerprint(c),'design_decisions':{'reference_choices_with_reasons':[choice]}}
+        reviewed=reference_choices(c,suggestions,brief)
+        plans=candidates(c,references=suggestions,reviewed=reviewed)
+        self.assertTrue(all(p['reference_review'][ref['id']]['use']==choice['use'] for p in plans))
+        choice['region_id']='nonexistent'
+        with self.assertRaisesRegex(ValueError,'valid region'):reference_choices(c,suggestions,brief)
         c['labels'][0]['text']+='变更'
         with self.assertRaisesRegex(ValueError,'stale'):candidates(c,references=suggestions)
         with self.assertRaises(ValueError):save_feedback({},self.lib/'feedback.json',self.lib)

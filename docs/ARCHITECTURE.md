@@ -53,13 +53,13 @@ PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。仓库保�
 
 ```text
 assets/reference-library/
-├── catalog.sqlite    161 条候选记录、图片相对路径/hash、标注历史
+├── catalog.sqlite    110 条候选记录、图片相对路径/hash、标注历史
 ├── library.json      数量、来源、分类方法、审核和许可状态
-├── analyses/         161 份逐图分析，版本化 JSON
+├── analyses/         110 份逐图分析，版本化 JSON
 ├── analysis-events/  不可变修订事件
 ├── taxonomy.yaml     中英别名和多维分类
 ├── patterns.json     带区域来源的设计归纳
-├── knowledge/        current 指针和可重建的知识代
+├── images-wiki/      离线入口、current 指针和可重建的知识代
 └── images/           原图唯一存放位置；Git 忽略
 ```
 

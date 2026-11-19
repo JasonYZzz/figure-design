@@ -1,0 +1,25 @@
+{
+  "name": "dsh-figure-design",
+  "description": "Editable research diagrams and technical roadmaps for DeepSeek Harness.",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JasonYZzz/figure-design.git",
+    "directory": "plugins/dsh-figure-design"
+  },
+  "keywords": ["deepseek-harness", "dsh-plugin", "scientific-figures", "diagrams"],
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0",
+    "dsh": "^0.2.1-rc.3 || ^0.2.2-rc.3"
+  },
+  "exports": {
+    ".": "./index.js",
+    "./package.json": "./package.json",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": ["index.js", "cordis.patch.yml", "locale", "icon.svg", "skill.json", "skills", "THIRD_PARTY_NOTICES.md"],
+  "dsh": { "bundle": { "patch": "./cordis.patch.yml" } }
+}

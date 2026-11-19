@@ -117,8 +117,9 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
     labels = {l['id']: l['text'] for l in content['labels']}
     state = STATES[content['study_status']]
     relation_types = sorted({r['type'] for r in relations.values()})
-    legend = '  ·  '.join(RELATIONS[t][0] for t in relation_types)
-    used_text = ''.join(labels.values()) + state + legend + '0123456789计划/假说以虚线表示；关系语义以图例及结构文件为准'
+    legend = '   ·   '.join(RELATIONS[t][0] for t in relation_types)
+    footer = state + (f'   ｜   关系：{legend}' if len(relation_types) > 1 else '')
+    used_text = ''.join(labels.values()) + footer + legend
     if any(token in used_text for token in ('\\frac', '\\begin', '\\sqrt', '$$')):
         raise ValueError('unsupported_math: provide a verified rendered math asset or approved Unicode runs')
     encoded_font = font_data(used_text)
@@ -137,12 +138,14 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
         aids = region.get('asset_ids', [])
         if len(aids) > 1:
             raise ValueError('one asset per region; split the region or provide a reviewed sheet')
-        image_h = h * .44 if aids and plan['route']!='image_first' else 0
+        image_h = h * region.get('asset_fraction', .44) if aids and route_name != 'image_first' else 0
         if aids:
             asset = assets[aids[0]]
             owners = {instances[iid]['owner_id'] for iid in region['label_instance_ids']}
             if not owners.intersection(asset['source_content_ids']):
                 raise ValueError('asset is bound to an unrelated region owner')
+            if route_name != 'image_first' and (w <= 2*pad or image_h > h-2*pad):
+                raise ValueError(f'asset_capacity: enlarge region {rid} or reduce its padding/asset fraction')
             objects.append({'id': 'image-'+rid, 'type': 'image', 'asset_id': aids[0],
                             'bounds': [0,0,width,height] if plan['route']=='image_first' else [x+pad,y+pad,w-2*pad,image_h], 'z_index': 0 if plan['route']=='image_first' else 2,
                             'source_content_ids': asset['source_content_ids']})
@@ -213,13 +216,6 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
             code_hash = implementation_hash()
             render_hash = fingerprint({'scene':scene,'font':file_hash(FONT),'assets':{aid:assets[aid]['file_sha256'] for aid in used_assets},
                                        'style':style,'code':code_hash,'chromium':browser.version})
-            if preflight:
-                return {'status':'pass','render_hash':render_hash,'labels':len(shaped),'relations':len(plan['edges']),
-                        'composition':composition,'theme':style}
-            out = Path(out)
-            if out.exists() and any(out.iterdir()):
-                raise ValueError('render output must be empty; use a new version directory')
-            out.mkdir(parents=True,exist_ok=True)
             svg = ET.Element('svg',{'xmlns':'http://www.w3.org/2000/svg','width':str(width),'height':str(height),
                                      'viewBox':f'0 0 {width} {height}','data-render-hash':render_hash,'data-status':'review_required',
                                      'data-mode':'mixed','role':'img','aria-labelledby':'figure-title'})
@@ -265,15 +261,12 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
                         '{http://www.w3.org/XML/1998/namespace}space':'preserve'})
                     for idx,line in enumerate(obj['lines']):
                         ET.SubElement(element,'tspan',{'x':str(x),'y':str(y+obj['font_size']+idx*obj['line_height'])}).text=line
-            ET.SubElement(svg,'text',{'x':str(width*.05),'y':str(height*.18),'font-size':'18','fill':style['accent']}).text=state
-            ET.SubElement(svg,'text',{'x':str(width*.05),'y':str(height*.985),'font-size':'16','fill':style['ink']}).text=legend
+            ET.SubElement(svg,'text',{'x':str(width*.05),'y':str(height*.985),'font-size':'18','fill':style['muted']}).text=footer
             xml=ET.tostring(svg,encoding='unicode')
             from vendor.ppt_master_svg_resources import svg_image_payload_error
             resource_error=svg_image_payload_error(xml.encode('utf-8'))
             if resource_error:raise ValueError('SVG resource closure: '+resource_error)
-            (out/'preview.svg').write_text(xml,encoding='utf-8')
             document = figure_html(xml, content['purpose'])
-            (out/'preview.html').write_text(document,encoding='utf-8')
             page.set_content(document)
             page.evaluate('document.fonts.ready')
             actual=page.evaluate('''() => Array.from(document.querySelectorAll('[data-label-instance-id]')).map(e=>({id:e.dataset.labelInstanceId,text:e.textContent,bbox:(()=>{let b=e.getBBox();return [b.x,b.y,b.width,b.height]})()}))''')
@@ -290,6 +283,17 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
             for i,a in enumerate(actual):
                 for b in actual[i+1:]:
                     if intersects(a['bbox'],b['bbox']):errors.append('label_overlap:'+a['id']+':'+b['id'])
+            if preflight:
+                if errors:
+                    raise ValueError('\n'.join(errors))
+                return {'status':'pass','render_hash':render_hash,'labels':len(actual),'relations':len(plan['edges']),
+                        'composition':composition,'theme':style}
+            out = Path(out)
+            if out.exists() and any(out.iterdir()):
+                raise ValueError('render output must be empty; use a new version directory')
+            out.mkdir(parents=True,exist_ok=True)
+            (out/'preview.svg').write_text(xml,encoding='utf-8')
+            (out/'preview.html').write_text(document,encoding='utf-8')
             page.screenshot(path=str(out/'preview.png'),full_page=True)
             report={'schema_version':'1.1','status':'blocked' if errors else 'review_required','render_hash':render_hash,
                     'hard_gates':{'evidence_binding':True,'label_instances':len(actual),'exact_text':not any('manifest' in e for e in errors),

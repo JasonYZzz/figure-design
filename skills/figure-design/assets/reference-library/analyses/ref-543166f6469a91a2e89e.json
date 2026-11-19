@@ -84,11 +84,5 @@
     "prompt_version": "reference-visual-v2",
     "observed_on": "2026-11-17"
   },
-  "relations": [
-    {
-      "reference_id": "ref-3cad07a8fff47639def3",
-      "type": "variant_of",
-      "reason": "逐图观察到相同主分区和主要分支；标签细节或配色不同。"
-    }
-  ]
+  "relations": []
 }

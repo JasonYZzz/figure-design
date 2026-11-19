@@ -15,7 +15,7 @@
 
 `ingest → FigureContent → content-check → research-brief → refs-search → plan → asset-register/绑定 → preflight → render → qa → export`
 
-- 简报初始状态为 `semantic_design_pending`，需要 Codex 填写科研叙事和图文分工。构图候选为 `draft`，可预检。被标记为 `rejected` 的计划会被拒绝渲染。
+- 简报初始状态为 `semantic_design_pending`，需要 宿主 Agent 填写科研叙事和图文分工。构图候选为 `draft`，可预检。被标记为 `rejected` 的计划会被拒绝渲染。
 - 渲染绑定内容、构图、字体、资产字节、Chromium 版本与实现 hash。同一输出目录已存在时，CLI 只在既有文件完整且输入匹配时复用；变化后用新目录生成。
 - 渲染报告为 `review_required`，机器门禁发现问题时为 `blocked`。质量报告列出实际素材放置、正式标签、关系图例和待审项。`qa` 对渲染目录校验文件与 render hash。
 - 草稿导出标记 `review_required`。终稿导出需要匹配 render hash 的人审记录，导出包标记 `accepted`。改字重新排版并生成新的 render hash。

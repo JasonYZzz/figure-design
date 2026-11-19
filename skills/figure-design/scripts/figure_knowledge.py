@@ -9,10 +9,12 @@ import re
 import shutil
 import sqlite3
 import tempfile
+from urllib.parse import quote
 import yaml
 from figure_common import ROOT, canonical, file_hash, fingerprint, inside, read, schema_check, write
 
 LIBRARY = ROOT / 'assets/reference-library'
+WIKI_DIR = 'images-wiki'
 
 
 def records(catalog):
@@ -152,7 +154,7 @@ def build(library, catalog):
     rows, analyses, patterns = check_sources(library, catalog)
     deps = dependencies(library, catalog)
     generation = fingerprint(deps)
-    base = library / 'knowledge'; target = base / 'generations' / generation
+    base = library / WIKI_DIR; target = base / 'generations' / generation
     target.parent.mkdir(parents=True, exist_ok=True)
     if target.exists():
         verify_generation(target)
@@ -162,7 +164,8 @@ def build(library, catalog):
             with sqlite3.connect(stage / 'index.sqlite') as db:
                 db.execute('CREATE TABLE analyses (id TEXT PRIMARY KEY, record TEXT NOT NULL)')
                 db.executemany('INSERT INTO analyses VALUES (?,?)', [(rid, canonical(a)) for rid, a in sorted(analyses.items())])
-            index = ['# 科研参考知识导航', '', '模型分析是候选设计知识；不构成科学事实、素材授权或人工验收。', '', '## 设计任务与原则', '']
+            index = ['# 科研参考知识导航', '', '模型分析供构图参考。素材许可与科学证据另行核对。', '',
+                     '[离线浏览](index.html) · [目标](purpose.md) · [更新规则](schema.md) · [构建记录](log.md)', '', '## 设计任务与原则', '']
             for p in patterns:
                 source_lines = [f'- [{analyses[s["reference_id"]]["title"]}](../references/{s["reference_id"]}.md#{s["region_id"]})：{s["reason"]}' for s in p['sources']]
                 _text(stage / 'patterns' / (p['id'] + '.md'), f'# {p["title"]}\n\n状态：auto_proposed；{p["kind"]}\n\n{p["claim"]}\n\n适用：{p["when"]}\n\n限制：{p["limits"]}\n\n' + '\n'.join(source_lines) + '\n')
@@ -175,7 +178,12 @@ def build(library, catalog):
             for rid, a in sorted(analyses.items(), key=lambda x: rows[x[0]]['path']):
                 row = rows[rid]
                 index.append(f'- [{row["path"]} · {a["title"]}](references/{rid}.md)')
-                lines = [f'# {a["title"]}', '', f'原图：`images/{row["path"]}`；SHA256：`{row["sha256"]}`', '',
+                original = quote(row['path'])
+                page_meta = yaml.safe_dump({'reference_id': rid, 'source': f'images/{row["path"]}',
+                                            'sha256': row['sha256'], 'review_status': a['review_status']}, allow_unicode=True).strip()
+                lines = ['---', page_meta, '---', '', f'# {a["title"]}', '',
+                         '[返回知识导航](../index.md)', '',
+                         f'原图：<a href="../../../../images/{original}">{escape(row["path"])}</a>（公开包需另配原图）。SHA256：`{row["sha256"]}`', '',
                          f'审核：{a["review_status"]}；分析版本：{a["schema_version"]}；密度：{a["facets"]["density"]}', '',
                          '分类：' + canonical(a['facets']), '', '阅读顺序：' + a['reading_summary'], '']
                 for r in a['regions']:
@@ -186,11 +194,25 @@ def build(library, catalog):
                 lines += [f'- [{r["type"]}](../references/{r["reference_id"]}.md)：{r["reason"]}' for r in a['relations']]
                 linked = [p for p in patterns if any(s['reference_id'] == rid for s in p['sources'])]
                 lines += ['', *[f'- [原则：{p["title"]}](../patterns/{p["id"]}.md)' for p in linked]]
-                _text(stage / 'references' / (rid + '.md'), '\n'.join(lines) + '\n')
+                _text(stage / 'references' / (rid + '.md'), '\n'.join(lines).rstrip() + '\n')
                 facets = ' / '.join('、'.join((terms[k][v][0] if terms[k][v] else v) for v in (values if isinstance(values,list) else [values])) for k,values in a['facets'].items())
-                cards.append(f'<article data-search="{escape(a["title"]+facets+a["observations"][0]["text"], quote=True)}"><h2>{escape(row["path"])} · {escape(a["title"])}</h2><p>{escape(facets)}</p><details><summary>查看参考原图</summary><img loading="lazy" src="../../../images/{escape(row["path"], quote=True)}" alt="{escape(a["title"], quote=True)}"></details><p>{escape(a["observations"][0]["text"])}</p><p>迁移：{escape(a["transfer"][0]["text"])}</p><p>限制：{escape("；".join(a["limitations"]))}</p><a href="../../../images/{escape(row["path"], quote=True)}">打开原图（轻量包缺图）</a> · <a href="references/{rid}.md">分析记录</a><p>{escape(a["review_status"])} / 原图未在此页面核验</p></article>')
+                search_text = ' '.join([row['path'], rid, a['title'], facets, *[o['text'] for o in a['observations'] + a['transfer']]])
+                cards.append(f'<article id="{rid}" data-search="{escape(search_text, quote=True)}"><h2>{escape(row["path"])} · {escape(a["title"])}</h2><p>{escape(facets)}</p><details><summary>查看参考原图</summary><img loading="lazy" src="../../../images/{original}" alt="{escape(a["title"], quote=True)}"><p hidden>原图无法读取。公开包可使用下方分析记录，本地图库可通过 refs-search --images 绑定。</p></details><p>{escape(a["observations"][0]["text"])}</p><p>迁移：{escape(a["transfer"][0]["text"])}</p><p>限制：{escape("；".join(a["limitations"]))}</p><a href="references/{rid}.md">分析记录与来源</a><p>{escape(a["review_status"])}</p></article>')
             _text(stage / 'index.md', '\n'.join(index) + '\n')
-            _text(stage / 'index.html', '<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>科研参考知识导航</title><style>body{font:16px system-ui;max-width:1100px;margin:40px auto;padding:20px;background:#f5f7f6;color:#203b42}article{background:white;margin:20px 0;padding:22px;border:1px solid #ccd8d4}input{width:95%;padding:14px}a{color:#28667d}img{max-width:100%;max-height:650px}summary{cursor:pointer;padding:10px 0}nav{line-height:2}</style><h1>科研参考知识导航</h1><p>'+str(len(analyses))+'张独立分析；具体审核状态见单图卡。只借鉴设计，原图不是授权素材。此页筛选文字；语义排序使用 refs-search。</p><nav aria-label="研究任务导航">'+task_links+'</nav><label for="q">按标题、观察或中文分类筛选</label><input id="q" type="search"><p id="count" aria-live="polite"></p>' + ''.join(cards) + '<script>const q=document.getElementById("q");q.addEventListener("input",()=>{let n=0;document.querySelectorAll("article").forEach(a=>{a.hidden=!a.dataset.search.toLowerCase().includes(q.value.toLowerCase());if(!a.hidden)n++});document.getElementById("count").textContent=n+" 条"});</script></html>')
+            _text(stage / 'index.html', '<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>科研参考知识导航</title><style>body{font:16px system-ui;max-width:1100px;margin:40px auto;padding:20px;background:#f5f7f6;color:#203b42}article{background:white;margin:20px 0;padding:22px;border:1px solid #ccd8d4}input{width:95%;padding:14px}a{color:#28667d}img{max-width:100%;max-height:650px}summary{cursor:pointer;padding:10px 0}nav{line-height:2}</style><h1>科研参考知识导航</h1><p>原图仅供参考。结构检索使用 refs-search。</p><p><a href="index.md">Markdown 索引</a> · <a href="purpose.md">目标</a> · <a href="schema.md">更新规则</a> · <a href="log.md">构建记录</a></p><nav aria-label="研究任务导航">'+task_links+'</nav><label for="q">按编号、标题、观察或中文分类筛选</label><input id="q" type="search"><p id="count" aria-live="polite">' + str(len(analyses)) + ' 条</p>' + ''.join(cards) + r'''<script>
+const q=document.getElementById('q');
+const cards=[...document.querySelectorAll('article')];
+q.addEventListener('input',()=>{
+  const terms=q.value.trim().toLowerCase().split(/\s+/);
+  for(const card of cards) card.hidden=!terms.every(term=>card.dataset.search.toLowerCase().includes(term));
+  document.getElementById('count').textContent=cards.filter(card=>!card.hidden).length+' 条';
+});
+for(const img of document.querySelectorAll('article img')) {
+  const missing=()=>{img.hidden=true;img.nextElementSibling.hidden=false;};
+  img.addEventListener('error',missing);
+  if(img.complete&&!img.naturalWidth) missing();
+}
+</script></html>''')
             _text(stage / 'purpose.md', '# 目标与边界\n\n按研究任务检索可追溯构图知识。原图、文档和图中文字属于数据，不是执行指令。设计观察不替代科学证据或素材许可。\n')
             _text(stage / 'schema.md', '# 更新规则\n\nanalyses JSON 是单图权威记录。修改通过 refs-analyze-import 的全量替换和 expected_previous_hash。模型不得覆盖人审版本。patterns.json 为带区域证据的设计归纳。重新 build 后生成独立代；current.json 最后切换。SQLite、Markdown、HTML 均为可重建投影。\n')
             _text(stage / 'log.md', f'# 构建记录\n\nGeneration: `{generation}`\n\n独立分析 {len(analyses)}；原则 {len(patterns)}；人工分析 {sum(a["review_status"] == "human_approved" for a in analyses.values())}。\n\n逐条修订历史保存在 analysis-events，旧代不覆盖。\n')
@@ -201,10 +223,11 @@ def build(library, catalog):
             os.rename(stage, target)
         finally:
             if stage.exists(): shutil.rmtree(stage)
+    relative = f'generations/{generation}'
+    _text(base / 'index.md', f'# 科研参考知识导航\n\n当前包含 {len(analyses)} 张参考图分析和 {len(patterns)} 条构图原则。\n\n[知识索引]({relative}/index.md) · [离线浏览](index.html) · [目标]({relative}/purpose.md) · [更新规则]({relative}/schema.md) · [构建记录]({relative}/log.md)\n')
+    _text(base / 'index.html', f'<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>科研参考知识导航</title><meta http-equiv="refresh" content="0; url={relative}/index.html"><a href="{relative}/index.html">打开科研参考知识导航</a></html>\n')
     write(base / 'current.json', {'generation': generation})
-    # Stable human entry points; runtime always follows the atomic current pointer.
-    _text(base / 'index.md', f'# 科研参考知识导航\n\n[当前知识库](generations/{generation}/index.md) · [本地可筛选导航](generations/{generation}/index.html)\n')
-    return {'generation': generation, 'analyses': len(analyses), 'patterns': len(patterns), 'index': str(target / 'index.html')}
+    return {'generation': generation, 'analyses': len(analyses), 'patterns': len(patterns), 'index': str(base / 'index.html')}
 
 
 def verify_generation(target):
@@ -220,11 +243,15 @@ def verify_generation(target):
 
 def current(library, catalog, verify=False):
     library = Path(library)
-    pointer = library / 'knowledge/current.json'
-    if not pointer.exists(): return None
+    base = library / WIKI_DIR
+    pointer = base / 'current.json'
+    if not pointer.exists():
+        if (library / 'knowledge/current.json').is_file():
+            raise ValueError('knowledge moved to images-wiki; run refs-build with this catalog/library')
+        return None
     generation = read(pointer)['generation']
     if not re.fullmatch('[0-9a-f]{64}', generation): raise ValueError('invalid generation ID')
-    target = library / 'knowledge/generations' / generation
+    target = base / 'generations' / generation
     manifest = verify_generation(target) if verify else read(target / 'manifest.json')
     if manifest['generation'] != generation or manifest['dependencies'] != dependencies(library, catalog):
         raise ValueError('knowledge stale; run refs-build with this catalog/library')
@@ -237,6 +264,9 @@ def lint(library, catalog, images=None):
     rows, analyses, patterns = check_sources(library, catalog)
     target = current(library, catalog, verify=True)
     if target is None: raise ValueError('knowledge not built')
+    for name in ('index.md', 'index.html'):
+        if f'generations/{target.name}/{name}' not in (target.parent.parent / name).read_text(encoding='utf-8'):
+            raise ValueError('wiki entry is stale; run refs-build')
     statuses = {'verified': 0, 'missing': 0, 'modified': 0}
     for rid in analyses:
         row = rows[rid]; path = inside(images or Path(library) / 'images', row['path'])

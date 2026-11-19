@@ -13,6 +13,7 @@
 3. 涉及资源/安装/打包时，构建 ZIP，解压到临时目录，通过包内 `scripts/install.py` 安装到新的 skills 父目录；从仓库外运行 doctor、检索、测试和演示。
 4. 版本定义在 Skill 的 `scripts/figure_common.py`。更新版本、入口说明和对应发布记录后重新打包。Skill 的 `LICENSE` 与仓库根目录许可证同步，安装包随附这份许可证和第三方声明。
 5. `make package` 构建公开安装包。需要私用迁移时使用 `make package-private`，将原图随包保存在本地。
+6. `make package-dsh` 使用 npm 构建 DSH `.tgz`，版本和资源取自公开 Skill。修改插件时，用临时 `DSH_HOME` 安装该包，检查 Profile 能加载 `/dsh-figure-design`，并从已安装的资源目录执行 `doctor`。 [DSH 插件说明](plugins/dsh-figure-design/README.md)
 
 参考索引中的 `path` 始终相对 `assets/reference-library/images/`。增加/替换原图后，先运行 refs-index 并审查候选标注，再打包；打包器拒绝图库与索引不一致。候选标签不自动升级为人审，未知许可不自动升级为授权素材。
 

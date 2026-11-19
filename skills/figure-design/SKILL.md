@@ -5,7 +5,7 @@ description: 根据论文、开题报告、基金申请或研究方案生成可�
 
 # Figure Design
 
-版本 `1.7.0`。纯文字架构图和技术路线图由宿主 Agent 执行本项目随包的 Diagram Design。图文混合由 Figure Design 负责证据绑定、参考检索、插图构图、排版与渲染。
+版本 `1.8.0`。纯文字架构图和技术路线图由宿主 Agent 执行本项目随包的 Diagram Design。图文混合由 Figure Design 负责证据绑定、参考检索、插图构图、排版与渲染。
 
 ## 先选择模式
 
@@ -17,7 +17,7 @@ description: 根据论文、开题报告、基金申请或研究方案生成可�
 
 ## 开始工作
 
-1. 确定本 Skill 的实际绝对路径；运行 `scripts/figure.py doctor`。按 [独立工作流程](references/standalone-workflow.md) 准备依赖。读取当前用户输入，不要寻找不存在的 TypeScript 宿主。
+1. 以宿主提供的 Skill 资源目录为基准解析相对路径。用用户指定的 Python 或环境变量 `FIGURE_PY` 指定的解释器运行 `scripts/figure.py doctor`，两者均未设置时用 `python3`。按 [独立工作流程](references/standalone-workflow.md) 准备依赖。
 2. 科研文档生成新图、参考图复刻/改版、已有产物改文字分别走下表。输出放在用户项目独立工作目录，禁止覆盖原件；所有路径以本次运行位置解析。
 3. 根据内容自行完成授权范围内的常规设计，不因“独立 Skill”再次询问已给出的权限。只对确实缺失的科研事实、无法推断的要求或真正需要的验收提问。
 
@@ -27,21 +27,21 @@ description: 根据论文、开题报告、基金申请或研究方案生成可�
 | 文档 → 图文混合图 | [独立工作流程](references/standalone-workflow.md)、[科研分析与构图](references/scientific-design.md)、[主题设计](references/visual-style.md) | ingest → content-check → plan --mode mixed → 绑定素材和主题 → preflight → render → qa → export |
 | 参考库查询/增补 | `references/reference-ingestion.md` | refs-search / refs-build / refs-lint / refs-analyze-import / refs-review |
 | 布局或视觉改进 | `references/composition-grammar.md` | 保留同一内容 hash，比较两个构图；可直接修改显式区域坐标 |
-| 获准素材/生图 | `references/asset-governance.md` | asset-search / image-request / Codex 生图工具 / asset-sheet / asset-register |
+| 获准素材/生图 | `references/asset-governance.md` | asset-search / image-request / 宿主生图工具 / asset-sheet / asset-register |
 | 严格数据图 | `references/standalone-workflow.md` | data-chart；只使用真实 CSV 数值和来源，不编造曲线 |
-| 原图重建 | `references/reconstruction.md` | Codex 观察图层与关系；建立新内容/构图契约，人工核对不确定项 |
+| 原图重建 | `references/reconstruction.md` | 宿主 Agent 观察图层与关系，建立新内容和构图契约，人工核对不确定项 |
 | 已有图改文字 | `references/standalone-workflow.md` | 纯文字编辑原 HTML 后再导出；图文混合用 patch-label，绑定 expected-render-hash |
 
-图文混合构图前生成 research-brief，由 Codex 填写科学问题、证据角色、主视觉与对照。两种模式的实现和参考说明均随包提供。
+图文混合构图前生成 research-brief，由宿主 Agent 填写科学问题、证据角色、主视觉与对照。两种模式的实现和参考说明均随包提供。
 
 参考检索与图库维护先读 [知识库工作流](references/reference-knowledge.md)。新增图片须逐张看原图；分类未知就记录未知。跨图原则至少两个独立结构来源，近似改版不能冒充两条独立证据。
 
 ## 文档生成图文路线图
 
 1. 先拿出图文构思。选一个读者应先看到的研究对象、关键方法或验证场景，在简报的 `visual_concept` 中写明 owner ID、出处、要画什么及说明什么。用短标签承载关键任务，并保留影响理解的条件、对照、单位和研究状态。
-2. 用 `plan --mode mixed` 生成候选，选定布局并写入 `theme`。优先使用获准素材，或根据文档在本地绘制原创无字 SVG 示意并注册。把资产绑定到相关区域后再预检。外部生图按素材流程处理。
+2. 先比较目标使用尺寸下的两种构图，把主视觉、关键方法与验证关系定下来。选用参考时，先记录具体区域和要迁移的结构，再用 `plan --mode mixed --references <检索结果> --brief <已填写简报>` 生成候选。选定布局并写入 `theme`，绑定获准素材或原创 SVG 后再预检。
 3. 显式选择图文模式时，素材不足就说明缺少的画面，待素材补齐后再交付该模式。
-4. 打开实际 PNG 核对每个主要画面是否解释了研究对象、方法或测量。查看质量报告的 `composition.asset_placements`，确认预期资产落在对应区域；发现只有文字框、装饰符号或图文遮挡时，先回到构图和素材步骤再交付。
+4. 在目标使用尺寸打开实际 PNG，对照参考的已选区域，核对主视觉是否清楚、图内连接是否表达具体方法或验证关系、关键标签是否可读。查看 `composition.asset_placements` 核对资产归属。图标仅在复述相邻文字时，回到构图或改画关系。
 
 ## 核心执行规则
 
@@ -50,13 +50,13 @@ description: 根据论文、开题报告、基金申请或研究方案生成可�
 以下规则用于图文混合：
 
 - `FigureContent` 保存科研事实和正式文字。每个科研对象和关系绑定精确原文，参考图提供构图线索。
-- PDF/DOCX/TXT/MD 由 `ingest` 本地提取。扫描件用 Codex 当前视觉/OCR 能力转录并复核，缺少可靠转录时停止对应内容。
+- PDF/DOCX/TXT/MD 由 `ingest` 本地提取。扫描件用宿主提供的视觉或 OCR 能力转录并复核，缺少可靠转录时停止对应内容。
 - 为每个正式文本保留独立 LabelInstance；同字串也不合并。冻结文字后才排版；capacity 或 glyph 检查失败应换布局/扩大空间，不擅自删字或压字号。
 - 图文模式先检索 3–5 个参考，再打开最相关的原图。包内候选全部为 `auto_proposed`。本机私用包的 `assets/reference-library/images/` 提供原图，也可指定本地图库。
-- 最多两个主要构图候选；优先图文解释科研任务。`plan` 只给可运行起点，Codex 必须结合参考和内容设计；无需拘泥母版，可编辑归一化 bounds。详情见构图文档。
+- 最多两个主要构图候选，优先用图文解释科研任务。`plan` 提供可运行的起点，宿主 Agent 结合参考和内容设计，可编辑归一化 bounds。详情见构图文档。
 - 图文模式以 `asset_composite` 合成获准资产。`strict_scientific` 保留严格关系和数据。`image_first` 使用获准底图，并额外复核原生文字和箭头。
 - 只有本地来源、asset metadata、字形、测量、文本实例和连接绑定通过，才允许导出待审图。它们不能证明科学结论真实或审美合格。所有自动渲染状态是 `review_required`；用户实际验收后才能按 hash 记录 accepted。
-- 外部生图由 Codex 可用工具完成，不另要求 API Key。先记录 operation，再调用工具；超时记 unknown，查询原请求，不自动重试扣费。仅发送获准的对象描述，不默认发送整个未公开文档。
+- 外部生图使用宿主已配置的工具。先记录 operation，再调用工具。超时记 unknown，查询原请求，不自动重试扣费。仅发送获准的对象描述，不默认发送整个未公开文档。
 - 图文标签用 `patch-label` 重新渲染，含义改变时重查来源。
 
 ## 交付

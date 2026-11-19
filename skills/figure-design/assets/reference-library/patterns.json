@@ -113,11 +113,6 @@
     "kind": "cross_image",
     "sources": [
       {
-        "reference_id": "ref-cffd75e133f2fc486434",
-        "region_id": "focus",
-        "reason": "三列对照说明研究内容与方法对应"
-      },
-      {
         "reference_id": "ref-c33acf0e3cc3dfc528ea",
         "region_id": "focus",
         "reason": "方法侧栏与层内关系图结合"

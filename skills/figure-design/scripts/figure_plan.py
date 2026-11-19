@@ -150,7 +150,28 @@ def make_plan(content, primary, style, variant='balanced', route='asset_composit
     return plan
 
 
-def candidates(content, style='biomedicine-academic', references=None, *, variant='balanced', route='asset_composite'):
+def reference_choices(content, references, brief):
+    if brief['source_content_hash'] != fingerprint(content):
+        raise ValueError('reference review is stale for this content')
+    rows = {row['id']:row for row in references['candidates']}
+    choices = {}
+    selected = brief['design_decisions']['reference_choices_with_reasons']
+    if len(selected) > 2:
+        raise ValueError('select at most two primary reference regions')
+    for choice in selected:
+        rid = choice['id']
+        row = rows.get(rid)
+        if row is None or rid in choices or row.get('image_status') == 'modified':
+            raise ValueError(f'invalid selected reference: {rid}')
+        if choice.get('basis') not in ('original', 'knowledge') or (choice['basis']=='original' and row.get('image_status')!='verified'):
+            raise ValueError(f'invalid reference review basis: {rid}')
+        if choice.get('region_id') not in {region['id'] for region in row['analysis']['regions']} or not choice.get('use','').strip():
+            raise ValueError(f'reference review requires a valid region and a concrete transfer: {rid}')
+        choices[rid] = {key:choice[key] for key in ('region_id','use','basis')}
+    return choices
+
+
+def candidates(content, style='biomedicine-academic', references=None, *, variant='balanced', route='asset_composite', reviewed=None):
     rels = content['relations']
     types = {r['type'] for r in rels}
     degree = {}
@@ -164,12 +185,13 @@ def candidates(content, style='biomedicine-academic', references=None, *, varian
         choices = ['annual-stage-timeline', 'top-overview-multi-lane']
     else:
         choices = ['top-overview-multi-lane', 'comparative-panels']
+    reviewed = reviewed or {}
     suggestions=[]
     if references:
         if references.get('source_content_hash') != fingerprint(content):
             raise ValueError('reference suggestions are stale for this content')
         for row in references.get('candidates',[]):
-            if row.get('image_status')=='modified':continue
+            if row['id'] not in reviewed:continue
             layout=row.get('analysis',{}).get('facets',{}).get('layout')
             if layout in registry()['layouts'] and layout not in suggestions:suggestions.append(layout)
         choices=list(dict.fromkeys(suggestions[:2]+choices))
@@ -179,9 +201,10 @@ def candidates(content, style='biomedicine-academic', references=None, *, varian
         try:
             plan = make_plan(content, primary, style, variant=variant, route=route)
             result.append({'plan': plan, 'content_hash': fingerprint(content),
-                           'reason': 'topology-based initial candidate; Codex must inspect references and refine', 'status': 'capacity_check_pending',
+                           'reason': 'refine this initial layout using topology and reviewed reference regions', 'status': 'capacity_check_pending',
+                           'reference_review': reviewed,
                            'reference_evidence': [{'id':r['id'],'sha256':r['sha256'],'analysis_hash':r.get('analysis_hash'),
-                               'image_status':r.get('image_status'),'visual_review':'pending','transfer_regions':r.get('transfer_regions',[])}
+                               'image_status':r.get('image_status'),'visual_review':reviewed.get(r['id'], 'pending'),'transfer_regions':r.get('transfer_regions',[])}
                                for r in (references or {}).get('candidates',[]) if r.get('image_status')!='modified' and r.get('analysis',{}).get('facets',{}).get('layout')==primary]})
         except ValueError:
             continue

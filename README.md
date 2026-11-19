@@ -1,6 +1,6 @@
 # Figure Design
 
-`figure-design` 是一个将论文、开题报告、基金申请和研究方案转成科研技术路线图、研究框架或机制示意图的 Agent Skill。Codex 提炼科研内容并审阅图面，Python 本地工具校验来源、排版并导出可编辑 SVG、PNG、可离线打开的 HTML 和质量报告。
+`figure-design` 是一个将论文、开题报告、基金申请和研究方案转成科研技术路线图、研究框架或机制示意图的 Agent Skill。宿主 Agent 提炼科研内容并审阅图面，Python 本地工具校验来源、排版并导出可编辑 SVG、PNG、可离线打开的 HTML 和质量报告。
 
 ## 快速开始
 
@@ -25,6 +25,18 @@ Skill 与 CLI 默认采用纯文字。用户可说「带插图」或指定 `mode
 
 跨项目使用可从 ZIP 安装。安装路径、环境配置和逐条 CLI 命令见 [独立安装与端到端流程](skills/figure-design/references/standalone-workflow.md)。
 
+## DeepSeek Harness 插件
+
+在仓库根目录执行 `make setup` 和 `make package-dsh`，生成 `dist/dsh-figure-design-1.8.0.tgz`，再安装到实际使用的 DSH CLI Profile。
+
+```bash
+export FIGURE_PY="$PWD/.venv/bin/python"
+dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.8.0.tgz"
+dsh web
+```
+
+在对话中使用 `/dsh-figure-design`。兼容版本、预构建包安装与依赖配置见 [DSH 插件说明](plugins/dsh-figure-design/README.md)。
+
 ## 从文档到成图
 
 - **纯文字**。宿主直接打开 [随包 Diagram Design](skills/figure-design/third_party/diagram-design/skills/diagram-design/SKILL.md)，从原文分析关系、选择图型和主题，使用上游模板编写 HTML。项目的 `diagram-export` 调用上游检查与导出。
@@ -47,6 +59,7 @@ figure-design/
 │   ├── tests/                           可随包验证的测试和夹具
 │   └── third_party/                     复用代码及其许可
 ├── docs/                                架构、研发状态和历史记录
+├── plugins/dsh-figure-design/            DSH 插件入口与元数据
 ├── scripts/                             仓库维护检查
 ├── .github/workflows/                   CI
 └── Makefile                             安装、测试、演示和打包
@@ -62,9 +75,9 @@ make check                           # 目录、文档链接和参考库完整�
 make test                            # 包含 Chromium 渲染集成测试
 make benchmark OUT=build/layout-001
 make package                         # 轻量 ZIP，包含索引、完整 Diagram Design Skill 及上游许可证
-make package-private                 # 本机私用 ZIP，另附全部 161 张经 hash 校验的科研参考原图
+make package-private                 # 本机私用 ZIP，另附活跃库的 110 张经 hash 校验的科研参考原图
 ```
 
 重复运行用新的 `OUT` 或 `DIST`。仓库与轻量 ZIP 提供参考索引和知识库，可通过 `--images` 绑定本地图库。项目代码采用 [MIT 许可证](LICENSE)。随包字体、第三方代码和本地参考原图的许可分别见 [第三方资源与许可](THIRD_PARTY_NOTICES.md)。
 
-[贡献与维护](CONTRIBUTING.md) · [开发状态](docs/DEVELOPMENT_PLAN.md) · [参考库维护](skills/figure-design/references/reference-knowledge.md) · [1.7.0 变更](docs/releases/1.7.0.md)
+[贡献与维护](CONTRIBUTING.md) · [开发状态](docs/DEVELOPMENT_PLAN.md) · [参考图 Wiki](skills/figure-design/assets/reference-library/images-wiki/index.md) · [参考库维护](skills/figure-design/references/reference-knowledge.md) · [1.8.0 变更](docs/releases/1.8.0.md)

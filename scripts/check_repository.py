@@ -20,8 +20,9 @@ def check():
     if (SKILL/'LICENSE').read_bytes() != (ROOT/'LICENSE').read_bytes():
         errors.append('bundled skill license must match the repository license')
     documents = [ROOT/'README.md', ROOT/'CONTRIBUTING.md', ROOT/'THIRD_PARTY_NOTICES.md',
+                 ROOT/'plugins/dsh-figure-design/README.md',
                  *(p for p in SKILL.rglob('*.md') if not p.is_relative_to(upstream)),
-                 ROOT/'docs/ARCHITECTURE.md', ROOT/'docs/DEVELOPMENT_PLAN.md', ROOT/'docs/releases/1.7.0.md']
+                 ROOT/'docs/ARCHITECTURE.md', ROOT/'docs/DEVELOPMENT_PLAN.md', ROOT/'docs/releases/1.8.0.md']
     for path in documents:
         for target in re.findall(r'\]\(([^)]+)\)', path.read_text(encoding='utf-8')):
             if re.match(r'\w+://', target) or target.startswith('#'):

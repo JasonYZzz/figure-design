@@ -8,9 +8,11 @@
 python3 /实际解压路径/figure-design/scripts/install.py --to ~/.agents/skills
 ```
 
-安装器验证包内全部 hash，并在目标已有同名 Skill 时停止。旧名 `scientific-figure-designer` 的用户级安装可单独备份。使用新名称时，安装 `figure-design` 后在会话中调用它，并用 `doctor` 核对名称和版本。完整私用包包含当前 161 张本地参考图，原图许可待核实。
+安装器验证包内全部 hash，并在目标已有同名 Skill 时停止。旧名 `scientific-figure-designer` 的用户级安装可单独备份。使用新名称时，安装 `figure-design` 后在会话中调用它，并用 `doctor` 核对名称和版本。私用包包含当前 110 张本地参考图，原图许可待核实。
 
 Codex 使用 `$figure-design`，DSH 使用 `/figure-design`。需要项目级部署时，也可把独立安装包安装到目标项目的 `.agents/skills/`。
+
+通过 `.tgz` 安装 DSH 插件时使用 `/dsh-figure-design`。以会话提供的资源目录作为 `FIGURE_SKILL`，接着配置下方的 Python 环境。
 
 为工具建立隔离环境，路径由当前机器选择（下方变量中的路径必须换成实际值）：
 
@@ -69,7 +71,7 @@ Linux 若缺 Chromium 系统库，按 Playwright 提示安装系统依赖；不�
 "$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" ingest --input /输入/研究方案.docx --out /工作目录/sources
 ```
 
-支持 UTF-8 TXT/MD、DOCX、可提取文字的 PDF。输出 `sources/<原文件SHA>/source.json` 和不可变原件。代码不自动发起 OCR。Codex 读取 `source.json.text`，按 `schemas/figure-content.schema.json` 写出 `content.json`：
+支持 UTF-8 TXT/MD、DOCX、可提取文字的 PDF。输出 `sources/<原文件SHA>/source.json` 和不可变原件。代码不自动发起 OCR。宿主 Agent 读取 `source.json.text`，按 `schemas/figure-content.schema.json` 写出 `content.json`：
 
 - sources：`document_sha256` 取工具返回的值；`locator` 为 `chars:起点:终点`，使用 Python/Unicode codepoint 左闭右开偏移，`excerpt` 与切片逐字一致。不要猜测 hash 或位置。
 - entities/tasks/relations：绑定 source_ids。关系至少支持 sequence、depends_on、parallel、tests、measures、supports、activates、inhibits、feedback、association。计划不得变成结果。
@@ -81,7 +83,7 @@ Linux 若缺 Chromium 系统库，按 Playwright 提示安装系统依赖；不�
 "$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" content-check --content /工作目录/content.json --sources /工作目录/sources/HASH/source.json
 ```
 
-检查会重新提取原件、核对文本/hash/跨度/引用。它不能判断摘要科学含义是否准确，Codex 仍需逐条审阅原文。
+检查会重新提取原件、核对文本/hash/跨度/引用。它不能判断摘要科学含义是否准确，宿主 Agent 仍需逐条审阅原文。
 
 ### 2. 科研设计简报、参考图与构图
 
@@ -91,18 +93,24 @@ Linux 若缺 Chromium 系统库，按 Playwright 提示安装系统依赖；不�
 "$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" research-brief --content /工作目录/content.json --sources /工作目录/sources/HASH/source.json --out /工作目录/research-brief.json
 ```
 
-Codex 根据实际来源填写中心问题、面板职责、主证据与验证层次，在 `design_decisions.visual_concept` 记录主画面和各素材说明的对象或方法，再选构图。修改 FigureContent 后重新生成简报。图面用短标签，原文摘录留在来源记录；对照、关键参数和研究状态保留在图上。
+宿主 Agent 根据实际来源填写中心问题、面板职责、主证据与验证层次，在 `design_decisions.visual_concept` 记录主画面和各素材说明的对象或方法，再选构图。修改 FigureContent 后重新生成简报。图面用短标签，原文摘录留在来源记录；对照、关键参数和研究状态保留在图上。
 
 ```bash
 "$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" refs-search \
-  --brief /工作目录/research-brief.json --query "图文混合 多任务并行" --limit 5 > /工作目录/references.json
+  --brief /工作目录/research-brief.json --query "图文混合 多任务并行" --require media=illustrated --limit 5 > /工作目录/references.json
+```
+
+打开候选图或知识页，在简报的 `reference_choices_with_reasons` 记录实际选用的区域与手法，再生成候选。
+
+```bash
 "$FIGURE_PY" "$FIGURE_SKILL/scripts/figure.py" plan --content /工作目录/content.json \
-  --references /工作目录/references.json --mode mixed --variant wide --out /工作目录/plans
+  --references /工作目录/references.json --brief /工作目录/research-brief.json \
+  --mode mixed --variant wide --out /工作目录/plans
 ```
 
 默认使用随包 SQLite。检索返回候选标签、结构观察、`image_path` 和 `image_status`（verified/missing/modified）。打开 verified 的原图判断可迁移的构图。轻量包可加 `--images <本地图库>`；原图缺失时可以使用知识页的结构描述，并在简报记录原图未查看。参考检索只影响候选布局家族，素材仍需单独制作或绑定。
 
-显式布局：`plan --layout center-hero-side-support --style biomedicine-academic --variant wide ...`。布局见 `assets/layout-registry.yaml`，12 个可执行入口、4 套样式；可选择 balanced/wide/portrait/landscape 及对应 mirrored 共 8 种画幅/方向变体。镜像仅改变区域位置，关系方向仍由事实 ID 决定。构图修饰词是设计词表，不是所有装饰均会自动实现。
+显式布局可用 `plan --layout center-hero-side-support --style biomedicine-academic --variant wide ...`。布局见 `assets/layout-registry.yaml`。镜像仅改变区域位置，关系方向仍由事实 ID 决定。绑定插图的区域可用 `asset_fraction` 调整图片高度占比，默认 `0.44`，上限 `0.85`，需要为该区域的正式文字保留测量空间。
 
 选一个候选另存为 `plan.json`。按参考图编排画面，在 `theme` 写入本次图文配色及依据，再绑定素材。新图文计划写入 `mode: mixed`。高级选项 `--route strict_scientific` 和 `--route image_first` 仍要求绑定获准资产。
 
@@ -120,7 +128,7 @@ metadata 必需：`id`, `scientific_type`, `style_family_id`, `rights: authorize
 
 1. `image-request --content <content> --entity <ID> --prompt <客观对象描述> --operation-id <稳定ID> --budget <已批准上限> --out <operations>`，只准备请求。
 2. 获得本次任务真实授权和可用工具后，`image-status --operation <operation.json> --status submitted --provider <实际工具/模型>`。
-3. Codex 调用当前生图工具，提示词只含来源支持的可视对象、样式和“无字、无科学箭头、无实验结果”。它不是本地 CLI 的网络功能。
+3. 宿主 Agent 调用当前已配置的生图工具，提示词只含来源支持的可视对象、样式和“无字、无科学箭头、无实验结果”。
 4. 成功时 `image-status ... --status succeeded --image <实际结果文件> --receipt <实际工具结果标识>`；超时记 unknown，查询原操作，不重复提交。
 5. 审核科学对象和像素质量后注册。可用 `asset-sheet --input <sheet.png> --boxes <JSON数组> --out <候选目录>` 按 `{id,bounds:[x,y,w,h]}` 切分；裁片仍是 candidate，边缘统计不代替人工 QA。
 
@@ -147,7 +155,7 @@ cd /工作目录
 
 渲染生成 `preview.svg`、`preview.png`、`preview.html`、内容、计划、Scene、质量报告、文件 hash 清单、本地来源与素材快照。网页内嵌同一 SVG、字体子集与已批准的插图，可单独离线打开。渲染目录不可覆盖，相同输入可缓存复用。写入使用临时目录再整体重命名。失败保留 failure.json，修正后用原目标路径重跑。进程被强制杀死留下 `.lock` 时先确认任务已退出，再移走该任务的锁。
 
-Codex 打开 PNG 审查构图、阅读顺序、语义连接和图文遮挡，按原文复核所有实验条件。QA 的 pass 只证明列出的机器门禁，不是模型自签人类验收。
+宿主 Agent 打开 PNG 审查构图、阅读顺序、语义连接和图文遮挡，按原文复核所有实验条件。QA 的 pass 只证明列出的机器门禁，不是模型自签人类验收。
 
 当前边界：复杂数学 TeX、自环、复杂矢量导入、不支持字形或无法无交叉排线会报错，需重构图/使用经核验的数学资产。不要把 unsupported/unknown 判为通过。数据图暂支持数值 x/y 的 line/bar，不模拟显微/Western blot/实验数值。
 
@@ -160,7 +168,7 @@ Codex 打开 PNG 审查构图、阅读顺序、语义连接和图文遮挡，按
 
 改字保留素材并重新渲染/QA，生图调用为 0；新意图或新增事实必须先改来源与内容。旧图验收不会继承。
 
-只有实际人类验收后才创建 review JSON：`render_hash`, `decision: accepted`, `reviewer_kind: human`, `attestation`（原反馈/审核记录）、`scientific_review: true`, `visual_review: true`, `asset_review: true`；Image First 另需 `image_first_review: true`。随后 export 加 `--final --review <文件>`。这些声明由操作人员提供，CLI 不进行身份认证，Codex 不得虚构人类反馈。
+只有实际人类验收后才创建 review JSON：`render_hash`, `decision: accepted`, `reviewer_kind: human`, `attestation`（原反馈/审核记录）、`scientific_review: true`, `visual_review: true`, `asset_review: true`；Image First 另需 `image_first_review: true`。随后 export 加 `--final --review <文件>`。这些声明由操作人员提供，CLI 不进行身份认证，宿主 Agent 不得虚构人类反馈。
 
 导出 ZIP 携带 SVG、PNG、HTML、质量报告和可追溯的结构文件。旧版渲染目录可以直接导出，工具从已通过 hash 检查的 SVG 生成离线 HTML。导出仍包含必要摘录，请按项目保密要求分享。所有命令支持 `--dry-run` 描述请求且不执行，实际容量预检使用 preflight。
 

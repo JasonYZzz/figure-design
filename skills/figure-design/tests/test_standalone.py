@@ -271,11 +271,15 @@ class BrowserIntegration(unittest.TestCase):
 
     def test_render_exact_unicode_cache_patch_and_export(self):
         from figure import render_job,verify_bundle,export
+        from figure_render import render
         c,s=make_case(self.root/'case',number=1)
         p=make_plan(c,'top-overview-multi-lane','biomedicine-academic')
         manifests=self.illustrate(p)
         out=self.root/'render'
+        preflight=render(c,p,s,out,manifests,preflight=True)
+        self.assertFalse(out.exists())
         report=render_job(c,p,s,out,manifests);self.assertFalse(report['errors'])
+        self.assertEqual(preflight['render_hash'],report['render_hash'])
         self.assertEqual(report['composition']['mode'], 'mixed')
         self.assertEqual(report['theme']['accent'], '#514487')
         scene=read(out/'scene.json')
@@ -308,6 +312,11 @@ class BrowserIntegration(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,'text_capacity'):render(bad,p,s,self.root/'none',manifests,preflight=True)
         bad['labels'][1]['text']='\U0001f984'
         with self.assertRaisesRegex(ValueError,'glyph'):render(bad,p,s,self.root/'none',manifests,preflight=True)
+        title=next(region for region in p['regions'] if region['role']=='title')
+        title['text_safe']['padding_px']=0
+        with self.assertRaisesRegex(ValueError,'rendered_text_overflow'):
+            render(c,p,s,None,manifests,preflight=True)
+        title['text_safe']['padding_px']=24
         p['edges'][0]['source_region_id']='owner-3'
         with self.assertRaisesRegex(ValueError,'owner'):render(c,p,s,self.root/'none',manifests,preflight=True)
 

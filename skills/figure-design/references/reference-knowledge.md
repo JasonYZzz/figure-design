@@ -1,8 +1,8 @@
 # 参考知识工作流（2.0 数据契约）
 
-原图与旧 catalog 保留。`analyses/<ref-id>.json` 是逐图权威记录；`patterns.json` 是带区域来源的设计归纳；`taxonomy.yaml` 定义中英别名与分面。知识页与 SQLite 查询投影位于 `knowledge/generations/<hash>/`，由 `current.json` 指向当前代。[本地知识入口](../assets/reference-library/knowledge/index.md)
+活跃目录保存 110 张原图并使用裁定后的 catalog。`analyses/<ref-id>.json` 是逐图权威记录；`patterns.json` 是带区域来源的设计归纳；`taxonomy.yaml` 定义中英别名与分面。知识页与 SQLite 查询投影位于 `images-wiki/generations/<hash>/`，由 `current.json` 指向当前代。[Markdown 索引](../assets/reference-library/images-wiki/index.md) · [离线导航](../assets/reference-library/images-wiki/index.html)
 
-161 张已逐张打开原图，记录独立观察、近似归一化重点区域、迁移建议及限制。全部是 `auto_proposed`。整体阅读摘要是观察；迁移建议是推断；未知数量、颜色测量、文字占比和逐条连接端点保持未知，不能从文件名或旧标签补齐。年份区别于阶段编号。变体关系由逐图观察提出，未视为人工金标。
+110 张保留逐图观察、近似重点区域、迁移建议和限制。1.8.0 两轮筛查共从原 161 张中移出 51 张重复、低可读性或模板参考。全部是 `auto_proposed`。整体阅读摘要是观察；迁移建议是推断；未知数量、颜色测量、文字占比和逐条连接端点保持未知，不能从文件名或旧标签补齐。年份区别于阶段编号。变体关系由逐图观察提出，未视为人工金标。
 
 ## 检索与构图
 
@@ -12,16 +12,16 @@ python scripts/figure.py refs-search --query '图文混合 生物医药' --requi
 python scripts/figure.py refs-search --query '四年技术路线图' --require duration_years=4
 python scripts/figure.py research-brief --content content.json --sources source.json --reference-query '图文方法与独立验证' --out brief.json
 python scripts/figure.py refs-search --brief brief.json > suggestions.json
-python scripts/figure.py plan --content content.json --references suggestions.json --out plans
+python scripts/figure.py plan --mode mixed --content content.json --references suggestions.json --brief brief.json --out plans
 ```
 
 普通查询返回兼容的记录列表；`--brief` 返回绑定 `source_content_hash` 的候选封装。简报的 `reference_requirements` 支持 `query`、`require`；关系类型和任务数是容量提示，不自动变成硬约束。`--require` 接受领域、构图、拓扑、图文、密度、时间类型、目的以及 `columns/task_lanes/duration_years`。未知值不满足精确约束。自然语言中的数字只影响软评分，并返回 match/mismatch/unknown。
 
-中文二元词、英文词、中英别名与结构分面共同评分。输出包括词法、结构、容量分项，命中字段、未满足偏好、分析 hash、来源区域、知识页和原图状态。多样性对人工尚未确认的同构变体组及重复布局减分，不能当作真实近似重复准确率。161 图采用内存评分，SQLite 只存可重建投影，无外部服务或新增依赖。
+中文二元词、英文词、中英别名与结构分面共同评分。输出包括词法、结构、容量分项，命中字段、未满足偏好、分析 hash、来源区域、知识页和原图状态。多样性对人工尚未确认的同构变体组及重复布局减分，不能当作真实近似重复准确率。活跃库采用内存评分，SQLite 只存可重建投影，无外部服务或新增依赖。
 
 空查询仍全量枚举，供打包和审核兼容调用。旧库无知识代时保留原检索；已有知识代失效或损坏会明确报错，要求重建。轻量包可检索文字；`missing` 不能称为视觉核验。`modified` 不能用于构图建议。
 
-Codex 必须打开最终 3–5 张候选原图，选择最多两个主要构图，在简报中填写借鉴区域、需修改点及排除原因。`plan --references` 只影响布局家族建议，并在 selection.json 记录来源；不会改 FigureContent、复制科学结论或复制原图像素。建议仍须 preflight；容量失败后先改区域或采用另一可用布局。
+查看 3–5 张候选，选择最多两个主要参考区域。简报的 `design_decisions.reference_choices_with_reasons` 每条填写 `id`、候选分析的 `region_id`、具体迁移手法 `use`，以及 `basis`（已实际看图用 `original`，只读分析用 `knowledge`）。选用记录随 `plan --brief` 进入 `selection.json`，只有明确选用的参考可改变构图候选优先级。未审阅候选只提供查阅线索。保持 FigureContent 的来源绑定，容量失败先调整构图，再验实图。
 
 ## 增补、修订与恢复
 
@@ -36,7 +36,7 @@ python scripts/figure.py refs-review --out review-work --count 30
 
 refs-review 按领域、构图、图文、密度均衡选择，输出原图 HTML、旧标注模板和 `analysis-review.json`。模板不是审核结果；只有实际人审者填写身份与 attestation 后才能导入。批次状态通过成功记录和不可变事件恢复；不维护第二套任务队列。
 
-构建先在临时目录生成整代 SQLite、知识页和 manifest，验证依赖未变后原子切换 current。相同依赖复用整代；161 张小库有变动时重建整代，尚未实现按单页依赖的增量编译。失败不切换旧代，但源内容变动会阻止旧代用于新检索。历史代本地保留，包仅携带当前代。外部图片状态在 lint 或候选解析时核对。
+构建先在临时目录生成整代 SQLite、知识页和 manifest，验证依赖未变后原子切换 current。相同依赖复用整代；小库有变动时重建整代，尚未实现按单页依赖的增量编译。失败不切换旧代，但源内容变动会阻止旧代用于新检索。历史代本地保留，包仅携带当前代。外部图片状态在 lint 或候选解析时核对。
 
 ## 反馈与评估
 
