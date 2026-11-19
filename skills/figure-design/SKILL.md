@@ -5,11 +5,11 @@ description: 根据论文、开题报告、基金申请或研究方案生成可�
 
 # Figure Design
 
-版本 `1.9.0`。纯文字架构图和技术路线图由宿主 Agent 执行本项目随包的 Diagram Design。图文混合由 Figure Design 负责证据绑定、参考检索、插图构图、排版与渲染。
+版本 `1.11.0`。纯文字架构图和技术路线图由宿主 Agent 执行本项目随包的 Diagram Design。图文混合由 Figure Design 负责证据绑定、参考检索、插图构图、排版与渲染。
 
 ## 先选择模式
 
-用户说「纯文字」「全文字」或未指定时用 `text`。用户要求配图时用 `mixed`。
+用户说「纯文字」「全文字」或未指定时用 `text`。用户要求配图、三维图例或 3D 图例时用 `mixed`。
 
 - **`text`**：首先打开 [随包原版 Diagram Design SKILL.md](third_party/diagram-design/skills/diagram-design/SKILL.md)，把原文、图的用途和用户参考直接交给该流程。按 [纯文字工作流程](references/standalone-workflow.md#纯文字架构图与技术路线图) 提炼关键节点、边、交接物和限定条件，再按随包规则选图型、主题和模板，编写独立 HTML。核心节点优先说明职责或产出，关键连线传达具体关系。可用 `plan --source <原文> --mode text` 留交接记录。
 - **纯文字导出**：运行 `diagram-export --input <HTML> --out <新目录>` 调用同一随包 Skill 的检查与导出。打开实际 HTML 和 PNG，按原文和使用尺寸验收，将结论写进 [纯文字审阅记录](references/acceptance.md#纯文字审阅)。HTML 是编辑入口。
@@ -28,6 +28,7 @@ description: 根据论文、开题报告、基金申请或研究方案生成可�
 | 参考库查询/增补 | `references/reference-ingestion.md` | refs-search / refs-build / refs-lint / refs-analyze-import / refs-review |
 | 布局或视觉改进 | `references/composition-grammar.md` | 保留同一内容 hash，比较两个构图；可直接修改显式区域坐标 |
 | 获准素材/生图 | `references/asset-governance.md` | asset-search / image-request / 宿主生图工具 / asset-sheet / asset-register |
+| 空间结构图例 | [Three.js 三维图例](references/threejs-legends.md) | legend-3d → 按内容绑定 asset-register → 图文 preflight / render |
 | 严格数据图 | `references/standalone-workflow.md` | data-chart；只使用真实 CSV 数值和来源，不编造曲线 |
 | 原图重建 | `references/reconstruction.md` | 宿主 Agent 观察图层与关系，建立新内容和构图契约，人工核对不确定项 |
 | 已有图改文字 | `references/standalone-workflow.md` | 纯文字编辑原 HTML 后再导出；图文混合用 patch-label，绑定 expected-render-hash |
@@ -38,10 +39,14 @@ description: 根据论文、开题报告、基金申请或研究方案生成可�
 
 ## 文档生成图文路线图
 
-1. 先拿出图文构思。选一个读者应先看到的研究对象、关键方法或验证场景，在简报的 `visual_concept` 中写明 owner ID、出处、要画什么及说明什么。用短标签承载关键任务，并保留影响理解的条件、对照、单位和研究状态。
+1. 先按标题范围确定主图。整篇研究的路线图先画通用机制和可选路径，具体个案放在它说明的操作旁；个案专题可直接放大实例。在简报的 `visual_concept` 中写明 owner ID、出处、要画什么及说明什么。用短标签承载关键任务，并保留影响理解的条件、对照、单位和研究状态。
 2. 在目标尺寸明确要迁移的整图结构、图文层次和配色角色。用 `reference_design` 把它们映射到实际区域。存在具体版式取舍时再比较第二版。先解析参考或领域主题，再绑定素材、预检和渲染。
 3. 显式选择图文模式时，素材不足就说明缺少的画面，待素材补齐后再交付该模式。
 4. 在目标使用尺寸打开实际 PNG，并排对照整张参考和已选区域，核对主视觉是否清楚、图内连接是否表达具体方法或验证关系、关键标签是否可读。查看 `composition.asset_placements` 核对资产归属。图标仅在复述相邻文字时，回到构图或改画关系。
+
+机制有状态变化时，在简报的 `visual_concept.object_trace` 里选定一个来源支持的实例，写出它的输入、改变的字段、依据和下一步动作，把它画在目标尺寸能辨认的位置。检索时比较候选图如何画交接物和对照。候选的 `limitations` 同时限定可迁移的部分。结果面板在 `evidence_displays` 记录指标、对照、单位及适合的图形。为关键交接写出来源支持的动作，使用 relation 自有的 `operation` 文字实例标在箭头上。实验按实际改变的条件、对照、指标和适用范围挂接；多步系统的整体对照应指向整条被评估的路径。按[科研分析与构图](references/scientific-design.md)逐项复核 `composition.relation_review`。先查看成图的 `composition.readout_visuals`，逐项对照哪些结果已有证据图、哪些仅有插图或文字。保留文字呈现时给出具体理由。实际打开图，检查遮住解释段落后能否从图形读出状态变化和组间差异。
+
+如果源材料中的第三个空间维度承担含义（例如体素占用、特征图尺度或真实结构的遮挡），在制作主图之前用 `legend-3d` 绘制局部并登记到对应 owner。抽象的会话顺序、索引跳转和分组对照通常用二维表达。图文模式不会自动调用 Three.js。
 
 ## 核心执行规则
 
@@ -52,7 +57,7 @@ description: 根据论文、开题报告、基金申请或研究方案生成可�
 - `FigureContent` 保存科研事实和正式文字。每个科研对象和关系绑定精确原文，参考图提供构图线索。
 - PDF/DOCX/TXT/MD 由 `ingest` 本地提取。扫描件用宿主提供的视觉或 OCR 能力转录并复核，缺少可靠转录时停止对应内容。
 - 为每个正式文本保留独立 LabelInstance；同字串也不合并。冻结文字后才排版；capacity 或 glyph 检查失败应换布局/扩大空间，不擅自删字或压字号。
-- 无上传设计参考的图文任务可检索 3–5 个参考，再打开最相关的原图。包内候选全部为 `auto_proposed`。本机私用包的 `assets/reference-library/images/` 提供原图，也可指定本地图库。
+- 无上传设计参考的图文任务可检索 3–5 个参考，再打开最相关的原图。包内候选全部为 `auto_proposed`。本机私用包的 `assets/reference-library/images/` 提供原尺寸参考图（含无损 WebP），也可指定本地原件图库。
 - 最多两个主要构图候选，优先用图文解释科研任务。`plan` 提供可运行的起点，宿主 Agent 结合参考和内容设计，可编辑归一化 bounds。详情见构图文档。
 - 图文模式以 `asset_composite` 合成获准资产。`strict_scientific` 保留严格关系和数据。`image_first` 使用获准底图，并额外复核原生文字和箭头。
 - 只有本地来源、asset metadata、字形、测量、文本实例和连接绑定通过，才允许导出待审图。它们不能证明科学结论真实或审美合格。所有自动渲染状态是 `review_required`；用户实际验收后才能按 hash 记录 accepted。

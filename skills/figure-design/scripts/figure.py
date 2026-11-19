@@ -223,16 +223,17 @@ def pack(out, references=None):
         from inventory_refs import inventory
         rows,errors=inventory(Path(references))
         if errors:raise ValueError('reference pack contains invalid inputs')
-        from figure_catalog import search
+        from figure_catalog import image_files, search
         records=search(ROOT/'assets/reference-library/catalog.sqlite',limit=10000)
-        expected={path:row['sha256'] for row in records for path in row.get('paths',[row['path']])}
-        if {row['path']:row['sha256'] for row in rows}!=expected:
+        actual = {row['path']: row['sha256'] for row in rows}
+        if not any(actual == {p: h for r in records for p, h in image_files(r, compact=compact).items()}
+                   for compact in (True, False)):
             raise ValueError('reference images do not match the bundled catalog; index and review the intended library first')
         for row in rows:
             relative='assets/reference-library/images/'+row['path'];images.append((Path(references)/row['path'],relative))
             manifest['files'][relative]=row['sha256']
     out.parent.mkdir(parents=True,exist_ok=True)
-    with ZipFile(out,'x',ZIP_DEFLATED) as z:
+    with ZipFile(out,'x',ZIP_DEFLATED,compresslevel=9) as z:
         for p in files:z.write(p,SKILL_NAME+'/'+p.relative_to(ROOT).as_posix())
         for p,relative in images:z.write(p,SKILL_NAME+'/'+relative)
         z.writestr(SKILL_NAME+'/package-manifest.json',json.dumps(manifest,ensure_ascii=False,indent=2))
@@ -328,6 +329,8 @@ def main():
     c.add_argument('--input',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('patch-label');c.add_argument('--render',required=True);c.add_argument('--expected-render-hash',required=True);c.add_argument('--label',required=True);c.add_argument('--text',required=True);c.add_argument('--reason',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('export');c.add_argument('--render',required=True);c.add_argument('--out',required=True);c.add_argument('--review');c.add_argument('--include-sources',action='store_true');c.add_argument('--source-file',action='append',default=[]);c.add_argument('--final',action='store_true')
+    c=sub.add_parser('legend-3d', help='Project a local Three.js scene to transparent SVG')
+    c.add_argument('--scene',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('asset-register');c.add_argument('--plan');c.add_argument('--input',required=True);c.add_argument('--metadata',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('asset-sheet');c.add_argument('--input',required=True);c.add_argument('--boxes',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('asset-search');c.add_argument('--library',required=True);c.add_argument('--type',required=True);c.add_argument('--style')
@@ -495,6 +498,9 @@ def main():
             result=render_job(content,read(folder/'composition-plan.json'),list(folder.glob('sources/*/source.json')),a.out,list(folder.glob('assets/*/asset.json')))
             write(Path(a.out)/'patch-event.json',{'previous_render_hash':report['render_hash'],'label_id':a.label,'reason':a.reason,'paid_calls':0,'review_invalidated':True})
         elif a.command=='export':result=export(a.render,a.out,a.review,a.final,a.include_sources,a.source_file)
+        elif a.command=='legend-3d':
+            from figure_legend import render_legend
+            result=render_legend(read(a.scene),a.out)
         elif a.command=='asset-register':
             from figure_assets import register, register_themed
             metadata=read(a.metadata)

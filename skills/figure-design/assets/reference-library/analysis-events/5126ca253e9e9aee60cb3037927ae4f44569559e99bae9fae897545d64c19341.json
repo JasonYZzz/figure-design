@@ -1,0 +1,95 @@
+{
+  "at": "2026-11-19T07:08:32.926571+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-ff90700e724f8759a714",
+    "image_sha256": "ff90700e724f8759a714b11e9da4e9ff729609b454a5d62bd51da66a85929e76",
+    "title": "带出处的文档问答技术路线",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "cs-ai",
+      "layout": "fork-merge-validation",
+      "topology": [
+        "merge"
+      ],
+      "media": "illustrated",
+      "density": "medium",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.17,
+          0.52,
+          0.46,
+          0.23
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "两条召回路径汇集，答案逐句标注来源段落。",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "在候选、证据和回答中复用段落编号。",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "P1 在可见候选中缺少来源。证据区连向用户问题的方向不能照搬，示例文字不构成性能证据。",
+      "生成图，仅借鉴所列布局，技术关系须回查任务来源。"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "两条召回路径汇集，答案逐句标注来源段落。",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "mixed",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "在候选、证据和回答中复用段落编号。",
+    "uncertainty": "版式观察与区域近似定位由模型完成。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "Codex",
+      "method": "native_imagegen_and_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "1.10.0-roadmap-replacement",
+      "observed_on": "2026-11-19"
+    },
+    "relations": []
+  }
+}

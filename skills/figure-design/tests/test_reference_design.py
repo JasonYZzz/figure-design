@@ -22,11 +22,53 @@ from figure_assets import register_themed
 from figure_common import file_hash, read, write
 from figure_plan import default_style, figure_theme, registry
 from figure_reference import ROLES, reference_theme
-from figure_render import render
+from figure_render import readout_visuals, render
 from figure_sources import evidence, ingest
 
 
 class ReferenceDesign(unittest.TestCase):
+    def test_readout_visuals_follow_owner_across_regions(self):
+        instances = {key: {'owner_id': owner, 'role': role} for key, owner, role in [
+            ('a', 'trial', 'readout'), ('b', 'trial', 'task'), ('c', 'control', 'readout')]}
+        regions = {'results': {'label_instance_ids': ['a', 'c']},
+                   'graph': {'label_instance_ids': ['b'], 'asset_ids': ['measure']}}
+        assets = {'measure': {'source_content_ids': ['trial'], 'contains_evidence': True}}
+        trial, control = readout_visuals(regions, instances, assets)
+        self.assertEqual(trial['evidence_assets'], ['measure'])
+        self.assertEqual(control['evidence_assets'], [])
+        self.assertEqual(trial['readout_instances'], ['a'])
+
+    @unittest.skipUnless(os.environ.get('FIGURE_RENDER_TESTS') == '1', 'requires Chromium')
+    def test_source_bound_edge_label_and_evidence_target(self):
+        from figure_plan import make_plan
+        from figure_render import bindings
+
+        content, sources = make_case(self.root/'operation', count=2, relation_type='tests')
+        content['labels'].append(dict(id='action', text='核对采集条件', kind='approved_summary',
+                                      approved=True, source_ids=['S1', 'S2']))
+        content['label_instances'].append(dict(id='operation', label_id='action', owner_id='R1',
+                                               role='operation', required=True))
+        plan = make_plan(content, 'top-overview-multi-lane', 'computing-systems', route='asset_composite')
+        self.assertEqual(plan['edges'][0]['label_instance_id'], 'operation')
+        bad = copy.deepcopy(plan)
+        bad['edges'][0]['label_instance_id'] = 'I1'
+        with self.assertRaisesRegex(ValueError, 'owned by its relation'):
+            bindings(content, bad)
+        for region, x in zip(plan['regions'][1:], [.05, .65]):
+            region['bounds'] = [x, .3, .30, .42]
+        asset = self.root/'operation.svg'
+        asset.write_text('<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="7" fill="{{figure:accent}}"/></svg>')
+        register_themed(asset, dict(id='sample', scientific_type='fixture',style_family_id='test',
+            rights='authorized_reuse', approval='production_approved', origin='test fixture',
+            source_content_ids=['T1'], reviewer='fixture', review_note='geometric test',contains_evidence=False),
+            self.root/'assets', plan)
+        plan['regions'][1]['asset_ids'] = ['sample']
+        report = render_job(content, plan, sources, self.root/'operation-render', [self.root/'assets/sample/asset.json'])
+        self.assertFalse(report['errors'])
+        self.assertEqual(report['relation_label_manifest'][0]['text'], '核对采集条件')
+        self.assertEqual([item['id'] for item in report['label_manifest']].count('operation'), 1)
+        self.assertEqual(report['composition']['relation_review']['evidence_links'], content['relations'])
+
     def setUp(self):
         self.directory = tempfile.TemporaryDirectory()
         self.addCleanup(self.directory.cleanup)

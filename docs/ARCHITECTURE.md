@@ -18,7 +18,7 @@ PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。仓库保�
 | --- | --- | --- |
 | 1. 固定来源 | 选取相关段落，检查扫描件的转录 | `ingest` 将文档提取为带原文件 SHA256 的来源快照 |
 | 2. 整理科研内容 | 提炼任务、正式标签、条件、对照和有依据的关系，区分研究计划与结果 | `content-check` 重读原件并核对 FigureContent 的原文跨度、引用和状态契约 |
-| 3. 设计图文 | 写出主视觉解释的问题，确定各面板的证据分工，打开可用参考图核对可迁移布局 | `research-brief` 提供设计工作表；`refs-search --brief` 返回与当前内容绑定的候选 |
+| 3. 设计图文 | 确定主路径的输入、操作与产出，将实验对照和指标对应到实际评估的路径，再选择可迁移的布局 | `research-brief` 提供设计工作表；`refs-search --brief` 返回与当前内容绑定的候选 |
 | 4. 编排构图 | 设计区域位置和阅读顺序，制作或选择获准素材 | `plan --mode mixed` 持久化选择并编排区域；`asset-register` 固定素材及来源元数据 |
 | 5. 编译与渲染 | 按实际预览调整空间、文字层级和图文关系 | `preflight` 做实际字体测量、关系走线和资产检查；`render` 输出 Scene、SVG、PNG、HTML 和报告 |
 | 6. 审查和导出 | 核对科学语义、图像内容和可读性，收集实际验收 | `qa` 核对渲染包 hash；`export` 打包待审图，终稿需绑定 render hash 的人审记录 |
@@ -47,15 +47,15 @@ PPT Master 的 SVG 资源闭包检查以 MIT 许可复制到 Skill。仓库保�
 | `figure_assets.py` / `figure_data.py` | 许可元数据、素材与请求状态、真实数值图表 |
 | `install.py` | 校验包内 hash 后安装，不覆盖旧版本 |
 
-以上模块均在 [Skill scripts](../skills/figure-design/scripts/) 中。所有资源以 `figure_common.ROOT`（解析后的 Skill 路径）为基准，不查找项目外的开发源码。
+Python 模块位于 [Skill scripts](../skills/figure-design/scripts/)，第三方资源在 [third_party](../skills/figure-design/third_party/)。所有资源以 `figure_common.ROOT`（解析后的 Skill 路径）为基准，不查找项目外的开发源码。
 
 ## 参考库与打包
 
 ```text
 assets/reference-library/
-├── catalog.sqlite    110 条候选记录、图片相对路径/hash、标注历史
+├── catalog.sqlite    111 条候选记录、图片相对路径/hash、标注历史
 ├── library.json      数量、来源、分类方法、审核和许可状态
-├── analyses/         110 份逐图分析，版本化 JSON
+├── analyses/         111 份逐图分析，版本化 JSON
 ├── analysis-events/  不可变修订事件
 ├── taxonomy.yaml     中英别名和多维分类
 ├── patterns.json     带区域来源的设计归纳
@@ -73,5 +73,5 @@ assets/reference-library/
 
 - [开发计划](DEVELOPMENT_PLAN.md) 和 [任务状态](development/BACKLOG.csv) 描述当前工作；`docs/archive/` 保存原始设计和当时证据，不驱动当前执行。
 - `tests/` 随 Skill 迁移，安装后仍可运行；仓库检查在根目录 `scripts/check_repository.py`。
-- `build/` 包含审校、基准、演示与临时安装，`dist/` 仅放当前发行包；二者不进入源码包。
+- `build/` 包含审校、基准、演示与临时安装，`dist/` 按版本存放发行包；二者不进入源码包。
 - 机器检查覆盖文件、字形、文本、关系绑定和部分几何；科研含义、像素内容、版权真实性及审美仍需实际审阅。

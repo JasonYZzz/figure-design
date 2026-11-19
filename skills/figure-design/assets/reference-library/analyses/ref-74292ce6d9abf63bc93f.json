@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-74292ce6d9abf63bc93f",
+  "image_sha256": "74292ce6d9abf63bc93f15729f9d320afd119a21cc44cfc50319ef917c40945e",
+  "title": "双目视觉深度估计技术路线",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "cs-ai",
+    "layout": "comparative-panels",
+    "topology": [
+      "comparison"
+    ],
+    "media": "illustrated",
+    "density": "medium",
+    "temporal_axis": "stages",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.02,
+        0.28,
+        0.94,
+        0.43
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "左右视图对照同一场景，再比较局部匹配窗口。",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "左右面板共用标线，保留对应物的位置。",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "局部块相似不能代替左右视差一致性检验。",
+    "生成图，仅借鉴所列布局，技术关系须回查任务来源。"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "左右视图对照同一场景，再比较局部匹配窗口。",
+  "variant_group": null,
+  "spatial": {
+    "columns": null,
+    "stages": null,
+    "direction": "mixed",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "左右面板共用标线，保留对应物的位置。",
+  "uncertainty": "版式观察与区域近似定位由模型完成。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "Codex",
+    "method": "native_imagegen_and_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "1.10.0-roadmap-replacement",
+    "observed_on": "2026-11-19"
+  },
+  "relations": []
+}

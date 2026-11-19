@@ -1,0 +1,87 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-310df241631d719030c5",
+  "image_sha256": "310df241631d719030c53f9089bd61451cea0b5d2b79a3c63a9f3f5184988a24",
+  "title": "织物表面缺陷分割技术路线",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "cs-ai",
+    "layout": "macro-micro-mechanism",
+    "topology": [
+      "sequence",
+      "comparison"
+    ],
+    "media": "illustrated",
+    "density": "medium",
+    "temporal_axis": "stages",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.392,
+        0.085,
+        0.396,
+        0.411
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "线扫条带拼成布幅，三级局部放大把断纱与像素标注对应起来。下排沿切片、掩膜和整幅坐标展示预测轮廓，右侧并列漏检与误检。",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "用同一断纱轮廓贯穿局部纹理、黑白掩膜和红色覆盖图，并给误检和漏检各配一对原图与预测。",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "织物纹理、掩膜和复核图均为生成示意。局部窗口不提供像素级真值或模型性能。"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "线扫条带拼成布幅，三级局部放大把断纱与像素标注对应起来。下排沿切片、掩膜和整幅坐标展示预测轮廓，右侧并列漏检与误检。",
+  "variant_group": null,
+  "spatial": {
+    "columns": null,
+    "stages": null,
+    "direction": "mixed",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "用同一断纱轮廓贯穿局部纹理、黑白掩膜和红色覆盖图，并给误检和漏检各配一对原图与预测。",
+  "uncertainty": "版式观察与区域近似定位由模型完成。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "Codex",
+    "method": "native_imagegen_and_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "1.10.0-roadmap-replacement",
+    "observed_on": "2026-11-19"
+  },
+  "relations": []
+}

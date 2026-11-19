@@ -20,7 +20,7 @@ def check_content(data:dict)->list[str]:
     task_ids=unique(data['tasks'],'tasks',errors)
     label_ids=unique(data['labels'],'labels',errors)
     inst_ids=unique(data['label_instances'],'label_instances',errors)
-    unique(data['relations'],'relations',errors)
+    relation_ids=unique(data['relations'],'relations',errors)
     owners=[data['figure_id']]+[x['id'] for x in data['entities']+data['tasks']+data['relations']]
     if len(owners)!=len(set(owners)):errors.append('ambiguous owner IDs across content categories')
     for obj in data['entities']+data['tasks']+data['relations']+data['labels']:
@@ -31,7 +31,14 @@ def check_content(data:dict)->list[str]:
         for ent in obj.get('entity_ids',[]):
             if ent not in entity_ids:errors.append(f'{obj["id"]}: entity missing {ent}')
     allowed_owner={data['figure_id']}|task_ids|entity_ids|{x['id'] for x in data['relations']}
+    operation_owners=set()
+    sourced_labels={label['id'] for label in data['labels'] if label['source_ids']}
     for item in data['label_instances']:
+        if item['role']=='operation':
+            owner=item['owner_id']
+            if owner not in relation_ids or owner in operation_owners or item['label_id'] not in sourced_labels:
+                errors.append(f"{item['id']}: an operation requires a unique relation owner and a source-bound label")
+            operation_owners.add(owner)
         if item['label_id'] not in label_ids:errors.append(f'{item["id"]}: label missing')
         if item['owner_id'] not in allowed_owner:errors.append(f'{item["id"]}: unknown owner')
     for item in data['relations']:

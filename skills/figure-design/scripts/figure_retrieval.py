@@ -6,7 +6,8 @@ import math
 from pathlib import Path
 import re
 import sqlite3
-from figure_common import fingerprint, inside, file_hash, write
+from figure_catalog import resolve_image
+from figure_common import fingerprint, write
 from figure_knowledge import current, taxonomy
 
 
@@ -103,11 +104,10 @@ def rank(rows, catalog, query, limit, reviewed_only=False, require=None, diversi
 
 def resolve_images(rows, images):
     for row in rows:
-        paths = [inside(images,p) for p in row.get('paths',[row['path']])]
-        verified = [p for p in paths if p.is_file() and file_hash(p)==row['sha256']]
-        path = verified[0] if verified else next((p for p in paths if p.is_file()),paths[0])
-        row['image_path']=str(path)
-        row['image_status']='verified' if verified else 'modified' if path.is_file() else 'missing'
+        path, digest, status = resolve_image(row, images)
+        row['image_path'] = str(path)
+        row['image_file_sha256'] = digest
+        row['image_status'] = status
     return rows
 
 

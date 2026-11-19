@@ -149,10 +149,13 @@ def make_plan(content, primary, style, variant='balanced', route='asset_composit
         edges.append({'relation_id': rel['id'], 'source_region_id': owner_regions[rel['from_id']],
                       'target_region_id': owner_regions[rel['to_id']],
                       'line_style': 'tbar' if rel['type'] == 'inhibits' else 'dashed' if rel['evidence_state'] in ('planned', 'hypothesis') else 'solid'})
-        owned = [i['id'] for i in instances if i['owner_id'] == rel['id']]
+        owned = [i for i in instances if i['owner_id'] == rel['id']]
         for r in regions:
             if r['id'] == owner_regions[rel['from_id']]:
-                r['label_instance_ids'].extend(owned)
+                r['label_instance_ids'].extend(i['id'] for i in owned if i['role'] != 'operation')
+        for instance in owned:
+            if instance['role'] == 'operation':
+                edges[-1]['label_instance_id'] = instance['id']
         if rel.get('condition_label_id') and not any(i['owner_id'] == rel['id'] and i['label_id'] == rel['condition_label_id'] for i in instances):
             raise ValueError('conditional relation needs an explicit condition LabelInstance owned by that relation')
     if caption:

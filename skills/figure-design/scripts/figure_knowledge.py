@@ -11,6 +11,7 @@ import sqlite3
 import tempfile
 from urllib.parse import quote
 import yaml
+from figure_catalog import resolve_image
 from figure_common import ROOT, canonical, file_hash, fingerprint, inside, read, schema_check, write
 
 LIBRARY = ROOT / 'assets/reference-library'
@@ -179,11 +180,15 @@ def build(library, catalog):
                 row = rows[rid]
                 index.append(f'- [{row["path"]} · {a["title"]}](references/{rid}.md)')
                 original = quote(row['path'])
+                display = quote(row.get('lossless_webp', row)['path'])
+                image_link = f'<a href="../../../../images/{display}">查看参考图</a>'
+                if display != original:
+                    image_link += f' · <a href="../../../../images/{original}">外接 PNG 原件</a>'
                 page_meta = yaml.safe_dump({'reference_id': rid, 'source': f'images/{row["path"]}',
                                             'sha256': row['sha256'], 'review_status': a['review_status']}, allow_unicode=True).strip()
                 lines = ['---', page_meta, '---', '', f'# {a["title"]}', '',
                          '[返回知识导航](../index.md)', '',
-                         f'原图：<a href="../../../../images/{original}">{escape(row["path"])}</a>（公开包需另配原图）。SHA256：`{row["sha256"]}`', '',
+                         f'{image_link}（公开包需另配图库）。原件 SHA256：`{row["sha256"]}`', '',
                          f'审核：{a["review_status"]}；分析版本：{a["schema_version"]}；密度：{a["facets"]["density"]}', '',
                          '分类：' + canonical(a['facets']), '', '阅读顺序：' + a['reading_summary'], '']
                 for r in a['regions']:
@@ -197,7 +202,7 @@ def build(library, catalog):
                 _text(stage / 'references' / (rid + '.md'), '\n'.join(lines).rstrip() + '\n')
                 facets = ' / '.join('、'.join((terms[k][v][0] if terms[k][v] else v) for v in (values if isinstance(values,list) else [values])) for k,values in a['facets'].items())
                 search_text = ' '.join([row['path'], rid, a['title'], facets, *[o['text'] for o in a['observations'] + a['transfer']]])
-                cards.append(f'<article id="{rid}" data-search="{escape(search_text, quote=True)}"><h2>{escape(row["path"])} · {escape(a["title"])}</h2><p>{escape(facets)}</p><details><summary>查看参考原图</summary><img loading="lazy" src="../../../images/{original}" alt="{escape(a["title"], quote=True)}"><p hidden>原图无法读取。公开包可使用下方分析记录，本地图库可通过 refs-search --images 绑定。</p></details><p>{escape(a["observations"][0]["text"])}</p><p>迁移：{escape(a["transfer"][0]["text"])}</p><p>限制：{escape("；".join(a["limitations"]))}</p><a href="references/{rid}.md">分析记录与来源</a><p>{escape(a["review_status"])}</p></article>')
+                cards.append(f'<article id="{rid}" data-search="{escape(search_text, quote=True)}"><h2>{escape(row["path"])} · {escape(a["title"])}</h2><p>{escape(facets)}</p><details><summary>查看参考原图</summary><img loading="lazy" src="../../../images/{display}" data-original="../../../images/{original}" alt="{escape(a["title"], quote=True)}"><p hidden>原图无法读取。公开包可使用下方分析记录，本地图库可通过 refs-search --images 绑定。</p></details><p>{escape(a["observations"][0]["text"])}</p><p>迁移：{escape(a["transfer"][0]["text"])}</p><p>限制：{escape("；".join(a["limitations"]))}</p><a href="references/{rid}.md">分析记录与来源</a><p>{escape(a["review_status"])}</p></article>')
             _text(stage / 'index.md', '\n'.join(index) + '\n')
             _text(stage / 'index.html', '<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>科研参考知识导航</title><style>body{font:16px system-ui;max-width:1100px;margin:40px auto;padding:20px;background:#f5f7f6;color:#203b42}article{background:white;margin:20px 0;padding:22px;border:1px solid #ccd8d4}input{width:95%;padding:14px}a{color:#28667d}img{max-width:100%;max-height:650px}summary{cursor:pointer;padding:10px 0}nav{line-height:2}</style><h1>科研参考知识导航</h1><p>原图仅供参考。结构检索使用 refs-search。</p><p><a href="index.md">Markdown 索引</a> · <a href="purpose.md">目标</a> · <a href="schema.md">更新规则</a> · <a href="log.md">构建记录</a></p><nav aria-label="研究任务导航">'+task_links+'</nav><label for="q">按编号、标题、观察或中文分类筛选</label><input id="q" type="search"><p id="count" aria-live="polite">' + str(len(analyses)) + ' 条</p>' + ''.join(cards) + r'''<script>
 const q=document.getElementById('q');
@@ -208,7 +213,10 @@ q.addEventListener('input',()=>{
   document.getElementById('count').textContent=cards.filter(card=>!card.hidden).length+' 条';
 });
 for(const img of document.querySelectorAll('article img')) {
-  const missing=()=>{img.hidden=true;img.nextElementSibling.hidden=false;};
+  const missing=()=>{
+    if(img.getAttribute('src')!==img.dataset.original){img.src=img.dataset.original;return;}
+    img.hidden=true;img.nextElementSibling.hidden=false;
+  };
   img.addEventListener('error',missing);
   if(img.complete&&!img.naturalWidth) missing();
 }
@@ -269,8 +277,7 @@ def lint(library, catalog, images=None):
             raise ValueError('wiki entry is stale; run refs-build')
     statuses = {'verified': 0, 'missing': 0, 'modified': 0}
     for rid in analyses:
-        row = rows[rid]; path = inside(images or Path(library) / 'images', row['path'])
-        status = ('verified' if file_hash(path) == row['sha256'] else 'modified') if path.is_file() else 'missing'
+        _, _, status = resolve_image(rows[rid], images or Path(library) / 'images')
         statuses[status] += 1
     return {'status': 'blocked' if statuses['modified'] else 'ok', 'analyses': len(analyses),
             'unanalysed': sorted(set(rows) - set(analyses)), 'patterns': len(patterns), 'images': statuses,

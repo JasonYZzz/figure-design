@@ -46,6 +46,15 @@ def bindings(content, plan):
         raise ValueError('figure ID mismatch')
     instances = {i['id']: i for i in content['label_instances']}
     placed = [iid for r in plan['regions'] for iid in r['label_instance_ids']]
+    if any(instances.get(iid, {}).get('role') == 'operation' for iid in placed):
+        raise ValueError('place operation instances on their relation edges')
+    for edge in plan['edges']:
+        if 'label_instance_id' in edge:
+            iid = edge['label_instance_id']
+            instance = instances.get(iid, {})
+            if instance.get('owner_id') != edge['relation_id'] or instance.get('role') != 'operation':
+                raise ValueError('edge label must be an operation instance owned by its relation')
+            placed.append(iid)
     if len(placed) != len(set(placed)) or not set(placed) <= instances.keys():
         raise ValueError('unknown or duplicate label instance placement')
     if {i['id'] for i in instances.values() if i['required']} - set(placed):
@@ -73,6 +82,25 @@ def bindings(content, plan):
         if relation.get('condition_label_id') and not any(iid in placed and i['label_id'] == relation['condition_label_id'] and i['owner_id'] == rid for iid,i in instances.items()):
             raise ValueError('condition label instance missing')
     return instances, relations, regions
+
+
+def readout_visuals(regions, instances, assets):
+    """Report the registered visuals for each displayed result owner, across split regions."""
+    readouts = {}
+    placed = {}
+    for region in regions.values():
+        for iid in region['label_instance_ids']:
+            instance = instances[iid]
+            owner = instance['owner_id']
+            if instance['role'] == 'readout':
+                readouts.setdefault(owner, []).append(iid)
+            for aid in region.get('asset_ids', []):
+                if owner in assets[aid]['source_content_ids']:
+                    placed.setdefault(owner, {})[aid] = assets[aid]['contains_evidence']
+    return [{'owner_id': owner, 'readout_instances': ids,
+             'evidence_assets': [aid for aid, evidence in placed.get(owner, {}).items() if evidence],
+             'illustration_assets': [aid for aid, evidence in placed.get(owner, {}).items() if not evidence]}
+            for owner, ids in readouts.items()]
 
 
 def group_geometry(groups, bounds):
@@ -142,6 +170,15 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
         {'region_id': rid, 'asset_id': aid} for rid, region in regions.items()
         for aid in region.get('asset_ids', [])
     ]}
+    displayed_owners = {instances[iid]['owner_id'] for r in regions.values() for iid in r['label_instance_ids']}
+    drawn_relations = [relations[e['relation_id']] for e in plan['edges']]
+    endpoints = {r[key] for r in drawn_relations for key in ('from_id', 'to_id')}
+    composition['relation_review'] = {
+        'entities_without_native_edges': [e['id'] for e in content['entities'] if e['id'] in displayed_owners - endpoints],
+        'evidence_links': [r for r in drawn_relations if r['type'] in ('tests', 'measures', 'supports')],
+    }
+    if readouts := readout_visuals(regions, instances, assets):
+        composition['readout_visuals'] = readouts
     labels = {l['id']: l['text'] for l in content['labels']}
     state = STATES[content['study_status']]
     relation_types = sorted({r['type'] for r in relations.values()})
@@ -257,6 +294,9 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
                                 'source_content_ids':[relation['from_id'],relation['to_id']], 'points':points,
                                 'relation_type':relation['type'],'evidence_state':relation['evidence_state'],
                                 'condition_label_id':relation.get('condition_label_id'),'z_index':3})
+                if 'label_instance_id' in edge:
+                    iid = edge['label_instance_id']
+                    objects[-1].update(label_instance_id=iid, text=labels[instances[iid]['label_id']])
             semantic_boxes=[]
             connectors=[o for o in objects if o['type']=='connector']
             target_relations = {rid for feature in features for rid in feature.get('target_relations', [])}
@@ -269,15 +309,26 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
                     if other is obj:continue
                     for a,b in zip(other['points'],other['points'][1:]):
                         other_lines.append([min(a[0],b[0])-2,min(a[1],b[1])-2,max(abs(a[0]-b[0]),4),max(abs(a[1]-b[1]),4)])
+                label_width, label_height = 44, 24
+                if 'text' in obj:
+                    if '\n' in obj['text']:
+                        raise ValueError('use a single-line operation label')
+                    measured = page.evaluate('''text => {
+                        const ctx = document.createElement('canvas').getContext('2d');
+                        ctx.font = '22px FigureFont';
+                        return ctx.measureText(text).width;
+                    }''', obj['text'])
+                    label_width, label_height = measured + 12, 34
                 segments=sorted(zip(obj['points'],obj['points'][1:]),key=lambda pair:abs(pair[0][0]-pair[1][0])+abs(pair[0][1]-pair[1][1]),reverse=True)
                 chosen=None
                 for a,b in segments:
                     if abs(a[0]-b[0])+abs(a[1]-b[1])<30:continue
                     mx,my=(a[0]+b[0])/2,(a[1]+b[1])/2
-                    offsets=[(-22,-30),(-22,8),(-22,-12)] if a[1]==b[1] else [(8,-12),(-52,-12),(-22,-12)]
+                    half_width, half_height = label_width/2, label_height/2
+                    offsets=[(-half_width,-label_height-6),(-half_width,8),(-half_width,-half_height)] if a[1]==b[1] else [(8,-half_height),(-label_width-8,-half_height),(-half_width,-half_height)]
                     for dx,dy in offsets:
-                        box=[mx+dx,my+dy,44,24]
-                        if min(box[0],box[1])<0 or box[0]+44>width or box[1]+24>height:continue
+                        box=[mx+dx,my+dy,label_width,label_height]
+                        if min(box[0],box[1])<0 or box[0]+label_width>width or box[1]+label_height>height:continue
                         if not any(intersects(box,r) for r in list(bounds.values())+semantic_boxes+other_lines):chosen=box;break
                     if chosen:break
                 if chosen is None:raise ValueError('relation_label_capacity: add space for '+obj['relation_id'])
@@ -336,7 +387,11 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
                     ET.SubElement(svg,'path',attrs)
                     lx,ly,lw,lh=obj['semantic_label_bounds']
                     ET.SubElement(svg,'rect',{'x':str(lx),'y':str(ly),'width':str(lw),'height':str(lh),'rx':'3','fill':paper,'fill-opacity':'.96'})
-                    ET.SubElement(svg,'text',{'data-relation-label':obj['relation_id'],'x':str(lx+6),'y':str(ly+18),'font-size':'16','fill':style[tone]}).text=RELATIONS[obj['relation_type']][0]
+                    size = 22 if 'label_instance_id' in obj else 16
+                    attrs = {'data-relation-label':obj['relation_id'],'x':str(lx+6),'y':str(ly+(27 if 'label_instance_id' in obj else 18)),'font-size':str(size),'fill':style[tone]}
+                    if 'label_instance_id' in obj:
+                        attrs['data-label-instance-id'] = obj['label_instance_id']
+                    ET.SubElement(svg,'text',attrs).text=obj.get('text',RELATIONS[obj['relation_type']][0])
                 else:
                     x,y,w,h=obj['bounds']
                     if plan['route']=='image_first':
@@ -361,17 +416,20 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
             actual=page.evaluate('''() => Array.from(document.querySelectorAll('[data-label-instance-id]')).map(e=>({id:e.dataset.labelInstanceId,text:e.textContent,bbox:(()=>{let b=e.getBBox();return [b.x,b.y,b.width,b.height]})()}))''')
             errors=[]
             semantic_actual=page.evaluate('''() => Array.from(document.querySelectorAll('[data-relation-label]')).map(e=>({id:e.dataset.relationLabel,text:e.textContent,bbox:(()=>{let b=e.getBBox();return [b.x,b.y,b.width,b.height]})()}))''')
-            if {x['id']:x['text'] for x in semantic_actual}!={o['relation_id']:RELATIONS[o['relation_type']][0] for o in connectors}:
+            if {x['id']:x['text'] for x in semantic_actual}!={o['relation_id']:o.get('text',RELATIONS[o['relation_type']][0]) for o in connectors}:
                 errors.append('relation_semantic_label_mismatch')
             expected={iid:labels[instances[iid]['label_id']] for r in regions.values() for iid in r['label_instance_ids']}
+            expected.update({o['label_instance_id']:o['text'] for o in connectors if 'label_instance_id' in o})
             if {x['id']:x['text'] for x in actual}!=expected or len(actual)!=len(expected):errors.append('exact_label_manifest_mismatch')
-            object_labels={o['label_instance_id']:o for o in objects if o['type']=='text'}
+            object_labels={o['label_instance_id']:o for o in objects if 'label_instance_id' in o}
             for label in actual:
-                x,y,w,h=label['bbox'];obj=object_labels[label['id']];rx,ry,rw,rh=bounds[obj['region_id']]
+                x,y,w,h=label['bbox'];obj=object_labels[label['id']]
+                rx,ry,rw,rh = obj['semantic_label_bounds'] if obj['type']=='connector' else bounds[obj['region_id']]
                 if x < rx-.5 or y < ry-.5 or x+w > rx+rw+.5 or y+h > ry+rh+.5:errors.append('rendered_text_overflow:'+label['id'])
             footer_bbox=page.locator('[data-figure-footer]').evaluate('e => {const b=e.getBBox();return [b.x,b.y,b.width,b.height]}')
+            named_relations = {o['relation_id'] for o in connectors if 'label_instance_id' in o}
             auxiliary_labels = [{'id':'figure-footer','bbox':footer_bbox}] + [
-                {'id':'relation-'+label['id'],'bbox':label['bbox']} for label in semantic_actual]
+                {'id':'relation-'+label['id'],'bbox':label['bbox']} for label in semantic_actual if label['id'] not in named_relations]
             for item in auxiliary_labels:
                 x, y, w, h = item['bbox']
                 if min(x,y) < -.5 or x+w > width+.5 or y+h > height+.5:

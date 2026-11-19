@@ -152,7 +152,7 @@ def apply_reference(plan, brief, suggestions, *, use_reference_colors=True):
         records = []
         chosen = {choice['id'] for choice in brief['design_decisions']['reference_choices_with_reasons']}
         usable = {row['id']: {'id': row['id'], 'path': row.get('image_path') if row.get('image_status') == 'verified' else None,
-                             'sha256': row['sha256']} for row in (suggestions or {}).get('candidates', []) if row['id'] in chosen}
+                             'sha256': row['sha256'], 'file_sha256': row.get('image_file_sha256', row['sha256'])} for row in (suggestions or {}).get('candidates', []) if row['id'] in chosen}
     design = brief['design_decisions'].get('reference_design')
     if not design:
         if uploads and usable:
@@ -196,8 +196,19 @@ def apply_reference(plan, brief, suggestions, *, use_reference_colors=True):
             if key in item:
                 feature[key] = item[key]
         features.append(feature)
-    path = usable[primary]['path']
-    if path and file_hash(path) != usable[primary]['sha256']:
+    source = usable[primary]
+    path = source['path']
+    file_digest = source.get('file_sha256', source['sha256'])
+    if path and not uploads and not Path(path).exists():
+        # Saved suggestions can point to the PNG removed by the lossless library migration.
+        from figure_knowledge import LIBRARY, records as catalog_records
+        from figure_catalog import resolve_image
+        current = catalog_records(LIBRARY/'catalog.sqlite').get(primary)
+        if current and current.get('lossless_webp') and current['sha256'] == source['sha256']:
+            replacement, digest, status = resolve_image(current, LIBRARY/'images')
+            if status == 'verified':
+                path, file_digest = replacement, digest
+    if path and file_hash(path) != file_digest:
         raise ValueError('primary reference image no longer matches its recorded hash')
     color_theme, colors = reference_theme(design, path, plan['style_id']) if use_reference_colors else (None, {'mode': 'explicit'})
     if color_theme:

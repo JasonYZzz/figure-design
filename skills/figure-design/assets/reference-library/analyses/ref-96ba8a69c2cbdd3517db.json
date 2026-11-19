@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-96ba8a69c2cbdd3517db",
+  "image_sha256": "96ba8a69c2cbdd3517dbeba880cc60020ae10d0c91740cd17a44292855dec2ee",
+  "title": "软件过程风险矩阵与多阶段控制路线",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "cs-ai",
+    "layout": "matrix-plus-flow",
+    "topology": [
+      "merge",
+      "association",
+      "sequence"
+    ],
+    "media": "illustrated",
+    "density": "high",
+    "temporal_axis": "stages",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.09,
+        0.33,
+        0.85,
+        0.39
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "纵向分区把来源、矩阵组合、度量及实证应用串联，右缘有跨区返回线。",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "将矩阵作为方法间交接物，并保留模块编号。",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "原图部分小字重叠，局部标号和数值应回查原文。"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "纵向分区把来源、矩阵组合、度量及实证应用串联，右缘有跨区返回线。",
+  "variant_group": null,
+  "spatial": {
+    "columns": null,
+    "stages": null,
+    "direction": "top_to_bottom",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "将矩阵作为方法间交接物，并保留模块编号。",
+  "uncertainty": "版式观察与区域近似定位由模型完成。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "Codex",
+    "method": "user_supplied_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "curation-1.10",
+    "observed_on": "2026-11-19"
+  },
+  "relations": []
+}

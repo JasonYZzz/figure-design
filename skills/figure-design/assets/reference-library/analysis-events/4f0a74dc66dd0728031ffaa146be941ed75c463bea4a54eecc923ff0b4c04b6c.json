@@ -1,0 +1,95 @@
+{
+  "at": "2026-11-19T06:09:44.901895+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-6773a6f849dfff2c8fd9",
+    "image_sha256": "6773a6f849dfff2c8fd9b8e81c67306df1e65e3b0c239b050af5355cbe70ad90",
+    "title": "清肺类黄酮抗 RSV 感染研究技术路线",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "biomedicine",
+      "layout": "top-overview-multi-lane",
+      "topology": [
+        "parallel",
+        "sequence"
+      ],
+      "media": "illustrated",
+      "density": "high",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.055,
+          0.25,
+          0.93,
+          0.7
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "顶部横带列对象，下方四组图文任务沿左栏排列，底部为验证区。",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "将行标题、方法插图、观察指标按列对齐。",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "仅作行列层次参考，示意图中的条带和读出不能作为实验数据。"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "顶部横带列对象，下方四组图文任务沿左栏排列，底部为验证区。",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "top_to_bottom",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "将行标题、方法插图、观察指标按列对齐。",
+    "uncertainty": "版式观察与区域近似定位由模型完成。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "Codex",
+      "method": "user_supplied_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "curation-1.10",
+      "observed_on": "2026-11-19"
+    },
+    "relations": []
+  }
+}

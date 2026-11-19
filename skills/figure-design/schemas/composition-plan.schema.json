@@ -64,7 +64,7 @@
       }}
     }}},
     "edges":{"type":"array","items":{"type":"object","additionalProperties":false,"required":["relation_id","source_region_id","target_region_id","line_style"],"properties":{
-      "relation_id":{"type":"string"},"source_region_id":{"type":"string"},"target_region_id":{"type":"string"},"line_style":{"enum":["solid","dashed","dotted","tbar"]},"tone":{"$ref":"#/$defs/tone"}
+      "relation_id":{"type":"string"},"label_instance_id":{"type":"string"},"source_region_id":{"type":"string"},"target_region_id":{"type":"string"},"line_style":{"enum":["solid","dashed","dotted","tbar"]},"tone":{"$ref":"#/$defs/tone"}
     }}},
     "status":{"enum":["draft","validated","rejected","review_required"]}
   },

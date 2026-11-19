@@ -29,6 +29,15 @@
       "type": "string",
       "pattern": "^[a-f0-9]{64}$"
     },
+    "lossless_webp": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
     "width": {
       "type": "integer",
       "minimum": 1

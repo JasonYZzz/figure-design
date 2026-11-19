@@ -10,11 +10,19 @@
 make setup
 make package-dsh
 export FIGURE_PY="$PWD/.venv/bin/python"
-dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.9.0.tgz"
+dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.11.0.tgz"
 dsh web
 ```
 
-已使用 DeepSeek Harness 桌面版时，用桌面版提供的 `dsh` CLI，并在退出桌面应用后执行 `dsh plugin --profile desktop add <插件包绝对路径>`。随后重新打开桌面客户端，从「插件 → 已安装」查看「科研图设计」。
+在 macOS 上升级已安装的桌面插件时，先正常退出 DeepSeek Harness，再从仓库根目录运行桌面版自带的 CLI。以下路径适用于应用安装在 `/Applications` 的情况。
+
+```bash
+dsh_desktop="/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh"
+"$dsh_desktop" plugin --profile desktop add "$PWD/dist/dsh-figure-design-1.11.0.tgz"
+"$dsh_desktop" plugin --profile desktop list dsh-figure-design
+```
+
+列表应显示 `dsh-figure-design@1.11.0`。重新打开桌面客户端，从「插件 → 已安装」查看「科研图设计」。
 
 拿到预构建 `.tgz` 时可直接用绝对路径安装。渲染环境需要 Python 依赖和 Playwright Chromium。若尚未准备，在会话中让 Agent 给出已加载 Skill 的资源目录，然后在独立虚拟环境中执行以下命令。`FIGURE_SKILL` 取会话报告的绝对路径，`FIGURE_PY` 取虚拟环境的 Python 绝对路径。
 

@@ -44,6 +44,11 @@
       "source_relative_path": "templates/03_argument_map.md",
       "sha256": "45d8705a58eb3c9cdb797481c9833f3bca3397039979fce185ac517d82f46496",
       "reuse": "ideas_reviewed_original_local_implementation"
+    },
+    {
+      "project": "three",
+      "version": "0.186.1",
+      "reuse": "MIT_bundled_SVGRenderer_and_selected_exports"
     }
   ],
   "vendored_files": {
@@ -58,6 +63,9 @@
     "third_party/diagram-design/skills/diagram-design/references/primitives-core.md": "601305baed49217870dda15a0ebc879a6a560608cb63fe2108aaebee1abefbc9",
     "third_party/diagram-design/skills/diagram-design/references/style-guide.md": "320881ec802004384c09ce4f4f087b9242d926b08071d6b908160e14c707d155",
     "third_party/diagram-design/skills/diagram-design/references/output-spec.md": "12dc0eed3514e387328651652604ef4fba1a76bce1823a79f4da2993336d1e69",
-    "third_party/diagram-design/skills/diagram-design/references/layout-budget.md": "12043c659df9ce146f8ecc45e247ddc14b04f1c5724cc4cb6286b60cc1e758f2"
+    "third_party/diagram-design/skills/diagram-design/references/layout-budget.md": "12043c659df9ce146f8ecc45e247ddc14b04f1c5724cc4cb6286b60cc1e758f2",
+    "third_party/three-svg/LICENSE": "8b378ebe60e2fe500158cb0ac71cb5e8b7d92953c2abcc63a0eb90499653b5bc",
+    "third_party/three-svg/runtime.js": "1127c56bd63fda77e157fa1913966db56052f96701f3c11e0191639d3e5d4c57",
+    "third_party/three-svg/exports.js": "047e94c6c5381837ace1ebcb18371ba0efa04fbd3b56ce04aa5895f325b9bca1"
   }
 }

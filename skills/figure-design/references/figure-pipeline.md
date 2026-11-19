@@ -11,6 +11,10 @@
 
 具体字段见 [内容契约](../schemas/figure-content.schema.json)、[构图契约](../schemas/composition-plan.schema.json) 和 [场景契约](../schemas/figure-scene-v1.1.schema.json)。
 
+### 在箭头上放正式动作文字
+
+在 FigureContent 中给关系增加一个 `role: operation` 的 LabelInstance。实例的 `owner_id` 是该关系的 ID，引用的 Label 带来源，例如“核对日志”或“按需检索”。每条关系可有一个这样的实例。自动计划把它放到对应的 `edges[].label_instance_id`；显式计划也在边上放置一次。条件文字继续用 `condition`。渲染会测量词宽、避开区域并检查实图，位置不足时加大连线留白。使用原有关系类型的计划继续绘制默认标签。
+
 ## 数据流与状态
 
 `ingest → FigureContent → content-check → research-brief → refs-search → plan → asset-register/绑定 → preflight → render → qa → export`

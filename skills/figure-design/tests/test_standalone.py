@@ -217,6 +217,52 @@ class StandaloneContracts(unittest.TestCase):
         (source/'SKILL.md').write_text('tampered')
         with self.assertRaises(ValueError):install(source,self.root/'other')
 
+    def test_lossless_reference_preserves_identity_and_detects_changes(self):
+        import sqlite3
+        from PIL import Image
+        from figure_catalog import resolve_image
+        from figure_common import canonical
+        from figure_reference import apply_reference
+        from figure_retrieval import resolve_images
+
+        images = self.root/'images'
+        images.mkdir()
+        png, webp = images/'sample.png', images/'sample.webp'
+        Image.new('RGB', (60, 40), '#206070').save(png)
+        catalog = self.root/'catalog.sqlite'
+        index(images, catalog)
+        row = search(catalog)[0]
+        with Image.open(png) as im:
+            im.save(webp, lossless=True)
+        row['lossless_webp'] = {'path': webp.name, 'sha256': file_hash(webp)}
+        with sqlite3.connect(catalog) as db:
+            db.execute('UPDATE refs SET record=? WHERE id=?', (canonical(row), row['id']))
+        rid = row['id']
+        index(images, catalog)
+        self.assertEqual([r['id'] for r in search(catalog)], [rid])
+        original = self.root/'originals'
+        original.mkdir()
+        png.rename(original/png.name)
+        self.assertEqual(resolve_image(row, original), ((original/png.name).resolve(), row['sha256'], 'verified'))
+        selected = resolve_images([row], images)[0]
+        self.assertEqual(selected['image_file_sha256'], file_hash(webp))
+        plan = {'regions': [{'id': 'task'}], 'style_id': 'general-roadmap'}
+        brief = {'design_decisions': {'reference_choices_with_reasons': [{'id': rid}],
+                 'reference_design': {'primary_id': rid, 'placements': {'task': {'bounds': [0,0,1,1]}},
+                     'features': [{'reference_id': rid, 'source_bounds': [0,0,1,1], 'target_regions': ['task'],
+                                   'observation': 'one panel', 'check': 'colors'}]}}}
+        apply_reference(plan, brief, {'candidates': [selected]}, use_reference_colors=False)
+        self.assertEqual(plan['reference_design']['images'], {rid: row['sha256']})
+        from unittest.mock import patch
+        saved = dict(selected, image_path=str(png))
+        del saved['image_file_sha256']
+        with patch('figure_knowledge.LIBRARY', self.root):
+            apply_reference(plan, brief, {'candidates': [saved]}, use_reference_colors=False)
+        webp.write_bytes(b'changed')
+        self.assertEqual(resolve_image(row, images)[2], 'modified')
+        with self.assertRaisesRegex(ValueError, 'recorded hash'):
+            apply_reference(plan, brief, {'candidates': [selected]}, use_reference_colors=False)
+
     def test_packages_separate_private_images_and_verify_catalog(self):
         from unittest.mock import patch
         from PIL import Image
@@ -352,6 +398,7 @@ class BrowserIntegration(unittest.TestCase):
             self.assertFalse(report['errors']);self.assertEqual(report['format'],'hybrid_svg')
             self.assertEqual(report['composition'], {'route': route, 'mode': 'mixed',
                 'html_template': 'figure-design',
+                'relation_review': {'entities_without_native_edges': [], 'evidence_links': []},
                 'asset_placements': [{'region_id': p['regions'][1]['id'], 'asset_id': 'module1'}]})
             self.assertIn('href="data:image/png;base64,', (self.root/route/'preview.html').read_text())
             if route=='image_first':self.assertIn('native_image_text_and_arrows_review',report['pending'])

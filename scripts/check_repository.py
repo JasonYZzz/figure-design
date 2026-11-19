@@ -22,8 +22,8 @@ def check():
     documents = [ROOT/'README.md', ROOT/'CONTRIBUTING.md', ROOT/'THIRD_PARTY_NOTICES.md',
                  ROOT/'plugins/dsh-figure-design/README.md',
                  *(p for p in SKILL.rglob('*.md') if not p.is_relative_to(upstream)),
-                 ROOT/'docs/ARCHITECTURE.md', ROOT/'docs/DEVELOPMENT_PLAN.md', ROOT/'docs/releases/1.8.0.md',
-                 ROOT/'docs/releases/1.9.0.md']
+                 ROOT/'docs/ARCHITECTURE.md', ROOT/'docs/DEVELOPMENT_PLAN.md',
+                 *sorted((ROOT/'docs/releases').glob('*.md'))]
     for path in documents:
         for target in re.findall(r'\]\(([^)]+)\)', path.read_text(encoding='utf-8')):
             if re.match(r'\w+://', target) or target.startswith('#'):
@@ -48,14 +48,10 @@ def check():
         text = path.read_text()
         if re.search(r'https?://(?:raw\.githubusercontent\.com|github\.com)/|/Users/', text):
             errors.append('remote/upstream-machine source reference: '+str(path.relative_to(SKILL)))
-    for row in rows:
-        image = inside(library/'images', row['path'])
-        if (library/'images').is_dir() and (not image.is_file() or file_hash(image) != row['sha256']):
-            errors.append('missing or changed reference: '+row['path'])
     from figure_knowledge import lint
     try:
         knowledge=lint(library,library/'catalog.sqlite')
-        if knowledge['status']!='ok' or knowledge['unanalysed']:
+        if knowledge['status']!='ok' or knowledge['unanalysed'] or ((library/'images').is_dir() and knowledge['images']['missing']):
             errors.append('knowledge coverage or image verification failed')
     except (ValueError,OSError,KeyError) as exc:
         errors.append('knowledge: '+str(exc))

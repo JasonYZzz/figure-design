@@ -1,0 +1,88 @@
+{
+  "schema_version": "2.0",
+  "reference_id": "ref-10d9af5175fe250f7cb6",
+  "image_sha256": "10d9af5175fe250f7cb673c72bf10311df0c00298031d4199ca31974b5d98a11",
+  "title": "结构光三维尺寸检测技术路线",
+  "review_status": "auto_proposed",
+  "facets": {
+    "domain": "cs-ai",
+    "layout": "top-overview-multi-lane",
+    "topology": [
+      "sequence",
+      "merge",
+      "branch"
+    ],
+    "media": "illustrated",
+    "density": "medium",
+    "temporal_axis": "stages",
+    "purpose": "roadmap"
+  },
+  "regions": [
+    {
+      "id": "overview",
+      "parent_id": null,
+      "bounds": [
+        0,
+        0,
+        1,
+        1
+      ],
+      "role": "whole_figure"
+    },
+    {
+      "id": "focus",
+      "parent_id": "overview",
+      "bounds": [
+        0.012,
+        0.4,
+        0.977,
+        0.245
+      ],
+      "role": "transfer_evidence"
+    }
+  ],
+  "observations": [
+    {
+      "text": "同一个法兰依次呈现条纹、包裹相位、展开相位和点云，底部用配准后的截面分别说明孔径与端面检验。",
+      "region_ids": [
+        "overview",
+        "focus"
+      ]
+    }
+  ],
+  "transfer": [
+    {
+      "text": "跨阶段保持法兰开孔和缺口的方向，读者可以直接在不同表示之间定位同一部位。",
+      "region_ids": [
+        "focus"
+      ]
+    }
+  ],
+  "limitations": [
+    "相位着色、条纹和几何偏差均为方法示意，未给出实测值或可溯源的精度。"
+  ],
+  "reading_order": [
+    "overview",
+    "focus"
+  ],
+  "reading_summary": "同一个法兰依次呈现条纹、包裹相位、展开相位和点云，底部用配准后的截面分别说明孔径与端面检验。",
+  "variant_group": null,
+  "spatial": {
+    "columns": null,
+    "stages": null,
+    "direction": "mixed",
+    "task_lanes": null,
+    "duration_years": null
+  },
+  "visual_encoding": "跨阶段保持法兰开孔和缺口的方向，读者可以直接在不同表示之间定位同一部位。",
+  "uncertainty": "版式观察与区域近似定位由模型完成。",
+  "provenance": {
+    "reviewer": "Codex",
+    "model": "Codex",
+    "method": "native_imagegen_and_visual_inspection",
+    "taxonomy_version": "2.0",
+    "prompt_version": "1.10.0-roadmap-replacement",
+    "observed_on": "2026-11-19"
+  },
+  "relations": []
+}

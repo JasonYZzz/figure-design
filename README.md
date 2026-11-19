@@ -19,7 +19,7 @@ make package
 | 模式 | 用途 | CLI 规划参数 |
 | --- | --- | --- |
 | 纯文字 | 随包的原版 Diagram Design 直接分析文档并绘制架构图或技术路线图 | `plan --source <原文> --mode text` 可记录交接，图型可选 `architecture` 或 `roadmap` |
-| 图文混合 | 用原创 SVG 示意或获准插图解释研究对象、方法与验证场景 | `--mode mixed` |
+| 图文混合 | 用 [Three.js 空间图例](skills/figure-design/references/threejs-legends.md)、原创 SVG 示意或获准插图解释研究对象、方法与验证场景 | `--mode mixed` |
 
 Skill 与 CLI 默认采用纯文字。用户可说「带插图」或指定 `mode=mixed` 来选择图文。两种模式均交付 `preview.svg`、`preview.png`、`preview.html` 和 `quality-report.json`。
 
@@ -27,11 +27,11 @@ Skill 与 CLI 默认采用纯文字。用户可说「带插图」或指定 `mode
 
 ## DeepSeek Harness 插件
 
-在仓库根目录执行 `make setup` 和 `make package-dsh`，生成 `dist/dsh-figure-design-1.9.0.tgz`，再安装到实际使用的 DSH CLI Profile。
+在仓库根目录执行 `make setup` 和 `make package-dsh`，生成 `dist/dsh-figure-design-1.11.0.tgz`，再安装到实际使用的 DSH CLI Profile。
 
 ```bash
 export FIGURE_PY="$PWD/.venv/bin/python"
-dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.9.0.tgz"
+dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.11.0.tgz"
 dsh web
 ```
 
@@ -75,9 +75,9 @@ make check                           # 目录、文档链接和参考库完整�
 make test                            # 包含 Chromium 渲染集成测试
 make benchmark OUT=build/layout-001
 make package                         # 轻量 ZIP，包含索引、完整 Diagram Design Skill 及上游许可证
-make package-private                 # 本机私用 ZIP，另附活跃库的 110 张经 hash 校验的科研参考原图
+make package-private                 # 本机私用 ZIP，另附 111 张经哈希校验的参考图，全部使用等尺寸无损 WebP
 ```
 
 重复运行用新的 `OUT` 或 `DIST`。仓库与轻量 ZIP 提供参考索引和知识库，可通过 `--images` 绑定本地图库。项目代码采用 [MIT 许可证](LICENSE)。随包字体、第三方代码和本地参考原图的许可分别见 [第三方资源与许可](THIRD_PARTY_NOTICES.md)。
 
-[贡献与维护](CONTRIBUTING.md) · [开发状态](docs/DEVELOPMENT_PLAN.md) · [参考图 Wiki](skills/figure-design/assets/reference-library/images-wiki/index.md) · [参考库维护](skills/figure-design/references/reference-knowledge.md) · [1.9.0 变更](docs/releases/1.9.0.md)
+[贡献与维护](CONTRIBUTING.md) · [开发状态](docs/DEVELOPMENT_PLAN.md) · [参考图 Wiki](skills/figure-design/assets/reference-library/images-wiki/index.md) · [参考库维护](skills/figure-design/references/reference-knowledge.md) · [1.11.0 变更](docs/releases/1.11.0.md)

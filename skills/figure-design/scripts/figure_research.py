@@ -34,14 +34,16 @@ def research_brief(content, sources, reference_images=()):
         'design_decisions': {
             'main_question_or_supported_claim': None, 'hero_owner_id': None,
             'panel_questions_and_evidence_roles': [], 'reading_order': [],
+            'main_paths': [], 'evidence_scope': [],
             'alternative_explanations_and_controls': [], 'color_meanings': [],
             'reference_choices_with_reasons': [], 'exclusions_with_reasons': [],
             'reference_design': None,
-            'visual_concept': {'route': None, 'depictions': [], 'fallback_reason': None},
+            'visual_concept': {'route': None, 'depictions': [], 'object_trace': [], 'evidence_displays': [], 'fallback_reason': None},
         },
         'review_required': [
             'Keep planned questions distinct from observed or validated conclusions.',
-            'Assign each panel a necessary question and trace its answer to source IDs.',
+            'Trace the main paths without the local example. Identify the object passed and the action on each path.',
+            'Read each evidence link as a claim. Match the target to the intervention, comparator, outcome and scope.',
             'Distinguish the main evidence from controls, methods and validation.',
             'Retain negation, units, uncertainty, experimental conditions and alternative explanations.',
             'Choose layout after the scientific argument; references provide design, never new facts.',

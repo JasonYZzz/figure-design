@@ -8,7 +8,7 @@ from html import escape
 from base64 import b64encode
 from PIL import Image, ImageOps, ImageDraw
 from inventory_refs import inventory
-from figure_common import canonical, fingerprint, inside, read, write
+from figure_common import canonical, file_hash, fingerprint, inside, read, write
 
 TAG_FIELDS = ('domain_tags', 'figure_type_tags', 'composition_tags', 'asset_tags')
 
@@ -21,6 +21,29 @@ def connect(path):
     return db
 
 
+def image_files(row, *, compact):
+    """Relative paths and expected file hashes for either complete representation."""
+    if compact and 'lossless_webp' in row:
+        webp = row['lossless_webp']
+        return {webp['path']: webp['sha256']}
+    return {path: row['sha256'] for path in row.get('paths', [row['path']])}
+
+
+def resolve_image(row, images):
+    candidates = image_files(row, compact=True) | image_files(row, compact=False)
+    first_existing = None
+    for name, digest in candidates.items():
+        path = inside(images, name)
+        if path.is_file():
+            if file_hash(path) == digest:
+                return path, digest, 'verified'
+            if first_existing is None:
+                first_existing = path
+    if first_existing is not None:
+        return first_existing, None, 'modified'
+    return inside(images, next(iter(candidates))), None, 'missing'
+
+
 def index(root, catalog):
     root = Path(root).resolve()
     if Path(catalog).resolve().is_relative_to(root):
@@ -29,7 +52,14 @@ def index(root, catalog):
     if errors:
         raise ValueError(canonical(errors))
     with connect(catalog) as db:
+        derivatives = {item['lossless_webp']['path']: item['lossless_webp']['sha256']
+                       for (raw,) in db.execute('SELECT record FROM refs')
+                       for item in [json.loads(raw)] if 'lossless_webp' in item}
         for row in rows:
+            if row['path'] in derivatives:
+                if derivatives[row['path']] != row['sha256']:
+                    raise ValueError('modified lossless reference: ' + row['path'])
+                continue
             row['id'] = 'ref-' + row['sha256'][:20]
             old = db.execute('SELECT record FROM refs WHERE id=?', (row['id'],)).fetchone()
             if old:
@@ -122,9 +152,8 @@ def sheets(catalog, image_root, out, count=30):
     out.mkdir(parents=True, exist_ok=True)
     html = ['<!doctype html><meta charset="utf-8"><title>Reference review</title><style>body{font:16px sans-serif;background:#f4f5f3}article{padding:24px;background:white;margin:20px}img{max-width:100%;max-height:700px}code{word-break:break-all}</style><h1>Reference candidates — human review pending</h1>']
     for row in chosen:
-        path = inside(image_root, row['path'])
-        from figure_common import file_hash
-        if file_hash(path) != row['sha256']:
+        path, _, status = resolve_image(row, image_root)
+        if status != 'verified':
             raise ValueError('reference bytes changed')
         import io
         with Image.open(path) as im:

@@ -1,12 +1,12 @@
 {
   "version": "2.0",
-  "count": 110,
+  "count": 111,
   "status": "auto_proposed",
   "human_gold_count": 0,
-  "images": "assets/reference-library/images/ in private full package, or user-supplied directory",
-  "method": "Active set curated from 161 visual observations; archive retains excluded originals. Model proposals, no human gold.",
-  "rights": "unknown; reference pixels are never production assets",
+  "images": "Private distribution: pixel-verified lossless WebP. Metadata and signatures of original containers are available only in original files.",
+  "method": "99 legacy, two supplied and ten generated figures. Eight of the generated figures have explicit method limitations for layout-only reuse.",
+  "rights": "User-supplied pixels have unknown redistribution rights. Authored examples are illustrative designs.",
   "observations": "Legacy catalog labels retained for compatibility. Current analyses distinguish explicit time from stages; unknown measurements remain unknown.",
-  "analysis_count": 110,
+  "analysis_count": 111,
   "analysis_schema": "2.0"
 }

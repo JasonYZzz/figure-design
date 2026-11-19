@@ -8,7 +8,7 @@
 python3 /实际解压路径/figure-design/scripts/install.py --to ~/.agents/skills
 ```
 
-安装器验证包内全部 hash，并在目标已有同名 Skill 时停止。旧名 `scientific-figure-designer` 的用户级安装可单独备份。使用新名称时，安装 `figure-design` 后在会话中调用它，并用 `doctor` 核对名称和版本。私用包包含当前 110 张本地参考图，原图许可待核实。
+安装器验证包内全部 hash，并在目标已有同名 Skill 时停止。旧名 `scientific-figure-designer` 的用户级安装可单独备份。使用新名称时，安装 `figure-design` 后在会话中调用它，并用 `doctor` 核对名称和版本。私用包包含当前 111 张本地参考图，原图许可待核实。
 
 Codex 使用 `$figure-design`，DSH 使用 `/figure-design`。需要项目级部署时，也可把独立安装包安装到目标项目的 `.agents/skills/`。
 
@@ -185,7 +185,7 @@ python scripts/demo.py --out /独立工作目录/illustrated-demo
 python scripts/figure.py pack --out /独立发布目录/figure-design.zip --references /用户授权的本地参考图目录
 ```
 
-两种包都提供 Diagram Design 模板、规则、示例和当前科研参考索引。需要包内原图时用 `make package-private` 或显式传 `pack --references <Skill目录>/assets/reference-library/images`。打包前核对每张图的路径及 SHA-256，解包后的原图保持同一目录结构。轻量包可用 `--images` 绑定本地图库。benchmark 的 12+4 个案例均为合成校验，demo 使用原创几何图标。依赖通过 `requirements.txt` 安装。
+两种包都提供 Diagram Design 模板、规则、示例和当前科研参考索引。需要包内原图时用 `make package-private` 或显式传 `pack --references <Skill目录>/assets/reference-library/images`。打包前核对每张图的路径及 SHA-256，私用包优先包含经过逐像素校验的无损 WebP。检索结果中的 path、sha256 标识原件，image_path、image_file_sha256 指向实际验证的文件。外接旧 PNG/JPEG 图库仍可按原件哈希校验。轻量包可用 `--images` 绑定本地图库。benchmark 的 12+4 个案例均为合成校验，demo 使用原创几何图标。依赖通过 `requirements.txt` 安装。
 
 经授权的本地复现包使用 `export --include-sources`，一次归档源快照与资产。用可重复的 `--source-file FILE` 按需加入获准的简报和 SVG 源文件。提供 `--review` 时，ZIP 内质量报告也含审阅结论。复现包的 `artifact-manifest.json` 覆盖所有其他条目，CLI 返回最终 ZIP 的 SHA-256。默认分享包只含成图、结构文件和显式传入的审阅。
 

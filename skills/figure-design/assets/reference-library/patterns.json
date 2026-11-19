@@ -61,13 +61,8 @@
     "claim": "可辨条件节点配标明失败出口的外侧返回线。",
     "when": "真实存在失败重做或条件跳转。",
     "limits": "未标条件的菱形不算证据；回路与双向关联不同。",
-    "kind": "cross_image",
+    "kind": "single_example",
     "sources": [
-      {
-        "reference_id": "ref-3de32b64b207ae3b7244",
-        "region_id": "focus",
-        "reason": "用菱形和否标注表达条件失败重做"
-      },
       {
         "reference_id": "ref-418e78e4234db25d6b19",
         "region_id": "focus",

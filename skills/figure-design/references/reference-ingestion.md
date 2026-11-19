@@ -1,6 +1,6 @@
 # Reference library
 
-The canonical library is `assets/reference-library/`: `catalog.sqlite` contains searchable records and review events, `library.json` describes provenance/status, and `images/` holds private original pixels. Catalog paths are relative to `images/`. The full private package preserves this layout; the default package excludes pixels. `refs-search` resolves the image path and verifies its hash; use `--images` for an external image directory.
+The canonical library is `assets/reference-library/`: `catalog.sqlite` contains searchable records and review events, `library.json` describes provenance/status, and `images/` holds private reference images. Catalog paths are relative to `images/`. The catalog retains original paths and SHA-256 identities. Optional lossless_webp records the distribution path and its separate byte hash. The full private package preserves this layout; the default package excludes pixels. `refs-search` resolves the image path and verifies its hash; use `--images` for an external image directory.
 
 The following ingestion stages describe the review workflow, not proof that human gold/OCR/segmentation have been completed.
 

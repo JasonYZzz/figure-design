@@ -1,0 +1,2 @@
+# Preserve the generated shader strings in the checksum-pinned Three.js bundle.
+skills/figure-design/third_party/three-svg/runtime.js -text -whitespace

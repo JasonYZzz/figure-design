@@ -1,0 +1,95 @@
+{
+  "at": "2026-11-19T07:08:32.927238+00:00",
+  "kind": "visual_analysis",
+  "reviewer": "Codex",
+  "reviewer_kind": "model",
+  "attestation": null,
+  "previous_hash": null,
+  "analysis": {
+    "schema_version": "2.0",
+    "reference_id": "ref-f6e9ce3034287928c379",
+    "image_sha256": "f6e9ce3034287928c3794d25d60118abbdb85f33784c0eb53c800a87a5184697",
+    "title": "组相联缓存的访存分析路线",
+    "review_status": "auto_proposed",
+    "facets": {
+      "domain": "cs-ai",
+      "layout": "matrix-plus-flow",
+      "topology": [
+        "comparison"
+      ],
+      "media": "illustrated",
+      "density": "medium",
+      "temporal_axis": "stages",
+      "purpose": "roadmap"
+    },
+    "regions": [
+      {
+        "id": "overview",
+        "parent_id": null,
+        "bounds": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "role": "whole_figure"
+      },
+      {
+        "id": "focus",
+        "parent_id": "overview",
+        "bounds": [
+          0.12,
+          0.18,
+          0.76,
+          0.61
+        ],
+        "role": "transfer_evidence"
+      }
+    ],
+    "observations": [
+      {
+        "text": "地址字段与组相联缓存的各路、存储阵列同图呈现。",
+        "region_ids": [
+          "overview",
+          "focus"
+        ]
+      }
+    ],
+    "transfer": [
+      {
+        "text": "将地址拆字段，与索引的存储行对齐。",
+        "region_ids": [
+          "focus"
+        ]
+      }
+    ],
+    "limitations": [
+      "比较器应比较请求标记与缓存标记。图中误接的数据通路不可复用。",
+      "生成图，仅借鉴所列布局，技术关系须回查任务来源。"
+    ],
+    "reading_order": [
+      "overview",
+      "focus"
+    ],
+    "reading_summary": "地址字段与组相联缓存的各路、存储阵列同图呈现。",
+    "variant_group": null,
+    "spatial": {
+      "columns": null,
+      "stages": null,
+      "direction": "mixed",
+      "task_lanes": null,
+      "duration_years": null
+    },
+    "visual_encoding": "将地址拆字段，与索引的存储行对齐。",
+    "uncertainty": "版式观察与区域近似定位由模型完成。",
+    "provenance": {
+      "reviewer": "Codex",
+      "model": "Codex",
+      "method": "native_imagegen_and_visual_inspection",
+      "taxonomy_version": "2.0",
+      "prompt_version": "1.10.0-roadmap-replacement",
+      "observed_on": "2026-11-19"
+    },
+    "relations": []
+  }
+}
