@@ -9,22 +9,32 @@ def registry():
     return yaml.safe_load((ROOT / 'assets' / 'layout-registry.yaml').read_text(encoding='utf-8'))
 
 
+def contrast(first, second):
+    def luminance(color):
+        channels = [int(color[index:index+2], 16)/255 for index in (1, 3, 5)]
+        linear = [value/12.92 if value <= .04045 else ((value+.055)/1.055)**2.4 for value in channels]
+        return sum(value*weight for value, weight in zip(linear, (.2126, .7152, .0722)))
+    low, high = sorted((luminance(first), luminance(second)))
+    return (high+.05)/(low+.05)
+
+
+def default_style(domain):
+    normalized = domain.casefold()
+    for aliases, default in registry()['domain_styles']:
+        if any(alias in normalized for alias in aliases):
+            return default
+    return 'general-roadmap'
+
+
 def figure_theme(plan):
     preset = registry()['styles'].get(plan['style_id'])
     if preset is None:
         raise ValueError('unknown style')
     theme = plan.get('theme') or preset
 
-    def luminance(rgb):
-        channels = [int(rgb[i:i+2], 16)/255 for i in (1, 3, 5)]
-        linear = [v/12.92 if v <= .04045 else ((v+.055)/1.055)**2.4 for v in channels]
-        return sum(value*weight for value, weight in zip(linear, (.2126, .7152, .0722)))
-
-    for text in ('ink', 'muted', 'accent'):
-        for background in ('paper', 'surface'):
-            low, high = sorted((luminance(theme[text]), luminance(theme[background])))
-            if (high+.05)/(low+.05) < 4.5:
-                raise ValueError(f'theme_contrast: {text} against {background} must reach 4.5:1')
+    for hue in ('ink', 'muted', 'accent', 'secondary', 'tertiary'):
+        if hue in theme and any(contrast(theme[hue], theme[background]) < 4.5 for background in ('paper', 'surface')):
+            raise ValueError(f'theme_contrast: {hue} against paper and surface must reach 4.5:1')
     return theme
 
 
@@ -89,6 +99,12 @@ def positions(family, n, variant='balanced'):
     raise ValueError('unknown layout family')
 
 
+def owner_slots(content):
+    excluded = {content['figure_id'], *(relation['id'] for relation in content['relations'])}
+    owners = dict.fromkeys(item['owner_id'] for item in content['label_instances'] if item['owner_id'] not in excluded)
+    return {f'owner-{index}': owner for index,owner in enumerate(owners,1)}
+
+
 def make_plan(content, primary, style, variant='balanced', route='asset_composite'):
     schema_check('figure-content.schema.json', content)
     if route not in MIXED_ROUTES:
@@ -106,10 +122,9 @@ def make_plan(content, primary, style, variant='balanced', route='asset_composit
     if style not in config['styles']:
         raise ValueError('unknown style')
     instances = content['label_instances']
-    owner_ids = list(dict.fromkeys(i['owner_id'] for i in instances
-                                  if i['owner_id'] != content['figure_id'] and i['owner_id'] not in {r['id'] for r in content['relations']}))
+    slots = owner_slots(content)
     # Preserve task input order; Codex may reorder explicitly after scientific review.
-    coords = positions(layout['family'], len(owner_ids), variant)
+    coords = positions(layout['family'], len(slots), variant)
     cw,ch,mirrored=variants[variant]
     if mirrored:coords=[[1-x-w,y,w,h] for x,y,w,h in coords]
     canvas = {'width':cw, 'height':ch}
@@ -123,8 +138,7 @@ def make_plan(content, primary, style, variant='balanced', route='asset_composit
     if title:
         regions.append(region('title', 'title', [.05, .035, .90, .12], title))
     owner_regions = {}
-    for i, (owner, bounds) in enumerate(zip(owner_ids, coords)):
-        rid = f'owner-{i + 1}'
+    for i, ((rid, owner), bounds) in enumerate(zip(slots.items(), coords)):
         owner_regions[owner] = rid
         regions.append(region(rid, 'hero' if layout['family'] in ('center', 'radial', 'abstract', 'apparatus') and i == 0 else 'research_task', bounds,
                               [item['id'] for item in instances if item['owner_id'] == owner]))

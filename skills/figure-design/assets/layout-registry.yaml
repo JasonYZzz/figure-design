@@ -18,3 +18,27 @@ styles:
   cs-academic: {paper: '#f8fafc', surface: '#ffffff', ink: '#1c2b40', muted: '#4d5d73', accent: '#274d80', border: '#b7c5d8'}
   materials-academic: {paper: '#faf8f5', surface: '#ffffff', ink: '#332a24', muted: '#675449', accent: '#8a442b', border: '#d4c2b7'}
   earth-social-academic: {paper: '#faf9f6', surface: '#ffffff', ink: '#2e2b27', muted: '#5d5751', accent: '#76475c', border: '#d0c3c6'}
+  biomed-mechanism: {paper: '#F8F6FA', surface: '#FFFFFF', ink: '#29243D', muted: '#29243D', accent: '#624788', border: '#B5ABB8', secondary: '#2F607B', tertiary: '#96603B'}
+  biomed-clinical: {paper: '#F7F9FC', surface: '#FFFFFF', ink: '#202F49', muted: '#202F49', accent: '#315B8A', border: '#B5ABB8', secondary: '#883D61', tertiary: '#825829'}
+  computing-systems: {paper: '#F6F8FC', surface: '#FFFFFF', ink: '#1C2A41', muted: '#1C2A41', accent: '#285AA3', border: '#B5ABB8', secondary: '#67449A', tertiary: '#995934'}
+  computing-engineering: {paper: '#F7F8FA', surface: '#FFFFFF', ink: '#1A2D38', muted: '#1A2D38', accent: '#284C69', border: '#B5ABB8', secondary: '#A3572A', tertiary: '#62578C'}
+  materials-structure: {paper: '#FAF7F3', surface: '#FFFFFF', ink: '#332920', muted: '#332920', accent: '#8B492F', border: '#B5ABB8', secondary: '#486381', tertiary: '#786048'}
+  materials-testing: {paper: '#F7F7FA', surface: '#FFFFFF', ink: '#282938', muted: '#282938', accent: '#575D70', border: '#B5ABB8', secondary: '#754D87', tertiary: '#976231'}
+  earth-process: {paper: '#F7F9F3', surface: '#FFFFFF', ink: '#24352C', muted: '#24352C', accent: '#356B4A', border: '#B5ABB8', secondary: '#365A89', tertiary: '#936321'}
+  earth-climate: {paper: '#F3F8FA', surface: '#FFFFFF', ink: '#243445', muted: '#243445', accent: '#286780', border: '#B5ABB8', secondary: '#9B4D3E', tertiary: '#686195'}
+  social-policy: {paper: '#FAF8F5', surface: '#FFFFFF', ink: '#2D2A31', muted: '#2D2A31', accent: '#405684', border: '#B5ABB8', secondary: '#864B62', tertiary: '#7C6635'}
+  social-comparison: {paper: '#F9F6F8', surface: '#FFFFFF', ink: '#322535', muted: '#322535', accent: '#754B76', border: '#B5ABB8', secondary: '#375D78', tertiary: '#9C6539'}
+  energy-systems: {paper: '#F8F8F5', surface: '#FFFFFF', ink: '#252D3A', muted: '#252D3A', accent: '#2D58A0', border: '#B5ABB8', secondary: '#97611A', tertiary: '#785288'}
+  chemistry-pathways: {paper: '#FBF7F5', surface: '#FFFFFF', ink: '#312537', muted: '#312537', accent: '#604085', border: '#B5ABB8', secondary: '#9B4B37', tertiary: '#3C6671'}
+  sleep-systems: {paper: '#F7F6FB', surface: '#FFFFFF', ink: '#262840', muted: '#262840', accent: '#3E5689', border: '#B5ABB8', secondary: '#785B94', tertiary: '#996138'}
+  human-factors: {paper: '#FAF7F5', surface: '#FFFFFF', ink: '#322B37', muted: '#322B37', accent: '#925841', border: '#B5ABB8', secondary: '#425D7D', tertiary: '#725781'}
+  general-roadmap: {paper: '#F8F7F5', surface: '#FFFFFF', ink: '#272C36', muted: '#272C36', accent: '#36537E', border: '#B5ABB8', secondary: '#95513E', tertiary: '#6B5689'}
+  general-comparison: {paper: '#F8F8F6', surface: '#FFFFFF', ink: '#2A2D36', muted: '#2A2D36', accent: '#555C94', border: '#B5ABB8', secondary: '#69743C', tertiary: '#8E5361'}
+domain_styles:
+  - [[睡眠, sleep, 人因, ergonomics, "human factors", "human-factors", 消费健康], sleep-systems]
+  - [[material, manufactur, 材料, 制造], materials-structure]
+  - [[chemistry, energy, chemical, 化学, 能源], energy-systems]
+  - [[environment, earth, climate, ecology, 环境, 地球, 气候, 生态], earth-process]
+  - [[social, policy, governance, 社会, 政策, 治理], social-policy]
+  - [[clinical, biomed, medic, 临床, 生物医学, 医疗], biomed-mechanism]
+  - [[comput, cs-ai, algorithm, machine learning, software, 计算, 算法, 智能体, 软件, 人工智能], computing-systems]

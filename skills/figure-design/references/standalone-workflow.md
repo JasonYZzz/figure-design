@@ -87,6 +87,8 @@ Linux 若缺 Chromium 系统库，按 Playwright 提示安装系统依赖；不�
 
 ### 2. 科研设计简报、参考图与构图
 
+有用户上传设计参考时先走 [上传参考与整图迁移](reference-design.md) 的入口，再直接规划。此处的图库命令用于无上传设计参考的任务。
+
 先读 [scientific-design.md](scientific-design.md)，将来源绑定内容整理为设计工作表：
 
 ```bash
@@ -108,7 +110,7 @@ Linux 若缺 Chromium 系统库，按 Playwright 提示安装系统依赖；不�
   --mode mixed --variant wide --out /工作目录/plans
 ```
 
-默认使用随包 SQLite。检索返回候选标签、结构观察、`image_path` 和 `image_status`（verified/missing/modified）。打开 verified 的原图判断可迁移的构图。轻量包可加 `--images <本地图库>`；原图缺失时可以使用知识页的结构描述，并在简报记录原图未查看。参考检索只影响候选布局家族，素材仍需单独制作或绑定。
+默认使用随包 SQLite。检索返回候选标签、结构观察、`image_path` 和 `image_status`（verified/missing/modified）。打开 verified 的原图判断可迁移的构图。轻量包可加 `--images <本地图库>`；原图缺失时可以使用知识页的结构描述，并在简报记录原图未查看。参考检索提供候选布局家族。通过整图迁移记录把参考区域、图文层级和色样落实到最终计划；素材仍需单独制作或绑定。
 
 显式布局可用 `plan --layout center-hero-side-support --style biomedicine-academic --variant wide ...`。布局见 `assets/layout-registry.yaml`。镜像仅改变区域位置，关系方向仍由事实 ID 决定。绑定插图的区域可用 `asset_fraction` 调整图片高度占比，默认 `0.44`，上限 `0.85`，需要为该区域的正式文字保留测量空间。
 
@@ -184,3 +186,7 @@ python scripts/figure.py pack --out /独立发布目录/figure-design.zip --refe
 ```
 
 两种包都提供 Diagram Design 模板、规则、示例和当前科研参考索引。需要包内原图时用 `make package-private` 或显式传 `pack --references <Skill目录>/assets/reference-library/images`。打包前核对每张图的路径及 SHA-256，解包后的原图保持同一目录结构。轻量包可用 `--images` 绑定本地图库。benchmark 的 12+4 个案例均为合成校验，demo 使用原创几何图标。依赖通过 `requirements.txt` 安装。
+
+经授权的本地复现包使用 `export --include-sources`，一次归档源快照与资产。用可重复的 `--source-file FILE` 按需加入获准的简报和 SVG 源文件。提供 `--review` 时，ZIP 内质量报告也含审阅结论。复现包的 `artifact-manifest.json` 覆盖所有其他条目，CLI 返回最终 ZIP 的 SHA-256。默认分享包只含成图、结构文件和显式传入的审阅。
+
+PDF 个别页出现非法 Unicode 时，工具会用可用的本机 Poppler 重提异常页，并在 `pdf_fallback` 标出恢复不完整的页。引用受影响的页前，按原页核对并保存为 UTF-8 文本，用 `ingest --input REPORT.pdf --pdf-page-text 56=page-56.txt --out NEW-SOURCES` 建立新快照。可逐页重复传入 `--pdf-page-text`。快照记录转录及原 PDF 摘要。在新快照上重新定位摘录，再运行 `content-check`。

@@ -9,7 +9,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_NAME = 'figure-design'
-VERSION = '1.8.0'
+VERSION = '1.9.0'
 DIAGRAM_SKILL = ROOT / 'third_party/diagram-design/skills/diagram-design'
 MIXED_ROUTES = ('asset_composite', 'image_first', 'strict_scientific')
 ARTIFACTS = ('preview.svg', 'preview.png', 'preview.html', 'figure-content.json',
@@ -18,7 +18,7 @@ ARTIFACTS = ('preview.svg', 'preview.png', 'preview.html', 'figure-content.json'
 
 def implementation_hash():
     return fingerprint({p.relative_to(ROOT).as_posix(): file_hash(p)
-        for p in sorted([*(ROOT/'scripts').rglob('*.py'), ROOT/'assets/layout-registry.yaml'])})
+        for p in sorted([*(ROOT/'scripts').rglob('*.py'), ROOT/'assets/layout-registry.yaml', *(ROOT/'schemas').glob('*.json')])})
 
 
 def figure_html(svg, title):

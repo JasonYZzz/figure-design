@@ -3,7 +3,7 @@ from figure_common import fingerprint
 from figure_sources import evidence
 
 
-def research_brief(content, sources):
+def research_brief(content, sources, reference_images=()):
     checked = evidence(content, sources)
     if checked['errors']:
         raise ValueError('\n'.join(checked['errors']))
@@ -19,7 +19,12 @@ def research_brief(content, sources):
             'incoming_relations': [r['id'] for r in content['relations'] if r['to_id'] == task['id']],
             'outgoing_relations': [r['id'] for r in content['relations'] if r['from_id'] == task['id']],
         })
+    from figure_reference import reference_inputs
+    from figure_plan import owner_slots
     return {
+        'reference_source': 'upload' if reference_images else 'library',
+        'uploaded_references': reference_inputs(reference_images),
+        'composition_owners': owner_slots(content),
         'schema_version': '1.0', 'figure_id': content['figure_id'],
         'source_content_hash': fingerprint(content), 'status': 'semantic_design_pending',
         'purpose': content['purpose'], 'study_status': content['study_status'],
@@ -31,6 +36,7 @@ def research_brief(content, sources):
             'panel_questions_and_evidence_roles': [], 'reading_order': [],
             'alternative_explanations_and_controls': [], 'color_meanings': [],
             'reference_choices_with_reasons': [], 'exclusions_with_reasons': [],
+            'reference_design': None,
             'visual_concept': {'route': None, 'depictions': [], 'fallback_reason': None},
         },
         'review_required': [

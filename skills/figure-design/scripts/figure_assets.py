@@ -4,6 +4,7 @@ from pathlib import Path
 import shutil
 import os
 import re
+from tempfile import TemporaryDirectory
 from xml.etree import ElementTree as ET
 from PIL import Image
 from figure_common import fingerprint, file_hash, read, write, inside, schema_check
@@ -70,6 +71,38 @@ def register(path, metadata, out):
     shutil.copyfile(path, target)
     write(folder / 'asset.json', record)
     return record
+
+
+def theme_hash(theme):
+    from figure_reference import ROLES
+    return fingerprint({role: theme[role].lower() for role in ROLES if role in theme})
+
+
+def register_themed(path, metadata, out, plan):
+    from figure_plan import figure_theme
+    path = Path(path)
+    if path.suffix.lower() != '.svg' or path.stat().st_size > 30 * 1024 * 1024:
+        raise ValueError('theme tokens require a local SVG of at most 30 MiB')
+    schema_check('composition-plan.schema.json', plan)
+    theme = figure_theme(plan)
+    def resolve_token(match):
+        role, variant = match[1], match[2]
+        if role not in theme or not re.fullmatch(r'#[0-9a-fA-F]{6}', theme[role]):
+            raise ValueError(f'unknown SVG theme token: {role}')
+        if not variant:
+            return theme[role]
+        weight = .38 if variant == 'light' else .14
+        return '#%02x%02x%02x' % tuple(
+            round(int(theme[role][i:i+2],16)*weight + int(theme['paper'][i:i+2],16)*(1-weight))
+            for i in (1,3,5))
+    source = path.read_text(encoding='utf-8')
+    payload, count = re.subn(r'\{\{figure:([a-z]+)(?:-(light|pale))?\}\}', resolve_token, source)
+    if not count or '{{figure:' in payload:
+        raise ValueError('provide valid SVG theme tokens such as {{figure:accent}}')
+    with TemporaryDirectory() as tmp:
+        resolved = Path(tmp)/'illustration.svg'
+        resolved.write_text(payload, encoding='utf-8')
+        return register(resolved, {**metadata, 'theme_sha256': theme_hash(theme)}, out)
 
 
 def resolve(manifests, content):

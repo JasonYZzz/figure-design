@@ -10,7 +10,7 @@
 make setup
 make package-dsh
 export FIGURE_PY="$PWD/.venv/bin/python"
-dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.8.0.tgz"
+dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.9.0.tgz"
 dsh web
 ```
 

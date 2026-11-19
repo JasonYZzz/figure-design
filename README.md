@@ -27,11 +27,11 @@ Skill 与 CLI 默认采用纯文字。用户可说「带插图」或指定 `mode
 
 ## DeepSeek Harness 插件
 
-在仓库根目录执行 `make setup` 和 `make package-dsh`，生成 `dist/dsh-figure-design-1.8.0.tgz`，再安装到实际使用的 DSH CLI Profile。
+在仓库根目录执行 `make setup` 和 `make package-dsh`，生成 `dist/dsh-figure-design-1.9.0.tgz`，再安装到实际使用的 DSH CLI Profile。
 
 ```bash
 export FIGURE_PY="$PWD/.venv/bin/python"
-dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.8.0.tgz"
+dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.9.0.tgz"
 dsh web
 ```
 
@@ -80,4 +80,4 @@ make package-private                 # 本机私用 ZIP，另附活跃库的 110
 
 重复运行用新的 `OUT` 或 `DIST`。仓库与轻量 ZIP 提供参考索引和知识库，可通过 `--images` 绑定本地图库。项目代码采用 [MIT 许可证](LICENSE)。随包字体、第三方代码和本地参考原图的许可分别见 [第三方资源与许可](THIRD_PARTY_NOTICES.md)。
 
-[贡献与维护](CONTRIBUTING.md) · [开发状态](docs/DEVELOPMENT_PLAN.md) · [参考图 Wiki](skills/figure-design/assets/reference-library/images-wiki/index.md) · [参考库维护](skills/figure-design/references/reference-knowledge.md) · [1.8.0 变更](docs/releases/1.8.0.md)
+[贡献与维护](CONTRIBUTING.md) · [开发状态](docs/DEVELOPMENT_PLAN.md) · [参考图 Wiki](skills/figure-design/assets/reference-library/images-wiki/index.md) · [参考库维护](skills/figure-design/references/reference-knowledge.md) · [1.9.0 变更](docs/releases/1.9.0.md)

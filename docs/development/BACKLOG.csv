@@ -52,3 +52,8 @@ K2,K2-01,P0,161 原图逐图区域分析,analyses; schema,P1-01,0,原图 hash �
 K2,K2-02,P0,知识代与任务导航,figure_knowledge,K2-01,0,可重建/失效检查/失败不切换,verified,tests/test_knowledge.py,整代缓存；不做逐页增量
 K2,K2-03,P0,中文结构检索与构图衔接,figure_retrieval; figure_plan,K2-02,0,解释/数量过滤/内容 hash 不变,verified,tests/test_knowledge.py; benchmark_references.py,覆盖率不是准确率；候选仍需设计
 K2,K2-04,P1,30 图结构与60查询人工评测,review; judgments,K2-03,0,实际人审与模型输出分离,external_review_pending,build/reference-knowledge-v2/human-review; build/reference-knowledge-v2/evaluation-final,无独立人工金标及视觉盲评
+FD19,FD19-P0,P0,冻结旧版版式和页脚碰撞基线,Chromium,,0,故障夹具失败而修订图通过,verified,skills/figure-design/tests/test_reference_design.py,真实项目对照材料留在本地
+FD19,FD19-P1,P1,上传参考分流及结构和配色迁移,brief; plan; theme,FD19-P0,0,上传路线可在无图库时规划且能识别黑白参考,verified,skills/figure-design/tests/test_reference_design.py,原图视觉分析由宿主完成
+FD19,FD19-P2,P2,共享底板和源文件包,render; QA; export,FD19-P1,0,目标显示尺寸可复查且必需分组被移除时阻止放行,verified,skills/figure-design/tests/test_reference_design.py,真实科研图的签收需独立确认
+FD19,FD19-P3,P3,异常 PDF 页恢复及发行复验,ingest; package,FD19-P2,0,逐页恢复或转录并核验安装包,verified,docs/releases/1.9.0.md; skills/figure-design/tests/test_reference_design.py,无法还原的页由审阅者核对转录
+FD19,FD19-REVIEW,P2,真实图独立验收,host review,FD19-P2,0,在目标尺寸核对事实和参考特征并记录重排次数,external_review_pending,skills/figure-design/references/reference-design.md,工程回归与真实审阅分别记录

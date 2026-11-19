@@ -10,7 +10,7 @@ from fontTools import subset
 from playwright.sync_api import sync_playwright
 from figure_common import ROOT, VERSION, figure_html, fingerprint, file_hash, write, schema_check, implementation_hash
 from figure_sources import evidence
-from figure_assets import resolve
+from figure_assets import resolve, theme_hash
 from figure_plan import MIXED_ROUTES, figure_theme
 from figure_geometry import route, intersects
 
@@ -52,9 +52,19 @@ def bindings(content, plan):
         raise ValueError('missing required label instances')
     relations = {r['id']: r for r in content['relations']}
     regions = {r['id']: r for r in plan['regions']}
+    if len(regions) != len(plan['regions']):
+        raise ValueError('duplicate composition region')
+    for feature in plan.get('reference_design', {}).get('features', []):
+        missing = set(feature['target_regions']) - regions.keys()
+        if missing:
+            raise ValueError(f"reference feature {feature['observation']} targets missing regions: {', '.join(sorted(missing))}")
     edges = {e['relation_id']: e for e in plan['edges']}
-    if not edges.keys() <= relations.keys() or {r['id'] for r in relations.values() if r['critical']} - edges.keys():
+    if len(edges) != len(plan['edges']) or not edges.keys() <= relations.keys() or {r['id'] for r in relations.values() if r['critical']} - edges.keys():
         raise ValueError('unknown or missing critical relations')
+    for feature in plan.get('reference_design', {}).get('features', []):
+        missing = set(feature.get('target_relations', [])) - edges.keys()
+        if missing:
+            raise ValueError(f"reference feature {feature['observation']} targets missing relations: {', '.join(sorted(missing))}")
     for rid, edge in edges.items():
         relation = relations[rid]
         for region_key, owner_key in [('source_region_id', 'from_id'), ('target_region_id', 'to_id')]:
@@ -63,6 +73,24 @@ def bindings(content, plan):
         if relation.get('condition_label_id') and not any(iid in placed and i['label_id'] == relation['condition_label_id'] and i['owner_id'] == rid for iid,i in instances.items()):
             raise ValueError('condition label instance missing')
     return instances, relations, regions
+
+
+def group_geometry(groups, bounds):
+    result = {}
+    members = set()
+    for group in groups:
+        key, region_ids = group['id'], set(group['regions'])
+        if key in result or region_ids & members or not region_ids <= bounds.keys():
+            raise ValueError(f'group {key} has duplicate or missing regions')
+        boxes = [bounds[rid] for rid in region_ids]
+        left, top = min(b[0] for b in boxes), min(b[1] for b in boxes)
+        box = [left, top, max(b[0] + b[2] for b in boxes) - left, max(b[1] + b[3] for b in boxes) - top]
+        if any(intersects(box, bounds[rid]) for rid in bounds.keys() - region_ids) or any(
+                intersects(box, other['bounds']) for other in result.values()):
+            raise ValueError(f'group {key} overlaps another region or group')
+        result[key] = {**group, 'bounds': box}
+        members.update(region_ids)
+    return result, members
 
 
 WRAP = r'''items => {
@@ -124,8 +152,35 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
         raise ValueError('unsupported_math: provide a verified rendered math asset or approved Unicode runs')
     encoded_font = font_data(used_text)
     style = figure_theme(plan)
+    composition.update({field: plan[field] for field in ('reference_design','theme_source') if field in plan})
+    features = plan.get('reference_design', {}).get('features', [])
+    if plan.get('reference_design'):
+        composition['reference_targets'] = {target: regions[target]['bounds']
+            for feature in plan['reference_design']['features'] for target in feature['target_regions']}
+    resolved_theme_hash = theme_hash(style)
+    for aid in used_assets:
+        if assets[aid].get('theme_sha256', resolved_theme_hash) != resolved_theme_hash:
+            raise ValueError(f'asset {aid} was registered for another theme; register a new themed version')
+    for region in regions.values():
+        if region.get('tone', 'accent') not in style:
+            raise ValueError(f"region {region['id']} uses an undefined theme tone")
     width, height = plan['canvas']['width'], plan['canvas']['height']
     bounds = {rid: [r['bounds'][0]*width,r['bounds'][1]*height,r['bounds'][2]*width,r['bounds'][3]*height] for rid,r in regions.items()}
+    groups, grouped_regions = group_geometry(plan.get('groups', []), bounds)
+    if groups and route_name == 'image_first':
+        raise ValueError('native region groups require a composited figure')
+    for item in [*groups.values(), *plan['edges']]:
+        if item.get('tone', 'accent') not in style:
+            raise ValueError(f"undefined theme tone: {item['tone']}")
+    if groups:
+        composition['groups'] = list(groups.values())
+    for index, feature in enumerate(features, 1):
+        if 'target_group' in feature:
+            group = groups.get(feature['target_group'])
+            if not group or not set(feature['target_regions']) <= set(group['regions']):
+                composition.setdefault('reference_deviations', []).append({
+                    'feature': index, 'group': feature['target_group'], 'regions': feature['target_regions'],
+                    'reason': 'target regions do not share the promised visual group'})
     for a, ra in bounds.items():
         for b, rb in bounds.items():
             if a < b and intersects(ra, rb):
@@ -138,22 +193,36 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
         aids = region.get('asset_ids', [])
         if len(aids) > 1:
             raise ValueError('one asset per region; split the region or provide a reviewed sheet')
-        image_h = h * region.get('asset_fraction', .44) if aids and route_name != 'image_first' else 0
+        text_x, text_y, text_width = x+pad, y+pad, w-2*pad
         if aids:
             asset = assets[aids[0]]
             owners = {instances[iid]['owner_id'] for iid in region['label_instance_ids']}
             if not owners.intersection(asset['source_content_ids']):
                 raise ValueError('asset is bound to an unrelated region owner')
-            if route_name != 'image_first' and (w <= 2*pad or image_h > h-2*pad):
+            position = region.get('asset_position', 'top')
+            fraction = region.get('asset_fraction', .44)
+            if route_name == 'image_first':
+                image_bounds = [0,0,width,height]
+                text_y += 16
+            elif position == 'top':
+                image_bounds = [text_x,text_y,text_width,h*fraction]
+                text_y += image_bounds[3] + 16
+            else:
+                image_width = text_width * fraction
+                image_x = text_x if position == 'left' else x+w-pad-image_width
+                image_bounds = [image_x,text_y,image_width,h-2*pad]
+                text_width -= image_width + 16
+                if position == 'left':
+                    text_x += image_width + 16
+            if min(text_width, image_bounds[2], image_bounds[3], y+h-pad-text_y) <= 0:
                 raise ValueError(f'asset_capacity: enlarge region {rid} or reduce its padding/asset fraction')
             objects.append({'id': 'image-'+rid, 'type': 'image', 'asset_id': aids[0],
-                            'bounds': [0,0,width,height] if plan['route']=='image_first' else [x+pad,y+pad,w-2*pad,image_h], 'z_index': 0 if plan['route']=='image_first' else 2,
+                            'bounds': image_bounds, 'z_index': 0 if route_name=='image_first' else 2,
                             'source_content_ids': asset['source_content_ids']})
-        cursor = y + pad + image_h + (16 if aids else 0)
         for iid in region['label_instance_ids']:
             size = 42 if region['role'] == 'title' else max(24, region['text_safe']['min_font_px'])
             specs.append({'id': iid, 'region': rid, 'text': labels[instances[iid]['label_id']],
-                          'size': size, 'width': w-2*pad, 'start_y': cursor, 'pad': pad,
+                          'size': size, 'width': text_width, 'start_x': text_x, 'start_y': text_y, 'pad': pad,
                           'weight': 600 if instances[iid]['role'] in heading_roles else 400})
     with sync_playwright() as pw:
         browser = pw.chromium.launch()
@@ -174,7 +243,7 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
                     raise ValueError(f'text_capacity: {spec["id"]} does not fit {rid}; enlarge/recompose, do not alter approved text')
                 obj = {'id': 'label-'+spec['id'], 'type': 'text', 'label_instance_id': spec['id'],
                        'source_content_ids': [instances[spec['id']]['owner_id']], 'region_id': rid,
-                       'bounds': [x+spec['pad'],cursor,spec['width'],len(spec['lines'])*line_height],
+                       'bounds': [spec['start_x'],cursor,spec['width'],len(spec['lines'])*line_height],
                        'text': spec['text'], 'lines':spec['lines'], 'font_size':spec['size'], 'line_height':line_height, 'z_index':4}
                 objects.append(obj)
                 cursors[rid] = cursor + len(spec['lines'])*line_height + 16
@@ -190,6 +259,10 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
                                 'condition_label_id':relation.get('condition_label_id'),'z_index':3})
             semantic_boxes=[]
             connectors=[o for o in objects if o['type']=='connector']
+            target_relations = {rid for feature in features for rid in feature.get('target_relations', [])}
+            if target_relations:
+                composition['reference_relations'] = {obj['relation_id']: obj['points'] for obj in connectors
+                                                      if obj['relation_id'] in target_relations}
             for obj in connectors:
                 other_lines=[]
                 for other in connectors:
@@ -222,33 +295,48 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
             ET.SubElement(svg,'title',{'id':'figure-title'}).text = content['purpose']
             ET.SubElement(svg,'style').text = font_css + 'text{font-family:FigureFont;white-space:pre}'
             defs=ET.SubElement(svg,'defs')
-            for key,d in [('arrow','M0 0 L10 5 L0 10 Z'),('open','M0 0 L10 5 L0 10'),('bar','M9 0 L9 10')]:
-                marker=ET.SubElement(defs,'marker',{'id':key,'viewBox':'0 0 12 12','refX':'10','refY':'5','markerWidth':'7','markerHeight':'7','orient':'auto'})
-                ET.SubElement(marker,'path',{'d':d,'stroke':style['accent'],'fill':style['accent'] if key=='arrow' else 'none','stroke-width':'1.5'})
+            edge_tones = {edge['relation_id']: edge.get('tone', 'accent') for edge in plan['edges']}
+            for tone in sorted(set(edge_tones.values()) | {'accent'}):
+                for key,d in [('arrow','M0 0 L10 5 L0 10 Z'),('open','M0 0 L10 5 L0 10'),('bar','M9 0 L9 10')]:
+                    marker_id = key if tone == 'accent' else f'{key}-{tone}'
+                    marker=ET.SubElement(defs,'marker',{'id':marker_id,'viewBox':'0 0 12 12','refX':'10','refY':'5','markerWidth':'7','markerHeight':'7','orient':'auto'})
+                    ET.SubElement(marker,'path',{'d':d,'stroke':style[tone],'fill':style[tone] if key=='arrow' else 'none','stroke-width':'1.5'})
             paper = style['paper']
             ET.SubElement(svg,'rect',{'width':'100%','height':'100%','fill':paper})
+            for gid, group in groups.items():
+                x,y,w,h = group['bounds']
+                tone = style[group.get('tone', 'accent')]
+                ET.SubElement(svg,'rect',{'x':str(x),'y':str(y),'width':str(w),'height':str(h),
+                    'fill':style['surface'],'stroke':tone,'stroke-width':'1.5','data-region-group':gid})
+                ET.SubElement(svg,'rect',{'x':str(x),'y':str(y),'width':str(w),'height':'5','fill':tone})
             for rid,region in regions.items():
                 x,y,w,h=bounds[rid]
-                if region['role'] not in ('title','caption') and plan['route']!='image_first':
-                    ET.SubElement(svg,'rect',{'x':str(x),'y':str(y),'width':str(w),'height':str(h),'rx':'6','fill':style['surface'],
-                                              'stroke':style['border'],'stroke-width':'1.5'})
-                    if region['role'] == 'hero':
-                        ET.SubElement(svg,'rect',{'x':str(x),'y':str(y),'width':'5','height':str(h),'fill':style['accent']})
+                appearance = region.get('appearance', 'plain' if rid in grouped_regions or region['role'] in ('title','caption') else 'panel')
+                tone = style[region.get('tone', 'accent')]
+                if appearance == 'plain' or plan['route'] == 'image_first':
+                    continue
+                ET.SubElement(svg,'rect',{'x':str(x),'y':str(y),'width':str(w),'height':str(h),
+                    'rx':'6' if appearance == 'panel' else '0','fill':style['surface'],
+                    'stroke':tone if 'tone' in region else style['border'],'stroke-width':'1.5','data-region':rid})
+                if appearance == 'band' or region['role'] == 'hero':
+                    stripe_width, stripe_height = (w, 5) if appearance == 'band' else (5, h)
+                    ET.SubElement(svg,'rect',{'x':str(x),'y':str(y),'width':str(stripe_width),'height':str(stripe_height),'fill':tone})
             for obj in sorted(objects,key=lambda x:x['z_index']):
                 if obj['type']=='image':
                     asset=assets[obj['asset_id']];x,y,w,h=obj['bounds']
                     ET.SubElement(svg,'image',{'id':obj['id'],'x':str(x),'y':str(y),'width':str(w),'height':str(h),'preserveAspectRatio':'xMidYMid meet',
                         'href':f'data:{asset["mime"]};base64,'+b64encode(asset['_path'].read_bytes()).decode()})
                 elif obj['type']=='connector':
+                    tone = edge_tones[obj['relation_id']]
                     points=obj['points'];attrs={'id':obj['id'],'data-relation-id':obj['relation_id'],'data-relation-type':obj['relation_type'],'data-evidence-state':obj['evidence_state'],
-                        'd':'M '+' L '.join(f'{x},{y}' for x,y in points),'fill':'none','stroke':style['accent'],'stroke-width':'2.5','stroke-linejoin':'round'}
+                        'd':'M '+' L '.join(f'{x},{y}' for x,y in points),'fill':'none','stroke':style[tone],'stroke-width':'2.5','stroke-linejoin':'round'}
                     marker=RELATIONS[obj['relation_type']][1]
-                    if marker!='none':attrs['marker-end']=f'url(#{marker})'
+                    if marker!='none':attrs['marker-end']=f'url(#{marker})' if tone == 'accent' else f'url(#{marker}-{tone})'
                     if obj['evidence_state'] in ('planned','hypothesis') or obj['relation_type']=='association':attrs['stroke-dasharray']='8 6'
                     ET.SubElement(svg,'path',attrs)
                     lx,ly,lw,lh=obj['semantic_label_bounds']
                     ET.SubElement(svg,'rect',{'x':str(lx),'y':str(ly),'width':str(lw),'height':str(lh),'rx':'3','fill':paper,'fill-opacity':'.96'})
-                    ET.SubElement(svg,'text',{'data-relation-label':obj['relation_id'],'x':str(lx+6),'y':str(ly+18),'font-size':'16','fill':style['accent']}).text=RELATIONS[obj['relation_type']][0]
+                    ET.SubElement(svg,'text',{'data-relation-label':obj['relation_id'],'x':str(lx+6),'y':str(ly+18),'font-size':'16','fill':style[tone]}).text=RELATIONS[obj['relation_type']][0]
                 else:
                     x,y,w,h=obj['bounds']
                     if plan['route']=='image_first':
@@ -257,11 +345,12 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
                     heading = role in heading_roles
                     element=ET.SubElement(svg,'text',{'id':obj['id'],'data-label-instance-id':obj['label_instance_id'],
                         'x':str(x),'y':str(y+obj['font_size']),'font-size':str(obj['font_size']),
-                        'font-weight':'600' if heading else '400','fill':style['ink'] if heading else style['muted'],
+                        'font-weight':'600' if heading else '400',
+                        'fill':style[regions[obj['region_id']].get('tone','ink')] if heading else style['muted'],
                         '{http://www.w3.org/XML/1998/namespace}space':'preserve'})
                     for idx,line in enumerate(obj['lines']):
                         ET.SubElement(element,'tspan',{'x':str(x),'y':str(y+obj['font_size']+idx*obj['line_height'])}).text=line
-            ET.SubElement(svg,'text',{'x':str(width*.05),'y':str(height*.985),'font-size':'18','fill':style['muted']}).text=footer
+            ET.SubElement(svg,'text',{'data-figure-footer':'true','x':str(width*.05),'y':str(height*.985),'font-size':'18','fill':style['muted']}).text=footer
             xml=ET.tostring(svg,encoding='unicode')
             from vendor.ppt_master_svg_resources import svg_image_payload_error
             resource_error=svg_image_payload_error(xml.encode('utf-8'))
@@ -271,7 +360,7 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
             page.evaluate('document.fonts.ready')
             actual=page.evaluate('''() => Array.from(document.querySelectorAll('[data-label-instance-id]')).map(e=>({id:e.dataset.labelInstanceId,text:e.textContent,bbox:(()=>{let b=e.getBBox();return [b.x,b.y,b.width,b.height]})()}))''')
             errors=[]
-            semantic_actual=page.evaluate('''() => Array.from(document.querySelectorAll('[data-relation-label]')).map(e=>({id:e.dataset.relationLabel,text:e.textContent}))''')
+            semantic_actual=page.evaluate('''() => Array.from(document.querySelectorAll('[data-relation-label]')).map(e=>({id:e.dataset.relationLabel,text:e.textContent,bbox:(()=>{let b=e.getBBox();return [b.x,b.y,b.width,b.height]})()}))''')
             if {x['id']:x['text'] for x in semantic_actual}!={o['relation_id']:RELATIONS[o['relation_type']][0] for o in connectors}:
                 errors.append('relation_semantic_label_mismatch')
             expected={iid:labels[instances[iid]['label_id']] for r in regions.values() for iid in r['label_instance_ids']}
@@ -280,9 +369,34 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
             for label in actual:
                 x,y,w,h=label['bbox'];obj=object_labels[label['id']];rx,ry,rw,rh=bounds[obj['region_id']]
                 if x < rx-.5 or y < ry-.5 or x+w > rx+rw+.5 or y+h > ry+rh+.5:errors.append('rendered_text_overflow:'+label['id'])
-            for i,a in enumerate(actual):
-                for b in actual[i+1:]:
+            footer_bbox=page.locator('[data-figure-footer]').evaluate('e => {const b=e.getBBox();return [b.x,b.y,b.width,b.height]}')
+            auxiliary_labels = [{'id':'figure-footer','bbox':footer_bbox}] + [
+                {'id':'relation-'+label['id'],'bbox':label['bbox']} for label in semantic_actual]
+            for item in auxiliary_labels:
+                x, y, w, h = item['bbox']
+                if min(x,y) < -.5 or x+w > width+.5 or y+h > height+.5:
+                    errors.append('rendered_text_overflow:'+item['id'])
+            all_labels = actual + auxiliary_labels
+            for i,a in enumerate(all_labels):
+                for b in all_labels[i+1:]:
                     if intersects(a['bbox'],b['bbox']):errors.append('label_overlap:'+a['id']+':'+b['id'])
+            if display_width := plan.get('display_width_px'):
+                page.set_viewport_size({'width': display_width, 'height': height})
+                measured = page.evaluate('''() => {
+                    const svg = document.querySelector('svg');
+                    svg.style.width = '100%';
+                    const scale = svg.getScreenCTM().a;
+                    const minFont = Math.min(...[...svg.querySelectorAll('text')].map(e =>
+                        parseFloat(getComputedStyle(e).fontSize) * scale));
+                    const result = {width_px: svg.getBoundingClientRect().width, min_font_px: minFont,
+                        overflow: document.documentElement.scrollWidth > innerWidth};
+                    svg.style.removeProperty('width');
+                    return result;
+                }''')
+                page.set_viewport_size({'width': width, 'height': height})
+                composition['display_check'] = measured
+                if measured['overflow']:
+                    errors.append('display_width_overflow')
             if preflight:
                 if errors:
                     raise ValueError('\n'.join(errors))
@@ -301,7 +415,7 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
                                   'theme_contrast':True},
                     'errors':errors,'pending':['scientific_semantic_review','visual_review','user_acceptance']+(['asset_pixels_and_native_text_review'] if used_assets else [])+
                         (['native_image_text_and_arrows_review'] if plan['route']=='image_first' else []),
-                    'label_manifest':actual,'relation_label_manifest':semantic_actual,'source_review':source_qa,'format':'hybrid_svg' if used_assets else 'vector_svg',
+                    'label_manifest':actual,'relation_label_manifest':semantic_actual,'footer_bounds':footer_bbox,'source_review':source_qa,'format':'hybrid_svg' if used_assets else 'vector_svg',
                     'metrics':{'render_wall_ms':round((time.perf_counter()-start)*1000,2),'paid_calls':0,'cache_hit':False,'scope':'local_render_only','upstream_model_cost':'unknown'},
                     'renderer':{'version':VERSION,'chromium':browser.version,'font_sha256':file_hash(FONT),'implementation_hash':code_hash},
                     'asset_hashes':{aid:assets[aid]['file_sha256'] for aid in used_assets},'composition':composition,'theme':style}

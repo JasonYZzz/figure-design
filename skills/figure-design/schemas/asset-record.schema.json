@@ -96,6 +96,7 @@
       "type": "string",
       "minLength": 1
     },
+    "theme_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
     "contains_evidence": {
       "type": "boolean"
     },

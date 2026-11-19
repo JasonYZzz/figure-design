@@ -5,7 +5,7 @@ import argparse
 from figure_common import read,write
 from figure_sources import ingest
 from figure_plan import make_plan
-from figure_assets import register
+from figure_assets import register_themed
 from figure import render_job
 
 
@@ -43,18 +43,22 @@ def run(out):
         '<rect x="85" y="45" width="140" height="140" rx="10" fill="#e9edf8"/><path d="M105 78 H190 M105 108 H175 M105 138 H155" stroke="#31598f" stroke-width="6"/><circle cx="215" cy="135" r="40" fill="white" stroke="#31598f" stroke-width="7"/><path d="M245 165 L277 197" stroke="#31598f" stroke-width="12"/>',
         '<path d="M180 35 L290 95 L180 155 L70 95Z" fill="#8198c7"/><path d="M70 130 L180 190 L290 130" fill="none" stroke="#31598f" stroke-width="12"/><path d="M70 160 L180 220 L290 160" fill="none" stroke="#bdcbe4" stroke-width="12"/>',
         '<rect x="100" y="35" width="160" height="180" rx="12" fill="#e9edf8" stroke="#31598f" stroke-width="4"/><path d="M128 95 L147 114 L188 73 M128 160 L147 179 L188 138" fill="none" stroke="#31598f" stroke-width="9"/><path d="M205 98 H235 M205 162 H235" stroke="#8198c7" stroke-width="5"/>']
-    manifests=[]
-    for i,drawing in enumerate(icons):
-        path=out/f'icon-{i+1}.svg';path.write_text('<svg xmlns="http://www.w3.org/2000/svg" width="360" height="250" viewBox="0 0 360 250">'+drawing+'</svg>',encoding='utf-8')
-        register(path,{'id':f'demo-icon-{i+1}','scientific_type':'generic-method-symbol','style_family_id':'biomedicine-academic',
-                      'rights':'authorized_reuse','approval':'production_approved','origin':'Original geometric SVG authored by this demonstration script; no source reference pixels copied',
-                      'source_content_ids':[f'T{i+1}'],'reviewer':'Codex software demonstration','review_note':'Generic symbol of the named task; not experimental data or a human gold review','contains_evidence':False},out/'assets')
-        manifests.append(out/'assets'/f'demo-icon-{i+1}'/'asset.json')
-    for primary in ['center-hero-side-support','top-overview-multi-lane']:
-        plan=make_plan(content,primary,'biomedicine-academic',route='asset_composite')
-        plan['theme']={'paper':'#f8f8fc','surface':'#ffffff','ink':'#1c2941','muted':'#485774',
-                       'accent':'#31598f','border':'#bcc9dc',
-                       'rationale':'冷蓝呼应测量与数据记录，浅灰白衬底突出装置与验证信息。'}
+    variants = [('center-hero-side-support','earth-climate'),('top-overview-multi-lane','earth-process')]
+    for primary,style in variants:
+        plan=make_plan(content,primary,style,route='asset_composite')
+        manifests=[]
+        for i,drawing in enumerate(icons):
+            for old, role in {'#e9edf8':'accent-pale','#8198c7':'secondary-light','#f8f9fc':'paper',
+                              '#31598f':'accent','#bdcbe4':'tertiary-light'}.items():
+                drawing=drawing.replace(old, '{{figure:'+role+'}}')
+            path=out/f'icon-{i+1}.svg'
+            path.write_text('<svg xmlns="http://www.w3.org/2000/svg" width="360" height="250" viewBox="0 0 360 250">'+drawing+'</svg>', encoding='utf-8')
+            asset_id=f'demo-icon-{i+1}'
+            register_themed(path,{'id':asset_id,'scientific_type':'generic-method-symbol','style_family_id':style,
+                'rights':'authorized_reuse','approval':'production_approved','origin':'Original geometric SVG authored by this demonstration script',
+                'source_content_ids':[f'T{i+1}'],'reviewer':'Codex software demonstration','review_note':'Generic symbol of the named task',
+                'contains_evidence':False},out/primary.replace('-','_')/'assets',plan)
+            manifests.append(out/primary.replace('-','_')/'assets'/asset_id/'asset.json')
         owner_regions=[r for r in plan['regions'] if r['role']!='title']
         if primary=='center-hero-side-support':
             coordinates=[[.35,.22,.30,.65],[.04,.22,.26,.31],[.70,.22,.26,.31],[.04,.58,.26,.31],[.70,.58,.26,.31]]

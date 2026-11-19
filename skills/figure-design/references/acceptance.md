@@ -21,3 +21,5 @@
 30 图审校入口是 refs-review 生成的 HTML 和 annotations.json。填写真实审核者、分类、观察、推断及 attestation，再 refs-annotate；未完成时保持 auto_proposed，不阻止把候选当作待核对设计线索，但禁止宣称为金标。
 
 图文混合的 draft ZIP 可供审阅，final ZIP 要求该 render_hash 的完整人类接受记录。旧图与未知模型请求不自动覆盖或重提。
+
+参考驱动成图须按 [整图迁移审阅](reference-design.md) 查看最终 PNG。记录目标尺寸、各特征实际所在和配色比较。自动检查包含页脚和连接标签的边界框；宿主审阅负责判断整图层级、风格和布局取舍。

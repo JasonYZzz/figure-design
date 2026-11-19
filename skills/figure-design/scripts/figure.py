@@ -3,6 +3,7 @@
 from __future__ import annotations
 import argparse
 import copy
+from hashlib import sha256
 import json
 import os
 from pathlib import Path
@@ -82,13 +83,56 @@ def render_job(content, plan, sources, out, assets=()):
         lock.unlink(missing_ok=True)
 
 
-def export(folder, out, review=None, final=False):
+def visual_review(report, review):
+    if review.get('render_hash') != report['render_hash']:
+        raise ValueError('stale visual review hash; inspect the current rendered figure')
+    composition = report.get('composition', {})
+    design = composition.get('reference_design') or {}
+    features = design.get('features', [])
+    checks = review.get('reference_checks', [])
+    if features:
+        if (len(checks) != len(features) or {item.get('feature') for item in checks} != set(range(1,len(features)+1))
+            or any(item.get('result') not in ('retained','adapted','needs_rework') or not item.get('note','').strip() for item in checks)
+            or not review.get('palette_note','').strip() or type(review.get('display_width_px')) is not int
+            or review['display_width_px'] <= 0):
+            raise ValueError('review each reference feature in the PNG and record the display width and palette comparison')
+    if display := composition.get('display_check'):
+        if review.get('display_width_px') != display['width_px']:
+            raise ValueError('visual review width differs from the measured display width')
+    for deviation in composition.get('reference_deviations', []):
+        check = next(item for item in checks if item['feature'] == deviation['feature'])
+        if check['result'] == 'retained' or not check.get('reason', '').strip():
+            raise ValueError(f"reference feature {deviation['feature']} deviated; record the difference and reason")
+    if 'reflow_count' in review and (type(review['reflow_count']) is not int or review['reflow_count'] < 0):
+        raise ValueError('reflow_count must be a nonnegative integer')
+    return review
+
+
+def report_with_review(report, decision):
+    if not decision:
+        return report
+    total = len(report.get('composition', {}).get('reference_design', {}).get('features', []))
+    counts = dict.fromkeys(('retained', 'adapted', 'needs_rework'), 0)
+    if total:
+        for check in decision.get('reference_checks', []):
+            counts[check['result']] += 1
+    return {**report, 'visual_review': decision, 'reference_review_summary': {
+        'total': total, **counts, 'unverified': max(0, total - sum(counts.values()))}}
+
+
+def export(folder, out, review=None, final=False, include_sources=False, source_files=()):
     folder,out=Path(folder),Path(out)
     report=verify_bundle(folder)
     if report['errors']:
         raise ValueError('hard QA failure blocks export')
+    decision=visual_review(report,read(review)) if review else {}
     if final:
-        decision=read(review) if review else {}
+        composition = report.get('composition', {})
+        features = composition.get('reference_design', {}).get('features', [])
+        required_deviations = any(features[item['feature']-1].get('required')
+                                  for item in composition.get('reference_deviations', []))
+        if required_deviations or any(check['result'] == 'needs_rework' for check in decision.get('reference_checks', [])):
+            raise ValueError('reference review requires rework before final export')
         if decision.get('render_hash')!=report['render_hash'] or decision.get('decision')!='accepted' or decision.get('reviewer_kind')!='human' or not decision.get('attestation'):
             raise ValueError('final export needs actual human acceptance bound to this render hash')
         if any(not decision.get(k) for k in ('scientific_review','visual_review','asset_review')):
@@ -96,6 +140,14 @@ def export(folder, out, review=None, final=False):
         if 'native_image_text_and_arrows_review' in report['pending'] and not decision.get('image_first_review'):
             raise ValueError('image-first final requires specific native text and arrow review')
     if out.exists():raise ValueError('export path already exists')
+    if source_files and not include_sources:
+        raise ValueError('--source-file requires --include-sources')
+    extras = {}
+    for filename in source_files:
+        path = Path(filename)
+        if not path.is_file() or path.stat().st_size > 100 * 1024 * 1024 or path.name in extras:
+            raise ValueError(f'source attachment must be a local file of at most 100 MiB with a unique name: {path}')
+        extras[path.name] = path
     files = read(folder/'artifact-manifest.json')['files']
     legacy_html = None
     if 'preview.html' not in files and 'preview.pdf' in files:
@@ -104,15 +156,36 @@ def export(folder, out, review=None, final=False):
     if set(ARTIFACTS) - files.keys() - ({'preview.html'} if legacy_html is not None else set()):
         raise ValueError('artifact manifest does not include all required export files')
     out.parent.mkdir(parents=True,exist_ok=True)
-    with ZipFile(out,'x',ZIP_DEFLATED) as z:
-        for name in ARTIFACTS:
-            if name == 'preview.html' and legacy_html is not None:
-                z.writestr(name, legacy_html)
-            else:
-                z.write(folder/name,name)
-        z.writestr('export-status.json',json.dumps({'status':'accepted' if final else 'review_required','render_hash':report['render_hash'],
-            'notice':'Source excerpts may be confidential. Original source documents are not included.'},ensure_ascii=False,indent=2))
-        if final:z.write(review,'acceptance.json')
+    with tempfile.TemporaryDirectory(dir=out.parent) as temporary:
+        archive = Path(temporary)/'figure.zip'
+        with ZipFile(archive,'x',ZIP_DEFLATED) as z:
+            for name in ARTIFACTS:
+                if name == 'preview.html' and legacy_html is not None:
+                    z.writestr(name, legacy_html)
+                elif name == 'quality-report.json' and decision:
+                    z.writestr(name, json.dumps(report_with_review(report, decision), ensure_ascii=False, indent=2))
+                else:
+                    z.write(folder/name,name)
+            if include_sources:
+                for name in sorted(files):
+                    if name.startswith(('sources/','assets/')):
+                        z.write(inside(folder,name),name)
+                for name, path in extras.items():
+                    z.write(path, f'attachments/{name}')
+            z.writestr('export-status.json',json.dumps({'status':'accepted' if final else 'review_required','render_hash':report['render_hash'],
+                'includes_source_snapshots':include_sources},ensure_ascii=False,indent=2))
+            if decision:
+                z.writestr('acceptance.json' if final else 'visual-review.json',json.dumps(decision,ensure_ascii=False,indent=2))
+            if include_sources:
+                hashes = {}
+                for name in z.namelist():
+                    digest = sha256()
+                    with z.open(name) as entry:
+                        for block in iter(lambda: entry.read(1024 * 1024), b''):
+                            digest.update(block)
+                    hashes[name] = digest.hexdigest()
+                z.writestr('artifact-manifest.json', json.dumps({'render_hash': report['render_hash'], 'files': hashes}, indent=2))
+        os.link(archive,out)
     return {'export':str(out),'sha256':file_hash(out),'status':'accepted' if final else 'review_required'}
 
 
@@ -231,7 +304,7 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     sub=p.add_subparsers(dest='command',required=True)
     sub.add_parser('doctor')
-    c=sub.add_parser('ingest');c.add_argument('--input',required=True);c.add_argument('--out',required=True)
+    c=sub.add_parser('ingest');c.add_argument('--input',required=True);c.add_argument('--out',required=True);c.add_argument('--pdf-page-text',action='append',default=[],metavar='PAGE=FILE')
     c=sub.add_parser('refs-index');c.add_argument('--input',required=True);c.add_argument('--catalog',required=True)
     c=sub.add_parser('refs-search');c.add_argument('--catalog',default=str(ROOT/'assets/reference-library/catalog.sqlite'));c.add_argument('--images',default=str(ROOT/'assets/reference-library/images'));c.add_argument('--query',default='');c.add_argument('--limit',type=int,default=5);c.add_argument('--reviewed-only',action='store_true');c.add_argument('--brief');c.add_argument('--require',action='append',default=[],metavar='FACET=VALUE')
     for name in ('refs-build','refs-lint','refs-analyze-import'):
@@ -240,8 +313,8 @@ def main():
     c=sub.add_parser('refs-annotate');c.add_argument('--catalog',required=True);c.add_argument('--annotations',required=True)
     c=sub.add_parser('refs-review');c.add_argument('--catalog',default=str(ROOT/'assets/reference-library/catalog.sqlite'));c.add_argument('--images',default=str(ROOT/'assets/reference-library/images'));c.add_argument('--out',required=True);c.add_argument('--count',type=int,default=30)
     c=sub.add_parser('content-check');c.add_argument('--content',required=True);c.add_argument('--sources',nargs='+',required=True)
-    c=sub.add_parser('research-brief');c.add_argument('--reference-query');c.add_argument('--catalog',default=str(ROOT/'assets/reference-library/catalog.sqlite'));c.add_argument('--content',required=True);c.add_argument('--sources',nargs='+',required=True);c.add_argument('--out',required=True)
-    c=sub.add_parser('plan');c.add_argument('--references');c.add_argument('--brief');c.add_argument('--out',required=True);c.add_argument('--layout');c.add_argument('--style',default='biomedicine-academic');c.add_argument('--variant',default='balanced');c.add_argument('--route',choices=('text_structured', *MIXED_ROUTES))
+    c=sub.add_parser('research-brief');c.add_argument('--reference-image',nargs='+',default=[]);c.add_argument('--reference-query');c.add_argument('--catalog',default=str(ROOT/'assets/reference-library/catalog.sqlite'));c.add_argument('--content',required=True);c.add_argument('--sources',nargs='+',required=True);c.add_argument('--out',required=True)
+    c=sub.add_parser('plan');c.add_argument('--references');c.add_argument('--reference-image',nargs='+',default=[]);c.add_argument('--theme');c.add_argument('--brief');c.add_argument('--out',required=True);c.add_argument('--layout');c.add_argument('--style');c.add_argument('--variant',default='balanced');c.add_argument('--route',choices=('text_structured', *MIXED_ROUTES))
     inputs = c.add_mutually_exclusive_group(required=True)
     inputs.add_argument('--source', help='Original document to hand directly to the bundled Diagram Design Skill in text mode')
     inputs.add_argument('--content', help='FigureContent JSON for mixed planning or an existing text handoff')
@@ -250,12 +323,12 @@ def main():
     for name in ('preflight','render'):
         c=sub.add_parser(name);c.add_argument('--content',required=True);c.add_argument('--plan',required=True);c.add_argument('--sources',nargs='+',required=True);c.add_argument('--assets',nargs='*',default=[])
         c.add_argument('--out',required=name=='render',default='unused')
-    c=sub.add_parser('qa');c.add_argument('--render',required=True)
+    c=sub.add_parser('qa');c.add_argument('--render',required=True);c.add_argument('--review')
     c=sub.add_parser('diagram-export',help='Validate and export an HTML diagram authored with the bundled Diagram Design Skill')
     c.add_argument('--input',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('patch-label');c.add_argument('--render',required=True);c.add_argument('--expected-render-hash',required=True);c.add_argument('--label',required=True);c.add_argument('--text',required=True);c.add_argument('--reason',required=True);c.add_argument('--out',required=True)
-    c=sub.add_parser('export');c.add_argument('--render',required=True);c.add_argument('--out',required=True);c.add_argument('--review');c.add_argument('--final',action='store_true')
-    c=sub.add_parser('asset-register');c.add_argument('--input',required=True);c.add_argument('--metadata',required=True);c.add_argument('--out',required=True)
+    c=sub.add_parser('export');c.add_argument('--render',required=True);c.add_argument('--out',required=True);c.add_argument('--review');c.add_argument('--include-sources',action='store_true');c.add_argument('--source-file',action='append',default=[]);c.add_argument('--final',action='store_true')
+    c=sub.add_parser('asset-register');c.add_argument('--plan');c.add_argument('--input',required=True);c.add_argument('--metadata',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('asset-sheet');c.add_argument('--input',required=True);c.add_argument('--boxes',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('asset-search');c.add_argument('--library',required=True);c.add_argument('--type',required=True);c.add_argument('--style')
     c=sub.add_parser('data-chart');c.add_argument('--input',required=True);c.add_argument('--out',required=True);c.add_argument('--x',required=True);c.add_argument('--y',required=True);c.add_argument('--title',required=True);c.add_argument('--kind',choices=['line','bar'],default='line');c.add_argument('--plan',help='Reuse the mixed figure plan theme')
@@ -270,11 +343,23 @@ def main():
         if a.command=='doctor':result=doctor()
         elif a.command=='ingest':
             from figure_sources import ingest
-            result=ingest(a.input,a.out)
+            transcripts = {}
+            for entry in a.pdf_page_text:
+                page, separator, filename = entry.partition('=')
+                if not separator or not page.isascii() or not page.isdecimal() or not 1 <= int(page) <= 500 or str(int(page)) in transcripts:
+                    raise ValueError('--pdf-page-text expects a unique PDF page number and a verified UTF-8 file: PAGE=FILE')
+                path = Path(filename)
+                if not path.is_file() or path.stat().st_size > 1024 * 1024:
+                    raise ValueError('PDF page transcript must be a local UTF-8 file of at most 1 MiB')
+                transcripts[str(int(page))] = path.read_text(encoding='utf-8')
+            result=ingest(a.input,a.out,transcripts=transcripts)
         elif a.command=='refs-index':
             from figure_catalog import index
             result=index(a.input,a.catalog)
         elif a.command=='refs-search':
+            brief=read(a.brief) if a.brief else {}
+            if brief.get('reference_source') == 'upload':
+                raise ValueError('uploaded references bypass the library and Wiki; plan directly from the brief')
             from figure_catalog import search
             if not 1<=a.limit<=10000:raise ValueError('limit must be 1–10000')
             from figure_retrieval import resolve_images
@@ -284,7 +369,6 @@ def main():
                 key,value=value.split('=',1)
                 if key in require: raise ValueError('duplicate required facet')
                 require[key]=value
-            brief=read(a.brief) if a.brief else {}
             request=brief.get('reference_requirements',{})
             require={**request.get('require',{}),**require}
             query=a.query or request.get('query','')
@@ -313,8 +397,8 @@ def main():
         elif a.command=='research-brief':
             from figure_research import research_brief
             if Path(a.out).exists():raise ValueError('research brief exists; use a new version path')
-            result=research_brief(read(a.content),a.sources)
-            if a.reference_query:
+            result=research_brief(read(a.content),a.sources,a.reference_image)
+            if a.reference_query and not a.reference_image:
                 from figure_retrieval import suggest
                 result['reference_suggestions']=suggest(a.catalog,read(a.content),a.reference_query)
                 result['reference_requirements']['query']=a.reference_query
@@ -327,9 +411,17 @@ def main():
                 raise ValueError('mixed mode requires --content')
             if a.references and not a.content:
                 raise ValueError('--references requires --content; pass user references directly to Diagram Design with --source')
-            if a.brief and (mode != 'mixed' or not a.references):
-                raise ValueError('--brief requires mixed mode and --references')
+            brief=read(a.brief) if a.brief else {}
+            upload=brief.get('reference_source') == 'upload'
+            if a.brief and mode != 'mixed':
+                raise ValueError('--brief requires mixed mode')
+            if (upload or a.reference_image) and a.references:
+                raise ValueError('uploaded references bypass the library and Wiki')
+            if mode == 'mixed' and a.reference_image:
+                raise ValueError('register uploaded images with research-brief --reference-image')
             content=read(a.content) if a.content else None
+            if brief and brief.get('source_content_hash') != fingerprint(content):
+                raise ValueError('reference review is stale for this content')
             suggestions=read(a.references) if a.references else None
             if suggestions and suggestions.get('source_content_hash')!=fingerprint(content):raise ValueError('reference suggestions bound to another content version')
             if mode == 'text':
@@ -346,18 +438,40 @@ def main():
                 result={'status':'delegated','mode':'text','engine':'diagram-design','diagram_type':a.diagram_type,
                         **document, 'skill':str(DIAGRAM_SKILL/'SKILL.md'), 'output':str(out.resolve()),
                         'next':'Open the bundled SKILL.md now. Use Diagram Design to analyze the supplied input, select the diagram type and template, author and review the HTML, then run diagram-export.'}
+                if a.reference_image:
+                    from figure_reference import reference_inputs
+                    result['reference_source'] = 'upload'
+                    result['uploaded_references'] = reference_inputs(a.reference_image)
                 if a.references:
                     result['references'] = str(Path(a.references).resolve())
                 write(out/'diagram-design.json',result)
             else:
-                from figure_plan import candidates, make_plan, reference_choices
+                from figure_plan import candidates, default_style, figure_theme, make_plan, reference_choices
                 route = a.route or 'asset_composite'
                 if route not in MIXED_ROUTES or a.diagram_type:
                     raise ValueError('mixed mode uses an illustrated route with its own layout')
                 options = {'variant': a.variant, 'route': route}
-                reviewed = reference_choices(content,suggestions,read(a.brief)) if a.brief else {}
-                plans=[{'plan':make_plan(content,a.layout,a.style,**options),'content_hash':fingerprint(content),
-                        'reference_review':reviewed}] if a.layout else candidates(content,a.style,suggestions,reviewed=reviewed,**options)
+                from figure_reference import apply_reference
+                style = a.style or default_style(content['domain'])
+                reviewed = reference_choices(content,suggestions,brief) if brief and suggestions else {}
+                design = brief.get('design_decisions', {}).get('reference_design')
+                if design and not (upload or suggestions):
+                    raise ValueError('a library reference design requires --references')
+                layout = a.layout or (design or {}).get('layout')
+                plans=[{'plan':make_plan(content,layout,style,**options),'content_hash':fingerprint(content),
+                        'reference_review':reviewed}] if layout else candidates(content,style,suggestions,reviewed=reviewed,**options)
+                if design:
+                    plans = plans[:1]
+                for item in plans:
+                    plan = item['plan']
+                    if brief:
+                        apply_reference(plan,brief,suggestions,use_reference_colors=not (a.style or a.theme))
+                    if a.theme:
+                        plan['theme'] = read(a.theme)
+                    plan['theme_source'] = ('explicit' if a.theme or a.style else
+                                            'reference' if plan.get('theme') else 'domain_preset')
+                    schema_check('composition-plan.schema.json', plan)
+                    figure_theme(plan)
                 out.mkdir(parents=True)
                 for i,item in enumerate(plans):write(out/f'candidate-{i+1}.json',item['plan'])
                 write(out/'selection.json',plans);result={'candidates':len(plans),'out':str(out),'route':route,
@@ -365,7 +479,10 @@ def main():
         elif a.command in ('preflight','render'):
             from figure_render import render
             result=render(read(a.content),read(a.plan),a.sources,a.out,a.assets,True) if a.command=='preflight' else render_job(read(a.content),read(a.plan),a.sources,a.out,a.assets)
-        elif a.command=='qa':result=verify_bundle(a.render)
+        elif a.command=='qa':
+            result=verify_bundle(a.render)
+            if a.review:
+                result=report_with_review(result,visual_review(result,read(a.review)))
         elif a.command=='diagram-export':result=diagram_export(a.input,a.out)
         elif a.command=='patch-label':
             folder=Path(a.render);report=verify_bundle(folder)
@@ -377,10 +494,11 @@ def main():
             if not found:raise ValueError('label ID not found')
             result=render_job(content,read(folder/'composition-plan.json'),list(folder.glob('sources/*/source.json')),a.out,list(folder.glob('assets/*/asset.json')))
             write(Path(a.out)/'patch-event.json',{'previous_render_hash':report['render_hash'],'label_id':a.label,'reason':a.reason,'paid_calls':0,'review_invalidated':True})
-        elif a.command=='export':result=export(a.render,a.out,a.review,a.final)
+        elif a.command=='export':result=export(a.render,a.out,a.review,a.final,a.include_sources,a.source_file)
         elif a.command=='asset-register':
-            from figure_assets import register
-            result=register(a.input,read(a.metadata),a.out)
+            from figure_assets import register, register_themed
+            metadata=read(a.metadata)
+            result=register_themed(a.input,metadata,a.out,read(a.plan)) if a.plan else register(a.input,metadata,a.out)
         elif a.command=='asset-sheet':
             from figure_assets import split_sheet
             result=split_sheet(a.input,read(a.boxes),a.out)
