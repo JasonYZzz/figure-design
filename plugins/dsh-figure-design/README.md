@@ -28,7 +28,7 @@ dsh_desktop="/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/b
 "$dsh_desktop" plugin --profile desktop list dsh-figure-design
 ```
 
-从同一版本的本地包更新时，把新构建的 `.tgz` 放到一个新的持久路径，用该绝对路径执行 `add`。Profile 会继续引用此文件。
+从同一版本的本地包更新时，给 `make package-dsh` 传入新的 `DIST` 目录，用生成的 `.tgz` 绝对路径执行 `add`。Profile 会继续引用这个路径。
 
 列表应显示 `dsh-figure-design@1.11.0`。重新打开桌面客户端，从「插件 → 已安装 → 科研图设计」核对版本、启用状态和本地包路径。同版本更新时包路径可用于确认加载的是哪次构建。
 
