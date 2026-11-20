@@ -365,7 +365,7 @@ def candidates(content, style='biomedicine-academic', references=None, *, varian
         choices=list(dict.fromkeys(suggestions[:2]+choices))
     decisions = decisions or {}
     paths = decisions.get('main_paths') or []
-    path_layout = bool(paths) and all(isinstance(p, dict) and
+    path_layout = not decisions.get('reference_design') and bool(paths) and all(isinstance(p, dict) and
         all(isinstance(p.get(k), str) for k in ('input', 'intermediate', 'output')) for p in paths)
     path_owners = {p[k] for p in paths for k in ('input', 'intermediate', 'output')} if path_layout else set()
     # Prose paths from older briefs remain design notes; only actual IDs determine geometry.

@@ -108,6 +108,9 @@ class ReferenceDesign(unittest.TestCase):
         coords = ([[.04,.21,.25,.6],[.375,.21,.25,.6],[.71,.21,.25,.6]] if variant == 'wide'
                   else [[.12,.19,.76,.18],[.12,.45,.76,.18],[.12,.71,.76,.18]])
         bounds = [.08,.19,.84,.7]
+        brief['design_decisions']['main_paths'] = [
+            {'input':'T1','intermediate':'T2','output':'T3'},
+            {'input':'T2','intermediate':'T1','output':'T3'}]
         brief['design_decisions']['reference_design'] = {
             'primary_id':'upload-2',
             'placements':{f'owner-{i}':{'bounds':box,'appearance':'band','tone':'secondary'}
@@ -122,6 +125,7 @@ class ReferenceDesign(unittest.TestCase):
         plan = read(out/'candidate-1.json')
         self.assertEqual(plan['theme']['paper'],paper)
         self.assertEqual(plan['theme']['accent'],primary)
+        self.assertNotIn('groups', plan)
         self.assertEqual(plan['reference_design']['images'],{'upload-2':file_hash(reference)})
         return plan, brief_path
 
