@@ -32,6 +32,12 @@ def verify_bundle(folder):
 
 
 def render_job(content, plan, sources, out, assets=()):
+    from figure_design_checks import comparison_assets
+    with comparison_assets(plan, content, assets) as complete:
+        return _render_job(content, plan, sources, out, complete)
+
+
+def _render_job(content, plan, sources, out, assets):
     from figure_render import render
     from figure_sources import evidence
     from figure_assets import resolve
@@ -323,7 +329,7 @@ def main():
     c.add_argument('--diagram-type', choices=['architecture','roadmap'], help='Pass the requested diagram kind to the bundled Diagram Design Skill')
     for name in ('preflight','render'):
         c=sub.add_parser(name);c.add_argument('--content',required=True);c.add_argument('--plan',required=True);c.add_argument('--sources',nargs='+',required=True);c.add_argument('--assets',nargs='*',default=[])
-        c.add_argument('--out',required=name=='render',default='unused')
+        c.add_argument('--out',required=name=='render',default='unused');c.add_argument('--brief',help='Verify design commitments against the final editable plan')
     c=sub.add_parser('qa');c.add_argument('--render',required=True);c.add_argument('--review')
     c=sub.add_parser('diagram-export',help='Validate and export an HTML diagram authored with the bundled Diagram Design Skill')
     c.add_argument('--input',required=True);c.add_argument('--out',required=True)
@@ -334,9 +340,13 @@ def main():
     c=sub.add_parser('asset-register');c.add_argument('--plan');c.add_argument('--input',required=True);c.add_argument('--metadata',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('asset-sheet');c.add_argument('--input',required=True);c.add_argument('--boxes',required=True);c.add_argument('--out',required=True)
     c=sub.add_parser('asset-search');c.add_argument('--library',required=True);c.add_argument('--type',required=True);c.add_argument('--style')
-    c=sub.add_parser('data-chart');c.add_argument('--input',required=True);c.add_argument('--out',required=True);c.add_argument('--x',required=True);c.add_argument('--y',required=True);c.add_argument('--title',required=True);c.add_argument('--kind',choices=['line','bar'],default='line');c.add_argument('--plan',help='Reuse the mixed figure plan theme')
+    c=sub.add_parser('data-chart');c.add_argument('--input',required=True);c.add_argument('--out',required=True);c.add_argument('--x',required=True);c.add_argument('--y',required=True);c.add_argument('--title',required=True);c.add_argument('--kind',choices=['line','bar','horizontal-bar','paired-dot'],default='line');c.add_argument('--plan',help='Reuse the mixed figure plan theme')
     c=sub.add_parser('image-request');c.add_argument('--content',required=True);c.add_argument('--entity',required=True);c.add_argument('--prompt',required=True);c.add_argument('--out',required=True);c.add_argument('--operation-id',required=True);c.add_argument('--budget',required=True,type=float)
     c=sub.add_parser('image-status');c.add_argument('--operation',required=True);c.add_argument('--status',required=True,choices=['submitted','succeeded','unknown','failed','cancelled']);c.add_argument('--provider');c.add_argument('--receipt');c.add_argument('--image')
+    c_chart = sub.choices['data-chart']
+    for flag in ('condition','unit','baseline','scope'):
+        c_chart.add_argument('--'+flag)
+    c_chart.add_argument('--value-kind',choices=['level','delta'],default='level')
     c=sub.add_parser('pack');c.add_argument('--out',required=True);c.add_argument('--references')
     for command_parser in sub.choices.values():command_parser.add_argument('--dry-run',action='store_true',help='Describe the request without executing or writing files')
     a=p.parse_args()
@@ -453,7 +463,7 @@ def main():
                 route = a.route or 'asset_composite'
                 if route not in MIXED_ROUTES or a.diagram_type:
                     raise ValueError('mixed mode uses an illustrated route with its own layout')
-                options = {'variant': a.variant, 'route': route}
+                options = {'variant': a.variant, 'route': route, 'decisions': brief.get('design_decisions', {})}
                 from figure_reference import apply_reference
                 style = a.style or default_style(content['domain'])
                 reviewed = reference_choices(content,suggestions,brief) if brief and suggestions else {}
@@ -473,6 +483,11 @@ def main():
                         plan['theme'] = read(a.theme)
                     plan['theme_source'] = ('explicit' if a.theme or a.style else
                                             'reference' if plan.get('theme') else 'domain_preset')
+                    if brief:
+                        from figure_design_checks import bind_design
+                        decisions = brief.get('design_decisions', {})
+                        bind_design(plan, content, decisions)
+                        plan.setdefault('display_width_px', decisions.get('display_width_px') or min(1000, plan['canvas']['width']))
                     schema_check('composition-plan.schema.json', plan)
                     figure_theme(plan)
                 out.mkdir(parents=True)
@@ -481,7 +496,20 @@ def main():
                     'mode':'mixed','next':'Choose a layout, write its theme roles and bind approved illustrations before preflight.'}
         elif a.command in ('preflight','render'):
             from figure_render import render
-            result=render(read(a.content),read(a.plan),a.sources,a.out,a.assets,True) if a.command=='preflight' else render_job(read(a.content),read(a.plan),a.sources,a.out,a.assets)
+            from figure_design_checks import comparison_assets, design_bindings
+            content, plan = read(a.content), read(a.plan)
+            if a.brief:
+                brief = read(a.brief)
+                if brief['source_content_hash'] != fingerprint(content):
+                    raise ValueError('design brief is stale for this content')
+                expected = design_bindings(brief['design_decisions'])
+                if any(expected.values()) and expected != plan.get('design_bindings'):
+                    raise ValueError('design bindings differ from brief; regenerate plan and reapply geometry')
+            if a.command == 'preflight':
+                with comparison_assets(plan, content, a.assets) as assets:
+                    result = render(content, plan, a.sources, a.out, assets, True)
+            else:
+                result = render_job(content, plan, a.sources, a.out, a.assets)
         elif a.command=='qa':
             result=verify_bundle(a.render)
             if a.review:
@@ -515,7 +543,7 @@ def main():
                 if item['scientific_type']==a.type and (not a.style or item['style_family_id']==a.style) and item['rights']=='authorized_reuse' and item['approval']=='production_approved':result.append({'manifest':str(path),**item})
         elif a.command=='data-chart':
             from figure_data import chart
-            result=chart(a.input,a.out,a.x,a.y,a.title,a.kind,plan=read(a.plan) if a.plan else None)
+            result=chart(a.input,a.out,a.x,a.y,a.title,a.kind,plan=read(a.plan) if a.plan else None, condition=a.condition, unit=a.unit, baseline=a.baseline, scope=a.scope, value_kind=a.value_kind)
         elif a.command=='image-request':
             from figure_assets import request
             result=request(read(a.content),a.entity,a.prompt,a.out,a.operation_id,a.budget)

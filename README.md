@@ -2,12 +2,13 @@
 
 `figure-design` 是一个将论文、开题报告、基金申请和研究方案转成科研技术路线图、研究框架或机制示意图的 Agent Skill。宿主 Agent 提炼科研内容并审阅图面，Python 本地工具校验来源、排版并导出可编辑 SVG、PNG、可离线打开的 HTML 和质量报告。
 
-## 1.11.0 更新
+## 1.13.0 更新
 
-- 在图文路线图的箭头上标注有原文依据的动作，例如「核对日志」或「启动时载入」。动作文字可单独编辑。
-- 科研简报记录主路径和实验范围。质量报告列出图上缺少原生连线的实体，以及检验、测量和支持关系的端点，供制图者对照原文复核。
+- 用来源绑定的路径和状态变化组织主图，并在最终区域、连线和资产上复核。
+- 用同一组可追溯读数生成分类横条图、双条件配对点图和图例，标明基准及适用范围。
+- 本机 Codex ZIP 与 DSH private TGZ 可以从同一份含完整图库的 Skill 构建。
 
-[完整发布记录](docs/releases/1.11.0.md)
+[完整发布记录](docs/releases/1.13.0.md)
 
 ## 在 Codex 中使用
 
@@ -23,7 +24,7 @@ make package
 
 ```bash
 figure_install_dir=$(mktemp -d)
-unzip dist/figure-design-1.11.0.zip -d "$figure_install_dir"
+unzip dist/figure-design-1.13.0.zip -d "$figure_install_dir"
 .venv/bin/python "$figure_install_dir/figure-design/scripts/install.py" --to "$HOME/.codex/skills"
 ```
 
@@ -40,24 +41,24 @@ Skill 与 CLI 默认采用纯文字。用户可说「带插图」或指定 `mode
 
 ## DeepSeek Harness 插件
 
-本地验证使用 DSH npm CLI 和 macOS 桌面端 `0.2.2-rc.5`。插件版本是 **1.11.0**，宿主版本条件为 `^0.2.1-rc.3`。npm CLI `0.2.2-rc.5` 需要 Node.js 24.9 或更新版本。
+本地验证使用 DSH npm CLI 和 macOS 桌面端 `0.2.2-rc.5`。插件版本是 **1.13.0**，宿主版本条件为 `^0.2.1-rc.3`。npm CLI `0.2.2-rc.5` 需要 Node.js 24.9 或更新版本。
 
 执行 `make setup` 和 `make package-dsh` 后，从仓库根目录用相应的 CLI 安装。
 
 CLI 的 `web` Profile 使用终端中的 `dsh`。
 
 ```bash
-dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.11.0.tgz"
+dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.13.0.tgz"
 ```
 
 macOS 桌面端先启动一次应用以初始化 `desktop` Profile，再正常退出。若应用装在 `/Applications`，使用下列命令。
 
 ```bash
 dsh_desktop="/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh"
-"$dsh_desktop" plugin --profile desktop add "$PWD/dist/dsh-figure-design-1.11.0.tgz"
+"$dsh_desktop" plugin --profile desktop add "$PWD/dist/dsh-figure-design-1.13.0.tgz"
 ```
 
-重新打开桌面端，在「插件 → 已安装 → 科研图设计」确认版本为 1.11.0，且插件已启用。
+重新打开桌面端，在「插件 → 已安装 → 科研图设计」确认版本为 1.13.0，且插件已启用。
 
 安装后在 DSH 对话中使用 `/dsh-figure-design`。同版本重装时，用 `DIST` 将新包构建到新目录，安装时使用该包的绝对路径。[安装命令与运行环境](plugins/dsh-figure-design/README.md)
 
@@ -100,6 +101,7 @@ make test                            # 包含 Chromium 渲染集成测试
 make benchmark OUT=build/layout-001
 make package                         # 轻量 ZIP，包含索引、完整 Diagram Design Skill 及上游许可证
 make package-private                 # 本机私用 ZIP，另附 111 张经哈希校验的参考图，全部使用等尺寸无损 WebP
+make package-dsh-private             # 从同版 private ZIP 生成本机完整 DSH 包
 make package-dsh                     # DSH 插件安装包
 ```
 

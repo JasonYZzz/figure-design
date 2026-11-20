@@ -21,10 +21,11 @@ from figure import pack
 from figure_common import SKILL_NAME, VERSION, file_hash, read, write
 
 
-def package_dsh(dist):
+def package_dsh(dist, private_skill=None):
     manifest = read(PLUGIN / 'package.json')
     manifest['version'] = VERSION
-    out = dist / f"{manifest['name']}-{VERSION}.tgz"
+    suffix = "-private" if private_skill else ""
+    out = dist / f"{manifest['name']}-{VERSION}{suffix}.tgz"
     if out.exists():
         raise FileExistsError(f'package already exists: {out}')
     dist.mkdir(parents=True, exist_ok=True)
@@ -37,9 +38,21 @@ def package_dsh(dist):
         for filename in ('LICENSE', 'THIRD_PARTY_NOTICES.md'):
             shutil.copyfile(REPO / filename, bundle / filename)
 
-        public_zip = stage / 'skill.zip'
-        pack(public_zip)
-        with ZipFile(public_zip) as archive:
+        skill_zip = private_skill or stage / 'skill.zip'
+        if not private_skill:
+            pack(skill_zip)
+        with ZipFile(skill_zip) as archive:
+            if private_skill:
+                from hashlib import sha256
+                record = json.loads(archive.read(f'{SKILL_NAME}/package-manifest.json'))
+                if record['version'] != VERSION or not record['reference_images_included']:
+                    raise ValueError('private build requires the matching full skill ZIP')
+                names = {f'{SKILL_NAME}/{name}' for name in record['files']}
+                if names | {f'{SKILL_NAME}/package-manifest.json'} != set(archive.namelist()):
+                    raise ValueError('unexpected private skill ZIP contents')
+                for name, digest in record['files'].items():
+                    if Path(name).is_absolute() or '..' in Path(name).parts or sha256(archive.read(f'{SKILL_NAME}/{name}')).hexdigest() != digest:
+                        raise ValueError(f'invalid private skill file: {name}')
             archive.extractall(bundle / 'skills')
         skill_dir = bundle / 'skills' / SKILL_NAME
         skill_text = (skill_dir / 'SKILL.md').read_text(encoding='utf-8')
@@ -67,7 +80,7 @@ def package_dsh(dist):
             ['npm', 'pack', '--ignore-scripts', '--pack-destination', str(stage)],
             cwd=bundle, check=True, capture_output=True, text=True,
         )
-        tgz = stage / out.name
+        tgz = stage / f"{manifest['name']}-{VERSION}.tgz"
         with tarfile.open(tgz, 'r:gz') as archive:
             files = {entry.name.removeprefix('package/') for entry in archive if entry.isfile()}
         patch = manifest['dsh']['bundle']['patch'].removeprefix('./')
@@ -93,9 +106,10 @@ def package_dsh(dist):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--dist', required=True, type=Path)
+    parser.add_argument('--private-skill', type=Path)
     args = parser.parse_args()
     try:
-        print(json.dumps(package_dsh(args.dist), ensure_ascii=False, indent=2))
+        print(json.dumps(package_dsh(args.dist, args.private_skill), ensure_ascii=False, indent=2))
     except subprocess.CalledProcessError as exc:
         parser.exit(2, exc.stderr or str(exc) + '\n')
     except (OSError, ValueError) as exc:

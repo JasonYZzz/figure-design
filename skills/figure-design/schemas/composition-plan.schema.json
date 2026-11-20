@@ -13,6 +13,8 @@
     "grammar":{"type":"object","additionalProperties":false,"required":["primary","modifiers","asset_treatments"],"properties":{
       "primary":{"type":"string","minLength":1},"modifiers":{"type":"array","uniqueItems":true,"items":{"type":"string"}},"asset_treatments":{"type":"array","uniqueItems":true,"items":{"type":"string"}}
     }},
+    "design_bindings":{"type":"object","additionalProperties":false,"required":["hero","paths","traces","displays"],"properties":{
+      "hero":{"type":["string","null"]},"paths":{"type":"array"},"traces":{"type":"array"},"displays":{"type":"array"}}},
     "style_id":{"type":"string","minLength":1},
     "display_width_px":{"type":"integer","minimum":1,"maximum":10000},
     "theme_source":{"enum":["explicit","reference","domain_preset"]},

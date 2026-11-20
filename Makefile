@@ -5,9 +5,9 @@ VERSION := $(shell $(PYTHON) -c "import sys; sys.path.insert(0, '$(SKILL)/script
 DIST ?= dist
 OUT ?= build/runs
 
-.PHONY: help setup doctor test check benchmark demo package package-private package-dsh
+.PHONY: help setup doctor test check benchmark demo package package-private package-dsh package-dsh-private
 help:
-	@echo 'setup | doctor | test | check | benchmark | demo | package | package-private | package-dsh'
+	@echo 'setup | doctor | test | check | benchmark | demo | package | package-private | package-dsh | package-dsh-private'
 	@echo 'Override PYTHON, OUT or DIST as needed. Existing output directories/packages are never overwritten.'
 setup:
 	python3 -m venv .venv
@@ -29,3 +29,8 @@ package-private:
 	$(PYTHON) $(SKILL)/scripts/figure.py pack --out $(DIST)/$(notdir $(SKILL))-$(VERSION)-private.zip --references $(SKILL)/assets/reference-library/images
 package-dsh:
 	$(PYTHON) scripts/package_dsh.py --dist "$(DIST)"
+
+package-dsh-private: $(DIST)/figure-design-$(VERSION)-private.zip
+	$(PYTHON) scripts/package_dsh.py --dist "$(DIST)" --private-skill "$<"
+$(DIST)/figure-design-$(VERSION)-private.zip:
+	$(MAKE) package-private DIST="$(DIST)"

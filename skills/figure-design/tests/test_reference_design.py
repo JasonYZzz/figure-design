@@ -226,7 +226,9 @@ class ReferenceDesign(unittest.TestCase):
             out = self.root/(variant+'-render')
             report = render_job(self.content,plan,self.sources,out,[asset])
             self.assertFalse(report['errors'])
-            self.assertEqual(report['composition']['display_check']['width_px'], 600)
+            display = report['composition']['display_check']
+            self.assertEqual(display['width_px'], 600)
+            self.assertAlmostEqual(display['min_font_px_at_1000'], display['min_font_px'] * 1000 / 600)
             if variant == 'wide':
                 objects = {item['id']: item for item in read(out/'scene.json')['objects']}
                 x, _, w, _ = objects['image-owner-1']['bounds']
