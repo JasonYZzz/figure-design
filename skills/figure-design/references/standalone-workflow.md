@@ -118,7 +118,7 @@ Linux 若缺 Chromium 系统库，按 Playwright 提示安装系统依赖；不�
 
 ### 3. 本地示意、资产绑定与可选生图
 
-先寻找合适的获准原图，或按简报绘制无字的本地 SVG。比如用并排的采样装置和读数界面说明测量过程，正式条件和连接线仍由 FigureContent 控制。可以用 `make demo` 查看从本地原创 SVG 到两种成图的完整例子。
+先寻找适合当前对象且已获准使用的素材。需要新绘原创插画时，按下述步骤调用当前宿主的生图技能或工具。例如，可生成无字的采样装置插画，测量读数按来源数据绘制，正式条件和连接线由 FigureContent 控制。可以用 `make demo` 查看从本地原创 SVG 到两种成图的完整例子。
 
 有现成库先 `asset-search --library <目录> --type <类型> [--style <样式>]`。每个实际文件通过 `asset-register --input <图> --metadata <JSON> --out <库>` 注册。
 
@@ -134,7 +134,7 @@ metadata 必需：`id`, `scientific_type`, `style_family_id`, `rights: authorize
 4. 成功时 `image-status ... --status succeeded --image <实际结果文件> --receipt <实际工具结果标识>`；超时记 unknown，查询原操作，不重复提交。
 5. 审核科学对象和像素质量后注册。可用 `asset-sheet --input <sheet.png> --boxes <JSON数组> --out <候选目录>` 按 `{id,bounds:[x,y,w,h]}` 切分；裁片仍是 candidate，边缘统计不代替人工 QA。
 
-费用未知保持 unknown。请求账本记录操作状态，费用以上游工具为准。缺少生图能力时优先复用获准资产或绘制本地示意。用户未指定模式且素材不足时，可用纯文字交付结构草稿并注明待补画面。
+费用未知保持 unknown。请求账本记录操作状态，费用以上游工具为准。缺少生图能力时说明限制，可复用获准资产或绘制本地示意，并在素材记录中注明实际来源。若用户明确要求使用生图工具，将对应插画列为待补。用户未指定模式且素材不足时，可用纯文字交付结构草稿并注明待补画面。
 
 ### 4. 图文路线、渲染与检查
 
