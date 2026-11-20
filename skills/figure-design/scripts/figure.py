@@ -322,7 +322,7 @@ def main():
     c.add_argument('--mode', choices=['text','mixed'], help='Select text-only diagrams or diagrams with approved illustrations')
     c.add_argument('--diagram-type', choices=['architecture','roadmap'], help='Pass the requested diagram kind to the bundled Diagram Design Skill')
     for name in ('preflight','render'):
-        c=sub.add_parser(name);c.add_argument('--content',required=True);c.add_argument('--plan',required=True);c.add_argument('--sources',nargs='+',required=True);c.add_argument('--assets',nargs='*',default=[])
+        c=sub.add_parser(name);c.add_argument('--content',required=True);c.add_argument('--plan',required=True,nargs='+' if name=='preflight' else None);c.add_argument('--sources',nargs='+',required=True);c.add_argument('--assets',nargs='*',default=[])
         c.add_argument('--out',required=name=='render',default='unused')
     c=sub.add_parser('qa');c.add_argument('--render',required=True);c.add_argument('--review')
     c=sub.add_parser('diagram-export',help='Validate and export an HTML diagram authored with the bundled Diagram Design Skill')
@@ -453,7 +453,7 @@ def main():
                 route = a.route or 'asset_composite'
                 if route not in MIXED_ROUTES or a.diagram_type:
                     raise ValueError('mixed mode uses an illustrated route with its own layout')
-                options = {'variant': a.variant, 'route': route}
+                options = {'variant': a.variant, 'route': route, 'decisions': brief.get('design_decisions', {})}
                 from figure_reference import apply_reference
                 style = a.style or default_style(content['domain'])
                 reviewed = reference_choices(content,suggestions,brief) if brief and suggestions else {}
@@ -469,6 +469,8 @@ def main():
                     plan = item['plan']
                     if brief:
                         apply_reference(plan,brief,suggestions,use_reference_colors=not (a.style or a.theme))
+                    display_width = brief.get('design_decisions', {}).get('display_width_px')
+                    plan.setdefault('display_width_px', display_width or min(1200, plan['canvas']['width']))
                     if a.theme:
                         plan['theme'] = read(a.theme)
                     plan['theme_source'] = ('explicit' if a.theme or a.style else
@@ -478,10 +480,24 @@ def main():
                 out.mkdir(parents=True)
                 for i,item in enumerate(plans):write(out/f'candidate-{i+1}.json',item['plan'])
                 write(out/'selection.json',plans);result={'candidates':len(plans),'out':str(out),'route':route,
-                    'mode':'mixed','next':'Choose a layout, write its theme roles and bind approved illustrations before preflight.'}
+                    'mode':'mixed','next':'Use the current agent’s image-generation skill for the mixed figure illustration. Bind the reviewed result and run preflight on each contender before selection.'}
         elif a.command in ('preflight','render'):
             from figure_render import render
-            result=render(read(a.content),read(a.plan),a.sources,a.out,a.assets,True) if a.command=='preflight' else render_job(read(a.content),read(a.plan),a.sources,a.out,a.assets)
+            content = read(a.content)
+            if a.command == 'render':
+                result = render_job(content,read(a.plan),a.sources,a.out,a.assets)
+            elif len(a.plan) == 1:
+                result = render(content,read(a.plan[0]),a.sources,a.out,a.assets,True)
+            else:
+                checks = []
+                for path in a.plan:
+                    try:
+                        check = render(content, read(path), a.sources, a.out, a.assets, True)
+                    except (ValueError, OSError) as exc:
+                        check = {'status':'blocked', 'reason':str(exc)}
+                    checks.append({'plan':path, **check})
+                result = {'status':'pass' if any(c['status']=='pass' for c in checks) else 'blocked',
+                          'candidates':checks}
         elif a.command=='qa':
             result=verify_bundle(a.render)
             if a.review:

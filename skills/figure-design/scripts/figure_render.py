@@ -177,6 +177,14 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
         'entities_without_native_edges': [e['id'] for e in content['entities'] if e['id'] in displayed_owners - endpoints],
         'evidence_links': [r for r in drawn_relations if r['type'] in ('tests', 'measures', 'supports')],
     }
+    endpoint_regions = {}
+    for edge in plan['edges']:
+        rel = relations[edge['relation_id']]
+        for side, endpoint in [('source', 'from_id'), ('target', 'to_id')]:
+            endpoint_regions.setdefault(rel[endpoint], set()).add(edge[side + '_region_id'])
+    split = {owner: sorted(ids) for owner, ids in endpoint_regions.items() if len(ids) > 1}
+    if split:
+        composition['relation_review']['split_endpoint_owners'] = split
     if readouts := readout_visuals(regions, instances, assets):
         composition['readout_visuals'] = readouts
     labels = {l['id']: l['text'] for l in content['labels']}
@@ -364,12 +372,15 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
                 x,y,w,h=bounds[rid]
                 appearance = region.get('appearance', 'plain' if rid in grouped_regions or region['role'] in ('title','caption') else 'panel')
                 tone = style[region.get('tone', 'accent')]
+                emphasized = region['visual_priority'] >= 8 and region['role'] not in ('title', 'caption')
+                if emphasized and appearance == 'plain' and plan['route'] != 'image_first':
+                    ET.SubElement(svg,'rect',{'x':str(x),'y':str(y),'width':str(w),'height':'3','fill':tone})
                 if appearance == 'plain' or plan['route'] == 'image_first':
                     continue
                 ET.SubElement(svg,'rect',{'x':str(x),'y':str(y),'width':str(w),'height':str(h),
                     'rx':'6' if appearance == 'panel' else '0','fill':style['surface'],
                     'stroke':tone if 'tone' in region else style['border'],'stroke-width':'1.5','data-region':rid})
-                if appearance == 'band' or region['role'] == 'hero':
+                if appearance == 'band' or region['role'] == 'hero' or emphasized:
                     stripe_width, stripe_height = (w, 5) if appearance == 'band' else (5, h)
                     ET.SubElement(svg,'rect',{'x':str(x),'y':str(y),'width':str(stripe_width),'height':str(stripe_height),'fill':tone})
             for obj in sorted(objects,key=lambda x:x['z_index']):
@@ -452,6 +463,34 @@ def render(content, plan, source_paths, out, asset_manifests=(), preflight=False
                     return result;
                 }''')
                 page.set_viewport_size({'width': width, 'height': height})
+                measured['native_min_font_px'] = measured['min_font_px']
+                measured['asset_text'] = {}
+                for obj in objects:
+                    if obj['type'] != 'image':
+                        continue
+                    asset = assets[obj['asset_id']]
+                    entry = {'asset_id': obj['asset_id'], 'status': 'inspect_pixels'}
+                    if asset['mime'] == 'image/svg+xml':
+                        # Isolate inherited styles from the parent figure. Measure transformed SVG text at its placed size.
+                        with browser.new_page(java_script_enabled=False) as asset_page:
+                            asset_page.route('**/*', lambda req: req.abort())
+                            payload = b64encode(asset['_path'].read_bytes()).decode('ascii')
+                            asset_page.goto('data:image/svg+xml;base64,' + payload)
+                            dims = [v * measured['width_px'] / width for v in obj['bounds'][2:]]
+                            minimum = asset_page.evaluate("""([w,h]) => {
+                                const root = document.querySelector('svg');
+                                const box = root.getBoundingClientRect();
+                                const factor = Math.min(w / box.width, h / box.height);
+                                const sizes = Array.from(root.querySelectorAll('text,tspan'))
+                                    .filter(e => e.getClientRects().length && e.textContent.trim())
+                                    .map(e => { const m = e.getScreenCTM();
+                                        return parseFloat(getComputedStyle(e).fontSize) * Math.hypot(m.c, m.d) * factor; });
+                                return sizes.length ? Math.min(...sizes) : null;
+                            }""", dims)
+                        entry.update(status='measured' if minimum is not None else 'no_svg_text', min_font_px=minimum)
+                        if minimum is not None:
+                            measured['min_font_px'] = min(minimum, measured['min_font_px'])
+                    measured['asset_text'][obj['id']] = entry
                 composition['display_check'] = measured
                 if measured['overflow']:
                     errors.append('display_width_overflow')

@@ -114,11 +114,11 @@ Linux 若缺 Chromium 系统库，按 Playwright 提示安装系统依赖；不�
 
 显式布局可用 `plan --layout center-hero-side-support --style biomedicine-academic --variant wide ...`。布局见 `assets/layout-registry.yaml`。镜像仅改变区域位置，关系方向仍由事实 ID 决定。绑定插图的区域可用 `asset_fraction` 调整图片高度占比，默认 `0.44`，上限 `0.85`，需要为该区域的正式文字保留测量空间。
 
-选一个候选另存为 `plan.json`。按参考图编排画面，在 `theme` 写入本次图文配色及依据，再绑定素材。新图文计划写入 `mode: mixed`。高级选项 `--route strict_scientific` 和 `--route image_first` 仍要求绑定获准资产。
+先给候选写入主题并绑定代表性素材，实际预检后把选中的版本另存为 `plan.json`。新图文计划写入 `mode: mixed`。高级选项 `--route strict_scientific` 和 `--route image_first` 仍要求绑定获准资产。
 
-### 3. 本地示意、资产绑定与可选生图
+### 3. 当前 Agent 生图与素材绑定
 
-先寻找合适的获准原图，或按简报绘制无字的本地 SVG。比如用并排的采样装置和读数界面说明测量过程，正式条件和连接线仍由 FigureContent 控制。可以用 `make demo` 查看从本地原创 SVG 到两种成图的完整例子。
+绘制新的图文混合科研图时，由当前执行任务的 Agent 调用本会话实际提供的生图技能完成主要插图。先依据简报选择值得画的对象变化，登记操作，再调用工具。已有授权原图、数据图与 Three.js 空间图例可作为补充。软件测试和旧图改字可复用固定素材。
 
 有现成库先 `asset-search --library <目录> --type <类型> [--style <样式>]`。每个实际文件通过 `asset-register --input <图> --metadata <JSON> --out <库>` 注册。
 
@@ -126,7 +126,7 @@ metadata 必需：`id`, `scientific_type`, `style_family_id`, `rights: authorize
 
 在 plan 的对应 region 添加 `asset_ids: ["ID"]`；render/preflight 加 `--assets <库/ID/asset.json> ...`。资产与该区域 owner 必须匹配。支持 PNG/JPEG/WebP 与经静态限制的 SVG；外部 SVG 脚本、引用和任意样式不执行。每个区域一个资产，可拆区域或使用审核过的 sheet。
 
-需要原创插画时：
+执行宿主生图的步骤如下。
 
 1. `image-request --content <content> --entity <ID> --prompt <客观对象描述> --operation-id <稳定ID> --budget <已批准上限> --out <operations>`，只准备请求。
 2. 获得本次任务真实授权和可用工具后，`image-status --operation <operation.json> --status submitted --provider <实际工具/模型>`。
@@ -134,7 +134,9 @@ metadata 必需：`id`, `scientific_type`, `style_family_id`, `rights: authorize
 4. 成功时 `image-status ... --status succeeded --image <实际结果文件> --receipt <实际工具结果标识>`；超时记 unknown，查询原操作，不重复提交。
 5. 审核科学对象和像素质量后注册。可用 `asset-sheet --input <sheet.png> --boxes <JSON数组> --out <候选目录>` 按 `{id,bounds:[x,y,w,h]}` 切分；裁片仍是 candidate，边缘统计不代替人工 QA。
 
-费用未知保持 unknown。请求账本记录操作状态，费用以上游工具为准。缺少生图能力时优先复用获准资产或绘制本地示意。用户未指定模式且素材不足时，可用纯文字交付结构草稿并注明待补画面。
+费用未知保持 unknown。请求账本记录操作状态，费用以上游工具为准。当前 Agent 无法调用生图能力时，报告缺失能力和所需画面，保留草图等待补齐。用户未指定模式且素材不足时，可用纯文字交付结构草稿并注明待补画面。
+
+给两份候选绑定代表性素材后，使用同一批来源和素材运行 `preflight --plan 候选A.json 候选B.json --content ... --sources ... --assets ...`。逐项查看通过情况和失败原因，再按读图任务选稿。单份计划仍使用原命令。
 
 ### 4. 图文路线、渲染与检查
 

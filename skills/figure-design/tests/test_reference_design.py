@@ -206,7 +206,8 @@ class ReferenceDesign(unittest.TestCase):
             picture = self.root/'themed.svg'
             picture.write_text('<svg xmlns="http://www.w3.org/2000/svg" width="40" height="20">'
                                '<rect width="40" height="20" fill="{{figure:accent}}"/>'
-                               '<circle cx="20" cy="10" r="5" fill="#cf2307"/></svg>')
+                               '<circle cx="20" cy="10" r="5" fill="#cf2307"/>'
+                               '<text x="1" y="3" font-size="1">1</text></svg>')
             asset_root = self.root/(variant+'-assets')
             register_themed(picture,{'id':'demo','scientific_type':'test','style_family_id':'test',
                 'rights':'authorized_reuse','approval':'production_approved','origin':'original test SVG',
@@ -226,7 +227,12 @@ class ReferenceDesign(unittest.TestCase):
             out = self.root/(variant+'-render')
             report = render_job(self.content,plan,self.sources,out,[asset])
             self.assertFalse(report['errors'])
-            self.assertEqual(report['composition']['display_check']['width_px'], 600)
+            display = report['composition']['display_check']
+            self.assertEqual(display['width_px'], 600)
+            embedded = display['asset_text']['image-owner-1']
+            self.assertEqual(embedded['status'], 'measured')
+            self.assertGreater(embedded['min_font_px'], 0)
+            self.assertEqual(display['min_font_px'], min(display['native_min_font_px'], embedded['min_font_px']))
             if variant == 'wide':
                 objects = {item['id']: item for item in read(out/'scene.json')['objects']}
                 x, _, w, _ = objects['image-owner-1']['bounds']

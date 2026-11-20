@@ -32,9 +32,9 @@ def research_brief(content, sources, reference_images=()):
         'reference_requirements': {'query': content['purpose'], 'require': {}, 'task_count':len(content['tasks']),
             'relation_types':sorted({r['type'] for r in content['relations']}), 'count_policy':'capacity hint only; unknown reference counts never satisfy an exact constraint'},
         'design_decisions': {
-            'main_question_or_supported_claim': None, 'hero_owner_id': None,
+            'main_question_or_supported_claim': None, 'hero_owner_id': None, 'display_width_px': None,
             'panel_questions_and_evidence_roles': [], 'reading_order': [],
-            'main_paths': [], 'evidence_scope': [],
+            'main_paths': [], 'evidence_scope': [], 'label_anchors': {},
             'alternative_explanations_and_controls': [], 'color_meanings': [],
             'reference_choices_with_reasons': [], 'exclusions_with_reasons': [],
             'reference_design': None,
@@ -47,6 +47,9 @@ def research_brief(content, sources, reference_images=()):
             'Distinguish the main evidence from controls, methods and validation.',
             'Retain negation, units, uncertainty, experimental conditions and alternative explanations.',
             'Choose layout after the scientific argument; references provide design, never new facts.',
+            'Use input, intermediate and output owner IDs for each main path. Sketch shared objects once.',
+            'Generate the mixed illustration with the current agent image-generation skill and record its operation.',
+            'At display width, hide explanatory text to trace the system, then hide each illustration to identify the information it adds.',
         ],
         'automation_scope': 'Exact source/label/relation mapping only; empty decisions require semantic design. No research conclusion or human approval is inferred.',
     }

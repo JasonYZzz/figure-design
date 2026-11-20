@@ -11,11 +11,18 @@ def route(source, target, rectangles, canvas):
     if source == target:
         raise ValueError('self-loop needs explicit scene routing; split the owner or provide a custom composition')
     pad = 12
-    def ports(r):
+    def ports(r, other):
         x, y, w, h = r
-        return [((x+w/2, y), (x+w/2, y-pad)), ((x+w, y+h/2), (x+w+pad, y+h/2)),
+        ox, oy, ow, oh = other
+        cx, cy = ox + ow/2, oy + oh/2
+        aligned = []
+        if y + pad < cy < y + h - pad and cy != y+h/2:
+            aligned.extend([((x, cy), (x-pad, cy)), ((x+w, cy), (x+w+pad, cy))])
+        if x + pad < cx < x + w - pad and cx != x+w/2:
+            aligned.extend([((cx, y), (cx, y-pad)), ((cx, y+h), (cx, y+h+pad))])
+        return aligned + [((x+w/2, y), (x+w/2, y-pad)), ((x+w, y+h/2), (x+w+pad, y+h/2)),
                 ((x+w/2, y+h), (x+w/2, y+h+pad)), ((x, y+h/2), (x-pad, y+h/2))]
-    starts, ends = ports(source), ports(target)
+    starts, ends = ports(source, target), ports(target, source)
     expanded = [[x-pad+1, y-pad+1, w+2*pad-2, h+2*pad-2] for x,y,w,h in rectangles]
     xs = sorted({24., canvas[0]-24., *[v for x,y,w,h in rectangles for v in (x-pad, x+w/2, x+w+pad)]})
     ys = sorted({24., canvas[1]-24., *[v for x,y,w,h in rectangles for v in (y-pad, y+h/2, y+h+pad)]})

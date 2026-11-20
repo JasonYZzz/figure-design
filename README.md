@@ -2,12 +2,12 @@
 
 `figure-design` 是一个将论文、开题报告、基金申请和研究方案转成科研技术路线图、研究框架或机制示意图的 Agent Skill。宿主 Agent 提炼科研内容并审阅图面，Python 本地工具校验来源、排版并导出可编辑 SVG、PNG、可离线打开的 HTML 和质量报告。
 
-## 1.11.0 更新
+## 1.12.0 更新
 
-- 在图文路线图的箭头上标注有原文依据的动作，例如「核对日志」或「启动时载入」。动作文字可单独编辑。
-- 科研简报记录主路径和实验范围。质量报告列出图上缺少原生连线的实体，以及检验、测量和支持关系的端点，供制图者对照原文复核。
+- 简报中的主视觉与读序驱动排版。共享对象在主路径中保留单一节点，机制与实验可采用不同的阅读顺序。
+- 当前 Agent 调用本会话生图能力完成图文混合插图。候选支持批量容量预检，显示检查分别报告原生标签与嵌入插图文字。
 
-[完整发布记录](docs/releases/1.11.0.md)
+[完整发布记录](docs/releases/1.12.0.md)
 
 ## 在 Codex 中使用
 
@@ -23,7 +23,7 @@ make package
 
 ```bash
 figure_install_dir=$(mktemp -d)
-unzip dist/figure-design-1.11.0.zip -d "$figure_install_dir"
+unzip dist/figure-design-1.12.0.zip -d "$figure_install_dir"
 .venv/bin/python "$figure_install_dir/figure-design/scripts/install.py" --to "$HOME/.codex/skills"
 ```
 
@@ -34,30 +34,30 @@ unzip dist/figure-design-1.11.0.zip -d "$figure_install_dir"
 | 模式 | 用途 | CLI 规划参数 |
 | --- | --- | --- |
 | 纯文字 | 随包的原版 Diagram Design 直接分析文档并绘制架构图或技术路线图 | `plan --source <原文> --mode text` 可记录交接，图型可选 `architecture` 或 `roadmap` |
-| 图文混合 | 用 [Three.js 空间图例](skills/figure-design/references/threejs-legends.md)、原创 SVG 示意或获准插图解释研究对象、方法与验证场景 | `--mode mixed` |
+| 图文混合 | 由当前 Agent 的生图技能制作科学插图，结合 [Three.js 空间图例](skills/figure-design/references/threejs-legends.md)、原创 SVG 示意或获准插图解释研究对象、方法与验证场景 | `--mode mixed` |
 
 Skill 与 CLI 默认采用纯文字。用户可说「带插图」或指定 `mode=mixed` 来选择图文。两种模式均交付 `preview.svg`、`preview.png`、`preview.html` 和 `quality-report.json`。
 
 ## DeepSeek Harness 插件
 
-本地验证使用 DSH npm CLI 和 macOS 桌面端 `0.2.2-rc.5`。插件版本是 **1.11.0**，宿主版本条件为 `^0.2.1-rc.3`。npm CLI `0.2.2-rc.5` 需要 Node.js 24.9 或更新版本。
+本地验证使用 DSH npm CLI 和 macOS 桌面端 `0.2.2-rc.5`。插件版本是 **1.12.0**，宿主版本条件为 `^0.2.1-rc.3`。npm CLI `0.2.2-rc.5` 需要 Node.js 24.9 或更新版本。
 
 执行 `make setup` 和 `make package-dsh` 后，从仓库根目录用相应的 CLI 安装。
 
 CLI 的 `web` Profile 使用终端中的 `dsh`。
 
 ```bash
-dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.11.0.tgz"
+dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.12.0.tgz"
 ```
 
 macOS 桌面端先启动一次应用以初始化 `desktop` Profile，再正常退出。若应用装在 `/Applications`，使用下列命令。
 
 ```bash
 dsh_desktop="/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh"
-"$dsh_desktop" plugin --profile desktop add "$PWD/dist/dsh-figure-design-1.11.0.tgz"
+"$dsh_desktop" plugin --profile desktop add "$PWD/dist/dsh-figure-design-1.12.0.tgz"
 ```
 
-重新打开桌面端，在「插件 → 已安装 → 科研图设计」确认版本为 1.11.0，且插件已启用。
+重新打开桌面端，在「插件 → 已安装 → 科研图设计」确认版本为 1.12.0，且插件已启用。
 
 安装后在 DSH 对话中使用 `/dsh-figure-design`。同版本重装时，用 `DIST` 将新包构建到新目录，安装时使用该包的绝对路径。[安装命令与运行环境](plugins/dsh-figure-design/README.md)
 

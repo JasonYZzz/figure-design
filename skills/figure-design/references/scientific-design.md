@@ -1,6 +1,6 @@
 # 科研分析与构图设计
 
-本流程在当前 Skill 内执行，不读取其他已安装 Skill，也不下载远程提示词或源码。方法参考了本地 nature-figure 的科学主张与面板分工、nature-proposal-writer 的证据表与论证图，以及 PPT Master 的内容先于版式设计原则；这里是适配本产品的独立实现。
+本流程在当前 Skill 内执行，科研分析使用本包资源，图文插图交由当前 Agent 的生图技能完成。方法参考了本地 nature-figure 的科学主张与面板分工、nature-proposal-writer 的证据表与论证图，以及 PPT Master 的内容先于版式设计原则；这里是适配本产品的独立实现。
 
 ## 从来源到设计简报
 
@@ -25,6 +25,7 @@ python scripts/figure.py research-brief --content /工作目录/content.json --s
 
 ## 主图与实验的对应关系
 
+- 比较系统与对照视角时，先从原文图和图注确定哪些关系同时成立、哪些操作可选。主图草案复用同一 owner，分图重复时写明原因。图级标签只放跨面板的说明，方法、条件与读数绑定各自对象。
 - 在 `design_decisions.main_paths` 写出各条主路径的起点、交接物、操作、终点和来源。原文允许直接访问、并行处理或可选维护时，给这些路径留出独立走向。暂时遮住案例，读者仍应能回答标题里的系统问题。
 - 对有实验结果的面板，在 `evidence_scope` 写明改变的条件、保持的对照、读数与单位、支持的对象或路径，以及推广边界。先把图上的实验连线读成一句完整主张。多环节同时改变时，把结果配给这一组操作；只有实验单独改变某一环节时才将效果归给该环节。原文有适用范围的反例时，放在对应结果旁。
 - `composition.relation_review` 列出图上没有原生连线的实体，以及实际绘出的检验、测量和支持关系。对照成图检查孤立实体是有意的背景说明、素材内已画的关系还是漏画。核对证据连线两端的画面和文字与实验问题是否一致。未设计检验连线的结果可用指向同一机制的明确标题或图例挂接。
@@ -40,3 +41,10 @@ python scripts/figure.py research-brief --content /工作目录/content.json --s
 素材注册和最终 SVG 编译均调用随包的 `scripts/vendor/ppt_master_svg_resources.py`。它检查嵌入 SVG、CSS url、外部样式表和资源引用是否完整包含在文件内；同时保留本项目原有的 SVG 元素/属性限制。字体和获准图片实际嵌入输出，不依靠外部网址显示。
 
 该检查不判断科研正确性，也不能替代对 raster 图片内部文字和内容的审阅。第三方代码许可与源文件 hash 见 [本地来源说明](../third_party/README.md)。
+
+
+简报用 `display_width_px` 指定实际阅读宽度。新建 CLI 计划默认按画布宽度和 1200 像素中的较小值预览，参考设计指定的尺寸优先。
+
+### 图级文字的位置
+
+较早的内容文件可能把列名、实验区标题和每行小标题都绑定在整图上。在结构化主路径简报中，用 `design_decisions.label_anchors` 为这些已有实例指定位置。例如 `{"I3": "before_paths", "I6": "shared_column", "I19": "wiki", "I32": "before_evidence"}`。列名可用 `input_column`、`shared_column`、`output_column`，行标题可用实际 owner ID。未指定的图级说明按原次序保留在图注中；检查其中是否混入应放回主图的标题。自定义或参考图已有精确区域时，以显式 placement 为准。

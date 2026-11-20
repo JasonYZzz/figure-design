@@ -41,6 +41,6 @@ Design grammar: `primary` + zero to three `modifiers` + zero or more `asset_trea
 - Preserve status: proposed work is labeled proposed; never draw invented measured result.
 - Reject a composition if capacity or connections cannot fit; rank second candidate or split figure with explicit user's desired output.
 
-## Composition candidate scoring (heuristic only)
+## Choosing a candidate
 
-`score = 0.30*topology_fit + 0.25*content_hierarchy + 0.20*text_fit + 0.15*domain_visual_fit + 0.10*novelty_without_distortion`. Weights are initial tuning seeds and must be calibrated by benchmark; hard constraints are gates and never weighted away.
+Use the source-bound reading task to choose between a system overview and an evidence-first comparison. Bind representative assets and run preflight on both plans. Compare the rendered candidates at the target width and record what a reader learns from the shared objects, experimental contrasts and illustrations. Keep label and edge integrity as hard constraints.

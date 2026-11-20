@@ -105,7 +105,7 @@ def owner_slots(content):
     return {f'owner-{index}': owner for index,owner in enumerate(owners,1)}
 
 
-def make_plan(content, primary, style, variant='balanced', route='asset_composite'):
+def make_plan(content, primary, style, variant='balanced', route='asset_composite', *, decisions=None):
     schema_check('figure-content.schema.json', content)
     if route not in MIXED_ROUTES:
         raise ValueError('use Diagram Design for text diagrams')
@@ -123,7 +123,20 @@ def make_plan(content, primary, style, variant='balanced', route='asset_composit
         raise ValueError('unknown style')
     instances = content['label_instances']
     slots = owner_slots(content)
-    # Preserve task input order; Codex may reorder explicitly after scientific review.
+    decisions = decisions or {}
+    owner_ids = list(slots.values())
+    order = decisions.get('reading_order', [])
+    hero = decisions.get('hero_owner_id')
+    # Older briefs used prose for the reading order. Keep those hints for manual review.
+    order = [o for o in order if isinstance(o, str) and o in owner_ids] if isinstance(order, list) else []
+    hero = hero if hero in owner_ids else None
+    ordered = list(dict.fromkeys([*order, *owner_ids]))
+    central = layout['family'] in ('center', 'radial', 'abstract', 'apparatus')
+    if central and hero:
+        ordered.remove(hero)
+        ordered.insert(0, hero)
+    # Keep owner-N stable for reference placements even when reading order changes.
+    region_ids = {owner: rid for rid, owner in slots.items()}
     coords = positions(layout['family'], len(slots), variant)
     cw,ch,mirrored=variants[variant]
     if mirrored:coords=[[1-x-w,y,w,h] for x,y,w,h in coords]
@@ -138,9 +151,10 @@ def make_plan(content, primary, style, variant='balanced', route='asset_composit
     if title:
         regions.append(region('title', 'title', [.05, .035, .90, .12], title))
     owner_regions = {}
-    for i, ((rid, owner), bounds) in enumerate(zip(slots.items(), coords)):
+    for i, (owner, bounds) in enumerate(zip(ordered, coords)):
+        rid = region_ids[owner]
         owner_regions[owner] = rid
-        regions.append(region(rid, 'hero' if layout['family'] in ('center', 'radial', 'abstract', 'apparatus') and i == 0 else 'research_task', bounds,
+        regions.append(region(rid, 'hero' if owner == hero or (central and i == 0 and not hero) else 'research_task', bounds,
                               [item['id'] for item in instances if item['owner_id'] == owner]))
     edges = []
     for rel in content['relations']:
@@ -188,7 +202,144 @@ def reference_choices(content, references, brief):
     return choices
 
 
-def candidates(content, style='biomedicine-academic', references=None, *, variant='balanced', route='asset_composite', reviewed=None):
+def arrange_paths(plan, content, decisions, evidence_first):
+    """Use each scientific owner once, even when several paths visit it."""
+    paths = decisions['main_paths']
+    slots = owner_slots(content)
+    regions = {r['id']: r for r in plan['regions']}
+    by_owner = {owner: regions[rid] for rid, owner in slots.items()}
+    declared_order = decisions.get('reading_order') or []
+    order = list(dict.fromkeys([*(o for o in declared_order if isinstance(o, str) and o in by_owner), *by_owner]))
+    columns = []
+    assigned = set()
+    for key in ('intermediate', 'input', 'output'):
+        members = {p[key] for p in paths}
+        if members - by_owner.keys():
+            raise ValueError('main_paths refers to an unplaced owner')
+        columns.append([o for o in order if o in members - assigned])
+        assigned.update(members)
+    middle, left, right = columns
+    evidence = [o for o in order if o not in assigned]
+    width = plan['canvas']['width']
+    height = 40
+    boxes = {}
+    labels = {label['id']: label['text'] for label in content['labels']}
+    texts = {i['id']: labels[i['label_id']] for i in content['label_instances']}
+
+    anchors = decisions.get('label_anchors') or {}
+    bands = {'before_paths': [], 'before_evidence': [], 'input_column': [], 'shared_column': [], 'output_column': []}
+    caption = regions.get('caption')
+    anchored = {}
+    for iid, target in anchors.items():
+        if not caption or iid not in caption['label_instance_ids']:
+            raise ValueError('label_anchors must reference figure-wide non-title instances')
+        if target not in by_owner and target not in bands:
+            raise ValueError('unknown label anchor: ' + str(target))
+        caption['label_instance_ids'].remove(iid)
+        anchored.setdefault(target, []).append(iid)
+    for owner, ids in anchored.items():
+        if owner in by_owner:
+            by_owner[owner]['label_instance_ids'][:0] = ids
+        else:
+            rid = 'heading-' + owner
+            r = {**caption, 'text_safe': dict(caption['text_safe']), 'id':rid, 'role':'support',
+                 'appearance':'plain', 'label_instance_ids':ids}
+            plan['regions'].append(r)
+            regions[rid] = r
+            bands[owner] = [r]
+    if caption and not caption['label_instance_ids']:
+        plan['regions'].remove(caption)
+        del regions['caption']
+    depicted = {v.get('owner_id') for v in decisions.get('visual_concept', {}).get('depictions', [])
+                if isinstance(v, dict)}
+
+    def text_height(r, w):
+        # Conservative line estimate for the sketch; preflight uses shaped glyphs.
+        count = sum(sum(max(1, math.ceil(len(line) * 26 / (w - 32))) for line in texts[i].split('\n'))
+                    for i in r['label_instance_ids'])
+        return max(80, 32 + count * 38 + max(0, len(r['label_instance_ids']) - 1) * 16)
+
+    def place(r, x, y, w, h):
+        boxes[r['id']] = (x, y, w, h)
+        r['text_safe']['padding_px'] = 12
+
+    if 'title' in regions:
+        r = regions['title']
+        h = max(96, text_height(r, width * .92) * 2)
+        place(r, width * .04, height, width * .92, h)
+        height += h + 20
+
+    def heading(name, x, y, w):
+        for r in bands[name]:
+            h = text_height(r, w)
+            place(r, x, y, w, h)
+            return y + h + 12
+        return y
+
+    def evidence_rows(y):
+        y = heading('before_evidence', width * .035, y, width * .93)
+        for start in range(0, len(evidence), 3):
+            row = [by_owner[o] for o in evidence[start:start+3]]
+            w = width * .89 / len(row)
+            h = max(text_height(r, w) for r in row)
+            # Reserve room above the text for a representative chart or illustration.
+            h = math.ceil((h + 36) / .56)
+            for index, r in enumerate(row):
+                place(r, width * .04 + index * (w + width * .015), y, w, h)
+                if r['role'] != 'hero':
+                    r['role'] = 'validation'
+            y += h + 48
+        return y
+
+    if evidence_first:
+        height = evidence_rows(height)
+    height = heading('before_paths', width * .035, height, width * .93)
+    height = max(heading(key, x * width, height, w * width) for key, x, w in
+                 [('input_column', .035, .23), ('shared_column', .37, .26), ('output_column', .735, .23)])
+    # Align matched endpoints across the page. Shared objects span their lanes.
+    paths = sorted(paths, key=lambda path: (order.index(path['intermediate']), order.index(path['input'])))
+    spans = {}
+    for path in paths:
+        row_height = max(128, *(text_height(by_owner[path[key]], width * fraction)
+                                for key, fraction in [('input', .23), ('intermediate', .26), ('output', .23)]))
+        for o in (path['input'], path['intermediate'], path['output']):
+            top = spans.get(o, (height, height))[0]
+            spans[o] = (top, height + row_height)
+        height += row_height + 60
+    for owners, x, w in ((left, .035, .23), (middle, .37, .26), (right, .735, .23)):
+        bottom = 0
+        for o in sorted(owners, key=lambda owner: spans[owner][0]):
+            top, end = spans[o]
+            # Reused endpoints in non-adjacent lanes still occupy a single region.
+            y = max(top, bottom)
+            content_height = text_height(by_owner[o], width * w)
+            if o in depicted:
+                by_owner[o].update(asset_position='left', asset_fraction=.30)
+                content_height = text_height(by_owner[o], width * w * .64)
+            h = max(content_height, end - y)
+            place(by_owner[o], width * x, y, width * w, h)
+            bottom = y + h + 60
+        height = max(height, bottom)
+    if not evidence_first:
+        height = evidence_rows(height)
+    if 'caption' in regions:
+        # Old figure-wide editorial labels have no owner geometry. Keep them all.
+        r = regions['caption']
+        h = text_height(r, width * .92)
+        place(r, width * .04, height, width * .92, h)
+        height += h
+    height += 80
+    plan['canvas']['height'] = max(height, plan['canvas']['height'])
+    for rid, (x, y, w, h) in boxes.items():
+        regions[rid]['bounds'] = [x/width, y/plan['canvas']['height'], w/width, h/plan['canvas']['height']]
+    if len(middle) > 1:
+        for o in middle:
+            by_owner[o]['appearance'] = 'panel'
+        plan['groups'] = [{'id': 'shared-representations', 'regions': [by_owner[o]['id'] for o in middle]}]
+    schema_check('composition-plan.schema.json', plan)
+
+
+def candidates(content, style='biomedicine-academic', references=None, *, variant='balanced', route='asset_composite', reviewed=None, decisions=None):
     rels = content['relations']
     types = {r['type'] for r in rels}
     degree = {}
@@ -212,18 +363,40 @@ def candidates(content, style='biomedicine-academic', references=None, *, varian
             layout=row.get('analysis',{}).get('facets',{}).get('layout')
             if layout in registry()['layouts'] and layout not in suggestions:suggestions.append(layout)
         choices=list(dict.fromkeys(suggestions[:2]+choices))
+    decisions = decisions or {}
+    paths = decisions.get('main_paths') or []
+    path_layout = bool(paths) and all(isinstance(p, dict) and
+        all(isinstance(p.get(k), str) for k in ('input', 'intermediate', 'output')) for p in paths)
+    path_owners = {p[k] for p in paths for k in ('input', 'intermediate', 'output')} if path_layout else set()
+    # Prose paths from older briefs remain design notes; only actual IDs determine geometry.
+    path_layout = path_layout and path_owners <= set(owner_slots(content).values())
+    compare_evidence = path_layout and any(i['role'] == 'readout' and i['owner_id'] not in path_owners
+                                           for i in content['label_instances'])
+    if path_layout:
+        choices = list(dict.fromkeys(['top-overview-multi-lane', *(['comparative-panels'] if compare_evidence else []), *choices]))
     result = []
     for primary in choices:
         if len(result)==2:break
         try:
-            plan = make_plan(content, primary, style, variant=variant, route=route)
+            plan = make_plan(content, primary, style, variant=variant, route=route, decisions=decisions)
+            reason = 'refine this initial layout using topology and reviewed reference regions'
+            if path_layout and (not result or compare_evidence):
+                evidence_first = bool(result)
+                arrange_paths(plan, content, decisions, evidence_first)
+                if variant.endswith('mirrored'):
+                    for r in plan['regions']:
+                        x, y, w, h = r['bounds']
+                        r['bounds'] = [1-x-w, y, w, h]
+                reason = '先读实验对照，再追溯机制' if evidence_first else '先读共享对象与可选路径，再核对实验'
             result.append({'plan': plan, 'content_hash': fingerprint(content),
-                           'reason': 'refine this initial layout using topology and reviewed reference regions', 'status': 'capacity_check_pending',
+                           'reason': reason, 'status': 'capacity_check_pending',
                            'reference_review': reviewed,
                            'reference_evidence': [{'id':r['id'],'sha256':r['sha256'],'analysis_hash':r.get('analysis_hash'),
                                'image_status':r.get('image_status'),'visual_review':reviewed.get(r['id'], 'pending'),'transfer_regions':r.get('transfer_regions',[])}
                                for r in (references or {}).get('candidates',[]) if r.get('image_status')!='modified' and r.get('analysis',{}).get('facets',{}).get('layout')==primary]})
-        except ValueError:
+        except ValueError as exc:
+            if 'supports at most' not in str(exc):
+                raise
             continue
     if not result:
         raise ValueError('no initial layout fits owner count; split the figure')

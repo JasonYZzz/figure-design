@@ -9,7 +9,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL_NAME = 'figure-design'
-VERSION = '1.11.0'
+VERSION = '1.12.0'
 DIAGRAM_SKILL = ROOT / 'third_party/diagram-design/skills/diagram-design'
 MIXED_ROUTES = ('asset_composite', 'image_first', 'strict_scientific')
 ARTIFACTS = ('preview.svg', 'preview.png', 'preview.html', 'figure-content.json',
