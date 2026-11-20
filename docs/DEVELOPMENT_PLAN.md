@@ -1,8 +1,8 @@
 # 开发计划与当前状态
 
-当前版本 **1.12.1**，项目和独立 Agent Skill 统一使用 `figure-design`。唯一源码目录是 `skills/figure-design/`。用户通过独立安装包或 DSH 插件包部署 Skill。
+当前版本 **1.11.0**，项目和独立 Agent Skill 统一使用 `figure-design`。唯一源码目录是 `skills/figure-design/`。用户通过独立安装包或 DSH 插件包部署 Skill。
 
-图文模式的宿主生图要求与构图回退见 [1.12.1 交付记录](releases/1.12.1.md)。来源绑定的箭头动作和证据范围审阅见 [1.11.0 交付记录](releases/1.11.0.md)。图库复查与离线 Three.js 图例见 [1.10.0 交付记录](releases/1.10.0.md)。
+来源绑定的箭头动作和证据范围审阅见 [1.11.0 交付记录](releases/1.11.0.md)。图库复查与离线 Three.js 图例见 [1.10.0 交付记录](releases/1.10.0.md)。
 
 ## 1.9.0 图文生成
 

@@ -478,7 +478,7 @@ def main():
                 out.mkdir(parents=True)
                 for i,item in enumerate(plans):write(out/f'candidate-{i+1}.json',item['plan'])
                 write(out/'selection.json',plans);result={'candidates':len(plans),'out':str(out),'route':route,
-                    'mode':'mixed','next':'Choose a layout and its theme. For a new mixed scientific figure, use the current agent’s image-generation skill to generate the illustration, then review and bind it before preflight.'}
+                    'mode':'mixed','next':'Choose a layout, write its theme roles and bind approved illustrations before preflight.'}
         elif a.command in ('preflight','render'):
             from figure_render import render
             result=render(read(a.content),read(a.plan),a.sources,a.out,a.assets,True) if a.command=='preflight' else render_job(read(a.content),read(a.plan),a.sources,a.out,a.assets)

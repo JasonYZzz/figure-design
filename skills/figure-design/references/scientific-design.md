@@ -1,6 +1,6 @@
 # 科研分析与构图设计
 
-科研分析使用本包资源。新建图文混合科研图时，由当前 Agent 调用本会话的生图技能制作插图。方法参考了本地 nature-figure 的科学主张与面板分工、nature-proposal-writer 的证据表与论证图，以及 PPT Master 的内容先于版式设计原则；这里是适配本产品的独立实现。
+本流程在当前 Skill 内执行，不读取其他已安装 Skill，也不下载远程提示词或源码。方法参考了本地 nature-figure 的科学主张与面板分工、nature-proposal-writer 的证据表与论证图，以及 PPT Master 的内容先于版式设计原则；这里是适配本产品的独立实现。
 
 ## 从来源到设计简报
 

@@ -5,7 +5,7 @@ description: 根据论文、开题报告、基金申请或研究方案生成可�
 
 # Figure Design
 
-版本 `1.12.1`。纯文字架构图和技术路线图由宿主 Agent 执行本项目随包的 Diagram Design。图文混合由 Figure Design 负责证据绑定、参考检索、插图构图、排版与渲染。
+版本 `1.11.0`。纯文字架构图和技术路线图由宿主 Agent 执行本项目随包的 Diagram Design。图文混合由 Figure Design 负责证据绑定、参考检索、插图构图、排版与渲染。
 
 ## 先选择模式
 
@@ -14,8 +14,6 @@ description: 根据论文、开题报告、基金申请或研究方案生成可�
 - **`text`**：首先打开 [随包原版 Diagram Design SKILL.md](third_party/diagram-design/skills/diagram-design/SKILL.md)，把原文、图的用途和用户参考直接交给该流程。按 [纯文字工作流程](references/standalone-workflow.md#纯文字架构图与技术路线图) 提炼关键节点、边、交接物和限定条件，再按随包规则选图型、主题和模板，编写独立 HTML。核心节点优先说明职责或产出，关键连线传达具体关系。可用 `plan --source <原文> --mode text` 留交接记录。
 - **纯文字导出**：运行 `diagram-export --input <HTML> --out <新目录>` 调用同一随包 Skill 的检查与导出。打开实际 HTML 和 PNG，按原文和使用尺寸验收，将结论写进 [纯文字审阅记录](references/acceptance.md#纯文字审阅)。HTML 是编辑入口。
 - **`mixed`**：打开 [科研分析与构图](references/scientific-design.md) 和 [主题设计](references/visual-style.md)，使用本项目的 FigureContent、构图计划、资产绑定和编译流程。
-
-**图文混合的生图交接**：制作新图时，当前执行任务的 Agent 必须调用本会话的生图技能或生图工具来完成科研插图。Codex 使用当前 imagegen；DSH 使用当前会话已加载的生图能力。用原文明确这幅插图需要解释的状态变化或关系，先登记 image-request，再实际生成、检查回执与像素、注册素材并绑定到对应对象。Codex／DSH 均以宿主实际工具名和回执记录来源；只写提示词、手绘占位图均不能算已完成生图。生成图只解释对象、操作或状态变化；数据、标签与箭头由来源绑定。当前宿主缺少能力时，说明缺少的图像及启用入口，保存已完成的简报和草图。修改旧图文字可复用已核验的插图。
 
 ## 开始工作
 
