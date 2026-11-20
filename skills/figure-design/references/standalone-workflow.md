@@ -114,7 +114,7 @@ Linux 若缺 Chromium 系统库，按 Playwright 提示安装系统依赖；不�
 
 显式布局可用 `plan --layout center-hero-side-support --style biomedicine-academic --variant wide ...`。布局见 `assets/layout-registry.yaml`。镜像仅改变区域位置，关系方向仍由事实 ID 决定。绑定插图的区域可用 `asset_fraction` 调整图片高度占比，默认 `0.44`，上限 `0.85`，需要为该区域的正式文字保留测量空间。
 
-先给候选写入主题并绑定代表性素材，实际预检后把选中的版本另存为 `plan.json`。新图文计划写入 `mode: mixed`。高级选项 `--route strict_scientific` 和 `--route image_first` 仍要求绑定获准资产。
+选一个候选另存为 `plan.json`。按参考图编排画面，在 `theme` 写入本次图文配色及依据，再绑定素材。新图文计划写入 `mode: mixed`。高级选项 `--route strict_scientific` 和 `--route image_first` 仍要求绑定获准资产。
 
 ### 3. 当前 Agent 生图与素材绑定
 
@@ -135,8 +135,6 @@ metadata 必需：`id`, `scientific_type`, `style_family_id`, `rights: authorize
 5. 审核科学对象和像素质量后注册。可用 `asset-sheet --input <sheet.png> --boxes <JSON数组> --out <候选目录>` 按 `{id,bounds:[x,y,w,h]}` 切分；裁片仍是 candidate，边缘统计不代替人工 QA。
 
 费用未知保持 unknown。请求账本记录操作状态，费用以上游工具为准。当前 Agent 无法调用生图能力时，报告缺失能力和所需画面，保留草图等待补齐。用户未指定模式且素材不足时，可用纯文字交付结构草稿并注明待补画面。
-
-给两份候选绑定代表性素材后，使用同一批来源和素材运行 `preflight --plan 候选A.json 候选B.json --content ... --sources ... --assets ...`。逐项查看通过情况和失败原因，再按读图任务选稿。单份计划仍使用原命令。
 
 ### 4. 图文路线、渲染与检查
 

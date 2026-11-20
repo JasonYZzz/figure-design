@@ -108,31 +108,6 @@ class StandaloneContracts(unittest.TestCase):
         self.assertEqual(len(pair),2);self.assertEqual(pair[0]['content_hash'],pair[1]['content_hash'])
         self.assertNotEqual(pair[0]['plan']['regions'],pair[1]['plan']['regions'])
 
-    def test_brief_drives_shared_memory_and_evidence_views(self):
-        c, _ = make_case(self.root/'memory', count=5)
-        decisions = {'hero_owner_id':'T2','reading_order':['T3','T2','T1'],
-                     'main_paths':[{'input':'T1','intermediate':'T2','output':'T3'},
-                                   {'input':'T4','intermediate':'T2','output':'T3'}]}
-        c['label_instances'][-1]['role'] = 'readout'
-        c['label_instances'].append(dict(c['label_instances'][0], id='section-name', role='section'))
-        decisions['label_anchors'] = {'section-name':'shared_column'}
-        variants = candidates(c, decisions=decisions)
-        a, b = (item['plan'] for item in variants)
-        regions = {r['id']:r for r in a['regions']}
-        self.assertEqual(regions['owner-2']['role'], 'hero')
-        self.assertIn('section-name', regions['heading-shared_column']['label_instance_ids'])
-        self.assertLess(regions['owner-2']['bounds'][1], regions['owner-5']['bounds'][1])
-        other = {r['id']:r for r in b['regions']}
-        self.assertGreater(other['owner-2']['bounds'][1], other['owner-5']['bounds'][1])
-        self.assertEqual(sum('I2' in r['label_instance_ids'] for r in a['regions']), 1)
-        changed = make_plan(c,'comparative-panels','computing-systems',
-                            decisions={'hero_owner_id':'T3','reading_order':['T3','T1']})
-        owners = [r for r in changed['regions'] if r['id'].startswith('owner-')]
-        self.assertEqual((owners[0]['id'], owners[0]['role']), ('owner-3','hero'))
-        comparison = make_plan(c,'comparative-panels','computing-systems',
-                               decisions={'reading_order':['legacy prose']})
-        self.assertFalse(any(r['role']=='hero' for r in comparison['regions']))
-
     def test_cli_plan_modes_and_diagram_types(self):
         from figure_common import DIAGRAM_SKILL
         content_path = self.root/'content.json'

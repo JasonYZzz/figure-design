@@ -4,7 +4,7 @@
 
 ## DSH 版本与运行环境
 
-插件版本为 **1.12.0**。`package.json` 中的 `engines.dsh` 声明为 `^0.2.1-rc.3`。按 DSH 的预发布版本匹配规则，从 `0.2.1-rc.3` 起的 0.2.x 版本可通过版本检查。本地安装验证使用 npm CLI 的 `web` Profile 和 macOS 桌面端的 `desktop` Profile，当前宿主均为 `0.2.2-rc.5`。[DSH 版本匹配说明](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/preset/agent-preset/skills/dsh-doc/references/dsh-version.md)
+插件版本为 **1.12.1**。`package.json` 中的 `engines.dsh` 声明为 `^0.2.1-rc.3`。按 DSH 的预发布版本匹配规则，从 `0.2.1-rc.3` 起的 0.2.x 版本可通过版本检查。本地安装验证使用 npm CLI 的 `web` Profile 和 macOS 桌面端的 `desktop` Profile，当前宿主均为 `0.2.2-rc.5`。[DSH 版本匹配说明](https://github.com/deepseek-ai/deepseek-harness/blob/master/packages/preset/agent-preset/skills/dsh-doc/references/dsh-version.md)
 
 从源码构建需要 Python 3.11+、Node.js 22.19+（22.x）或 24+、npm 和项目依赖。npm 版 DSH `0.2.2-rc.5` 自身要求 Node.js 24.9+。桌面端安装插件使用随应用附带的 Node.js 和 pnpm。插件执行渲染时需要可用的 Python 3.11+、项目依赖和 Playwright Chromium。
 
@@ -16,7 +16,7 @@
 make setup
 make package-dsh
 export FIGURE_PY="$PWD/.venv/bin/python"
-dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.12.0.tgz"
+dsh plugin --profile web add "$PWD/dist/dsh-figure-design-1.12.1.tgz"
 dsh web
 ```
 
@@ -24,13 +24,13 @@ dsh web
 
 ```bash
 dsh_desktop="/Applications/DeepSeek Harness.app/Contents/Resources/runtime/cli/bin/dsh"
-"$dsh_desktop" plugin --profile desktop add "$PWD/dist/dsh-figure-design-1.12.0.tgz"
+"$dsh_desktop" plugin --profile desktop add "$PWD/dist/dsh-figure-design-1.12.1.tgz"
 "$dsh_desktop" plugin --profile desktop list dsh-figure-design
 ```
 
 从同一版本的本地包更新时，给 `make package-dsh` 传入新的 `DIST` 目录，用生成的 `.tgz` 绝对路径执行 `add`。Profile 会继续引用这个路径。
 
-列表应显示 `dsh-figure-design@1.12.0`。重新打开桌面客户端，从「插件 → 已安装 → 科研图设计」核对版本、启用状态和本地包路径。同版本更新时包路径可用于确认加载的是哪次构建。
+列表应显示 `dsh-figure-design@1.12.1`。重新打开桌面客户端，从「插件 → 已安装 → 科研图设计」核对版本、启用状态和本地包路径。同版本更新时包路径可用于确认加载的是哪次构建。
 
 拿到预构建 `.tgz` 时可直接用绝对路径安装。渲染环境需要 Python 依赖和 Playwright Chromium。若尚未准备，在会话中让 Agent 给出已加载 Skill 的资源目录，然后在独立虚拟环境中执行以下命令。`FIGURE_SKILL` 取会话报告的绝对路径，`FIGURE_PY` 取虚拟环境的 Python 绝对路径。
 
